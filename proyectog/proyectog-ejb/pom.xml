@@ -7,4 +7,20 @@
   </parent>
   <artifactId>proyectog-ejb</artifactId>
   <name>Secretaria-ejb</name>
+  <properties>
+  	<maven.compiler.source>1.8</maven.compiler.source>
+  	<maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  <dependencies>
+  	<dependency>
+  		<groupId>javax</groupId>
+  		<artifactId>javaee-api</artifactId>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>es.uma.informatica.sii</groupId>
+  		<artifactId>proyectog-jpa</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>
