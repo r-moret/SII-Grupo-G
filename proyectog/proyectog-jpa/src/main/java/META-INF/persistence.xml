@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="proyectog-jpa" transaction-type="JTA">
+		<jta-data-source>java:jboss/datasources/sii</jta-data-source>
+		<class>es.uma.informatica.sii.proyectog.entidades.Encuesta</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.Titulacion</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.Centro</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.Alumno</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.Matricula</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.Clase</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.Grupo</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.Optativa</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.Expediente</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.Asignatura</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.GruposPorAsignatura</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.DatosAlumnado</class>
+		<class>es.uma.informatica.sii.proyectog.entidades.AsignaturasPorMatriculas</class>
+		<properties>
+			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+		</properties>
+	</persistence-unit>
+</persistence>
