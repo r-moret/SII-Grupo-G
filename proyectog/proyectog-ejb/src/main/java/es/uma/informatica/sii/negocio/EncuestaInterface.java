@@ -18,6 +18,6 @@ public interface EncuestaInterface {
 	 */
 	public void registrarEncuesta(Alumno alumno, Encuesta encuesta) throws SecretariaException;
 	
-	public boolean incompatibilidadHoraria(Encuesta encuesta);
+	public boolean incompatibilidadHoraria(Encuesta encuesta) throws SecretariaException;
 
 }
