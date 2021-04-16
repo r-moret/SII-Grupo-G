@@ -8,6 +8,9 @@ import es.uma.informatica.sii.proyectog.entidades.Alumno;
 @Local
 public interface AlumnoInterface {
 
+	/*
+	 * 
+	 */
 	public void actualizarAlumno(Alumno alumno) throws SecretariaException;
 	
 }
