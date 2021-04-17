@@ -1,5 +1,6 @@
 package es.uma.informatica.sii.negocio;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,19 +54,13 @@ public class EncuestaEJB implements EncuestaInterface {
 	public boolean incompatibilidadHoraria(Encuesta encuesta) throws SecretariaException {
 		boolean res = false;
 
-		// Busco la encuesta en la bbdd
-		PersistenceUnitUtil util = emf.getPersistenceUnitUtil();
-		Object idEncuesta = util.getIdentifier(encuesta);
 
-		Encuesta enc = em.find(Encuesta.class, (EncuestaID) idEncuesta);
-
-		if (enc == null) {
+		if (encuesta == null) {
 			throw new SecretariaException();
 		}
 		// Me quedo con la lista de grupos por asignatura elegida
-		List<GruposPorAsignatura> gruposPorAsignatura = enc.getGruposPorAsignatura();
-		HashMap<Integer, String> mapaCompatibilidad = new HashMap<Integer, String>();
-		Integer clave = 0;
+		List<GruposPorAsignatura> gruposPorAsignatura = encuesta.getGruposPorAsignatura();
+		List<String> compatibilidad = new ArrayList<String>();
 
 		for (GruposPorAsignatura gruposPorAsig : gruposPorAsignatura) {
 			Asignatura asig = gruposPorAsig.getAsignatura();
@@ -77,11 +72,10 @@ public class EncuestaEJB implements EncuestaInterface {
 					String dia = clase.getDia();
 					String hora = clase.getHoraInicio().toString();
 					String valor = dia + hora;
-					if (mapaCompatibilidad.containsValue(valor)) {
+					if (compatibilidad.contains(valor)) {
 						res = true;
 					} else {
-						clave++;
-						mapaCompatibilidad.put(clave, valor);
+						compatibilidad.add(valor);
 					}
 				}
 			}
