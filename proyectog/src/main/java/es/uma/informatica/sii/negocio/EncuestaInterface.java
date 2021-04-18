@@ -11,8 +11,8 @@ public interface EncuestaInterface {
 
 	/**
 	 * REQUISITO: RF-02
-	 * Inserta la encuesta formalizada por el alumno con el expediente "expediente"
-	 *  en la base de datos
+	 * Inserta la encuesta en la base de datos formalizada por el alumno con el expediente pasado 
+	 * por parámetro
 	 * @param alumno
 	 * @param encuesta
 	 * @throws SecretariaException
@@ -22,8 +22,8 @@ public interface EncuestaInterface {
 	/**
 	 * REQUISITO: RF-10
 	 * 
-	 * Lanza un mensaje si tras comprobar la compatibilidad de horarios insertada en la encuesta, 
-	 * hay horarios que se solapan
+	 * Devuelve True si la encuesta pasada por parámetro presenta alguna incompatibilidad 
+	 * entre los horarios de los gruposPorAsignaturas seleccionados
 	 * @param encuesta
 	 * @return
 	 * @throws SecretariaException
