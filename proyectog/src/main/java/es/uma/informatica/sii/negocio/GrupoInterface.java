@@ -8,9 +8,7 @@ import es.uma.informatica.sii.exceptions.SecretariaException;
 
 @Local
 public interface GrupoInterface {
-	
-	
-	
+
 	public void asignarGrupos(Algoritmo selector) throws SecretariaException;
 	
 	/**
@@ -29,7 +27,10 @@ public interface GrupoInterface {
 	 */
 	public void reasignarGrupo(Alumno alumno, Grupo grupo) throws SecretariaException;
 	
-	// TODO public void aforoMaximo()
+	/**
+	 * TODO
+	 */
+	public void aforoMaximo();
 	
 	/** 
 	 * REQUISITO: RF-09

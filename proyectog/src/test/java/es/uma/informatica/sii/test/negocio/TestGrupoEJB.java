@@ -17,11 +17,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
-import es.uma.informatica.sii.exceptions.AlumnoInexistente;
-import es.uma.informatica.sii.entidades.Alumno;
-import es.uma.informatica.sii.negocio.AlumnoInterface;
+import es.uma.informatica.sii.entidades.Grupo;
+import es.uma.informatica.sii.entidades.Titulacion;
+import es.uma.informatica.sii.exceptions.GrupoInexistente;
+import es.uma.informatica.sii.negocio.GrupoInterface;
 
-public class TestAlumnoEJB {
+public class TestGrupoEJB {
 
 	private static EJBContainer ejbContainer;
 	private static Context ctx;
@@ -30,12 +31,12 @@ public class TestAlumnoEJB {
 	private static final String CONFIG_FILE = "target/test-classes/META-INF/domain.xml";
 	private static final String PERSISTENCE_UNIT = "proyectog-jpa-test";
 	
-	private static final String ALUMNO_EJB = "java:global/classes/AlumnoEJB";
+	private static final String ENCUESTA_EJB = "java:global/classes/GrupoEJB";
 	
 	private static EntityManagerFactory emf;
 	private static EntityManager em;
 	
-	private AlumnoInterface alumnoEJB;
+	private GrupoInterface grupoEJB;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -50,30 +51,32 @@ public class TestAlumnoEJB {
 
 	@Before
 	public void setUp() throws Exception {
-		alumnoEJB = (AlumnoInterface) ctx.lookup(ALUMNO_EJB);
+		grupoEJB = (GrupoInterface) ctx.lookup(ENCUESTA_EJB);
 		BaseDatos.initBaseDatos();
 	}
-
+	
 	@Requisitos({"RF9"})
 	@Test
 	@Ignore
-	public void testActualizarAlumno() {
-		
+	public void testActualizarGrupo() {
 		try {
-			alumnoEJB.actualizarAlumno(null);
-			fail("Permite actualizar un alumno nulo");
+			grupoEJB.actualizarGrupo(null);
+			fail("Permite actualizar un grupo nulo");
 		}
-		catch(AlumnoInexistente exc1) {
+		catch(GrupoInexistente exc1) {
 			try {
-				Alumno al = new Alumno();
-				al.setId(9);
-				al.setEmailInstitucional("email@email.es");
-				al.setNombreCompleto("Nombre Alumno");
-				al.setDni("8888888S");
-				alumnoEJB.actualizarAlumno(al);
-				fail("Permite actualizar un alumno inexistente en la base de datos");
+				Grupo gr = new Grupo();
+				gr.setId("id4");
+				gr.setCurso(3);
+				gr.setLetra("A");
+				gr.setTurno("tarde");
+				gr.setIngles(false);
+				gr.setTitulacion(em.find(Titulacion.class, 1));
+				
+				grupoEJB.actualizarGrupo(gr);
+				fail("Permite actualizar un grupo inexistente en la base de datos");
 			}
-			catch(AlumnoInexistente exc2) {
+			catch(GrupoInexistente exc2) {
 				/* COMPORTAMIENTO CORRECTO */
 			}
 			catch(Exception exc2) {
@@ -84,17 +87,17 @@ public class TestAlumnoEJB {
 			fail("Lanza la excepción incorrecta");
 		}
 		
-		Alumno al = em.find(Alumno.class, 1);
+		Grupo gr = em.find(Grupo.class, "id1");
 		
-		al.setEmailInstitucional("otro@gmail.com");
+		gr.setIngles(true);
 		
 		try {
-			alumnoEJB.actualizarAlumno(al);
+			grupoEJB.actualizarGrupo(gr);
 		} catch (Exception e) {
-			fail("Lanza una excepción en la actualización de un alumno correcto");
+			fail("Lanza una excepción en la actualización de un grupo correcto");
 		}
 		
-		assertEquals("El campo actualizado no se ha guardado en la base de datos", al.getEmailInstitucional(), em.find(Alumno.class, 1).getEmailInstitucional());	
+		assertEquals("El campo actualizado no se ha guardado en la base de datos", gr.getIngles(), em.find(Grupo.class, "id1").getIngles());	
 	}
 	
 	@AfterClass
@@ -103,5 +106,4 @@ public class TestAlumnoEJB {
 			ejbContainer.close();
 		}
 	}
-
 }
