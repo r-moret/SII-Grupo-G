@@ -53,7 +53,6 @@ public class EncuestaEJB implements EncuestaInterface {
 	public boolean incompatibilidadHoraria(Encuesta encuesta) throws SecretariaException {
 		boolean res = false;
 
-
 		if (encuesta == null) {
 			throw new SecretariaException();
 		}
