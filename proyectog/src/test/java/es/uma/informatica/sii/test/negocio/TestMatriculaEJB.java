@@ -119,7 +119,7 @@ public class TestMatriculaEJB {
 			fail("El método lanza una excepción al comprobar un expediente correcto");
 		}
 	}
-<<<<<<< HEAD
+
 
 	@Requisitos({ "RF1" })
 	@Test
@@ -296,15 +296,11 @@ public class TestMatriculaEJB {
 	}
 	
 	
-	
-
-=======
-	
 	@AfterClass
 	public static void tearDownAfterClass() {
 		if (ejbContainer != null) {
 			ejbContainer.close();
 		}
 	}
->>>>>>> 829c3820f6a4d786aadd13d9df51c3af90096e39
+
 }
