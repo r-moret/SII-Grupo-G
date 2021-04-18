@@ -1,7 +1,7 @@
 package es.uma.informatica.sii.entidades;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.*;
@@ -16,7 +16,7 @@ public class Encuesta implements Serializable {
 	
 	public static class EncuestaID implements Serializable{
 		private static final long serialVersionUID = 1L;
-		private Date fechaEnvio;
+		private Timestamp fechaEnvio;
 		private Integer expediente;
 		@Override
 		public int hashCode() {
@@ -51,7 +51,7 @@ public class Encuesta implements Serializable {
 	}
 
 	@Id
-	private Date fechaEnvio;
+	private Timestamp fechaEnvio;
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -66,11 +66,11 @@ public class Encuesta implements Serializable {
 		super();
 	}
 	  
-	public Date getFechaEnvio() {
+	public Timestamp getFechaEnvio() {
 		return this.fechaEnvio;
 	}
 
-	public void setFechaEnvio(Date fechaEnvio) {
+	public void setFechaEnvio(Timestamp fechaEnvio) {
 		this.fechaEnvio = fechaEnvio;
 	}
 

@@ -1,7 +1,5 @@
 package es.uma.informatica.sii.test.negocio;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,7 +26,6 @@ public class TestEncuestaEJB {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
 	}
 
 }

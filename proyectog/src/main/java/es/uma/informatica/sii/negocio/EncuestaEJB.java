@@ -3,6 +3,7 @@ package es.uma.informatica.sii.negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,6 +18,7 @@ import es.uma.informatica.sii.entidades.GruposPorAsignatura;
 import es.uma.informatica.sii.entidades.Encuesta.EncuestaID;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
+@Stateless
 public class EncuestaEJB implements EncuestaInterface {
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("proyectog-jpa");
@@ -33,9 +35,9 @@ public class EncuestaEJB implements EncuestaInterface {
 		}
 
 		PersistenceUnitUtil util = emf.getPersistenceUnitUtil();
-		Object idEncuesta = util.getIdentifier(encuesta);
+		EncuestaID idEncuesta = (EncuestaID) util.getIdentifier(encuesta);
 
-		Encuesta enc = em.find(Encuesta.class, (EncuestaID) idEncuesta);
+		Encuesta enc = em.find(Encuesta.class, idEncuesta);
 
 		if (enc == null) {
 			// La encuesta no se encontraba en la bbdd
