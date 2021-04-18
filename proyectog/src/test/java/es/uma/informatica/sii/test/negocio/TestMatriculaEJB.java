@@ -10,8 +10,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -57,6 +59,7 @@ public class TestMatriculaEJB {
 
 	@Requisitos({ "RF1" })
 	@Test
+	@Ignore
 	public void testConsultarMatricula() {
 
 		// 1 caso - paso un expediente vacio
@@ -105,7 +108,12 @@ public class TestMatriculaEJB {
 		} catch (Exception e) {
 			fail("El método lanza una excepción al comprobar un expediente correcto");
 		}
-
 	}
-
+	
+	@AfterClass
+	public static void tearDownAfterClass() {
+		if (ejbContainer != null) {
+			ejbContainer.close();
+		}
+	}
 }

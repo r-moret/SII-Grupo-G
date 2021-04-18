@@ -15,7 +15,7 @@ public class Clase implements Serializable {
 	public static class ClaseId implements Serializable{
 		private static final long serialVersionUID = 1L;
 		private String dia;      
-		private Timestamp horaInicio;
+		private String horaInicio;
 		private String grupo;
 		
 		@Override
@@ -58,8 +58,8 @@ public class Clase implements Serializable {
 	@Id
 	private String dia;
 	@Id
-	private Timestamp horaInicio;
-	private Timestamp horaFin;
+	private String horaInicio;
+	private String horaFin;
 	
 	@Id
 	@ManyToOne
@@ -74,11 +74,11 @@ public class Clase implements Serializable {
 		super();
 	}
 
-	public Timestamp getHoraFin() {
+	public String getHoraFin() {
 		return this.horaFin;
 	}
 
-	public void setHoraFin(Timestamp horaFin) {
+	public void setHoraFin(String horaFin) {
 		this.horaFin = horaFin;
 	}
 
@@ -90,11 +90,11 @@ public class Clase implements Serializable {
 		this.dia = dia;
 	}
 
-	public Timestamp getHoraInicio() {
+	public String getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(Timestamp horaInicio) {
+	public void setHoraInicio(String horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 
