@@ -25,9 +25,9 @@ public class EncuestaEJB implements EncuestaInterface {
 	private EntityManager em = emf.createEntityManager();
 
 	@Override
-	public void registrarEncuesta(Expediente expediente, Encuesta encuesta) throws SecretariaException {
+	public void registrarEncuesta(Encuesta encuesta) throws SecretariaException {
 
-		Expediente exp = em.find(Expediente.class, expediente.getNumExpediente());
+		Expediente exp = em.find(Expediente.class, encuesta.getExpediente().getNumExpediente());
 
 		if (exp == null) {
 			// El expediente no existe en la bbdd
@@ -41,11 +41,9 @@ public class EncuestaEJB implements EncuestaInterface {
 
 		if (enc == null) {
 			// La encuesta no se encontraba en la bbdd
-			encuesta.setExpediente(exp);
 			em.persist(encuesta);
 		} else if (enc != null) {
 			// La encuesta estaba en la bbdd y se debe sobreescribir
-			enc.setExpediente(expediente);
 			em.merge(enc);
 		}
 
