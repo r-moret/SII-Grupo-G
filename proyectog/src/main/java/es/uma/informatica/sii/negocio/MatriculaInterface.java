@@ -1,7 +1,7 @@
 package es.uma.informatica.sii.negocio;
 
-import es.uma.informatica.sii.entidades.Alumno;
 import es.uma.informatica.sii.entidades.Asignatura;
+import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import java.util.List;
@@ -12,11 +12,12 @@ public interface MatriculaInterface {
 
 	/**  
 	 *  REQUISITO: RF-01
-	 *  Lista el conjunto de matriculas de alumno
+	 *  Lista el conjunto de matriculas de alumno. Si el alumno no tiene matriculas, devuelve una
+	 *  lista vacía
 	 *  @param alumno 
 	 *  @throws SecretariaException
 	 */ 
-	public List<Matricula> consultarMatricula(Alumno alumno) throws SecretariaException;
+	public List<Matricula> consultarMatricula(Expediente alumno) throws SecretariaException;
 	
 	/**  
 	 *  REQUISITO: RF-01 
@@ -25,7 +26,7 @@ public interface MatriculaInterface {
 	 *  @param cursoAcademico 
 	 *  @throws SecretariaException
 	 */ 
-	public Matricula consultarMatricula(Alumno alumno, String cursoAcademico) throws SecretariaException;
+	public Matricula consultarMatricula(Expediente alumno, String cursoAcademico) throws SecretariaException;
 	
 	/**  
 	 * 	REQUISITO: RF-01 
