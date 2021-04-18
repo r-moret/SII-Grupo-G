@@ -18,9 +18,20 @@ import javax.persistence.*;
 public class Matricula implements Serializable {
 
 	public static class MatriculaId implements Serializable{
+		
 		private static final long serialVersionUID = 1L;
 		private String cursoAcademico;
 		private Integer expediente;
+		
+		public MatriculaId() {
+			
+		}
+		
+		public MatriculaId(String cursoAcademico, Integer expediente) {
+			this.cursoAcademico = cursoAcademico;
+			this.expediente = expediente;
+		}
+		
 		@Override
 		public int hashCode() {
 			final int prime = 31;

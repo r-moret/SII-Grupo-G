@@ -30,14 +30,6 @@ public interface MatriculaInterface {
 	
 	/**  
 	 * 	REQUISITO: RF-01 
-	 *  Lista todo el conjunto de matriculas del curso cursoAcademico
-	 *  @param cursoAcademico
-	 *  @throws SecretariaException
-	 */ 
-	public List<Matricula> consultarMatriculas(String cursoAcademico) throws SecretariaException;
-	
-	/**  
-	 * 	REQUISITO: RF-01 
 	 *  Lista todo el conjunto de matriculas
 	 *  @throws SecretariaException
 	 */ 
