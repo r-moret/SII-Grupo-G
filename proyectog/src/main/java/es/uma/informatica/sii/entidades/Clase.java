@@ -1,7 +1,7 @@
 package es.uma.informatica.sii.entidades;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 import javax.persistence.*;
 
 /**
@@ -15,7 +15,7 @@ public class Clase implements Serializable {
 	public static class ClaseId implements Serializable{
 		private static final long serialVersionUID = 1L;
 		private String dia;      
-		private Date horaInicio;
+		private Timestamp horaInicio;
 		private String grupo;
 		
 		@Override
@@ -58,8 +58,8 @@ public class Clase implements Serializable {
 	@Id
 	private String dia;
 	@Id
-	private Date horaInicio;
-	private Date horaFin;
+	private Timestamp horaInicio;
+	private Timestamp horaFin;
 	
 	@Id
 	@ManyToOne
@@ -74,11 +74,11 @@ public class Clase implements Serializable {
 		super();
 	}
 
-	public Date getHoraFin() {
+	public Timestamp getHoraFin() {
 		return this.horaFin;
 	}
 
-	public void setHoraFin(Date horaFin) {
+	public void setHoraFin(Timestamp horaFin) {
 		this.horaFin = horaFin;
 	}
 
@@ -90,11 +90,11 @@ public class Clase implements Serializable {
 		this.dia = dia;
 	}
 
-	public Date getHoraInicio() {
+	public Timestamp getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(Date horaInicio) {
+	public void setHoraInicio(Timestamp horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 

@@ -3,7 +3,7 @@ package es.uma.informatica.sii.entidades;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
-import java.sql.Date;
+import java.sql.Timestamp;
 import javax.persistence.*;
 
 /**
@@ -29,7 +29,7 @@ public class DatosAlumnado implements Serializable {
 	private String localidadNotificacion;
 	private String provinciaNotificacion;
 	private Integer cpNotificacion;
-	private Date fechaMatricula;
+	private Timestamp fechaMatricula;
 	private String turnoPreferente;
 	private String gruposAsignados;
 	private Integer notaMedia;
@@ -142,11 +142,11 @@ public class DatosAlumnado implements Serializable {
 		this.cpNotificacion = cpNotificacion;
 	}
 
-	public Date getFechaMatricula() {
+	public Timestamp getFechaMatricula() {
 		return fechaMatricula;
 	}
 
-	public void setFechaMatricula(Date fechaMatricula) {
+	public void setFechaMatricula(Timestamp fechaMatricula) {
 		this.fechaMatricula = fechaMatricula;
 	}
 

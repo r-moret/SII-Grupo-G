@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.*;
@@ -63,7 +63,7 @@ public class Matricula implements Serializable {
 	@Column(nullable=false)
 	private String turnoPreferente;
 	@Column(nullable=false)
-	private Date fechaMatricula;
+	private Timestamp fechaMatricula;
 	private Boolean nuevoIngreso;
 	private String listadoAsignaturas;
 	
@@ -107,11 +107,11 @@ public class Matricula implements Serializable {
 	public void setTurnoPreferente(String turnoPreferente) {
 		this.turnoPreferente = turnoPreferente;
 	}   
-	public Date getFechaMatricula() {
+	public Timestamp getFechaMatricula() {
 		return this.fechaMatricula;
 	}
 
-	public void setFechaMatricula(Date fechaMatricula) {
+	public void setFechaMatricula(Timestamp fechaMatricula) {
 		this.fechaMatricula = fechaMatricula;
 	}   
 	public Boolean getNuevoIngreso() {
