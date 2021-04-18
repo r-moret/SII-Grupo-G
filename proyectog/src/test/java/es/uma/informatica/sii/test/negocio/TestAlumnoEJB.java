@@ -91,7 +91,7 @@ public class TestAlumnoEJB {
 			fail("Lanza una excepción en la actualización de un alumno correcto");
 		}
 		
-		assertTrue("El campo actualizado no se ha guardado en la base de datos", "otro@gmmail.com".equals(em.find(Alumno.class, 1).getEmailInstitucional()));	
+		assertEquals("El campo actualizado no se ha guardado en la base de datos", "otro@gmmail.com", em.find(Alumno.class, 1).getEmailInstitucional());	
 	}
 
 }

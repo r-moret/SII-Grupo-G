@@ -42,13 +42,6 @@ public class Expediente implements Serializable {
 		super();
 	}   
 	
-	public Integer getNumExpendiente() {
-		return this.numExpediente;
-	}
-
-	public void setNumExpendiente(Integer numExpediente) {
-		this.numExpediente = numExpediente;
-	}   
 	public Boolean getActivo() {
 		return this.activo;
 	}

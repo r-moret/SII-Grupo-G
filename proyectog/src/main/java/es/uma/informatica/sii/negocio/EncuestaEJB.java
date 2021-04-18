@@ -25,7 +25,7 @@ public class EncuestaEJB implements EncuestaInterface {
 	private EntityManager em = emf.createEntityManager();
 
 	@Override
-	public void registrarEncuesta(Expediente expediente, Encuesta encuesta) throws SecretariaException {
+	public void registrarEncuesta(Encuesta encuesta) throws SecretariaException {
 
 		Expediente exp = em.find(Expediente.class, expediente.getNumExpediente());
 

@@ -11,6 +11,7 @@ import es.uma.informatica.sii.entidades.Alumno;
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.Centro;
 import es.uma.informatica.sii.entidades.Expediente;
+import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.Titulacion;
 
@@ -96,6 +97,7 @@ public class BaseDatos {
 		asig1.setCreditos(6);
 		asig1.setOfertada(true);
 		asig1.setNombre("Calculo");
+		asig1.setCurso(1);
 		asig1.setTitulacion(tit1);
 		
 		em.persist(asig1);
@@ -106,6 +108,7 @@ public class BaseDatos {
 		asig2.setCreditos(6);
 		asig2.setOfertada(true);
 		asig2.setNombre("Algebra");
+		asig2.setCurso(1);
 		asig2.setTitulacion(tit1);
 		
 		em.persist(asig2);
@@ -116,9 +119,40 @@ public class BaseDatos {
 		asig3.setCreditos(6);
 		asig3.setOfertada(true);
 		asig3.setNombre("TDC");
+		asig3.setCurso(2);
 		asig3.setTitulacion(tit1);
 		
 		em.persist(asig3);
+		
+		Grupo grup1 = new Grupo();
+		grup1.setId("id1");
+		grup1.setCurso(1);
+		grup1.setLetra("A");
+		grup1.setTurno("mañana");
+		grup1.setIngles(false);
+		grup1.setTitulacion(tit1);
+		
+		em.persist(grup1);
+		
+		Grupo grup2 = new Grupo();
+		grup2.setId("id2");
+		grup2.setCurso(1);
+		grup2.setLetra("B");
+		grup2.setTurno("mañana");
+		grup2.setIngles(false);
+		grup2.setTitulacion(tit1);
+		
+		em.persist(grup2);
+		
+		Grupo grup3 = new Grupo();
+		grup3.setId("id3");
+		grup3.setCurso(2);
+		grup3.setLetra("B");
+		grup3.setTurno("mañana");
+		grup3.setIngles(false);
+		grup3.setTitulacion(tit1);
+		
+		em.persist(grup3);
 		
 		// FIN DE LA INICIALIZACION DE LA BASE DE DATOS
 		

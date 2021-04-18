@@ -18,6 +18,16 @@ public class Encuesta implements Serializable {
 		private static final long serialVersionUID = 1L;
 		private Timestamp fechaEnvio;
 		private Integer expediente;
+		
+		public EncuestaID() {
+			
+		}
+		
+		public EncuestaID(Timestamp fechaEnvio, Integer expediente) {
+			this.fechaEnvio = fechaEnvio;
+			this.expediente = expediente;
+		}
+		
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -50,9 +60,10 @@ public class Encuesta implements Serializable {
 		
 	}
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private Timestamp fechaEnvio;
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@ManyToOne
