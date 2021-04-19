@@ -123,6 +123,7 @@ public class TestMatriculaEJB {
 
 	@Requisitos({ "RF1" })
 	@Test
+	@Ignore
 	public void testConsultarMatriculaPorCurso() {
 		// 1 caso - paso un expediente vacio
 		try {
@@ -153,6 +154,7 @@ public class TestMatriculaEJB {
 
 	@Requisitos({ "RF1" })
 	@Test
+	@Ignore
 	public void testBuscarMatriculaPorCurso() {
 		// Caso 1 - paso un curso null
 		try {
@@ -187,6 +189,7 @@ public class TestMatriculaEJB {
 	
 	@Requisitos({ "RF1" })
 	@Test
+	@Ignore
 	public void testListarTodasLasMatriculas() {
 		MatriculaId id1 = new MatriculaId("20/21",8);
 		Matricula m1 = em.find(Matricula.class, id1);
@@ -225,6 +228,7 @@ public class TestMatriculaEJB {
 	
 	@Requisitos({ "RF9" })
 	@Test
+	@Ignore
 	public void testComprobacionParametrosesmatricular() {
 		// Caso 1 - Matricula nula
 		try {
@@ -288,6 +292,7 @@ public class TestMatriculaEJB {
 	
 	@Requisitos({ "RF9" })
 	@Test
+	@Ignore
 	public void testDesmatricularAsignatura() {
 		// Caso 1 - La matricula no contiene la asignatura pasada por parametro 
 		

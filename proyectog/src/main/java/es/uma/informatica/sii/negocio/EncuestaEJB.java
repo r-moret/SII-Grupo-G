@@ -1,12 +1,14 @@
 package es.uma.informatica.sii.negocio;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.PersistenceUnitUtil;
 
 import es.uma.informatica.sii.entidades.Asignatura;
@@ -16,14 +18,39 @@ import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.GruposPorAsignatura;
 import es.uma.informatica.sii.entidades.Encuesta.EncuestaID;
+import es.uma.informatica.sii.exceptions.EncuestaInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
 @Stateless
 public class EncuestaEJB implements EncuestaInterface {
 
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("proyectog-jpa");
-	private EntityManager em = emf.createEntityManager();
+	private static final String PERSISTENCE_UNIT = "proyectog-jpa";
+	
+	@PersistenceUnit(unitName = PERSISTENCE_UNIT)
+	private EntityManagerFactory emf;
+	@PersistenceContext(name = PERSISTENCE_UNIT)
+	private EntityManager em;
 
+	@Override
+	public Encuesta obtenerEncuesta(Timestamp fechaRealizada, Expediente expediente) throws EncuestaInexistente {
+		EncuestaID id = new EncuestaID(fechaRealizada, expediente.getNumExpediente());
+		Encuesta encEntity = em.find(Encuesta.class, id);
+		if(encEntity == null) {
+			throw new EncuestaInexistente();
+		}
+		return encEntity;
+	}
+	
+	// 	TODO: Determinar si es necesario o no: List<Encuesta> obtenerEncuestasAlumno(Expediente expediente)
+	//
+	//	public List<Encuesta> obtenerEncuestasAlumno(Expediente expediente) throws ExpedienteInexistente {
+	//		Expediente expEntity = em.find(Expediente.class, expediente.getNumExpediente());
+	//		if(expEntity == null) {
+	//			throw new ExpedienteInexistente();
+	//		}
+	//		return expEntity.getEncuestas();
+	//	}
+	
 	@Override
 	public void registrarEncuesta(Encuesta encuesta) throws SecretariaException {
 

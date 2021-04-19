@@ -10,8 +10,7 @@ import java.util.Properties;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -41,7 +40,9 @@ public class TestEncuestaEJB {
 	
 	private static final String ENCUESTA_EJB = "java:global/classes/EncuestaEJB";
 	
-	private static EntityManagerFactory emf;
+	// TODO: ERROR -> El acceso a la BD lo tienen que hacer los EJB. 
+	// 		 NO ES NECESARIO UN ENTITY MANAGER EN LOS TEST
+	@PersistenceContext(name=PERSISTENCE_UNIT)
 	private static EntityManager em;
 	
 	private EncuestaInterface encuestaEJB;
@@ -52,9 +53,6 @@ public class TestEncuestaEJB {
 		properties.setProperty(GLASSFISH_CONFIG_FILE_PROPERTY, CONFIG_FILE);
 		ejbContainer = EJBContainer.createEJBContainer(properties);
 		ctx = ejbContainer.getContext();
-		
-		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
-		em = emf.createEntityManager();
 	}
 
 	@Before
@@ -181,6 +179,7 @@ public class TestEncuestaEJB {
 	
 	@Requisitos({"RF2"})
 	@Test
+	@Ignore
 	public void testRegistroEncuestaCorrecto() {
 		try {
 			encuestaEJB.registrarEncuesta(null);
