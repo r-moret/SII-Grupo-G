@@ -20,6 +20,7 @@ import es.uma.informatica.sii.anotaciones.Requisitos;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Titulacion;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
+import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.negocio.GrupoInterface;
 
 public class TestGrupoEJB {
@@ -63,10 +64,10 @@ public class TestGrupoEJB {
 			grupoEJB.actualizarGrupo(null);
 			fail("Permite actualizar un grupo nulo");
 		}
-		catch(GrupoInexistente exc1) {
+		catch(SecretariaException exc1) {
 			try {
 				Grupo gr = new Grupo();
-				gr.setId("id4");
+				gr.setId("id5");
 				gr.setCurso(3);
 				gr.setLetra("A");
 				gr.setTurno("tarde");

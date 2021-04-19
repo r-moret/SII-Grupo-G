@@ -2,6 +2,7 @@ package es.uma.informatica.sii.test.negocio;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,8 +11,11 @@ import javax.persistence.Persistence;
 import es.uma.informatica.sii.entidades.Alumno;
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.Centro;
+import es.uma.informatica.sii.entidades.Clase;
+import es.uma.informatica.sii.entidades.Encuesta;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
+import es.uma.informatica.sii.entidades.GruposPorAsignatura;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.Titulacion;
 
@@ -153,6 +157,92 @@ public class BaseDatos {
 		grup3.setTitulacion(tit1);
 		
 		em.persist(grup3);
+		
+		Grupo grup4 = new Grupo();
+		grup3.setId("id4");
+		grup3.setCurso(2);
+		grup3.setLetra("B");
+		grup3.setTurno("mañana");
+		grup3.setIngles(false);
+		grup3.setTitulacion(tit1);
+		
+		em.persist(grup4);
+		
+		Clase c1 = new Clase();
+		c1.setDia("Lunes");
+		c1.setHoraInicio("10:45");
+		c1.setAsignatura(asig1);
+		c1.setGrupo(grup1);
+		
+		em.persist(c1);
+		
+		Clase c2 = new Clase();
+		c2.setDia("Jueves");
+		c2.setHoraInicio("10:45");
+		c2.setAsignatura(asig3);
+		c2.setGrupo(grup4);
+		
+		em.persist(c2);
+		
+		Clase c3 = new Clase();
+		c3.setDia("Miercoles");
+		c3.setHoraInicio("12:45");
+		c3.setAsignatura(asig1);
+		c3.setGrupo(grup1);
+		
+		em.persist(c3);
+		
+		Clase c4 = new Clase();
+		c4.setDia("Miercoles");
+		c4.setHoraInicio("12:45");
+		c4.setAsignatura(asig3);
+		c4.setGrupo(grup3);
+		
+		em.persist(c4);
+		
+		// Seleccion con conflicto
+		List<GruposPorAsignatura> gpa1 = new ArrayList<>();
+		GruposPorAsignatura gp1 = new GruposPorAsignatura();
+		gp1.setCursoAcademico("20/21");
+		gp1.setAsignatura(asig1);
+		gp1.setGrupo(grup1);
+		GruposPorAsignatura gp2 = new GruposPorAsignatura();
+		gp2.setCursoAcademico("20/21");
+		gp2.setAsignatura(asig3);
+		gp2.setGrupo(grup3);
+		gpa1.add(gp1);
+		gpa1.add(gp2);
+		
+		em.persist(gpa1);
+		
+		// Seleccion sin conflicto
+		List<GruposPorAsignatura> gpa2 = new ArrayList<>();
+		GruposPorAsignatura gp3 = new GruposPorAsignatura();
+		gp3.setCursoAcademico("20/21");
+		gp3.setAsignatura(asig1);
+		gp3.setGrupo(grup1);
+		GruposPorAsignatura gp4 = new GruposPorAsignatura();
+		gp4.setCursoAcademico("20/21");
+		gp4.setAsignatura(asig3);
+		gp4.setGrupo(grup4);
+		gpa2.add(gp3);
+		gpa2.add(gp4);
+		
+		em.persist(gpa2);
+		
+		Encuesta enc1 = new Encuesta();
+		enc1.setExpediente(ex1);
+		enc1.setFechaEnvio(Timestamp.valueOf("2020-21-08 10:00:00"));
+		enc1.setGruposPorAsignatura(gpa1);
+		
+		em.persist(enc1);
+		
+		Encuesta enc2 = new Encuesta();
+		enc2.setExpediente(ex2);
+		enc2.setFechaEnvio(Timestamp.valueOf("2020-21-09 16:00:00"));
+		enc2.setGruposPorAsignatura(gpa2);
+		
+		em.persist(enc2);
 		
 		// FIN DE LA INICIALIZACION DE LA BASE DE DATOS
 		
