@@ -11,7 +11,6 @@ import javax.naming.Context;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -40,6 +39,13 @@ public class TestEncuestaEJB {
 		ejbContainer = EJBContainer.createEJBContainer(properties);
 		ctx = ejbContainer.getContext();
 	}
+	
+	@AfterClass
+	public static void tearDownAfterClass() {
+		if (ejbContainer != null) {
+			ejbContainer.close();
+		}
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -52,25 +58,19 @@ public class TestEncuestaEJB {
 		if(incompatibilidadHoraria) {
 			Expediente ex = new Expediente();
 			ex.setNumExpediente(8);
-			enc = encuestaEJB.obtenerEncuesta(Timestamp.valueOf("2020-21-08 10:00:00"), ex);
+			enc = encuestaEJB.obtenerEncuesta(Timestamp.valueOf("2020-08-21 10:00:00"), ex);
 		}
 		else {
 			Expediente ex = new Expediente();
 			ex.setNumExpediente(1);
-			enc = encuestaEJB.obtenerEncuesta(Timestamp.valueOf("2020-21-09 16:00:00"), ex);
+			enc = encuestaEJB.obtenerEncuesta(Timestamp.valueOf("2020-09-21 16:00:00"), ex);
 		}
 		
 		return enc;
 	}
 	
-	@Test
-	public void test() {
-		
-	}
-	
 	@Requisitos({"RF2"})
 	@Test
-	@Ignore
 	public void testRegistroEncuestaCorrecto() {
 		try {
 			encuestaEJB.registrarEncuesta(null);
@@ -177,7 +177,6 @@ public class TestEncuestaEJB {
 	
 	@Requisitos({"RF6"})
 	@Test
-	@Ignore
 	public void testDetectarIncompatibilidadHoraria() {
 		try {
 			encuestaEJB.incompatibilidadHoraria(null);
@@ -187,7 +186,7 @@ public class TestEncuestaEJB {
 			/* COMPORTAMIENTO CORRECTO */
 		}
 		catch(Exception e) {
-			fail("Lanza una excepcion distinta a SecretariaException" + e.toString());
+			fail("Lanza una excepcion distinta a SecretariaException");
 		}
 		
 		try {
@@ -197,13 +196,6 @@ public class TestEncuestaEJB {
 			assertTrue("No detecta incompatibilidad en una lista con incompatibilidad horaria", encuestaEJB.incompatibilidadHoraria(encIncompatible));
 		} catch (Exception e) {
 			fail("Lanza una excepción al comprobar una encuesta correcta");
-		}
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() {
-		if (ejbContainer != null) {
-			ejbContainer.close();
 		}
 	}
 }

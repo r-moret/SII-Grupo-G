@@ -159,12 +159,12 @@ public class BaseDatos {
 		em.persist(grup3);
 		
 		Grupo grup4 = new Grupo();
-		grup3.setId("id4");
-		grup3.setCurso(2);
-		grup3.setLetra("B");
-		grup3.setTurno("mañana");
-		grup3.setIngles(false);
-		grup3.setTitulacion(tit1);
+		grup4.setId("id4");
+		grup4.setCurso(2);
+		grup4.setLetra("A");
+		grup4.setTurno("mañana");
+		grup4.setIngles(false);
+		grup4.setTitulacion(tit1);
 		
 		em.persist(grup4);
 		
@@ -206,40 +206,41 @@ public class BaseDatos {
 		gp1.setCursoAcademico("20/21");
 		gp1.setAsignatura(asig1);
 		gp1.setGrupo(grup1);
+		
+		em.persist(gp1);
+		
 		GruposPorAsignatura gp2 = new GruposPorAsignatura();
 		gp2.setCursoAcademico("20/21");
 		gp2.setAsignatura(asig3);
 		gp2.setGrupo(grup3);
+		
 		gpa1.add(gp1);
 		gpa1.add(gp2);
 		
-		em.persist(gpa1);
+		em.persist(gp2);
 		
 		// Seleccion sin conflicto
 		List<GruposPorAsignatura> gpa2 = new ArrayList<>();
 		GruposPorAsignatura gp3 = new GruposPorAsignatura();
 		gp3.setCursoAcademico("20/21");
-		gp3.setAsignatura(asig1);
-		gp3.setGrupo(grup1);
-		GruposPorAsignatura gp4 = new GruposPorAsignatura();
-		gp4.setCursoAcademico("20/21");
-		gp4.setAsignatura(asig3);
-		gp4.setGrupo(grup4);
-		gpa2.add(gp3);
-		gpa2.add(gp4);
+		gp3.setAsignatura(asig3);
+		gp3.setGrupo(grup4);
 		
-		em.persist(gpa2);
+		gpa2.add(gp1);
+		gpa2.add(gp3);
+		
+		em.persist(gp3);
 		
 		Encuesta enc1 = new Encuesta();
 		enc1.setExpediente(ex1);
-		enc1.setFechaEnvio(Timestamp.valueOf("2020-21-08 10:00:00"));
+		enc1.setFechaEnvio(Timestamp.valueOf("2020-08-21 10:00:00"));
 		enc1.setGruposPorAsignatura(gpa1);
 		
 		em.persist(enc1);
 		
 		Encuesta enc2 = new Encuesta();
 		enc2.setExpediente(ex2);
-		enc2.setFechaEnvio(Timestamp.valueOf("2020-21-09 16:00:00"));
+		enc2.setFechaEnvio(Timestamp.valueOf("2020-09-21 16:00:00"));
 		enc2.setGruposPorAsignatura(gpa2);
 		
 		em.persist(enc2);

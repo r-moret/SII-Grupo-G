@@ -18,6 +18,13 @@
 	
   	<dependencies>
   		<dependency>
+			<groupId>org.glassfish.main.extras</groupId>
+			<artifactId>glassfish-embedded-all</artifactId>
+			<version>5.1.0</version>
+			<scope>test</scope>
+		</dependency>
+		
+  		<dependency>
   			<groupId>javax</groupId>
   			<artifactId>javaee-api</artifactId>
   			<version>8.0</version>
@@ -30,25 +37,18 @@
 	    	<version>4.13</version>
 	    	<scope>test</scope>
 		</dependency>
-		
-		<dependency>
-		    <groupId>es.uma.informatica.sii</groupId>
-		    <artifactId>anotaciones</artifactId>
-		    <version>0.0.1</version>
-		</dependency>
-	
-		<dependency>
-			<groupId>org.glassfish.main.extras</groupId>
-			<artifactId>glassfish-embedded-all</artifactId>
-			<version>5.1.0</version>
-			<scope>test</scope>
-		</dependency>
 	
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.4.200</version>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>es.uma.informatica.sii</groupId>
+		    <artifactId>anotaciones</artifactId>
+		    <version>0.0.1</version>
 		</dependency>
   	</dependencies>
   	

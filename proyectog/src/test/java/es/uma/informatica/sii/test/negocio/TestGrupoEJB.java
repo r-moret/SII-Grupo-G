@@ -49,6 +49,13 @@ public class TestGrupoEJB {
 		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
 		em = emf.createEntityManager();
 	}
+	
+	@AfterClass
+	public static void tearDownAfterClass() {
+		if (ejbContainer != null) {
+			ejbContainer.close();
+		}
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -99,12 +106,5 @@ public class TestGrupoEJB {
 		}
 		
 		assertEquals("El campo actualizado no se ha guardado en la base de datos", gr.getIngles(), em.find(Grupo.class, "id1").getIngles());	
-	}
-	
-	@AfterClass
-	public static void tearDownAfterClass() {
-		if (ejbContainer != null) {
-			ejbContainer.close();
-		}
 	}
 }

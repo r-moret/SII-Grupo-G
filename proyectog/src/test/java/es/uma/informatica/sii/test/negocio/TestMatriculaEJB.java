@@ -59,6 +59,13 @@ public class TestMatriculaEJB {
 		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
 		em = emf.createEntityManager();
 	}
+	
+	@AfterClass
+	public static void tearDownAfterClass() {
+		if (ejbContainer != null) {
+			ejbContainer.close();
+		}
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -299,13 +306,4 @@ public class TestMatriculaEJB {
 		
 		// Caso 2 - No desmatricula bien
 	}
-	
-	
-	@AfterClass
-	public static void tearDownAfterClass() {
-		if (ejbContainer != null) {
-			ejbContainer.close();
-		}
-	}
-
 }

@@ -58,57 +58,57 @@ public class Grupo implements Serializable {
 		return this.id;
 	}
 
-	public void setId(String ID) {
-		this.id = ID;
+	public void setId(String id) {
+		this.id = id;
 	}   
 	public Integer getCurso() {
 		return this.curso;
 	}
 
-	public void setCurso(Integer Curso) {
-		this.curso = Curso;
+	public void setCurso(Integer curso) {
+		this.curso = curso;
 	}   
 	public String getLetra() {
 		return this.letra;
 	}
 
-	public void setLetra(String Letra) {
-		this.letra = Letra;
+	public void setLetra(String letra) {
+		this.letra = letra;
 	}   
 	public String getTurno() {
 		return this.turno;
 	}
 
-	public void setTurno(String Turno) {
-		this.turno = Turno;
+	public void setTurno(String turno) {
+		this.turno = turno;
 	}   
 	public Boolean getIngles() {
 		return this.ingles;
 	}
 
-	public void setIngles(Boolean Ingles) {
-		this.ingles = Ingles;
+	public void setIngles(Boolean ingles) {
+		this.ingles = ingles;
 	}   
 	public Boolean getVisible() {
 		return this.visible;
 	}
 
-	public void setVisible(Boolean Visible) {
-		this.visible = Visible;
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
 	}   
 	public Boolean getAsignar() {
 		return this.asignar;
 	}
 
-	public void setAsignar(Boolean Asignar) {
-		this.asignar = Asignar;
+	public void setAsignar(Boolean asignar) {
+		this.asignar = asignar;
 	}   
 	public Integer getPlazas() {
 		return this.plazas;
 	}
 
-	public void setPlazas(Integer Plazas) {
-		this.plazas = Plazas;
+	public void setPlazas(Integer plazas) {
+		this.plazas = plazas;
 	}
 	public Titulacion getTitulacion() {
 		return titulacion;

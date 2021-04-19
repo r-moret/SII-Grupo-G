@@ -1,7 +1,6 @@
 package es.uma.informatica.sii.entidades;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import javax.persistence.*;
 
 /**
