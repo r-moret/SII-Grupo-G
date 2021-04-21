@@ -8,6 +8,13 @@ import es.uma.informatica.sii.exceptions.SecretariaException;
 @Local
 public interface ExpedienteInterface {
 	
+	/**
+	 * REQUISITO: RF-09
+	 * Actualizacion de los datos de expediente
+ 
+	 * @param expediente
+	 * @throws SecretariaException
+	 */
 	public void actualizarExpediente(Expediente expediente) throws SecretariaException; 
 	
 }

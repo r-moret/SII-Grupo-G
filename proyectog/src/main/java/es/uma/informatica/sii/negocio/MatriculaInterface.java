@@ -35,9 +35,10 @@ public interface MatriculaInterface {
 	 */ 
 	public List<Matricula> consultarMatriculas() throws SecretariaException;
 	
-	/** REQUISITO: RF-09 
+	/** REQUISITO: RF-10 
 	 *  TODO: Actualizar lista de requisitos incluyendolo
 	 *  @throws SecretariaException
 	 */ 
+	//Añadir este requisito
 	public void desmatricularAsignatura(Matricula matricula, Asignatura asignatura) throws SecretariaException;
 }

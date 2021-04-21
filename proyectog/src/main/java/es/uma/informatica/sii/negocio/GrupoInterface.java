@@ -9,16 +9,25 @@ import es.uma.informatica.sii.exceptions.SecretariaException;
 @Local
 public interface GrupoInterface {
 
+	/**
+	 * REQUISITO: RF-03
+	 * Aplicar el algoritmo seleccionado a las encuestas realizadas por los alumnos
+	 * 
+	 * 
+	 * @param selector
+	 * @throws SecretariaException
+	 */
+	//duda: falta par√°metro encuenta ??
 	public void asignarGrupos(Algoritmo selector) throws SecretariaException;
 	
 	/**
-	 * REQUISITO: RF-4
-	 * ActualizaciÛn del grupo de alumno correspondiente al mismo curso acadÈmico que 
+	 * REQUISITO: RF-04
+	 * Actualizaci√≥n del grupo de alumno correspondiente al mismo curso acad√©mico que 
 	 * grupo
 	 * 
-	 * TODO: ActualizaciÛn JPA para poder almacenar toda la informaciÛn que requiere 
-	 * la solicitud de cambio de grupo que m·s tarde revisar· SecretarÌa. Se necesita
-	 * un mÈtodo nuevo en GrupoInterface para almacenar estos nuevos datos en la base 
+	 * TODO: Actualizaci√≥n JPA para poder almacenar toda la informacion que requiere 
+	 * la solicitud de cambio de grupo que m√°s tarde revisar√° Secretar√≠a. Se necesita
+	 * un m√©todo nuevo en GrupoInterface para almacenar estos nuevos datos en la base 
 	 * de datos.
 	 * 
 	 * @param alumno
@@ -30,11 +39,12 @@ public interface GrupoInterface {
 	/**
 	 * TODO
 	 */
-	public void aforoMaximo();
+	public void aforoMaximo() throws SecretariaException;
 	
 	/** 
 	 * REQUISITO: RF-09
-	 * 
+	 * Actualizacion de los datos de grupo
+ 
 	 * @param grupo
 	 * @throws SecretariaException
 	 */

@@ -3,6 +3,7 @@ package es.uma.informatica.sii.negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,6 +17,7 @@ import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.MatriculaInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
+@Stateless
 public class MatriculaEJB implements MatriculaInterface {
 	
 
