@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -34,8 +35,8 @@ public class TestGrupoEJB {
 	
 	private static final String ENCUESTA_EJB = "java:global/classes/GrupoEJB";
 	
-	private static EntityManagerFactory emf;
-	private static EntityManager em;
+	private EntityManagerFactory emf;
+	private EntityManager em;
 	
 	private GrupoInterface grupoEJB;
 	
@@ -45,16 +46,10 @@ public class TestGrupoEJB {
 		properties.setProperty(GLASSFISH_CONFIG_FILE_PROPERTY, CONFIG_FILE);
 		ejbContainer = EJBContainer.createEJBContainer(properties);
 		ctx = ejbContainer.getContext();
-		
-		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
-		em = emf.createEntityManager();
 	}
 	
 	@AfterClass
-	public static void tearDownAfterClass() {
-		em.close();
-		emf.close();
-		
+	public static void tearDownAfterClass() {		
 		if (ejbContainer != null) {
 			ejbContainer.close();
 		}
@@ -62,8 +57,20 @@ public class TestGrupoEJB {
 
 	@Before
 	public void setUp() throws Exception {
+		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+		em = emf.createEntityManager();
+		
 		grupoEJB = (GrupoInterface) ctx.lookup(ENCUESTA_EJB);
 		BaseDatos.initBaseDatos();
+	}
+	
+	@After
+	public void tearDown() {
+		if(em.isOpen()) {
+			em.close();
+		}
+		
+		emf.close();
 	}
 	
 	@Requisitos({"RF9"})

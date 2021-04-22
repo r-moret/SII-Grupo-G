@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -44,8 +45,8 @@ public class TestMatriculaEJB {
 
 	private static final String MATRICULA_EJB = "java:global/classes/MatriculaEJB";
 
-	private static EntityManagerFactory emf;
-	private static EntityManager em;
+	private EntityManagerFactory emf;
+	private EntityManager em;
 
 	private MatriculaInterface matriculaEJB;
 
@@ -55,16 +56,10 @@ public class TestMatriculaEJB {
 		properties.setProperty(GLASSFISH_CONFIG_FILE_PROPERTY, CONFIG_FILE);
 		ejbContainer = EJBContainer.createEJBContainer(properties);
 		ctx = ejbContainer.getContext();
-
-		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
-		em = emf.createEntityManager();
 	}
 	
 	@AfterClass
 	public static void tearDownAfterClass() {
-		em.close();
-		emf.close();
-		
 		if (ejbContainer != null) {
 			ejbContainer.close();
 		}
@@ -72,13 +67,23 @@ public class TestMatriculaEJB {
 
 	@Before
 	public void setUp() throws Exception {
+		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+		em = emf.createEntityManager();
+		
 		matriculaEJB = (MatriculaInterface) ctx.lookup(MATRICULA_EJB);
 		BaseDatos.initBaseDatos();
+	}
+	
+	@After
+	public void tearDown() {
+		if(em.isOpen()) {
+			em.close();
+		}
+		emf.close();
 	}
 
 	@Requisitos({ "RF1" })
 	@Test
-	@Ignore
 	public void testConsultarMatricula() {
 
 		// 1 caso - paso un expediente vacio
@@ -133,7 +138,6 @@ public class TestMatriculaEJB {
 
 	@Requisitos({ "RF1" })
 	@Test
-	@Ignore
 	public void testConsultarMatriculaPorCurso() {
 		// 1 caso - paso un expediente vacio
 		try {
@@ -164,7 +168,6 @@ public class TestMatriculaEJB {
 
 	@Requisitos({ "RF1" })
 	@Test
-	@Ignore
 	public void testBuscarMatriculaPorCurso() {
 		// Caso 1 - paso un curso null
 		try {
@@ -199,7 +202,6 @@ public class TestMatriculaEJB {
 	
 	@Requisitos({ "RF1" })
 	@Test
-	@Ignore
 	public void testListarTodasLasMatriculas() {
 		MatriculaId id1 = new MatriculaId("20/21",8);
 		Matricula m1 = em.find(Matricula.class, id1);
@@ -214,7 +216,7 @@ public class TestMatriculaEJB {
 		try {
 			assertTrue("El metodo no devuelve una lista correcta",matriculas.equals(matriculaEJB.consultarMatriculas()));
 		} catch(Exception e) {
-			fail("El metodo devuelve una excepcion en un metodo correcto");
+			fail("Lanza una excepción inesperada");
 		}
 		
 		Matricula m3 = new Matricula();
@@ -222,23 +224,22 @@ public class TestMatriculaEJB {
 		m3.setExpediente(em.find(Expediente.class, 1));
 		m3.setEstado(true);
 		m3.setNumArchivo(10);
-		m3.setTurnoPreferente("maÃ±ana");
+		m3.setTurnoPreferente("mañana");
 		m3.setFechaMatricula(Timestamp.valueOf("2020-09-04 10:07:37"));
 		
 		em.persist(m3);
 		matriculas.add(m3);
 		
 		try {
-			assertTrue("El metodo no devuelve una lista correcta",matriculas.equals(matriculaEJB.consultarMatriculas()));
+			assertTrue("El metodo no devuelve una lista correcta", matriculas.equals(matriculaEJB.consultarMatriculas()));
 		} catch(Exception e) {
-			fail("El metodo devuelve una excepcion en un metodo correcto");
+			fail("Lanza una excepción inesperada");
 		}
 		
 	}
 	
 	@Requisitos({ "RF9" })
 	@Test
-	@Ignore
 	public void testComprobacionParametrosesmatricular() {
 		// Caso 1 - Matricula nula
 		try {

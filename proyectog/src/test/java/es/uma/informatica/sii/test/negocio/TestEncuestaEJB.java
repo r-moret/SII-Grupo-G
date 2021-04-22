@@ -11,10 +11,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -38,8 +38,8 @@ public class TestEncuestaEJB {
 	
 	private static final String PERSISTENCE_UNIT = "proyectog-jpa-test";
 	
-	private static EntityManagerFactory emf;
-	private static EntityManager em;
+	private EntityManagerFactory emf;
+	private EntityManager em;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -47,16 +47,10 @@ public class TestEncuestaEJB {
 		properties.setProperty(GLASSFISH_CONFIG_FILE_PROPERTY, CONFIG_FILE);
 		ejbContainer = EJBContainer.createEJBContainer(properties);
 		ctx = ejbContainer.getContext();
-	
-		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
-		em = emf.createEntityManager();
 	}
 	
 	@AfterClass
 	public static void tearDownAfterClass() {
-		em.close();
-		emf.close();
-		
 		if (ejbContainer != null) {
 			ejbContainer.close();
 		}
@@ -64,8 +58,19 @@ public class TestEncuestaEJB {
 
 	@Before
 	public void setUp() throws Exception {
+		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+		em = emf.createEntityManager();
+		
 		encuestaEJB = (EncuestaInterface) ctx.lookup(ENCUESTA_EJB);
 		BaseDatos.initBaseDatos();
+	}
+	
+	@After
+	public void tearDown() {
+		if(em.isOpen()) {
+			em.close();
+		}
+		emf.close();
 	}
 	
 	private Encuesta crearEncuesta(boolean incompatibilidadHoraria) throws SecretariaException {
@@ -125,7 +130,6 @@ public class TestEncuestaEJB {
 	
 	@Requisitos({"RF2"})
 	@Test
-	@Ignore
 	public void testRegistroEncuestaCorrecto() {
 		try {
 			encuestaEJB.registrarEncuesta(null);
@@ -239,7 +243,6 @@ public class TestEncuestaEJB {
 	
 	@Requisitos({"RF6"})
 	@Test
-	@Ignore
 	public void testDetectarIncompatibilidadHoraria() {
 		try {
 			encuestaEJB.incompatibilidadHoraria(null);

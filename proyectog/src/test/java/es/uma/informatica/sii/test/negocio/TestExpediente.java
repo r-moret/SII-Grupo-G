@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -37,8 +38,8 @@ public class TestExpediente {
 	
 	private static final String ALUMNO_EJB = "java:global/classes/ExpedienteEJB";
 	
-	private static EntityManagerFactory emf;
-	private static EntityManager em;
+	private EntityManagerFactory emf;
+	private EntityManager em;
 	
 	private ExpedienteInterface expedienteEJB;
 	
@@ -48,16 +49,10 @@ public class TestExpediente {
 		properties.setProperty(GLASSFISH_CONFIG_FILE_PROPERTY, CONFIG_FILE);
 		ejbContainer = EJBContainer.createEJBContainer(properties);
 		ctx = ejbContainer.getContext();
-		
-		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
-		em = emf.createEntityManager();
 	}
 	
 	@AfterClass
 	public static void tearDownAfterClass() {
-		em.close();
-		emf.close();
-		
 		if (ejbContainer != null) {
 			ejbContainer.close();
 		}
@@ -65,8 +60,19 @@ public class TestExpediente {
 
 	@Before
 	public void setUp() throws Exception {
+		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+		em = emf.createEntityManager();
+		
 		expedienteEJB = (ExpedienteInterface) ctx.lookup(ALUMNO_EJB);
 		BaseDatos.initBaseDatos();
+	}
+	
+	@After
+	public void tearDown() {
+		if(em.isOpen()) {
+			em.close();
+		}
+		emf.close();
 	}
 
 	@Test
