@@ -92,6 +92,7 @@ public class Matricula implements Serializable {
 
 	public Matricula() {
 		super();
+		asignaturasPorMatriculas = new ArrayList<>();
 	}   
 	public String getCursoAcademico() {
 		return this.cursoAcademico;

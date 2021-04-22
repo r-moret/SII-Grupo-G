@@ -79,11 +79,13 @@ public class TestGrupoEJB {
 	}
 	
 	@Test
+	@Ignore
 	public void testRegistrarCambioGrupo() {
 		// TODO
 	}
 	
 	@Test
+	@Ignore
 	public void testAsignarGrupos() {
 		// TODO
 	}
@@ -104,6 +106,7 @@ public class TestGrupoEJB {
 	
 	
 	@Test
+	@Ignore
 	public void testReasignarGrupoInvalido() {
 		Grupo gp1 = em.find(Grupo.class, "id1");
 		Expediente ex1 = em.find(Expediente.class, 8);
@@ -160,6 +163,7 @@ public class TestGrupoEJB {
 	}
 	
 	@Test 
+	@Ignore
 	public void testReasignarGrupo() {
 		Expediente al1 = em.find(Expediente.class, 8); // 1 B
 		Grupo gp1 = em.find(Grupo.class, "id1"); // 1 A
@@ -184,6 +188,7 @@ public class TestGrupoEJB {
 	}
 	
 	@Test
+	@Ignore
 	public void testAforoMaximo() {
 		// TODO
 	}

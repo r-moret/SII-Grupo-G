@@ -3,6 +3,7 @@ package es.uma.informatica.sii.entidades;
 import java.io.Serializable;
 import java.lang.Boolean;
 import java.lang.Integer;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -43,6 +44,7 @@ public class Expediente implements Serializable {
 
 	public Expediente() {
 		super();
+		this.matriculas = new ArrayList<>();
 	}   
 	
 	public Boolean getActivo() {

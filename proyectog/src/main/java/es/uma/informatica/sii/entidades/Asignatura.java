@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -49,6 +50,7 @@ public class Asignatura implements Serializable {
 
 	public Asignatura() {
 		super();
+		asignaturasPorMatriculas = new ArrayList<>();
 	}
 
 	public Integer getReferencia() {

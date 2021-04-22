@@ -76,7 +76,6 @@ public class TestExpediente {
 	}
 
 	@Test
-	@Ignore
 	public void testActualizarExpediente() {
 		
 		try {
