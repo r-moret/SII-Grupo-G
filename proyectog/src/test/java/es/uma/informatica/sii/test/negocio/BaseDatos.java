@@ -70,6 +70,7 @@ public class BaseDatos {
 		
 		em.persist(ex1);
 		
+		
 		Expediente ex2 = new Expediente();
 		ex2.setNumExpediente(1);
 		ex2.setAlumno(al2);
@@ -77,6 +78,7 @@ public class BaseDatos {
 		ex2.setActivo(false);
 		
 		em.persist(ex2);
+		
 		
 		Matricula mat1 = new Matricula();
 		mat1.setCursoAcademico("20/21");
@@ -108,12 +110,6 @@ public class BaseDatos {
 		asig1.setTitulacion(tit1);
 		
 		em.persist(asig1);
-		
-		AsignaturasPorMatriculas asigMat = new AsignaturasPorMatriculas();
-		asigMat.setAsignatura(asig1);
-		asigMat.setMatricula(mat1);
-		
-		em.persist(asigMat);
 		
 		Asignatura asig2 = new Asignatura();
 		asig2.setReferencia(2);
@@ -253,6 +249,20 @@ public class BaseDatos {
 		enc2.setGruposPorAsignatura(gpa2);
 		
 		em.persist(enc2);
+		
+		AsignaturasPorMatriculas am1 = new AsignaturasPorMatriculas();
+		am1.setAsignatura(asig1);
+		am1.setGrupo(grup2);
+		am1.setMatricula(mat1);
+		
+		em.persist(am1);
+		
+		AsignaturasPorMatriculas am2 = new AsignaturasPorMatriculas();
+		am2.setAsignatura(asig2);
+		am2.setGrupo(grup2);
+		am2.setMatricula(mat1);
+		
+		em.persist(am2);
 		
 		// FIN DE LA INICIALIZACION DE LA BASE DE DATOS
 		

@@ -16,6 +16,15 @@ public class AsignaturasPorMatriculas implements Serializable {
 		private Matricula.MatriculaId matricula;
 		private Integer asignatura;
 		
+		public AsignaturasPorMatriculasId() {
+			super();
+		}
+		
+		public AsignaturasPorMatriculasId(Matricula.MatriculaId matricula, Integer asignatura) {
+			this.matricula = matricula;
+			this.asignatura = asignatura;
+		}
+		
 		@Override
 		public int hashCode() {
 			final int prime = 31;

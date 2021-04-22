@@ -6,7 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
-import es.uma.informatica.sii.entidades.Alumno;
+import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
@@ -36,7 +36,7 @@ public class GrupoEJB implements GrupoInterface{
 	}
 
 	@Override
-	public void reasignarGrupo(Alumno alumno, Grupo grupo) throws SecretariaException {
+	public void reasignarGrupo(Expediente expediente, Grupo grupo) throws SecretariaException {
 		// TODO Auto-generated method stub
 		
 	}

@@ -86,7 +86,6 @@ public class TestMatriculaEJB {
 
 	@Requisitos({ "RF1" })
 	@Test
-	@Ignore
 	public void testConsultarMatricula() {
 
 		// 1 caso - paso un expediente vacio
@@ -114,28 +113,27 @@ public class TestMatriculaEJB {
 			fail("Lanza la excepcion incorrecta 2");
 		}
 
-		// 3 caso - devuelve una lista nula
-		Expediente expediente = em.find(Expediente.class, 8);
-
-		try {
-
-			expediente.setMatriculas(null);
-			assertTrue("El metodo devuelve Null en vez de una lista vacia",
-					matriculaEJB.consultarMatricula(expediente).isEmpty());
-
-		} catch (Exception e) {
-			fail("El metodo lanza una excepcion cuando el comportamiento es correcto");
-		}
-
 		// 4 caso - Consulta correcta
 		Expediente expediente2 = em.find(Expediente.class, 8);
 		// El metodo devuelve una lista distinta
 
 		try {
-			assertTrue("El metodo no devuelve una lista de matriculas correcta",
-					expediente2.getMatriculas().equals(matriculaEJB.consultarMatricula(expediente2)));
+			List<Matricula> matri1 = expediente2.getMatriculas();
+			List<Matricula> matri2 = matriculaEJB.consultarMatricula(expediente2);
+			
+			if(matri1.size() != matri2.size()) {
+				fail("El metodo no devuelve la lista correcta de matriculas");
+			} else {
+				
+				for(int i = 0; i < matri1.size(); i++) {
+					if(!matri1.get(i).equals(matri2.get(i))) {
+						fail("El metodo no devuelve la lista correcta de matriculas");
+					}
+				}
+			}
+			
+			
 		} catch (Exception e) {
-
 			fail("El metodo lanza una excepcion al comprobar un expediente correcto");
 		}
 	}
@@ -330,6 +328,7 @@ public class TestMatriculaEJB {
 	// Metodo que comprueba el funcionamiento correcto de desmatricular
 	@Requisitos({ "RF9" })
 	@Test
+	@Ignore
 	public void testDesmatricularAsignatura() {
 		
 		// Caso 1 - La matricula no contiene la asignatura pasada por parametro 

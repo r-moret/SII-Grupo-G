@@ -5,6 +5,7 @@ import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -85,7 +86,7 @@ public class Matricula implements Serializable {
 	private Expediente expediente;
 	
 	@OneToMany(mappedBy="matricula")
-	private List<AsignaturasPorMatriculas> asignaturasPorMatriculas;
+	private List<AsignaturasPorMatriculas> asignaturasPorMatriculas = new ArrayList<AsignaturasPorMatriculas>();
 	
 	private static final long serialVersionUID = 1L;
 
