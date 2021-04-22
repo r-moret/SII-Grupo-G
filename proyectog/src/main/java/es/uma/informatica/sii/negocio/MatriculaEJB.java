@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
 import es.uma.informatica.sii.entidades.Asignatura;
@@ -20,9 +22,12 @@ import es.uma.informatica.sii.exceptions.SecretariaException;
 @Stateless
 public class MatriculaEJB implements MatriculaInterface {
 	
-
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("proyectog-jpa");
-	private EntityManager em = emf.createEntityManager();
+	private static final String PERSISTENCE_UNIT = "proyectog-jpa";
+	
+	@PersistenceUnit(unitName = PERSISTENCE_UNIT)
+	private EntityManagerFactory emf;
+	@PersistenceContext(name = PERSISTENCE_UNIT)
+	private EntityManager em;
 
 	@Override
 	public List<Matricula> consultarMatricula(Expediente alumno) throws SecretariaException {

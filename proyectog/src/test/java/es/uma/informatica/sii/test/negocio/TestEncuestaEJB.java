@@ -87,7 +87,7 @@ public class TestEncuestaEJB {
 			// Creo una encuesta cualquiera
 			Encuesta enc = crearEncuesta(false);
 			encuestaEJB.registrarEncuesta(enc);
-			
+
 			// El mismo alumno crea una nueva encuesta (distinta fecha, mismo expediente)
 			Encuesta newEnc = crearEncuesta(true);
 			newEnc.setExpediente(enc.getExpediente());

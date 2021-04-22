@@ -65,6 +65,7 @@ public class BaseDatos {
 		ex1.setNumExpediente(8);
 		ex1.setAlumno(al1);
 		ex1.setTitulacion(tit1);
+		ex1.setActivo(true);
 		
 		em.persist(ex1);
 		
@@ -72,6 +73,7 @@ public class BaseDatos {
 		ex2.setNumExpediente(1);
 		ex2.setAlumno(al2);
 		ex2.setTitulacion(tit1);
+		ex2.setActivo(false);
 		
 		em.persist(ex2);
 		

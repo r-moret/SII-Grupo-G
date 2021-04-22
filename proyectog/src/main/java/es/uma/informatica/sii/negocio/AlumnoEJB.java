@@ -3,7 +3,8 @@ package es.uma.informatica.sii.negocio;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 
 import es.uma.informatica.sii.entidades.Alumno;
 import es.uma.informatica.sii.exceptions.AlumnoInexistente;
@@ -11,9 +12,12 @@ import es.uma.informatica.sii.exceptions.AlumnoInexistente;
 @Stateless
 public class AlumnoEJB implements AlumnoInterface{
 	
-
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("proyectog-jpa");
-	private EntityManager em = emf.createEntityManager();
+	private static final String PERSISTENCE_UNIT = "proyectog-jpa";
+	
+	@PersistenceUnit(unitName = PERSISTENCE_UNIT)
+	private EntityManagerFactory emf;
+	@PersistenceContext(name = PERSISTENCE_UNIT)
+	private EntityManager em;
 
 	@Override
 	public void actualizarAlumno(Alumno alumno) throws AlumnoInexistente {
