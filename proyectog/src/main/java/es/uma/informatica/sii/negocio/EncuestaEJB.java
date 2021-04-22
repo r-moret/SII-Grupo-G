@@ -67,35 +67,29 @@ public class EncuestaEJB implements EncuestaInterface {
 		}
 
 		Expediente exp = em.find(Expediente.class, encuesta.getExpediente().getNumExpediente());
-
 		if (exp == null) {
 			throw new SecretariaException();
 		}
-
 		
-			int anyo1 = obtenerAnyos(encuesta.getFechaEnvio());
-			
-			Encuesta encuestaCorrecta = null;
-			
-			List<Encuesta> encuestas = exp.getEncuestas();
-			for (Encuesta encu : encuestas) {
-				
-				int anyo2 = obtenerAnyos(encu.getFechaEnvio());
-			
-				if(anyo1 == anyo2) {
-					encuestaCorrecta = encu;
-				}
+		int anyo1 = obtenerAnyos(encuesta.getFechaEnvio());
+		Encuesta encuestaCorrecta = null;
+		
+		List<Encuesta> encuestas = exp.getEncuestas();
+		for (Encuesta encu : encuestas) {
+			int anyo2 = obtenerAnyos(encu.getFechaEnvio());
+		
+			if(anyo1 == anyo2) {
+				encuestaCorrecta = encu;
 			}
-			
-			if(encuestaCorrecta == null) {
-				em.persist(encuesta);
-			} else {
-			
-				em.remove(encuestaCorrecta);
-				em.persist(encuesta);
-			}
-	
-
+		}
+		
+		if(encuestaCorrecta == null) {
+			em.persist(encuesta);
+		} 
+		else {
+			em.remove(encuestaCorrecta);
+			em.persist(encuesta);
+		}
 	}
 
 	@Override

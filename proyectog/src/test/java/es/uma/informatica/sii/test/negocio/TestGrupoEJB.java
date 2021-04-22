@@ -52,6 +52,9 @@ public class TestGrupoEJB {
 	
 	@AfterClass
 	public static void tearDownAfterClass() {
+		em.close();
+		emf.close();
+		
 		if (ejbContainer != null) {
 			ejbContainer.close();
 		}

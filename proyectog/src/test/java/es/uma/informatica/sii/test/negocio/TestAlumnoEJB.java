@@ -13,6 +13,7 @@ import javax.persistence.Persistence;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -50,6 +51,9 @@ public class TestAlumnoEJB {
 	
 	@AfterClass
 	public static void tearDownAfterClass() {
+		em.close();
+		emf.close();
+		
 		if (ejbContainer != null) {
 			ejbContainer.close();
 		}
@@ -63,6 +67,7 @@ public class TestAlumnoEJB {
 
 	@Requisitos({"RF9"})
 	@Test
+	@Ignore
 	public void testActualizarAlumno() {
 		
 		try {
