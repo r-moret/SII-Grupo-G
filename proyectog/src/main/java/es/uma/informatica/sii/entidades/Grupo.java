@@ -49,6 +49,12 @@ public class Grupo implements Serializable {
 	@OneToMany(mappedBy="grupo")
 	private List<AsignaturasPorMatriculas> asignaturasPorMatriculas;
 	
+	@OneToMany(mappedBy="grupoActual")
+	private List<SolicitudCambioGrupo> solicitudesSalida;
+	
+	@OneToMany(mappedBy="grupoSolicitado")
+	private List<SolicitudCambioGrupo> solicitudesEntrada;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Grupo() {

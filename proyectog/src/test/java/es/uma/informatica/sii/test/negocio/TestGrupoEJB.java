@@ -73,6 +73,21 @@ public class TestGrupoEJB {
 		emf.close();
 	}
 	
+	@Test
+	public void testAsignarGrupos() {
+		// TODO
+	}
+	
+	@Test 
+	public void testReasignarGrupo() {
+		// TODO
+	}
+	
+	@Test
+	public void testAforoMaximo() {
+		// TODO
+	}
+	
 	@Requisitos({"RF9"})
 	@Test
 	@Ignore

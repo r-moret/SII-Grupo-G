@@ -18,6 +18,7 @@
 		<class>es.uma.informatica.sii.entidades.GruposPorAsignatura</class>
 		<class>es.uma.informatica.sii.entidades.DatosAlumnado</class>
 		<class>es.uma.informatica.sii.entidades.AsignaturasPorMatriculas</class>
+		<class>es.uma.informatica.sii.entidades.SolicitudCambioGrupo</class>
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property

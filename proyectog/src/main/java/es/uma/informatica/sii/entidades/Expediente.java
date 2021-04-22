@@ -36,6 +36,9 @@ public class Expediente implements Serializable {
 	@JoinColumn(nullable=false)
 	private List<Matricula> matriculas;
 	
+	@OneToMany(mappedBy="expediente")
+	private List<SolicitudCambioGrupo> solicitudesCambioGrupo;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Expediente() {

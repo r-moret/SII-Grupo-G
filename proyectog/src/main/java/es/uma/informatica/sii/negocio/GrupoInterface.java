@@ -4,6 +4,7 @@ import javax.ejb.Local;
 
 import es.uma.informatica.sii.entidades.Alumno;
 import es.uma.informatica.sii.entidades.Grupo;
+import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
 @Local
@@ -17,18 +18,22 @@ public interface GrupoInterface {
 	 * @param selector
 	 * @throws SecretariaException
 	 */
-	//duda: falta parámetro encuenta ??
 	public void asignarGrupos(Algoritmo selector) throws SecretariaException;
 	
 	/**
 	 * REQUISITO: RF-04
-	 * Actualización del grupo de alumno correspondiente al mismo curso académico que 
-	 * grupo
+	 * Guarda una solicitud de cambio de grupo en la base de datos para poder ser 
+	 * consultada m�s tarde por Secretaria
 	 * 
-	 * TODO: Actualización JPA para poder almacenar toda la informacion que requiere 
-	 * la solicitud de cambio de grupo que más tarde revisará Secretaría. Se necesita
-	 * un método nuevo en GrupoInterface para almacenar estos nuevos datos en la base 
-	 * de datos.
+	 * @param solicitud
+	 * @throws SecretariaException
+	 */
+	public void registrarSolicitudCambioGrupo(SolicitudCambioGrupo solicitud) throws SecretariaException;
+	
+	/**
+	 * REQUISITO: RF-04
+	 * Actualizaci�n del grupo de alumno correspondiente al mismo curso acad�mico que 
+	 * grupo
 	 * 
 	 * @param alumno
 	 * @param grupo
@@ -43,7 +48,7 @@ public interface GrupoInterface {
 	
 	/** 
 	 * REQUISITO: RF-09
-	 * Actualizacion de los datos de grupo
+	 * Actualizaci�n de los datos de grupo
  
 	 * @param grupo
 	 * @throws SecretariaException
