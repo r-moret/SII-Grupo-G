@@ -8,6 +8,7 @@ import javax.persistence.PersistenceUnit;
 
 import es.uma.informatica.sii.entidades.Alumno;
 import es.uma.informatica.sii.entidades.Grupo;
+import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
@@ -24,6 +25,12 @@ public class GrupoEJB implements GrupoInterface{
 
 	@Override
 	public void asignarGrupos(Algoritmo selector) throws SecretariaException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void registrarSolicitudCambioGrupo(SolicitudCambioGrupo solicitud) throws SecretariaException {
 		// TODO Auto-generated method stub
 		
 	}
