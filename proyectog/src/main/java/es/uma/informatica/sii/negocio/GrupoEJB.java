@@ -8,7 +8,6 @@ import javax.persistence.PersistenceUnit;
 
 import es.uma.informatica.sii.entidades.Alumno;
 import es.uma.informatica.sii.entidades.Grupo;
-import es.uma.informatica.sii.exceptions.AlumnoInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
@@ -45,7 +44,7 @@ public class GrupoEJB implements GrupoInterface{
 	public void actualizarGrupo(Grupo grupo) throws SecretariaException {
 		if(grupo == null) {
 			//Grupo no existe
-			throw new AlumnoInexistente();
+			throw new GrupoInexistente();
 		}
 		
 		Grupo g = em.find(Grupo.class, grupo.getId());
@@ -55,8 +54,7 @@ public class GrupoEJB implements GrupoInterface{
 			throw new GrupoInexistente();
 		}
 
-		em.merge(grupo);
-		
+		em.merge(grupo);	
 	}
 
 }
