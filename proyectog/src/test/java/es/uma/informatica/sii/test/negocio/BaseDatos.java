@@ -70,6 +70,7 @@ public class BaseDatos {
 		
 		em.persist(ex1);
 		
+		
 		Expediente ex2 = new Expediente();
 		ex2.setNumExpediente(1);
 		ex2.setAlumno(al2);
@@ -77,6 +78,7 @@ public class BaseDatos {
 		ex2.setActivo(false);
 		
 		em.persist(ex2);
+		
 		
 		Matricula mat1 = new Matricula();
 		mat1.setCursoAcademico("20/21");
