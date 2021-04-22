@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 
 import es.uma.informatica.sii.entidades.Alumno;
 import es.uma.informatica.sii.entidades.Asignatura;
+import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
 import es.uma.informatica.sii.entidades.Centro;
 import es.uma.informatica.sii.entidades.Clase;
 import es.uma.informatica.sii.entidades.Encuesta;
@@ -107,6 +108,12 @@ public class BaseDatos {
 		asig1.setTitulacion(tit1);
 		
 		em.persist(asig1);
+		
+		AsignaturasPorMatriculas asigMat = new AsignaturasPorMatriculas();
+		asigMat.setAsignatura(asig1);
+		asigMat.setMatricula(mat1);
+		
+		em.persist(asigMat);
 		
 		Asignatura asig2 = new Asignatura();
 		asig2.setReferencia(2);

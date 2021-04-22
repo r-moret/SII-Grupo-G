@@ -72,7 +72,8 @@ public class MatriculaEJB implements MatriculaInterface {
 	        String jpql = "select m from Matricula m where m.expediente = :alumno";
 	        Query query = em.createQuery(jpql);
 	        //query.setParameter("alumno", alumno.getMatriculas());
-			lm.add((Matricula) query.getResultList());
+			//lm.add((Matricula) query.getResultList());
+	        lm = query.getResultList();
 	        return lm;
 	        
 
@@ -81,10 +82,15 @@ public class MatriculaEJB implements MatriculaInterface {
 
 	@Override
 	public Matricula consultarMatricula(Expediente alumno, String cursoAcademico) throws SecretariaException {
+		if(alumno == null) {
+			throw new ExpedienteInexistente();
+			
+		}
+		
 		Expediente e = em.find(Expediente.class, alumno.getNumExpediente());
 		if(e == null) {
-			//Expediente no existe
-			throw new ExpedienteInexistente();
+			//Alumno no existe
+			throw new AlumnoInexistente();
 		}
 		int cont = 0;
 		boolean enc = false;
@@ -106,7 +112,8 @@ public class MatriculaEJB implements MatriculaInterface {
 	@Override
 	public List<Matricula> consultarMatriculas() throws SecretariaException {
 		List<Matricula> lm = new ArrayList<Matricula>();
-		Query query = em.createQuery("SELECT * FROM MATRICULA");
+		String jpql = "SELECT * FROM MATRICULA";
+		Query query = em.createQuery(jpql);
 		lm = query.getResultList();
 		return lm;
 	}
@@ -137,17 +144,5 @@ public class MatriculaEJB implements MatriculaInterface {
 		
 		em.remove(m.getAsignaturasPorMatriculas().get(cont).getAsignatura());
 		matricula = em.merge(m);
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }
