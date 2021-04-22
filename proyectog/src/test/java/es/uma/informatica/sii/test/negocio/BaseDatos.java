@@ -111,12 +111,6 @@ public class BaseDatos {
 		
 		em.persist(asig1);
 		
-		AsignaturasPorMatriculas asigMat = new AsignaturasPorMatriculas();
-		asigMat.setAsignatura(asig1);
-		asigMat.setMatricula(mat1);
-		
-		em.persist(asigMat);
-		
 		Asignatura asig2 = new Asignatura();
 		asig2.setReferencia(2);
 		asig2.setCodigo(976);
@@ -255,6 +249,20 @@ public class BaseDatos {
 		enc2.setGruposPorAsignatura(gpa2);
 		
 		em.persist(enc2);
+		
+		AsignaturasPorMatriculas am1 = new AsignaturasPorMatriculas();
+		am1.setAsignatura(asig1);
+		am1.setGrupo(grup2);
+		am1.setMatricula(mat1);
+		
+		em.persist(am1);
+		
+		AsignaturasPorMatriculas am2 = new AsignaturasPorMatriculas();
+		am2.setAsignatura(asig2);
+		am2.setGrupo(grup2);
+		am2.setMatricula(mat1);
+		
+		em.persist(am2);
 		
 		// FIN DE LA INICIALIZACION DE LA BASE DE DATOS
 		

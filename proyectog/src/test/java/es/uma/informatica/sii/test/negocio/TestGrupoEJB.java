@@ -2,6 +2,7 @@ package es.uma.informatica.sii.test.negocio;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.ejb.embeddable.EJBContainer;
@@ -18,8 +19,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
+import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
+import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
+import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.Titulacion;
+import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.negocio.GrupoInterface;
@@ -74,13 +79,108 @@ public class TestGrupoEJB {
 	}
 	
 	@Test
+	public void testRegistrarCambioGrupo() {
+		// TODO
+	}
+	
+	@Test
 	public void testAsignarGrupos() {
 		// TODO
 	}
 	
+	private String ultimoCursoMatriculado(Expediente ex) {
+		Integer maxUltimoAnyo = -1;
+		for(Matricula m : ex.getMatriculas()) {
+			Integer ultimoAnyo = Integer.parseInt(m.getCursoAcademico().substring(3,5));
+			if(ultimoAnyo > maxUltimoAnyo) {
+				maxUltimoAnyo = ultimoAnyo;
+			}
+		}
+		Integer previoAnyo = maxUltimoAnyo - 1;
+		String ultimoCurso = previoAnyo.toString() + "/" + maxUltimoAnyo.toString();
+		
+		return ultimoCurso;
+	}
+	
+	
+	@Test
+	public void testReasignarGrupoInvalido() {
+		Grupo gp1 = em.find(Grupo.class, "id1");
+		Expediente ex1 = em.find(Expediente.class, 8);
+		
+		try {
+			grupoEJB.reasignarGrupo(null, gp1);
+		}
+		catch(SecretariaException e) {
+			try {
+				grupoEJB.reasignarGrupo(ex1, null);
+			}
+			catch(SecretariaException a) {
+				/* COMPORTAMIENTO CORRECTO */
+			}
+			catch(Exception a) {
+				fail("No lanza la excepción correcta");
+			}
+		}
+		catch(Exception e) {
+			fail("No lanza la excepción correcta");
+		}
+		
+		Grupo gp2 = new Grupo();
+		gp2.setId("noExiste");
+		gp2.setCurso(1);
+		gp2.setLetra("K");
+		gp2.setTurno("tarde");
+		gp2.setIngles(false);
+		
+		Expediente ex2 = new Expediente();
+		ex2.setNumExpediente(16);
+		ex2.setTitulacion(em.find(Titulacion.class, 1));
+		ex2.setMatriculas(new ArrayList<Matricula>());
+		
+		try {
+			grupoEJB.reasignarGrupo(ex1, gp2);
+		}
+		catch(GrupoInexistente e) {
+			/* COMPORTAMIENTO CORRECTO */
+		}
+		catch(Exception e) {
+			fail("No lanza la excepción que se esperaba (GrupoInexistente)");
+		}
+		
+		try {
+			grupoEJB.reasignarGrupo(ex2, gp1);
+		}
+		catch(ExpedienteInexistente e) {
+			/* COMPORTAMIENTO CORRECTO */
+		}
+		catch(Exception e) {
+			fail("No lanza la excepción que se esperaba (ExpedienteInexistente)");
+		}
+	}
+	
 	@Test 
 	public void testReasignarGrupo() {
-		// TODO
+		Expediente al1 = em.find(Expediente.class, 8); // 1 B
+		Grupo gp1 = em.find(Grupo.class, "id1"); // 1 A
+		
+		try {
+			grupoEJB.reasignarGrupo(al1, gp1);
+			
+			String ultimoCurso = ultimoCursoMatriculado(al1);
+			Matricula.MatriculaId idMat = new Matricula.MatriculaId(ultimoCurso, al1.getNumExpediente());
+			Matricula mat = em.find(Matricula.class, idMat);
+			
+			for(AsignaturasPorMatriculas asigMat : mat.getAsignaturasPorMatriculas()) {
+				if(asigMat.getAsignatura().getCurso() == gp1.getCurso()) {
+					assertEquals(asigMat.getGrupo(), gp1);
+				}
+			}
+		}
+		catch(Exception e) {
+			fail("Lanza una excepción inesperada cuando el cambio debia ser efectivo");
+		}
+		
 	}
 	
 	@Test

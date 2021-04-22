@@ -2,7 +2,7 @@ package es.uma.informatica.sii.negocio;
 
 import javax.ejb.Local;
 
-import es.uma.informatica.sii.entidades.Alumno;
+import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.exceptions.SecretariaException;
@@ -39,7 +39,7 @@ public interface GrupoInterface {
 	 * @param grupo
 	 * @throws SecretariaException
 	 */
-	public void reasignarGrupo(Alumno alumno, Grupo grupo) throws SecretariaException;
+	public void reasignarGrupo(Expediente expediente, Grupo grupo) throws SecretariaException;
 	
 	/**
 	 * TODO
