@@ -36,7 +36,7 @@ public class TestEncuestaEJB {
 	
 	private EncuestaInterface encuestaEJB;
 	
-	private static final String PERSISTENCE_UNIT = "proyectog-jpa";
+	private static final String PERSISTENCE_UNIT = "proyectog-jpa-test";
 	
 	@PersistenceUnit(unitName = PERSISTENCE_UNIT)
 	private EntityManagerFactory emf;
@@ -101,7 +101,7 @@ public class TestEncuestaEJB {
 			
 			Expediente ex = em.find(Expediente.class, 1);
 			enc.setExpediente(ex);
-			
+	
 			encuestaEJB.registrarEncuesta(enc);
 			
 			  // El mismo alumno crea una nueva encuesta (distinta fecha, mismo expediente)
