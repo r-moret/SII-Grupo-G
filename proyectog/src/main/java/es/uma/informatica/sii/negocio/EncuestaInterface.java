@@ -20,7 +20,7 @@ public interface EncuestaInterface {
 	 * @throws EncuestaInexistente
 	 * @return
 	 */
-	public Encuesta obtenerEncuesta(Timestamp fechaRealizada, Expediente expediente) throws EncuestaInexistente;
+	public Encuesta obtenerEncuesta(Timestamp fechaRealizada, Expediente expediente) throws SecretariaException;
 	
 	/**
 	 * REQUISITO: RF-02

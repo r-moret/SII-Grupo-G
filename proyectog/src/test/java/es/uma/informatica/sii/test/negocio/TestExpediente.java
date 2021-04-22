@@ -2,6 +2,8 @@ package es.uma.informatica.sii.test.negocio;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.ejb.embeddable.EJBContainer;
@@ -16,13 +18,15 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import es.uma.informatica.sii.anotaciones.Requisitos;
-import es.uma.informatica.sii.exceptions.AlumnoInexistente;
-import es.uma.informatica.sii.exceptions.SecretariaException;
+import es.uma.informatica.sii.entidades.Titulacion;
 import es.uma.informatica.sii.entidades.Alumno;
-import es.uma.informatica.sii.negocio.AlumnoInterface;
+import es.uma.informatica.sii.entidades.Matricula;
+import es.uma.informatica.sii.entidades.Expediente;
+import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
+import es.uma.informatica.sii.exceptions.SecretariaException;
+import es.uma.informatica.sii.negocio.ExpedienteInterface;
 
-public class TestAlumnoEJB {
+public class TestExpediente {
 
 	private static EJBContainer ejbContainer;
 	private static Context ctx;
@@ -31,12 +35,12 @@ public class TestAlumnoEJB {
 	private static final String CONFIG_FILE = "target/test-classes/META-INF/domain.xml";
 	private static final String PERSISTENCE_UNIT = "proyectog-jpa-test";
 	
-	private static final String ALUMNO_EJB = "java:global/classes/AlumnoEJB";
+	private static final String ALUMNO_EJB = "java:global/classes/ExpedienteEJB";
 	
 	private static EntityManagerFactory emf;
 	private static EntityManager em;
 	
-	private AlumnoInterface alumnoEJB;
+	private ExpedienteInterface expedienteEJB;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -61,30 +65,32 @@ public class TestAlumnoEJB {
 
 	@Before
 	public void setUp() throws Exception {
-		alumnoEJB = (AlumnoInterface) ctx.lookup(ALUMNO_EJB);
+		expedienteEJB = (ExpedienteInterface) ctx.lookup(ALUMNO_EJB);
 		BaseDatos.initBaseDatos();
 	}
 
-	@Requisitos({"RF9"})
 	@Test
 	@Ignore
-	public void testActualizarAlumno() {
+	public void testActualizarExpediente() {
 		
 		try {
-			alumnoEJB.actualizarAlumno(null);
-			fail("Permite actualizar un alumno nulo");
+			expedienteEJB.actualizarExpediente(null);
+			fail("Permite actualizar un expediente nulo");
 		}
 		catch(SecretariaException exc1) {
 			try {
-				Alumno al = new Alumno();
-				al.setId(9);
-				al.setEmailInstitucional("email@email.es");
-				al.setNombreCompleto("Nombre Alumno");
-				al.setDni("8888888S");
-				alumnoEJB.actualizarAlumno(al);
-				fail("Permite actualizar un alumno inexistente en la base de datos");
+				Expediente exp = new Expediente();
+				exp.setNumExpediente(4);
+				exp.setTitulacion(em.find(Titulacion.class, 1));
+				exp.setAlumno(em.find(Alumno.class, "12W"));
+				List<Matricula> matris = new ArrayList<>();
+				exp.setMatriculas(matris);
+				exp.setActivo(false);
+				
+				expedienteEJB.actualizarExpediente(exp);
+				fail("Permite actualizar un expediente inexistente en la base de datos");
 			}
-			catch(AlumnoInexistente exc2) {
+			catch(ExpedienteInexistente exc2) {
 				/* COMPORTAMIENTO CORRECTO */
 			}
 			catch(Exception exc2) {
@@ -95,16 +101,17 @@ public class TestAlumnoEJB {
 			fail("Lanza la excepción incorrecta");
 		}
 		
-		Alumno al = em.find(Alumno.class, 1);
+		Expediente exp = em.find(Expediente.class, 1);
 		
-		al.setEmailInstitucional("otro@gmail.com");
+		exp.setActivo(true);
 		
 		try {
-			alumnoEJB.actualizarAlumno(al);
+			expedienteEJB.actualizarExpediente(exp);
 		} catch (Exception e) {
 			fail("Lanza una excepción en la actualización de un alumno correcto");
 		}
 		
-		assertEquals("El campo actualizado no se ha guardado en la base de datos", al.getEmailInstitucional(), em.find(Alumno.class, 1).getEmailInstitucional());	
+		assertEquals("El campo actualizado no se ha guardado en la base de datos", exp.getActivo(), em.find(Expediente.class, 1).getActivo());	
 	}
+
 }
