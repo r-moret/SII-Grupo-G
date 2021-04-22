@@ -1,7 +1,9 @@
 package es.uma.informatica.sii.negocio;
 
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -51,28 +53,48 @@ public class EncuestaEJB implements EncuestaInterface {
 	//		return expEntity.getEncuestas();
 	//	}
 	
+	private int obtenerAnyos(Timestamp fecha) {
+		String anyoString = fecha.toString().substring(0, 4);
+		int anyo = Integer.parseInt(anyoString);
+		return anyo;
+	}
+	
 	@Override
 	public void registrarEncuesta(Encuesta encuesta) throws SecretariaException {
+		
+		if(encuesta == null) {
+			throw new SecretariaException();
+		}
 
 		Expediente exp = em.find(Expediente.class, encuesta.getExpediente().getNumExpediente());
 
 		if (exp == null) {
-			// El expediente no existe en la bbdd
 			throw new SecretariaException();
 		}
 
-		PersistenceUnitUtil util = emf.getPersistenceUnitUtil();
-		EncuestaID idEncuesta = (EncuestaID) util.getIdentifier(encuesta);
-
-		Encuesta enc = em.find(Encuesta.class, idEncuesta);
-
-		if (enc == null) {
-			// La encuesta no se encontraba en la bbdd
-			em.persist(encuesta);
-		} else if (enc != null) {
-			// La encuesta estaba en la bbdd y se debe sobreescribir
-			em.merge(enc);
-		}
+		
+			int anyo1 = obtenerAnyos(encuesta.getFechaEnvio());
+			
+			Encuesta encuestaCorrecta = null;
+			
+			List<Encuesta> encuestas = exp.getEncuestas();
+			for (Encuesta encu : encuestas) {
+				
+				int anyo2 = obtenerAnyos(encu.getFechaEnvio());
+			
+				if(anyo1 == anyo2) {
+					encuestaCorrecta = encu;
+				}
+			}
+			
+			if(encuestaCorrecta == null) {
+				em.persist(encuesta);
+			} else {
+			
+				em.remove(encuestaCorrecta);
+				em.persist(encuesta);
+			}
+	
 
 	}
 

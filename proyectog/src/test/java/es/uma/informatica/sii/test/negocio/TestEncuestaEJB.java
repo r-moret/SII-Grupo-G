@@ -7,6 +7,10 @@ import java.util.Properties;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -31,6 +35,13 @@ public class TestEncuestaEJB {
 	private static final String ENCUESTA_EJB = "java:global/classes/EncuestaEJB";
 	
 	private EncuestaInterface encuestaEJB;
+	
+	private static final String PERSISTENCE_UNIT = "proyectog-jpa";
+	
+	@PersistenceUnit(unitName = PERSISTENCE_UNIT)
+	private EntityManagerFactory emf;
+	@PersistenceContext(name = PERSISTENCE_UNIT)
+	private EntityManager em;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -74,32 +85,41 @@ public class TestEncuestaEJB {
 	public void testRegistroEncuestaCorrecto() {
 		try {
 			encuestaEJB.registrarEncuesta(null);
-			fail("No lanza una excepción (SecretariaException) avisando de que la encuesta era nula");
+			fail("No lanza una excepciï¿½n (SecretariaException) avisando de que la encuesta era nula");
 		} 
 		catch(SecretariaException e) {
 			/* COMPORTAMIENTO CORRECTO */
 		}
 		catch(Exception e) {
-			fail("Lanza una excepción distinta a SecretariaException");
+			fail("Lanza una excepciï¿½n distinta a SecretariaException");
 		}
 	
 		try {
 			// Creo una encuesta cualquiera
-			Encuesta enc = crearEncuesta(false);
+			Encuesta enc = new Encuesta();
+			enc.setFechaEnvio(Timestamp.valueOf("2020-01-26 11:20:04"));
+			
+			Expediente ex = em.find(Expediente.class, 1);
+			enc.setExpediente(ex);
+			
 			encuestaEJB.registrarEncuesta(enc);
-
-			// El mismo alumno crea una nueva encuesta (distinta fecha, mismo expediente)
-			Encuesta newEnc = crearEncuesta(true);
-			newEnc.setExpediente(enc.getExpediente());
-			newEnc.setFechaEnvio(Timestamp.valueOf("2020-26-09 11:20:04"));
 			
-			encuestaEJB.registrarEncuesta(newEnc);
-			
-			// Aseguramos que hemos sobreescrito la base de datos con los nuevos datos que están en newEnc
-			assertEquals("No se sobreescriben los datos de la nueva encuesta realizada", newEnc, encuestaEJB.obtenerEncuesta(newEnc.getFechaEnvio(), newEnc.getExpediente()));
+			  // El mismo alumno crea una nueva encuesta (distinta fecha, mismo expediente)
+			  Encuesta newEnc = new Encuesta();
+			  newEnc.setExpediente(enc.getExpediente());
+			  newEnc.setFechaEnvio(Timestamp.valueOf("2020-09-26 11:20:04"));
+			  
+			  encuestaEJB.registrarEncuesta(newEnc);
+			  
+			  // Aseguramos que hemos sobreescrito la base de datos con los nuevos datos
+			  //que estï¿½n en newEnc
+			  assertEquals("No se sobreescriben los datos de la nueva encuesta realizada",
+			  newEnc, encuestaEJB.obtenerEncuesta(newEnc.getFechaEnvio(),
+			  newEnc.getExpediente()));
+			 
 		} 
 		catch (Exception e) {
-			fail("Lanza una excepción cuando se está registrando una encuesta correcta");
+			fail("Lanza una excepciï¿½n cuando se estï¿½ registrando una encuesta correcta");
 		}	
 	}
 	
@@ -110,7 +130,7 @@ public class TestEncuestaEJB {
 	//	@Test
 	//	@Ignore
 	//	public void testDistintoGrupoMismoCurso() {
-	//		/*  Simulamos una encuesta con un conflicto en el cual dos asignaturas del mismo año
+	//		/*  Simulamos una encuesta con un conflicto en el cual dos asignaturas del mismo aï¿½o
 	//		 *  tienen grupos distintos asignados
 	//		 */ 
 	//		Encuesta enc = new Encuesta();
@@ -135,17 +155,17 @@ public class TestEncuestaEJB {
 	//		
 	//		try {
 	//			encuestaEJB.registrarEncuesta(enc);
-	//			fail("No lanza una excepción (MalAsignacionEncuesta) avisando de que la encuesta tiene una seleccion incorrecta de grupos");
+	//			fail("No lanza una excepciï¿½n (MalAsignacionEncuesta) avisando de que la encuesta tiene una seleccion incorrecta de grupos");
 	//		} 
 	//		catch(MalAsignacionEncuesta e) {
 	//			/* COMPORTAMIENTO CORRECTO */
 	//		}
 	//		catch(Exception e) {
-	//			fail("Lanza una excepción distinta a MalAsignacionEncuesta");
+	//			fail("Lanza una excepciï¿½n distinta a MalAsignacionEncuesta");
 	//		}
 	//		
 	//		/*  Simulamos una encuesta sin conflicto donde tienen distintos grupos asignados pero
-	//		 *  para distintos años
+	//		 *  para distintos aï¿½os
 	//		 */ 
 	//		Encuesta enc2 = new Encuesta();
 	//		enc2.setFechaEnvio(Timestamp.valueOf("2020-09-03 11:00:00"));
@@ -171,7 +191,7 @@ public class TestEncuestaEJB {
 	//			encuestaEJB.registrarEncuesta(enc2);
 	//		} 
 	//		catch(Exception e) {
-	//			fail("Lanza una excepción cuando la asignación de grupo de la encuesta es correcta");
+	//			fail("Lanza una excepciï¿½n cuando la asignaciï¿½n de grupo de la encuesta es correcta");
 	//		}
 	//	}
 	
@@ -180,7 +200,7 @@ public class TestEncuestaEJB {
 	public void testDetectarIncompatibilidadHoraria() {
 		try {
 			encuestaEJB.incompatibilidadHoraria(null);
-			fail("No lanza una excepción (SecretariaException) avisando de que la encuesta era nula");
+			fail("No lanza una excepciï¿½n (SecretariaException) avisando de que la encuesta era nula");
 		}
 		catch(SecretariaException e) {
 			/* COMPORTAMIENTO CORRECTO */
@@ -195,7 +215,7 @@ public class TestEncuestaEJB {
 			assertFalse("Detecta incompatibilidad en una lista sin incompatibilidad horaria", encuestaEJB.incompatibilidadHoraria(encCompatible));
 			assertTrue("No detecta incompatibilidad en una lista con incompatibilidad horaria", encuestaEJB.incompatibilidadHoraria(encIncompatible));
 		} catch (Exception e) {
-			fail("Lanza una excepción al comprobar una encuesta correcta");
+			fail("Lanza una excepciï¿½n al comprobar una encuesta correcta");
 		}
 	}
 }
