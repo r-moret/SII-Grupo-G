@@ -9,14 +9,18 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
+import es.uma.informatica.sii.entidades.Alumno;
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
+import es.uma.informatica.sii.exceptions.AlumnoInexistente;
 import es.uma.informatica.sii.exceptions.AsignaturaInexistente;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.MatriculaInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
+import es.uma.informatica.sii.exceptions.TitulacionInexistente;
 
 @Stateless
 public class MatriculaEJB implements MatriculaInterface {
@@ -28,22 +32,51 @@ public class MatriculaEJB implements MatriculaInterface {
 	@PersistenceContext(name = PERSISTENCE_UNIT)
 	private EntityManager em;
 
+	
 	@Override
 	public List<Matricula> consultarMatricula(Expediente alumno) throws SecretariaException {
+
+
+		if(alumno == null) {
+			throw new ExpedienteInexistente();
+			
+		}
+				
 		Expediente e = em.find(Expediente.class, alumno.getNumExpediente());
 		
 		if(e == null) {
-			//Expediente no existe
-			throw new ExpedienteInexistente();
+			//Alumno no está en la bbdd
+			throw new AlumnoInexistente();
 		}
-		
+			
 		List<Matricula> lm = new ArrayList<Matricula>();
 		
-		if(e.getMatriculas() != null) {
-			lm.addAll(e.getMatriculas());
+		if(e.getMatriculas() == null || e.getMatriculas().isEmpty() || alumno.getMatriculas() == null){
+			//throw new MatriculaInexistente();
+			return lm;
+		}else {
+			
+			/*
+			TypedQuery<Matricula> q = em.createNamedQuery("select m from Matricula m where m.expediente := alumno", Matricula.class);
+			if(q == null) {
+				return lm;
+			}else {
+				q.setParameter("matriculas", alumno.getMatriculas());
+				return q.getResultList();
+			}
+			*/
+
+			//return e.getMatriculas();
+			
+			
+	        String jpql = "select m from Matricula m where m.expediente = :alumno";
+	        Query query = em.createQuery(jpql);
+	        //query.setParameter("alumno", alumno.getMatriculas());
+			lm.add((Matricula) query.getResultList());
+	        return lm;
+	        
+
 		}
-		
-		return lm;
 	}
 
 	@Override

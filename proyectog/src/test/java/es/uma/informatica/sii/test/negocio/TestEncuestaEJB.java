@@ -149,7 +149,7 @@ public class TestEncuestaEJB {
 			
 			Expediente ex = em.find(Expediente.class, 1);
 			enc.setExpediente(ex);
-			
+	
 			encuestaEJB.registrarEncuesta(enc);
 			
 			// El mismo alumno crea una nueva encuesta (distinta fecha, mismo expediente)

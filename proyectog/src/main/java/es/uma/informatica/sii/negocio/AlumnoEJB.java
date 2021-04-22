@@ -20,14 +20,19 @@ public class AlumnoEJB implements AlumnoInterface{
 	private EntityManager em;
 
 	@Override
-	public void actualizarAlumno(Alumno alumno) throws AlumnoInexistente {
-				
-		Alumno a = em.find(Alumno.class, alumno.getId());
-		if(a == null) {
+	public void actualizarAlumno(Alumno alumno) throws AlumnoInexistente {	
+		if(alumno == null) {
 			//Alumno no existe
 			throw new AlumnoInexistente();
 		}
-		alumno = em.merge(a);
-		em.persist(alumno);
+		
+		Alumno a = em.find(Alumno.class, alumno.getId());
+		
+		if(a == null) {
+			//Alumno no existe en la BBDD
+			throw new AlumnoInexistente();
+		}
+
+		em.merge(alumno);
 	}
 }

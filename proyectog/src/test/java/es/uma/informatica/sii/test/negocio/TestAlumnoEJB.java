@@ -92,11 +92,11 @@ public class TestAlumnoEJB {
 				/* COMPORTAMIENTO CORRECTO */
 			}
 			catch(Exception exc2) {
-				fail("Lanza la excepción incorrecta");
+				fail("Lanza la excepciï¿½n incorrecta");
 			}
 		}
 		catch(Exception exc1) {
-			fail("Lanza la excepción incorrecta");
+			fail("Lanza la excepciï¿½n incorrecta");
 		}
 		
 		Alumno al = em.find(Alumno.class, 1);
@@ -106,7 +106,7 @@ public class TestAlumnoEJB {
 		try {
 			alumnoEJB.actualizarAlumno(al);
 		} catch (Exception e) {
-			fail("Lanza una excepción en la actualización de un alumno correcto");
+			fail("Lanza una excepciï¿½n en la actualizaciï¿½n de un alumno correcto");
 		}
 		
 		assertEquals("El campo actualizado no se ha guardado en la base de datos", al.getEmailInstitucional(), em.find(Alumno.class, 1).getEmailInstitucional());	
