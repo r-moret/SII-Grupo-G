@@ -99,7 +99,7 @@ public class TestMatriculaEJB {
 		// 2 caso - paso un expediente no existente en la bbdd
 		try {
 			Expediente ex1 = new Expediente();
-			ex1.setNumExpediente(5); //5
+			ex1.setNumExpediente(5); 
 			ex1.setAlumno(em.find(Alumno.class, 1));
 			ex1.setTitulacion(em.find(Titulacion.class, 1));
 
@@ -131,7 +131,7 @@ public class TestMatriculaEJB {
 			assertTrue("El mï¿½todo no devuelve una lista de matrï¿½culas correcta",
 					expediente2.getMatriculas().equals(matriculaEJB.consultarMatricula(expediente2)));
 		} catch (Exception e) {
-			fail("El mï¿½todo lanza una excepciï¿½n al comprobar un expediente correcto 2222");
+			fail("El mï¿½todo lanza una excepciï¿½n al comprobar un expediente correcto 2252");
 		}
 	}
 
@@ -216,7 +216,7 @@ public class TestMatriculaEJB {
 		try {
 			assertTrue("El metodo no devuelve una lista correcta",matriculas.equals(matriculaEJB.consultarMatriculas()));
 		} catch(Exception e) {
-			fail("Lanza una excepción inesperada");
+			fail("Lanza una excepciï¿½n inesperada");
 		}
 		
 		Matricula m3 = new Matricula();
@@ -224,7 +224,7 @@ public class TestMatriculaEJB {
 		m3.setExpediente(em.find(Expediente.class, 1));
 		m3.setEstado(true);
 		m3.setNumArchivo(10);
-		m3.setTurnoPreferente("mañana");
+		m3.setTurnoPreferente("maï¿½ana");
 		m3.setFechaMatricula(Timestamp.valueOf("2020-09-04 10:07:37"));
 		
 		em.persist(m3);
@@ -233,7 +233,7 @@ public class TestMatriculaEJB {
 		try {
 			assertTrue("El metodo no devuelve una lista correcta", matriculas.equals(matriculaEJB.consultarMatriculas()));
 		} catch(Exception e) {
-			fail("Lanza una excepción inesperada");
+			fail("Lanza una excepciï¿½n inesperada");
 		}
 		
 	}
