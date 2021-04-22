@@ -3,7 +3,6 @@ package es.uma.informatica.sii.negocio;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -11,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
-import javax.persistence.PersistenceUnitUtil;
 
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.Clase;
@@ -34,7 +32,10 @@ public class EncuestaEJB implements EncuestaInterface {
 	private EntityManager em;
 
 	@Override
-	public Encuesta obtenerEncuesta(Timestamp fechaRealizada, Expediente expediente) throws EncuestaInexistente {
+	public Encuesta obtenerEncuesta(Timestamp fechaRealizada, Expediente expediente) throws SecretariaException {
+		if(fechaRealizada == null || expediente == null) {
+			throw new SecretariaException();
+		}
 		EncuestaID id = new EncuestaID(fechaRealizada, expediente.getNumExpediente());
 		Encuesta encEntity = em.find(Encuesta.class, id);
 		if(encEntity == null) {

@@ -68,7 +68,7 @@ public class TestEncuestaEJB {
 		BaseDatos.initBaseDatos();
 	}
 	
-	private Encuesta crearEncuesta(boolean incompatibilidadHoraria) throws EncuestaInexistente {
+	private Encuesta crearEncuesta(boolean incompatibilidadHoraria) throws SecretariaException {
 		Encuesta enc;
 		if(incompatibilidadHoraria) {
 			Expediente ex = new Expediente();
@@ -82,6 +82,45 @@ public class TestEncuestaEJB {
 		}
 		
 		return enc;
+	}
+	
+	@Test
+	public void testObtenerEncuesta() {
+		try {
+			Expediente ex = em.find(Expediente.class, 1);
+			encuestaEJB.obtenerEncuesta(null, ex);
+			fail("No lanza una excepción (SecretariaException) avisando de que la fecha de envío era nula");
+		}
+		catch(SecretariaException e) {
+			try {
+				Timestamp fechaEnvio = Timestamp.valueOf("2020-09-21 16:00:00");
+				encuestaEJB.obtenerEncuesta(fechaEnvio, null);
+				fail("No lanza una excepción (SecretariaException) avisando de que el expediento era nulo");
+			}
+			catch(SecretariaException a) {
+				/* COMPORTAMIENTO CORRECTO */
+			}
+			catch(Exception a) {
+				fail("Lanza una excepción distinta a SecretariaException");
+			}
+		}
+		catch(Exception e) {
+			fail("Lanza una excepción distinta a SecretariaException");
+		}
+		
+		try {
+			Expediente ex = new Expediente();
+			ex.setNumExpediente(3);
+			Timestamp fechaEnvio = Timestamp.valueOf("2020-06-21 12:00:00");
+			encuestaEJB.obtenerEncuesta(fechaEnvio, ex);
+			fail("No lanza una excepción avisando de que la encuesta no existe en la base de datos");
+		}
+		catch(EncuestaInexistente e) {
+			/* COMPORTAMIENTO CORRECTO */
+		}
+		catch(Exception e) {
+			fail("Lanza una excepcion incorrecta, distinta a EncuestaInexistente");
+		}
 	}
 	
 	@Requisitos({"RF2"})
@@ -122,7 +161,7 @@ public class TestEncuestaEJB {
 			assertThrows("Siguen existiendo en la base de datos los datos que se deberían haber actualizado", EncuestaInexistente.class, () -> encuestaEJB.obtenerEncuesta(enc.getFechaEnvio(), enc.getExpediente()));
 		} 
 		catch (Exception e) {
-			fail("Lanza una excepciï¿½n cuando se estï¿½ registrando una encuesta correcta " + e);
+			fail("Lanza una excepciï¿½n cuando se estï¿½ registrando una encuesta correcta");
 		}	
 	}
 	
@@ -200,6 +239,7 @@ public class TestEncuestaEJB {
 	
 	@Requisitos({"RF6"})
 	@Test
+	@Ignore
 	public void testDetectarIncompatibilidadHoraria() {
 		try {
 			encuestaEJB.incompatibilidadHoraria(null);
