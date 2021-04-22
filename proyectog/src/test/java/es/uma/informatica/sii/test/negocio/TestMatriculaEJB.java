@@ -134,11 +134,8 @@ public class TestMatriculaEJB {
 			assertTrue("El metodo no devuelve una lista de matriculas correcta",
 					expediente2.getMatriculas().equals(matriculaEJB.consultarMatricula(expediente2)));
 		} catch (Exception e) {
-<<<<<<< HEAD
+
 			fail("El metodo lanza una excepcion al comprobar un expediente correcto");
-=======
-			fail("El m�todo lanza una excepci�n al comprobar un expediente correcto 2252");
->>>>>>> f5ebd16ec5439ad7c56d2e86ccd00862f62e4191
 		}
 	}
 
