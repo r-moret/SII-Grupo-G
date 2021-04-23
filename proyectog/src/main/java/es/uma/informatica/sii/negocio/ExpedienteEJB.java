@@ -7,9 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
 import es.uma.informatica.sii.entidades.Expediente;
-import es.uma.informatica.sii.exceptions.AlumnoInexistente;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
-import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
 @Stateless
@@ -27,7 +25,7 @@ public class ExpedienteEJB implements ExpedienteInterface{
 	public void actualizarExpediente(Expediente expediente) throws SecretariaException {
 		if(expediente == null) {
 			//Expediente no existe
-			throw new ExpedienteInexistente();
+			throw new SecretariaException();
 		}
 		
 		Expediente e = em.find(Expediente.class, expediente.getNumExpediente());
