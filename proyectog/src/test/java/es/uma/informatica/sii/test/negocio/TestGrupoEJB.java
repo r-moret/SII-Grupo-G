@@ -80,14 +80,14 @@ public class TestGrupoEJB {
 	
 	@Test
 	@Ignore
-	public void testRegistrarCambioGrupo() {
-		// TODO
+	public void testRegistrarSolicitudCambioGrupo() {
+		// TODO testRegistrarSolicitudCambioGrupo
 	}
 	
 	@Test
 	@Ignore
 	public void testAsignarGrupos() {
-		// TODO
+		// TODO testAsignarGrupos
 	}
 	
 	private String ultimoCursoMatriculado(Expediente ex) {
@@ -103,8 +103,7 @@ public class TestGrupoEJB {
 		
 		return ultimoCurso;
 	}
-	
-	
+		
 	@Test
 	public void testReasignarGrupoInvalido() {
 		Grupo gp1 = em.find(Grupo.class, "id1");
@@ -187,8 +186,8 @@ public class TestGrupoEJB {
 	
 	@Test
 	@Ignore
-	public void testAforoMaximo() {
-		// TODO
+	public void testPlazasTotales() {
+		// TODO testPlazasTotales
 	}
 	
 	@Requisitos({"RF9"})

@@ -32,6 +32,8 @@ public class Asignatura implements Serializable {
 	private Integer duracion;
 	private Integer cuatrimestre;
 	private String idioma;
+	@Column(nullable = false)
+	private Integer plazas;
 
 	@ManyToOne
 	@JoinColumn(nullable = false)
@@ -131,6 +133,14 @@ public class Asignatura implements Serializable {
 
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
+	}
+
+	public Integer getPlazas() {
+		return plazas;
+	}
+
+	public void setPlazas(Integer plazas) {
+		this.plazas = plazas;
 	}
 
 	public Titulacion getTitulacion() {
