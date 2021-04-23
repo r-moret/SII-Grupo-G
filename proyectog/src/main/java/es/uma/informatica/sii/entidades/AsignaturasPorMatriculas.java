@@ -102,7 +102,6 @@ public class AsignaturasPorMatriculas implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((asignatura == null) ? 0 : asignatura.hashCode());
-		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
 		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
 		return result;
 	}
@@ -111,18 +110,15 @@ public class AsignaturasPorMatriculas implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof AsignaturasPorMatriculas))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		AsignaturasPorMatriculas other = (AsignaturasPorMatriculas) obj;
 		if (asignatura == null) {
 			if (other.asignatura != null)
 				return false;
 		} else if (!asignatura.equals(other.asignatura))
-			return false;
-		if (grupo == null) {
-			if (other.grupo != null)
-				return false;
-		} else if (!grupo.equals(other.grupo))
 			return false;
 		if (matricula == null) {
 			if (other.matricula != null)
@@ -137,5 +133,6 @@ public class AsignaturasPorMatriculas implements Serializable {
 		return "AsignaturasPorMatriculas [matricula=" + matricula + ", asignatura=" + asignatura + ", grupo=" + grupo
 				+ "]";
 	}
-   
+	
+	
 }

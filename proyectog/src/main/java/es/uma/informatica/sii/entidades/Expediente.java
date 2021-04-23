@@ -91,61 +91,28 @@ public class Expediente implements Serializable {
 	public void setMatriculas(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
 	}
-   
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((activo == null) ? 0 : activo.hashCode());
-		result = prime * result + ((alumno == null) ? 0 : alumno.hashCode());
-		result = prime * result + ((encuestas == null) ? 0 : encuestas.hashCode());
-		result = prime * result + ((matriculas == null) ? 0 : matriculas.hashCode());
-		result = prime * result + ((notaMediaProvisional == null) ? 0 : notaMediaProvisional.hashCode());
 		result = prime * result + ((numExpediente == null) ? 0 : numExpediente.hashCode());
-		result = prime * result + ((titulacion == null) ? 0 : titulacion.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof Expediente))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		Expediente other = (Expediente) obj;
-		if (activo == null) {
-			if (other.activo != null)
-				return false;
-		} else if (!activo.equals(other.activo))
-			return false;
-		if (alumno == null) {
-			if (other.alumno != null)
-				return false;
-		} else if (!alumno.equals(other.alumno))
-			return false;
-		if (encuestas == null) {
-			if (other.encuestas != null)
-				return false;
-		} else if (!encuestas.equals(other.encuestas))
-			return false;
-		if (matriculas == null) {
-			if (other.matriculas != null)
-				return false;
-		} else if (!matriculas.equals(other.matriculas))
-			return false;
-		if (notaMediaProvisional == null) {
-			if (other.notaMediaProvisional != null)
-				return false;
-		} else if (!notaMediaProvisional.equals(other.notaMediaProvisional))
-			return false;
 		if (numExpediente == null) {
 			if (other.numExpediente != null)
 				return false;
 		} else if (!numExpediente.equals(other.numExpediente))
-			return false;
-		if (titulacion == null) {
-			if (other.titulacion != null)
-				return false;
-		} else if (!titulacion.equals(other.titulacion))
 			return false;
 		return true;
 	}
@@ -154,6 +121,7 @@ public class Expediente implements Serializable {
 	public String toString() {
 		return "Expediente [numExpediente=" + numExpediente + ", activo=" + activo + ", notaMediaProvisional="
 				+ notaMediaProvisional + ", encuestas=" + encuestas + ", titulacion=" + titulacion + ", alumno="
-				+ alumno + ", matriculas=" + matriculas + "]";
+				+ alumno + ", matriculas=" + matriculas + ", solicitudesCambioGrupo=" + solicitudesCambioGrupo + "]";
 	}
+	
 }

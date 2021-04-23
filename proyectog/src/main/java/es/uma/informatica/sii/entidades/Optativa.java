@@ -49,7 +49,7 @@ public class Optativa extends Asignatura implements Serializable {
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (!(obj instanceof Optativa))
+		if (getClass() != obj.getClass())
 			return false;
 		Optativa other = (Optativa) obj;
 		if (mencion == null) {
@@ -68,5 +68,7 @@ public class Optativa extends Asignatura implements Serializable {
 	public String toString() {
 		return "Optativa [plazas=" + plazas + ", mencion=" + mencion + "]";
 	}
-   
+	
+	
+	
 }

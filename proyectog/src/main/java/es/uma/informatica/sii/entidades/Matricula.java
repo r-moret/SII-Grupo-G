@@ -165,68 +165,28 @@ public class Matricula implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((asignaturasPorMatriculas == null) ? 0 : asignaturasPorMatriculas.hashCode());
 		result = prime * result + ((cursoAcademico == null) ? 0 : cursoAcademico.hashCode());
-		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((expediente == null) ? 0 : expediente.hashCode());
-		result = prime * result + ((fechaMatricula == null) ? 0 : fechaMatricula.hashCode());
-		result = prime * result + ((listadoAsignaturas == null) ? 0 : listadoAsignaturas.hashCode());
-		result = prime * result + ((nuevoIngreso == null) ? 0 : nuevoIngreso.hashCode());
-		result = prime * result + ((numArchivo == null) ? 0 : numArchivo.hashCode());
-		result = prime * result + ((turnoPreferente == null) ? 0 : turnoPreferente.hashCode());
 		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof Matricula))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		Matricula other = (Matricula) obj;
-		if (asignaturasPorMatriculas == null) {
-			if (other.asignaturasPorMatriculas != null)
-				return false;
-		} else if (!asignaturasPorMatriculas.equals(other.asignaturasPorMatriculas))
-			return false;
 		if (cursoAcademico == null) {
 			if (other.cursoAcademico != null)
 				return false;
 		} else if (!cursoAcademico.equals(other.cursoAcademico))
 			return false;
-		if (estado == null) {
-			if (other.estado != null)
-				return false;
-		} else if (!estado.equals(other.estado))
-			return false;
 		if (expediente == null) {
 			if (other.expediente != null)
 				return false;
 		} else if (!expediente.equals(other.expediente))
-			return false;
-		if (fechaMatricula == null) {
-			if (other.fechaMatricula != null)
-				return false;
-		} else if (!fechaMatricula.equals(other.fechaMatricula))
-			return false;
-		if (listadoAsignaturas == null) {
-			if (other.listadoAsignaturas != null)
-				return false;
-		} else if (!listadoAsignaturas.equals(other.listadoAsignaturas))
-			return false;
-		if (nuevoIngreso == null) {
-			if (other.nuevoIngreso != null)
-				return false;
-		} else if (!nuevoIngreso.equals(other.nuevoIngreso))
-			return false;
-		if (numArchivo == null) {
-			if (other.numArchivo != null)
-				return false;
-		} else if (!numArchivo.equals(other.numArchivo))
-			return false;
-		if (turnoPreferente == null) {
-			if (other.turnoPreferente != null)
-				return false;
-		} else if (!turnoPreferente.equals(other.turnoPreferente))
 			return false;
 		return true;
 	}
@@ -237,5 +197,6 @@ public class Matricula implements Serializable {
 				+ nuevoIngreso + ", listadoAsignaturas=" + listadoAsignaturas + ", expediente=" + expediente
 				+ ", asignaturasPorMatriculas=" + asignaturasPorMatriculas + "]";
 	}
-   
+	
+	
 }

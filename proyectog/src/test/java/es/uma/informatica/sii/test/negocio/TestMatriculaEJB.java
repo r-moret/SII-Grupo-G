@@ -86,7 +86,6 @@ public class TestMatriculaEJB {
 
 	@Requisitos({ "RF1" })
 	@Test
-	@Ignore
 	public void testConsultarMatricula() {
 
 		// 1 caso - paso un expediente vacio
@@ -95,7 +94,8 @@ public class TestMatriculaEJB {
 			// No falla
 			fail("Permite consultar un expediente nulo");
 		} catch (SecretariaException exc1) {
-			/* Falla y lanza la excepcion correcta */} catch (Exception e) {
+			/* Falla y lanza la excepcion correcta */
+		} catch (Exception e) {
 			fail("Lanza la excepci�n incorrecta 1");
 		}
 
@@ -122,14 +122,8 @@ public class TestMatriculaEJB {
 			List<Matricula> matri1 = expediente2.getMatriculas();
 			List<Matricula> matri2 = matriculaEJB.consultarMatricula(expediente2);
 			
-			if(matri1.size() != matri2.size()) {
-				fail("El metodo no devuelve la lista correcta de matriculas");
-			} 
-			else {
-				// SE CREA UN BUCLE INDIRECTO ENTRE ASIGNATURA - ASIGNATURAPORMATRICULA - MATRICULA
-				assertEquals("ERROR", matri1, matri2);
-			}
-			
+			assertEquals("El metodo no devuelve la lista correcta de matriculas", matri1.size(), matri2.size());
+			assertEquals("ERROR", matri1, matri2);
 			
 		} catch (Exception e) {
 			fail("El metodo lanza una excepcion al comprobar un expediente correcto");

@@ -169,20 +169,7 @@ public class Asignatura implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((asignaturasPorMatriculas == null) ? 0 : asignaturasPorMatriculas.hashCode());
-		result = prime * result + ((caracter == null) ? 0 : caracter.hashCode());
-		result = prime * result + ((clases == null) ? 0 : clases.hashCode());
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((creditos == null) ? 0 : creditos.hashCode());
-		result = prime * result + ((cuatrimestre == null) ? 0 : cuatrimestre.hashCode());
-		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
-		result = prime * result + ((duracion == null) ? 0 : duracion.hashCode());
-		result = prime * result + ((gruposPorAsignaturas == null) ? 0 : gruposPorAsignaturas.hashCode());
-		result = prime * result + ((idioma == null) ? 0 : idioma.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((ofertada == null) ? 0 : ofertada.hashCode());
 		result = prime * result + ((referencia == null) ? 0 : referencia.hashCode());
-		result = prime * result + ((titulacion == null) ? 0 : titulacion.hashCode());
 		return result;
 	}
 
@@ -190,78 +177,15 @@ public class Asignatura implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof Asignatura))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		Asignatura other = (Asignatura) obj;
-		if (asignaturasPorMatriculas == null) {
-			if (other.asignaturasPorMatriculas != null)
-				return false;
-		} else if (!asignaturasPorMatriculas.equals(other.asignaturasPorMatriculas))
-			return false;
-		if (caracter == null) {
-			if (other.caracter != null)
-				return false;
-		} else if (!caracter.equals(other.caracter))
-			return false;
-		if (clases == null) {
-			if (other.clases != null)
-				return false;
-		} else if (!clases.equals(other.clases))
-			return false;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (creditos == null) {
-			if (other.creditos != null)
-				return false;
-		} else if (!creditos.equals(other.creditos))
-			return false;
-		if (cuatrimestre == null) {
-			if (other.cuatrimestre != null)
-				return false;
-		} else if (!cuatrimestre.equals(other.cuatrimestre))
-			return false;
-		if (curso == null) {
-			if (other.curso != null)
-				return false;
-		} else if (!curso.equals(other.curso))
-			return false;
-		if (duracion == null) {
-			if (other.duracion != null)
-				return false;
-		} else if (!duracion.equals(other.duracion))
-			return false;
-		if (gruposPorAsignaturas == null) {
-			if (other.gruposPorAsignaturas != null)
-				return false;
-		} else if (!gruposPorAsignaturas.equals(other.gruposPorAsignaturas))
-			return false;
-		if (idioma == null) {
-			if (other.idioma != null)
-				return false;
-		} else if (!idioma.equals(other.idioma))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (ofertada == null) {
-			if (other.ofertada != null)
-				return false;
-		} else if (!ofertada.equals(other.ofertada))
-			return false;
 		if (referencia == null) {
 			if (other.referencia != null)
 				return false;
 		} else if (!referencia.equals(other.referencia))
-			return false;
-		if (titulacion == null) {
-			if (other.titulacion != null)
-				return false;
-		} else if (!titulacion.equals(other.titulacion))
 			return false;
 		return true;
 	}
@@ -274,4 +198,5 @@ public class Asignatura implements Serializable {
 				+ ", clases=" + clases + ", gruposPorAsignaturas=" + gruposPorAsignaturas
 				+ ", asignaturasPorMatriculas=" + asignaturasPorMatriculas + "]";
 	}
+	
 }

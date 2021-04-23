@@ -22,7 +22,7 @@ public class Titulacion implements Serializable {
 	@Column(nullable=false)
 	private Integer creditos;
 	@OneToMany (mappedBy="titulacion")
-	List<Asignatura> asignaturas;
+	private List<Asignatura> asignaturas;
 	@OneToMany(mappedBy="titulacion")
 	private List<Grupo> grupos;
 	@OneToMany(mappedBy="titulacion")
@@ -98,13 +98,7 @@ public class Titulacion implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((asignaturas == null) ? 0 : asignaturas.hashCode());
-		result = prime * result + ((centros == null) ? 0 : centros.hashCode());
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((creditos == null) ? 0 : creditos.hashCode());
-		result = prime * result + ((expedientes == null) ? 0 : expedientes.hashCode());
-		result = prime * result + ((grupos == null) ? 0 : grupos.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
 
@@ -112,43 +106,15 @@ public class Titulacion implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof Titulacion))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		Titulacion other = (Titulacion) obj;
-		if (asignaturas == null) {
-			if (other.asignaturas != null)
-				return false;
-		} else if (!asignaturas.equals(other.asignaturas))
-			return false;
-		if (centros == null) {
-			if (other.centros != null)
-				return false;
-		} else if (!centros.equals(other.centros))
-			return false;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
 		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (creditos == null) {
-			if (other.creditos != null)
-				return false;
-		} else if (!creditos.equals(other.creditos))
-			return false;
-		if (expedientes == null) {
-			if (other.expedientes != null)
-				return false;
-		} else if (!expedientes.equals(other.expedientes))
-			return false;
-		if (grupos == null) {
-			if (other.grupos != null)
-				return false;
-		} else if (!grupos.equals(other.grupos))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
 	}
@@ -158,4 +124,6 @@ public class Titulacion implements Serializable {
 		return "Titulacion [codigo=" + codigo + ", nombre=" + nombre + ", creditos=" + creditos + ", asignaturas="
 				+ asignaturas + ", grupos=" + grupos + ", expedientes=" + expedientes + ", centros=" + centros + "]";
 	}
+	
+	
 }

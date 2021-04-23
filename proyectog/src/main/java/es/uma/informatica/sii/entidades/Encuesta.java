@@ -107,7 +107,6 @@ public class Encuesta implements Serializable {
 		int result = 1;
 		result = prime * result + ((expediente == null) ? 0 : expediente.hashCode());
 		result = prime * result + ((fechaEnvio == null) ? 0 : fechaEnvio.hashCode());
-		result = prime * result + ((gruposPorAsignatura == null) ? 0 : gruposPorAsignatura.hashCode());
 		return result;
 	}
 
@@ -115,7 +114,9 @@ public class Encuesta implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof Encuesta))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		Encuesta other = (Encuesta) obj;
 		if (expediente == null) {
@@ -128,11 +129,6 @@ public class Encuesta implements Serializable {
 				return false;
 		} else if (!fechaEnvio.equals(other.fechaEnvio))
 			return false;
-		if (gruposPorAsignatura == null) {
-			if (other.gruposPorAsignatura != null)
-				return false;
-		} else if (!gruposPorAsignatura.equals(other.gruposPorAsignatura))
-			return false;
 		return true;
 	}
 
@@ -141,4 +137,5 @@ public class Encuesta implements Serializable {
 		return "Encuesta [fechaEnvio=" + fechaEnvio + ", expediente=" + expediente + ", gruposPorAsignatura="
 				+ gruposPorAsignatura + "]";
 	}
+	
 }

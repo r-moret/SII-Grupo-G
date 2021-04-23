@@ -117,10 +117,8 @@ public class Clase implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((asignatura == null) ? 0 : asignatura.hashCode());
 		result = prime * result + ((dia == null) ? 0 : dia.hashCode());
 		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
-		result = prime * result + ((horaFin == null) ? 0 : horaFin.hashCode());
 		result = prime * result + ((horaInicio == null) ? 0 : horaInicio.hashCode());
 		return result;
 	}
@@ -129,14 +127,11 @@ public class Clase implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof Clase))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		Clase other = (Clase) obj;
-		if (asignatura == null) {
-			if (other.asignatura != null)
-				return false;
-		} else if (!asignatura.equals(other.asignatura))
-			return false;
 		if (dia == null) {
 			if (other.dia != null)
 				return false;
@@ -146,11 +141,6 @@ public class Clase implements Serializable {
 			if (other.grupo != null)
 				return false;
 		} else if (!grupo.equals(other.grupo))
-			return false;
-		if (horaFin == null) {
-			if (other.horaFin != null)
-				return false;
-		} else if (!horaFin.equals(other.horaFin))
 			return false;
 		if (horaInicio == null) {
 			if (other.horaInicio != null)
@@ -165,5 +155,5 @@ public class Clase implements Serializable {
 		return "Clase [dia=" + dia + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", grupo=" + grupo
 				+ ", asignatura=" + asignatura + "]";
 	}
-
+	
 }

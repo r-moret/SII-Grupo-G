@@ -124,9 +124,7 @@ public class GruposPorAsignatura implements Serializable {
 		int result = 1;
 		result = prime * result + ((asignatura == null) ? 0 : asignatura.hashCode());
 		result = prime * result + ((cursoAcademico == null) ? 0 : cursoAcademico.hashCode());
-		result = prime * result + ((encuesta == null) ? 0 : encuesta.hashCode());
 		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
-		result = prime * result + ((ofertada == null) ? 0 : ofertada.hashCode());
 		return result;
 	}
 
@@ -134,7 +132,9 @@ public class GruposPorAsignatura implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof GruposPorAsignatura))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		GruposPorAsignatura other = (GruposPorAsignatura) obj;
 		if (asignatura == null) {
@@ -147,20 +147,10 @@ public class GruposPorAsignatura implements Serializable {
 				return false;
 		} else if (!cursoAcademico.equals(other.cursoAcademico))
 			return false;
-		if (encuesta == null) {
-			if (other.encuesta != null)
-				return false;
-		} else if (!encuesta.equals(other.encuesta))
-			return false;
 		if (grupo == null) {
 			if (other.grupo != null)
 				return false;
 		} else if (!grupo.equals(other.grupo))
-			return false;
-		if (ofertada == null) {
-			if (other.ofertada != null)
-				return false;
-		} else if (!ofertada.equals(other.ofertada))
 			return false;
 		return true;
 	}
@@ -170,5 +160,6 @@ public class GruposPorAsignatura implements Serializable {
 		return "GruposPorAsignatura [cursoAcademico=" + cursoAcademico + ", ofertada=" + ofertada + ", asignatura="
 				+ asignatura + ", grupo=" + grupo + ", encuesta=" + encuesta + "]";
 	}
-   
+	
+	
 }

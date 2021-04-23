@@ -109,16 +109,12 @@ public class SolicitudCambioGrupo implements Serializable {
 	public void setDocumentacionAportada(List<File> documentacionAportada) {
 		this.documentacionAportada = documentacionAportada;
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((documentacionAportada == null) ? 0 : documentacionAportada.hashCode());
 		result = prime * result + ((expediente == null) ? 0 : expediente.hashCode());
-		result = prime * result + ((fechaRealizada == null) ? 0 : fechaRealizada.hashCode());
 		result = prime * result + ((grupoActual == null) ? 0 : grupoActual.hashCode());
-		result = prime * result + ((grupoSolicitado == null) ? 0 : grupoSolicitado.hashCode());
 		return result;
 	}
 	@Override
@@ -130,31 +126,24 @@ public class SolicitudCambioGrupo implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		SolicitudCambioGrupo other = (SolicitudCambioGrupo) obj;
-		if (documentacionAportada == null) {
-			if (other.documentacionAportada != null)
-				return false;
-		} else if (!documentacionAportada.equals(other.documentacionAportada))
-			return false;
 		if (expediente == null) {
 			if (other.expediente != null)
 				return false;
 		} else if (!expediente.equals(other.expediente))
-			return false;
-		if (fechaRealizada == null) {
-			if (other.fechaRealizada != null)
-				return false;
-		} else if (!fechaRealizada.equals(other.fechaRealizada))
 			return false;
 		if (grupoActual == null) {
 			if (other.grupoActual != null)
 				return false;
 		} else if (!grupoActual.equals(other.grupoActual))
 			return false;
-		if (grupoSolicitado == null) {
-			if (other.grupoSolicitado != null)
-				return false;
-		} else if (!grupoSolicitado.equals(other.grupoSolicitado))
-			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "SolicitudCambioGrupo [fechaRealizada=" + fechaRealizada + ", documentacionAportada="
+				+ documentacionAportada + ", expediente=" + expediente + ", grupoActual=" + grupoActual
+				+ ", grupoSolicitado=" + grupoSolicitado + "]";
+	}
+	
+	
 }
