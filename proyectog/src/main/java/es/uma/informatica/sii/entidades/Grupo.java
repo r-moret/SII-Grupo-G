@@ -40,11 +40,11 @@ public class Grupo implements Serializable {
 	@OneToMany(mappedBy="grupo")
 	private List<Clase> clases;
 	
-	@ManyToOne
-	private Grupo grupoComun;
+	@ManyToMany
+	private List<Grupo> relacionados;
 	
-	@OneToMany(mappedBy="grupoComun")
-	private List<Grupo> unionGrupos;
+	@ManyToMany(mappedBy="relacionados")
+	private List<Grupo> relacionadoCon;
 	
 	@OneToMany(mappedBy="grupo")
 	private List<AsignaturasPorMatriculas> asignaturasPorMatriculas;
@@ -134,17 +134,30 @@ public class Grupo implements Serializable {
 	public void setClases(List<Clase> clases) {
 		this.clases = clases;
 	}
-	public Grupo getGrupoComun() {
-		return grupoComun;
+	
+	public List<SolicitudCambioGrupo> getSolicitudesSalida() {
+		return solicitudesSalida;
 	}
-	public void setGrupoComun(Grupo grupoComun) {
-		this.grupoComun = grupoComun;
+	public void setSolicitudesSalida(List<SolicitudCambioGrupo> solicitudesSalida) {
+		this.solicitudesSalida = solicitudesSalida;
 	}
-	public List<Grupo> getUnionGrupos() {
-		return unionGrupos;
+	public List<SolicitudCambioGrupo> getSolicitudesEntrada() {
+		return solicitudesEntrada;
 	}
-	public void setUnionGrupos(List<Grupo> unionGrupos) {
-		this.unionGrupos = unionGrupos;
+	public void setSolicitudesEntrada(List<SolicitudCambioGrupo> solicitudesEntrada) {
+		this.solicitudesEntrada = solicitudesEntrada;
+	}
+	public List<Grupo> getRelacionados() {
+		return relacionados;
+	}
+	public void setRelacionados(List<Grupo> relacionados) {
+		this.relacionados = relacionados;
+	}
+	public List<Grupo> getRelacionadoCon() {
+		return relacionadoCon;
+	}
+	public void setRelacionadoCon(List<Grupo> relacionadoCon) {
+		this.relacionadoCon = relacionadoCon;
 	}
 	public List<AsignaturasPorMatriculas> getAsignaturasPorMatriculas() {
 		return asignaturasPorMatriculas;
@@ -179,9 +192,9 @@ public class Grupo implements Serializable {
 	public String toString() {
 		return "Grupo [id=" + id + ", curso=" + curso + ", letra=" + letra + ", turno=" + turno + ", ingles=" + ingles
 				+ ", visible=" + visible + ", asignar=" + asignar + ", plazas=" + plazas + ", titulacion=" + titulacion
-				+ ", gruposPorAsignatura=" + gruposPorAsignatura + ", clases=" + clases + ", grupoComun=" + grupoComun
-				+ ", unionGrupos=" + unionGrupos + ", asignaturasPorMatriculas=" + asignaturasPorMatriculas
-				+ ", solicitudesSalida=" + solicitudesSalida + ", solicitudesEntrada=" + solicitudesEntrada + "]";
+				+ ", gruposPorAsignatura=" + gruposPorAsignatura + ", clases=" + clases + ", relacionados="
+				+ relacionados + ", relacionadoCon=" + relacionadoCon + ", asignaturasPorMatriculas="
+				+ asignaturasPorMatriculas + ", solicitudesSalida=" + solicitudesSalida + ", solicitudesEntrada="
+				+ solicitudesEntrada + "]";
 	}
-	
 }

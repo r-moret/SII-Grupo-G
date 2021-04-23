@@ -54,9 +54,10 @@ public interface GrupoInterface {
 	 * 		 aforo máximo
 	 * 
 	 * @param grupo
+	 * @return numPlazas
 	 * @throws SecretariaException
 	 */
-	public void plazasTotales(Grupo grupo) throws SecretariaException;
+	public Integer plazasTotales(Grupo grupo) throws SecretariaException;
 	
 	/** 
 	 * REQUISITO: RF-09

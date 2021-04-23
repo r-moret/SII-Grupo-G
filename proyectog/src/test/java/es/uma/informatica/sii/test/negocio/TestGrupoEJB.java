@@ -2,7 +2,10 @@ package es.uma.informatica.sii.test.negocio;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.ejb.embeddable.EJBContainer;
@@ -23,10 +26,13 @@ import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Matricula;
+import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
+import es.uma.informatica.sii.entidades.SolicitudCambioGrupo.SolicitudCambioGrupoID;
 import es.uma.informatica.sii.entidades.Titulacion;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
+import es.uma.informatica.sii.exceptions.SolicitudDuplicada;
 import es.uma.informatica.sii.negocio.GrupoInterface;
 
 public class TestGrupoEJB {
@@ -79,9 +85,58 @@ public class TestGrupoEJB {
 	}
 	
 	@Test
-	@Ignore
 	public void testRegistrarSolicitudCambioGrupo() {
-		// TODO testRegistrarSolicitudCambioGrupo
+		try {
+			grupoEJB.registrarSolicitudCambioGrupo(null);
+			fail("No lanza una excepción (SecretariaException) avisando de que la solicitud era nula");
+		} 
+		catch(SecretariaException e) {
+			/* COMPORTAMIENTO CORRECTO */
+		}
+		catch(Exception e) {
+			fail("Lanza una excepción distinta a SecretariaException");
+		}
+	
+		Expediente ex = em.find(Expediente.class, 8);
+		Grupo g1 = em.find(Grupo.class, "id2");
+		Grupo g2 = em.find(Grupo.class, "id1");
+		
+		try {
+			SolicitudCambioGrupo sol = new SolicitudCambioGrupo();
+			List<File> docs = new ArrayList<>();
+			sol.setDocumentacionAportada(docs);
+			sol.setExpediente(ex);
+			sol.setFechaRealizada(Timestamp.valueOf("2020-09-22 09:07:00"));
+			sol.setGrupoActual(g1);
+			sol.setGrupoSolicitado(g2);
+			
+			grupoEJB.registrarSolicitudCambioGrupo(sol);
+			SolicitudCambioGrupoID id = new SolicitudCambioGrupoID(ex.getNumExpediente(), g1.getId());
+			assertEquals("No se registra la encuesta correctamente", sol.getExpediente(), em.find(SolicitudCambioGrupo.class, id).getExpediente());
+			assertEquals("No se registra la encuesta correctamente", sol.getGrupoActual(), em.find(SolicitudCambioGrupo.class, id).getGrupoActual());
+		} 
+		catch (Exception e) {
+			fail("Lanza una excepción cuando se está registrando una encuesta correcta");
+		}
+		
+		try {
+			SolicitudCambioGrupo sol = new SolicitudCambioGrupo();
+			List<File> docs = new ArrayList<>();
+			sol.setDocumentacionAportada(docs);
+			sol.setExpediente(ex);
+			sol.setFechaRealizada(Timestamp.valueOf("2020-09-30 12:01:00"));
+			sol.setGrupoActual(g1);
+			sol.setGrupoSolicitado(g2);
+			
+			grupoEJB.registrarSolicitudCambioGrupo(sol);
+			fail("Permite registrar una nueva solicitud cuando ya se tiene una para ese grupo registrada");
+		} 
+		catch (SolicitudDuplicada e) {
+			/* COMPORTAMIENTO CORRECTO */
+		}
+		catch(Exception e) {
+			fail("Lanza la excepción incorrecta");
+		}
 	}
 	
 	@Test
@@ -160,8 +215,9 @@ public class TestGrupoEJB {
 		}
 	}
 	
-	@Test 
+	@Test
 	public void testReasignarGrupo() {
+		// TODO: Comprobar si se decrementa las plazas del grupo de salida y se incrementan las de entrada
 		Expediente al1 = em.find(Expediente.class, 8); // 1 B
 		Grupo gp1 = em.find(Grupo.class, "id1"); // 1 A
 		
@@ -185,9 +241,43 @@ public class TestGrupoEJB {
 	}
 	
 	@Test
-	@Ignore
 	public void testPlazasTotales() {
-		// TODO testPlazasTotales
+		try {
+			grupoEJB.plazasTotales(null);
+		}
+		catch(SecretariaException e) {
+			try {
+				Grupo g = new Grupo();
+				g.setId("id7");
+				grupoEJB.plazasTotales(g);
+				fail("No lanza la excepción esperada, permite un grupo no almacenado en la base de datos");
+			}
+			catch(GrupoInexistente a) {
+				/* COMPORTAMIENTO ESPERADO */
+			}
+			catch(Exception a) {
+				fail("Lanza la excepción incorrecta");
+			}
+		}
+		catch(Exception e) {
+			fail("Lanza la excepción incorrecta");
+		}
+		
+		Grupo g1 = em.find(Grupo.class, "id1"); // Dos grupos relacionados
+		Grupo g2 = em.find(Grupo.class, "id2");
+		Integer plazas = g1.getPlazas() + g2.getPlazas();
+		
+		Grupo g3 = em.find(Grupo.class, "id3"); // Grupo sin relacionar
+		
+		try {
+			assertEquals("No coincide el numero de plazas totales de dos grupos relacionados", grupoEJB.plazasTotales(g1), grupoEJB.plazasTotales(g2));
+			assertEquals("El numero de plazas totales no es correcto", plazas, grupoEJB.plazasTotales(g1));
+			
+			assertEquals("No coincide el numero de plazas totales de un grupo sin relaciones con su atributo interno", g3.getPlazas(), grupoEJB.plazasTotales(g3));
+		}
+		catch(Exception e) {
+			fail("Lanza una excepcion inesperada");
+		}
 	}
 	
 	@Requisitos({"RF9"})

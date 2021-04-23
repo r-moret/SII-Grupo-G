@@ -143,8 +143,8 @@ public class BaseDatos {
 		grup1.setTurno("mañana");
 		grup1.setIngles(false);
 		grup1.setTitulacion(tit1);
-		
-		em.persist(grup1);
+		grup1.setPlazas(50);
+		List<Grupo> rel1 = new ArrayList<Grupo>();
 		
 		Grupo grup2 = new Grupo();
 		grup2.setId("id2");
@@ -153,8 +153,8 @@ public class BaseDatos {
 		grup2.setTurno("mañana");
 		grup2.setIngles(false);
 		grup2.setTitulacion(tit1);
-		
-		em.persist(grup2);
+		grup2.setPlazas(30);
+		List<Grupo> rel2 = new ArrayList<Grupo>();
 		
 		Grupo grup3 = new Grupo();
 		grup3.setId("id3");
@@ -163,8 +163,8 @@ public class BaseDatos {
 		grup3.setTurno("mañana");
 		grup3.setIngles(false);
 		grup3.setTitulacion(tit1);
-		
-		em.persist(grup3);
+		grup3.setPlazas(20);
+		List<Grupo> rel3 = new ArrayList<Grupo>();
 		
 		Grupo grup4 = new Grupo();
 		grup4.setId("id4");
@@ -173,7 +173,21 @@ public class BaseDatos {
 		grup4.setTurno("mañana");
 		grup4.setIngles(false);
 		grup4.setTitulacion(tit1);
+		grup4.setPlazas(20);
+		List<Grupo> rel4 = new ArrayList<Grupo>();
 		
+		rel1.add(grup2);
+		rel2.add(grup1);
+		
+		grup1.setRelacionados(rel1);
+		grup2.setRelacionados(rel2);
+		
+		grup3.setRelacionados(rel3);
+		grup4.setRelacionados(rel4);
+		
+		em.persist(grup1);
+		em.persist(grup2);
+		em.persist(grup3);
 		em.persist(grup4);
 		
 		Clase c1 = new Clase();
