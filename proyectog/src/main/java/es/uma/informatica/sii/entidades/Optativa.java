@@ -1,7 +1,6 @@
 package es.uma.informatica.sii.entidades;
 
 import java.io.Serializable;
-import java.lang.Integer;
 import java.lang.String;
 import javax.persistence.*;
 
@@ -12,22 +11,14 @@ import javax.persistence.*;
 @Entity
 @PrimaryKeyJoinColumn(referencedColumnName="referencia")
 public class Optativa extends Asignatura implements Serializable {
-
-	@Column(nullable=false)
-	private Integer plazas;
+	
 	private String mencion;
 	private static final long serialVersionUID = 1L;
 
 	public Optativa() {
 		super();
 	}   
-	public Integer getPlazas() {
-		return this.plazas;
-	}
-
-	public void setPlazas(Integer plazas) {
-		this.plazas = plazas;
-	}   
+  
 	public String getMencion() {
 		return this.mencion;
 	}
@@ -40,7 +31,6 @@ public class Optativa extends Asignatura implements Serializable {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((mencion == null) ? 0 : mencion.hashCode());
-		result = prime * result + ((plazas == null) ? 0 : plazas.hashCode());
 		return result;
 	}
 	@Override
@@ -57,16 +47,11 @@ public class Optativa extends Asignatura implements Serializable {
 				return false;
 		} else if (!mencion.equals(other.mencion))
 			return false;
-		if (plazas == null) {
-			if (other.plazas != null)
-				return false;
-		} else if (!plazas.equals(other.plazas))
-			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Optativa [plazas=" + plazas + ", mencion=" + mencion + "]";
+		return "Optativa [mencion=" + mencion + "]";
 	}
 	
 	

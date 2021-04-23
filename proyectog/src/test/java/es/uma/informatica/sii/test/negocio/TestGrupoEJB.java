@@ -80,14 +80,14 @@ public class TestGrupoEJB {
 	
 	@Test
 	@Ignore
-	public void testRegistrarCambioGrupo() {
-		// TODO
+	public void testRegistrarSolicitudCambioGrupo() {
+		// TODO testRegistrarSolicitudCambioGrupo
 	}
 	
 	@Test
 	@Ignore
 	public void testAsignarGrupos() {
-		// TODO
+		// TODO testAsignarGrupos
 	}
 	
 	private String ultimoCursoMatriculado(Expediente ex) {
@@ -103,10 +103,8 @@ public class TestGrupoEJB {
 		
 		return ultimoCurso;
 	}
-	
-	
+		
 	@Test
-	@Ignore
 	public void testReasignarGrupoInvalido() {
 		Grupo gp1 = em.find(Grupo.class, "id1");
 		Expediente ex1 = em.find(Expediente.class, 8);
@@ -163,7 +161,6 @@ public class TestGrupoEJB {
 	}
 	
 	@Test 
-	@Ignore
 	public void testReasignarGrupo() {
 		Expediente al1 = em.find(Expediente.class, 8); // 1 B
 		Grupo gp1 = em.find(Grupo.class, "id1"); // 1 A
@@ -177,7 +174,7 @@ public class TestGrupoEJB {
 			
 			for(AsignaturasPorMatriculas asigMat : mat.getAsignaturasPorMatriculas()) {
 				if(asigMat.getAsignatura().getCurso() == gp1.getCurso()) {
-					assertEquals(asigMat.getGrupo(), gp1);
+					assertEquals("No se efectua el cambio de grupo en una asignatura de " + gp1.getCurso() + "º", asigMat.getGrupo(), gp1);
 				}
 			}
 		}
@@ -189,13 +186,12 @@ public class TestGrupoEJB {
 	
 	@Test
 	@Ignore
-	public void testAforoMaximo() {
-		// TODO
+	public void testPlazasTotales() {
+		// TODO testPlazasTotales
 	}
 	
 	@Requisitos({"RF9"})
 	@Test
-	@Ignore
 	public void testActualizarGrupo() {
 		try {
 			grupoEJB.actualizarGrupo(null);

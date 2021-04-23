@@ -108,6 +108,7 @@ public class BaseDatos {
 		asig1.setNombre("Calculo");
 		asig1.setCurso(1);
 		asig1.setTitulacion(tit1);
+		asig1.setPlazas(80);
 		
 		em.persist(asig1);
 		
@@ -119,6 +120,7 @@ public class BaseDatos {
 		asig2.setNombre("Algebra");
 		asig2.setCurso(1);
 		asig2.setTitulacion(tit1);
+		asig2.setPlazas(60);
 		
 		em.persist(asig2);
 		
@@ -130,6 +132,7 @@ public class BaseDatos {
 		asig3.setNombre("TDC");
 		asig3.setCurso(2);
 		asig3.setTitulacion(tit1);
+		asig3.setPlazas(50);
 		
 		em.persist(asig3);
 		

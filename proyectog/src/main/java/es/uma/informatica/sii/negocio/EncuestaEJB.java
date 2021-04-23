@@ -44,16 +44,6 @@ public class EncuestaEJB implements EncuestaInterface {
 		return encEntity;
 	}
 	
-	// 	TODO: Determinar si es necesario o no: List<Encuesta> obtenerEncuestasAlumno(Expediente expediente)
-	//
-	//	public List<Encuesta> obtenerEncuestasAlumno(Expediente expediente) throws ExpedienteInexistente {
-	//		Expediente expEntity = em.find(Expediente.class, expediente.getNumExpediente());
-	//		if(expEntity == null) {
-	//			throw new ExpedienteInexistente();
-	//		}
-	//		return expEntity.getEncuestas();
-	//	}
-	
 	private int obtenerAnyos(Timestamp fecha) {
 		String anyoString = fecha.toString().substring(0, 4);
 		int anyo = Integer.parseInt(anyoString);
