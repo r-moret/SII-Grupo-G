@@ -19,6 +19,7 @@ import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.exceptions.SolicitudCambioGrupoInexistente;
+import es.uma.informatica.sii.exceptions.SolicitudDuplicada;
 
 @Stateless
 public class GrupoEJB implements GrupoInterface{
@@ -64,9 +65,27 @@ public class GrupoEJB implements GrupoInterface{
 		if(exp==null){
 			throw new ExpedienteInexistente();
 		}
+			
+		List<SolicitudCambioGrupo> ls = s.getSolicitudesPasadas();
 		
-		em.persist(s);
+		int i=0;
+		boolean enc=false;
+
+		while(i<ls.size() && !enc){
+			if(s.getGrupoSolicitado().getCurso().equals(ls.get(i).getGrupoActual().getCurso())){
+				enc=true;
+			}else{
+				i++;
+			}
+		}
 		
+		if(!enc) {
+			ls.add(solicitud);
+			em.persist(s);
+		}else{
+			throw new SolicitudDuplicada();
+		}
+
 	}
 
 	@Override
@@ -92,18 +111,41 @@ public class GrupoEJB implements GrupoInterface{
 		List<AsignaturasPorMatriculas> apm = m.getAsignaturasPorMatriculas();
 
 		for(AsignaturasPorMatriculas a : apm){
-			if(a.getGrupo().getCurso() == g.getCurso()){
+	
+			if(a.getGrupo().getCurso() == g.getCurso() && a.getAsignatura().getPlazas() < g.getPlazas()){
+				
+				g.setPlazas(g.getPlazas()-1); 
+				a.getGrupo().setPlazas(a.getGrupo().getPlazas()+1);
 				a.setGrupo(g);
-			}
+			}	
 		}
-
 		em.merge(exp);
 	}
 
 	@Override
 	public Integer plazasTotales(Grupo grupo) throws SecretariaException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(grupo == null) {
+			throw new SecretariaException();
+		}
+	
+		Grupo g = em.find(Grupo.class, grupo.getId());
+	
+		if(g == null) {
+			throw new GrupoInexistente();
+		}
+		
+		int plazasTotales = g.getPlazas();
+		List<Grupo> lg = g.getRelacionados();
+		
+		if(!lg.isEmpty()){
+			
+			for(Grupo gr: lg){
+				plazasTotales+=gr.getPlazas();
+			}
+		}
+
+		return plazasTotales;
 	}
 
 	@Override

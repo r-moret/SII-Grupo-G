@@ -11,7 +11,7 @@ import es.uma.informatica.sii.entidades.GruposPorAsignatura;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
-public class Algoritmo implements AlgoritmoInterfaz{
+public class Algoritmo implements AlgoritmoInterface{
 
 	private int metodo;
 	private Encuesta encuesta;
@@ -49,8 +49,7 @@ public class Algoritmo implements AlgoritmoInterfaz{
 				/*
 				BUSCAR MATRICULA (HACE FALTA CURSO ACADEMICO Y EXPEDIENTE)
 				CUANDO TENGAMOS LA MATRICULA BUSCAMOS LAS ASIGNATURASPORMATRICULAS  (HACE FALTA MATRICULA Y CADA ASIGNATURA)
-				AHÍ EN TEORÍA PODEMOS ASIGNAR AL ALUMNO EL GRUPO DE ESA ASIGNATURA (PORQUE HEMOS LLEGADO DESDE SU EXPEDIENTE) 
-				t
+				AHORA PODEMOS ASIGNAR AL ALUMNO EL GRUPO DE ESA ASIGNATURA		
 				*/
 				
 				if(!procesada){
@@ -64,9 +63,12 @@ public class Algoritmo implements AlgoritmoInterfaz{
 						asignatura = en.getGruposPorAsignatura().get(i).getAsignatura();
 						grupo = en.getGruposPorAsignatura().get(i).getGrupo();
 						
-					 
 						mat.getAsignaturasPorMatriculas().get(i).setAsignatura(asignatura);
 						mat.getAsignaturasPorMatriculas().get(i).setGrupo(grupo);
+						
+						//Actualizar plazas asignatura
+						int plazas = mat.getAsignaturasPorMatriculas().get(i).getAsignatura().getPlazas();
+						mat.getAsignaturasPorMatriculas().get(i).getAsignatura().setPlazas(plazas++);
 					}
 					en.setEstadoProcesada(true);
 				}	

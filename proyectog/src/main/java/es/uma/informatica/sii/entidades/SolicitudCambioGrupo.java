@@ -78,6 +78,7 @@ public class SolicitudCambioGrupo implements Serializable {
 	@JoinColumn(nullable = false)
 	private Grupo grupoSolicitado;
 	
+	private List<SolicitudCambioGrupo> solicitudesPasadas;
 	
 	public Expediente getExpediente() {
 		return expediente;
@@ -143,6 +144,12 @@ public class SolicitudCambioGrupo implements Serializable {
 		return "SolicitudCambioGrupo [fechaRealizada=" + fechaRealizada + ", documentacionAportada="
 				+ documentacionAportada + ", expediente=" + expediente + ", grupoActual=" + grupoActual
 				+ ", grupoSolicitado=" + grupoSolicitado + "]";
+	}
+	public List<SolicitudCambioGrupo> getSolicitudesPasadas() {
+		return solicitudesPasadas;
+	}
+	public void setSolicitudesPasadas(List<SolicitudCambioGrupo> solicitudesPasadas) {
+		this.solicitudesPasadas = solicitudesPasadas;
 	}
 	
 	
