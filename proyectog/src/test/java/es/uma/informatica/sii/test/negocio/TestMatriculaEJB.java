@@ -4,8 +4,10 @@ import static org.junit.Assert.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
@@ -211,33 +213,18 @@ public class TestMatriculaEJB {
 		MatriculaId id2 = new MatriculaId("19/20",1);
 		Matricula m2 = em.find(Matricula.class, id2);
 		
-		List<Matricula> matriculas = new ArrayList<Matricula>();
-		matriculas.add(m1);
+		Set<Matricula> matriculas = new HashSet<Matricula>();
 		matriculas.add(m2);
+		matriculas.add(m1);
 		
 		try {
-			assertTrue("El metodo no devuelve una lista correcta",matriculas.equals(matriculaEJB.consultarMatriculas()));
+			assertEquals("El metodo no devuelve una lista correcta", matriculas, matriculaEJB.consultarMatriculas());
+			
 		} catch(Exception e) {
-			fail("Lanza una excepciï¿½n inesperada 1");
+			fail("Lanza una excepcion inesperada");
 		}
 		
-		// Meto una nueva matricula en la bbdd y veo si tambien me la devuelve
-		Matricula m3 = new Matricula();
-		m3.setCursoAcademico("18/19");
-		m3.setExpediente(em.find(Expediente.class, 1));
-		m3.setEstado(true);
-		m3.setNumArchivo(10);
-		m3.setTurnoPreferente("maï¿½ana");
-		m3.setFechaMatricula(Timestamp.valueOf("2020-09-04 10:07:37"));
-		
-		em.persist(m3);
-		matriculas.add(m3);
-		
-		try {
-			assertTrue("El metodo no devuelve una lista correcta", matriculas.equals(matriculaEJB.consultarMatriculas()));
-		} catch(Exception e) {
-			fail("Lanza una excepciï¿½n inesperada 2");
-		}
+
 		
 	}
 	
@@ -322,7 +309,7 @@ public class TestMatriculaEJB {
 		Asignatura asig2 = em.find(Asignatura.class, 2);
 		try {
 			matriculaEJB.desmatricularAsignatura(m1, asig2);
-			fail("Permite desmatricular de una asignatura en la que no estï¿½ matriculada");
+			fail("Permite desmatricular de una asignatura en la que no está matriculada");
 		} catch(SecretariaException e) {
 			
 		} catch(Exception e) {
