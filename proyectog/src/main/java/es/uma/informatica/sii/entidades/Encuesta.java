@@ -72,6 +72,16 @@ public class Encuesta implements Serializable {
 
 	@ManyToMany
 	private List<GruposPorAsignatura> gruposPorAsignatura;
+	
+	private boolean estadoProcesada;
+
+	public boolean getEstadoProcesada() {
+		return estadoProcesada;
+	}
+
+	public void setEstadoProcesada(boolean estadoProcesada) {
+		this.estadoProcesada = estadoProcesada;
+	}
 
 	public Encuesta() {
 		super();
