@@ -1,6 +1,5 @@
 package es.uma.informatica.sii.negocio;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,21 +9,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
-import es.uma.informatica.sii.entidades.Alumno;
+
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.Matricula.MatriculaId;
-import es.uma.informatica.sii.exceptions.AlumnoInexistente;
 import es.uma.informatica.sii.exceptions.AsignaturaInexistente;
 import es.uma.informatica.sii.exceptions.CursoInexistente;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.MatriculaInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
-import es.uma.informatica.sii.exceptions.TitulacionInexistente;
 
 @Stateless
 public class MatriculaEJB implements MatriculaInterface {
@@ -126,7 +121,7 @@ public class MatriculaEJB implements MatriculaInterface {
 		while (cont < m.getAsignaturasPorMatriculas().size() && !enc) {
 			
 			if (m.getAsignaturasPorMatriculas().get(cont).getAsignatura().equals(a)) {
-
+				
 				enc = true;
 			}else {
 				cont++;
@@ -135,9 +130,10 @@ public class MatriculaEJB implements MatriculaInterface {
 		
 		if(!enc) {
 			throw new SecretariaException();
+		} else {
+			em.remove(em.merge(m.getAsignaturasPorMatriculas().get(cont)));
 		}
 
-		em.remove(em.merge(m.getAsignaturasPorMatriculas().get(cont).getAsignatura()));
 
 	}
 }

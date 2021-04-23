@@ -57,7 +57,7 @@ public class TestMatriculaEJB {
 		ejbContainer = EJBContainer.createEJBContainer(properties);
 		ctx = ejbContainer.getContext();
 	}
-	
+
 	@AfterClass
 	public static void tearDownAfterClass() {
 		if (ejbContainer != null) {
@@ -69,14 +69,14 @@ public class TestMatriculaEJB {
 	public void setUp() throws Exception {
 		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
 		em = emf.createEntityManager();
-		
+
 		matriculaEJB = (MatriculaInterface) ctx.lookup(MATRICULA_EJB);
 		BaseDatos.initBaseDatos();
 	}
-	
+
 	@After
 	public void tearDown() {
-		if(em.isOpen()) {
+		if (em.isOpen()) {
 			em.close();
 		}
 		emf.close();
@@ -100,7 +100,7 @@ public class TestMatriculaEJB {
 		// 2 caso - paso un expediente no existente en la bbdd
 		try {
 			Expediente ex1 = new Expediente();
-			ex1.setNumExpediente(5); 
+			ex1.setNumExpediente(5);
 			ex1.setAlumno(em.find(Alumno.class, 1));
 			ex1.setTitulacion(em.find(Titulacion.class, 1));
 
@@ -119,19 +119,17 @@ public class TestMatriculaEJB {
 		try {
 			List<Matricula> matri1 = expediente2.getMatriculas();
 			List<Matricula> matri2 = matriculaEJB.consultarMatricula(expediente2);
-			
+
 			assertEquals("El mï¿½todo no devuelve la lista correcta de matriculas", matri1.size(), matri2.size());
 			assertEquals("El mï¿½todo no devuelve la lista correcta de matriculas", matri1, matri2);
-			
+
 		} catch (Exception e) {
 			fail("El metodo lanza una excepcion al comprobar un expediente correcto");
 		}
 	}
 
-
-	
 	// Test que comprueba los datos pasados por parametro de la consulta
-	
+
 	@Requisitos({ "RF1" })
 	@Test
 	public void testConsultarMatriculaPorCurso() {
@@ -141,8 +139,7 @@ public class TestMatriculaEJB {
 			// No falla
 			fail("Permite consultar un expediente nulo");
 		} catch (SecretariaException exc1) {
-			/* Falla y lanza la excepcion correcta */} 
-		catch (Exception e) {
+			/* Falla y lanza la excepcion correcta */} catch (Exception e) {
 			fail("Lanza la excepcion incorrecta 1");
 		}
 
@@ -160,7 +157,7 @@ public class TestMatriculaEJB {
 		} catch (Exception e) {
 			fail("Lanza la excepcion incorrecta 2");
 		}
-		
+
 		// 3 caso - paso un curso null
 		try {
 			Expediente exp = em.find(Expediente.class, 8);
@@ -190,7 +187,7 @@ public class TestMatriculaEJB {
 		} catch (Exception e) {
 			fail("Lanza una excepcion incorrecta");
 		}
-		
+
 		// Caso 2 - Paso un curso perteneciente a una matricula del expediente
 		try {
 			// Solo hay una matricula en la bbdd para ese alumno
@@ -201,47 +198,44 @@ public class TestMatriculaEJB {
 			fail("El metodo lanza una excepcion al comprobar un expediente con un curso academico correcto");
 		}
 	}
-	
+
 	@Requisitos({ "RF1" })
 	@Test
 	public void testListarTodasLasMatriculas() {
-		//Caso 1 - Veo si devuelvo las matriculas ya existentes en la bbdd
-		MatriculaId id1 = new MatriculaId("20/21",8);
+		// Caso 1 - Veo si devuelvo las matriculas ya existentes en la bbdd
+		MatriculaId id1 = new MatriculaId("20/21", 8);
 		Matricula m1 = em.find(Matricula.class, id1);
-		
-		MatriculaId id2 = new MatriculaId("19/20",1);
+
+		MatriculaId id2 = new MatriculaId("19/20", 1);
 		Matricula m2 = em.find(Matricula.class, id2);
-		
+
 		Set<Matricula> matriculas = new HashSet<Matricula>();
 		matriculas.add(m2);
 		matriculas.add(m1);
-		
+
 		try {
 			assertEquals("El metodo no devuelve una lista correcta", matriculas, matriculaEJB.consultarMatriculas());
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			fail("Lanza una excepcion inesperada");
 		}
-		
 
-		
 	}
-	
+
 	// Metodo que comprueba los datos pasados por parametro de desmatricular
 	@Requisitos({ "RF9" })
 	@Test
 	public void testComprobacionParametrosDesmatricular() {
 		// Caso 1 - Matricula nula
 		try {
-			matriculaEJB.desmatricularAsignatura(null, em.find(Asignatura.class,1));
+			matriculaEJB.desmatricularAsignatura(null, em.find(Asignatura.class, 1));
 			// No falla
 			fail("Permite consultar una matricula nula");
 		} catch (SecretariaException exc1) {
-			/* Falla y lanza la excepcion correcta */} 
-		catch (Exception e) {
+			/* Falla y lanza la excepcion correcta */} catch (Exception e) {
 			fail("Lanza la excepcion incorrecta");
 		}
-		
+
 		// Caso 2 - Matricula pasada por parametro no existente en la bbdd
 		Matricula m3 = new Matricula();
 		m3.setCursoAcademico("17/18");
@@ -252,78 +246,79 @@ public class TestMatriculaEJB {
 		m3.setNumArchivo(10);
 		m3.setTurnoPreferente("maï¿½ana");
 		m3.setFechaMatricula(Timestamp.valueOf("2020-09-04 10:07:37"));
-		
+
 		try {
-			matriculaEJB.desmatricularAsignatura(m3, em.find(Asignatura.class,1));
+			matriculaEJB.desmatricularAsignatura(m3, em.find(Asignatura.class, 1));
 			fail("Permite desmatricular a un matricula inexistente en la bbdd");
 		} catch (MatriculaInexistente e1) {
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			fail("Lanza la excepcion incorrecta");
 		}
-		
+
 		// Caso 3 - Asignatura nula
 		try {
-			MatriculaId id1 = new MatriculaId("20/21",8);
+			MatriculaId id1 = new MatriculaId("20/21", 8);
 			Matricula m1 = em.find(Matricula.class, id1);
-			
+
 			matriculaEJB.desmatricularAsignatura(m1, null);
 			// No falla
 			fail("Permite consultar una asignatura nula");
 		} catch (SecretariaException exc3) {
-			/* Falla y lanza la excepcion correcta */} 
-		catch (Exception e) {
+			/* Falla y lanza la excepcion correcta */} catch (Exception e) {
 			fail("Lanza la excepcion incorrecta");
 		}
-		
-		
+
 		// Caso 4 - Asignatura pasada por parametro no existente en la bbdd
-	
-		MatriculaId id1 = new MatriculaId("20/21",8);
+
+		MatriculaId id1 = new MatriculaId("20/21", 8);
 		Matricula m1 = em.find(Matricula.class, id1);
-		
+
 		Asignatura asig = new Asignatura();
 		asig.setReferencia(100);
 		try {
 			matriculaEJB.desmatricularAsignatura(m1, asig);
 			fail("Permite desmatricular de una asignatura no existente en la bbdd");
 		} catch (AsignaturaInexistente e) {
-		
+
 		} catch (Exception e) {
 			fail("Lanza la excepcion incorrecta");
 		}
-		
+
 	}
-	
-	
+
 	// Metodo que comprueba el funcionamiento correcto de desmatricular
 	@Requisitos({ "RF9" })
 	@Test
 	public void testDesmatricularAsignatura() {
-		
-		// Caso 1 - La matricula no contiene la asignatura pasada por parametro 
-		MatriculaId id1 = new MatriculaId("20/21",8);
+
+		// Caso 1 - La matricula no contiene la asignatura pasada por parametro
+		MatriculaId id1 = new MatriculaId("20/21", 8);
 		Matricula m1 = em.find(Matricula.class, id1);
-		
-		Asignatura asig2 = em.find(Asignatura.class, 2);
+
+		Asignatura asig3 = em.find(Asignatura.class, 3);
+
 		try {
-			matriculaEJB.desmatricularAsignatura(m1, asig2);
+			matriculaEJB.desmatricularAsignatura(m1, asig3);
 			fail("Permite desmatricular de una asignatura en la que no está matriculada");
-		} catch(SecretariaException e) {
-			
-		} catch(Exception e) {
+		} catch (SecretariaException e) {
+
+		} catch (Exception e) {
 			fail("Lanza la excepcion incorrecta");
 		}
-		
-		
+
 		// Caso 2 - No desmatricula bien
 		Asignatura asig1 = em.find(Asignatura.class, 1);
-		try{
+		Asignatura asig2 = em.find(Asignatura.class, 2);
+		try {
 			matriculaEJB.desmatricularAsignatura(m1, asig1);
-			// mat1 solo tiene asig1, si se ha desmatriculado, ahora la lista de m1 es vacia
+			matriculaEJB.desmatricularAsignatura(m1, asig2);
+			// mat1 solo tiene asig1 y asig2, si se ha desmatriculado de ambas, ahora la lista de m1 es vacia
+			
 			assertTrue("No ha desmatriculado correctamente", m1.getAsignaturasPorMatriculas().isEmpty());
-		} catch(Exception e){
+		} catch (Exception e) {
 			fail("Se ha lanzado una excepcion inesperada");
 		}
+
 	}
 }

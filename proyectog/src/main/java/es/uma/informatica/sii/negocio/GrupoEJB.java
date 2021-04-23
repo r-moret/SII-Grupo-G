@@ -17,6 +17,8 @@ import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas.AsignaturasPorMatriculasId;
 import es.uma.informatica.sii.entidades.Matricula.MatriculaId;
+import es.uma.informatica.sii.entidades.SolicitudCambioGrupo.SolicitudCambioGrupoID;
+import es.uma.informatica.sii.exceptions.EncuestaInexistente;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.MatriculaInexistente;
@@ -77,40 +79,42 @@ public class GrupoEJB implements GrupoInterface{
 			throw new SecretariaException();
 		}
 		
-		SolicitudCambioGrupo s = em.find(SolicitudCambioGrupo.class, solicitud.getExpediente());
-	
-		if(s == null) {
-			throw new SolicitudCambioGrupoInexistente();
-		}
+		Expediente exp = em.find(Expediente.class, solicitud.getExpediente().getNumExpediente());
 		
-		Expediente exp = em.find(Expediente.class, s.getExpediente().getNumExpediente());
-		
-		if(exp==null){
-			throw new ExpedienteInexistente();
-		}
-			
-		List<SolicitudCambioGrupo> ls = s.getSolicitudesPasadas();
-		
-		int i=0;
-		boolean enc=false;
+		List<SolicitudCambioGrupo> ls = exp.getSolicitudesPasadas();
+		int i = 0;
+		boolean enc = false;
 
-		while(i<ls.size() && !enc){
-			if(s.getGrupoSolicitado().getCurso().equals(ls.get(i).getGrupoActual().getCurso())){
-				enc=true;
+		while(i < ls.size() && !enc) {
+			if(ls.get(i).equals(solicitud)){
+				enc = true;
 			}else{
 				i++;
 			}
 		}
 		
 		if(!enc) {
-			ls.add(solicitud);
-			em.persist(s);
-		}else{
-			throw new SolicitudDuplicada();
+			em.persist(solicitud);
+		}else {
+			throw new SolicitudDuplicada(); 
 		}
-
 	}
-
+	
+	private String ultimoCursoMatriculado(Expediente ex) {
+		Integer maxUltimoAnyo = -1;
+		for(Matricula m : ex.getMatriculas()) {
+			Integer ultimoAnyo = Integer.parseInt(m.getCursoAcademico().substring(3,5));
+			if(ultimoAnyo > maxUltimoAnyo) {
+				maxUltimoAnyo = ultimoAnyo;
+			}
+		}
+		Integer previoAnyo = maxUltimoAnyo - 1;
+		String ultimoCurso = previoAnyo.toString() + "/" + maxUltimoAnyo.toString();
+		
+		return ultimoCurso;
+	}
+	
+	
 	@Override
 	public void reasignarGrupo(Expediente expediente, Grupo grupo) throws SecretariaException {
 		
@@ -129,13 +133,21 @@ public class GrupoEJB implements GrupoInterface{
 			throw new GrupoInexistente();
 		}
 		
-		int i = exp.getMatriculas().size()-1;
-		Matricula m = exp.getMatriculas().get(i);
-		List<AsignaturasPorMatriculas> apm = m.getAsignaturasPorMatriculas();
+		String ultCurso = ultimoCursoMatriculado(exp);
+		List<Matricula> lm = exp.getMatriculas();
+		Matricula mat = new Matricula();
+		for(Matricula m : lm){
+			if(m.getCursoAcademico().equals(ultCurso)){
+				mat = m;
+			}
+		}
+		//int i = exp.getMatriculas().size()-1;
+		//Matricula m = exp.getMatriculas().get(i);
+		List<AsignaturasPorMatriculas> apm = mat.getAsignaturasPorMatriculas();
 
 		for(AsignaturasPorMatriculas a : apm){
 	
-			if(a.getGrupo().getCurso() == g.getCurso() && a.getAsignatura().getPlazas() < g.getPlazas()){
+			if(a.getGrupo().getCurso().equals(g.getCurso()) && a.getAsignatura().getPlazas() < g.getPlazas()){
 				
 				g.setPlazas(g.getPlazas()-1); 
 				a.getGrupo().setPlazas(a.getGrupo().getPlazas()+1);

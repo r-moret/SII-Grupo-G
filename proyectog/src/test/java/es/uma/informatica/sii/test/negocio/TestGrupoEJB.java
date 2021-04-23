@@ -139,7 +139,7 @@ public class TestGrupoEJB {
 			/* COMPORTAMIENTO CORRECTO */
 		}
 		catch(Exception e) {
-			fail("Lanza la excepción incorrecta");
+			fail("Lanza la excepción incorrecta 1");
 		}
 	}
 	

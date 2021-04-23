@@ -39,6 +39,9 @@ public class Expediente implements Serializable {
 	
 	@OneToMany(mappedBy="expediente")
 	private List<SolicitudCambioGrupo> solicitudesCambioGrupo;
+
+	@OneToMany(mappedBy="expediente")
+	private List<SolicitudCambioGrupo> solicitudesPasadas;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -90,6 +93,13 @@ public class Expediente implements Serializable {
 	}
 	public void setMatriculas(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
+	}
+	
+	public List<SolicitudCambioGrupo> getSolicitudesPasadas() {
+		return solicitudesPasadas;
+	}
+	public void setSolicitudesPasadas(List<SolicitudCambioGrupo> solicitudesPasadas) {
+		this.solicitudesPasadas = solicitudesPasadas;
 	}
 
 	@Override
