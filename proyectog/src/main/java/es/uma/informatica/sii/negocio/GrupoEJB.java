@@ -54,9 +54,9 @@ public class GrupoEJB implements GrupoInterface{
 	}
 
 	@Override
-	public void plazasTotales(Grupo grupo) throws SecretariaException {
+	public Integer plazasTotales(Grupo grupo) throws SecretariaException {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override

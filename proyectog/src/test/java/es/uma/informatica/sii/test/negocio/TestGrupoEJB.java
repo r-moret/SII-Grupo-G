@@ -185,9 +185,43 @@ public class TestGrupoEJB {
 	}
 	
 	@Test
-	@Ignore
 	public void testPlazasTotales() {
-		// TODO testPlazasTotales
+		try {
+			grupoEJB.plazasTotales(null);
+		}
+		catch(SecretariaException e) {
+			try {
+				Grupo g = new Grupo();
+				g.setId("id7");
+				grupoEJB.plazasTotales(g);
+				fail("No lanza la excepción esperada, permite un grupo no almacenado en la base de datos");
+			}
+			catch(GrupoInexistente a) {
+				/* COMPORTAMIENTO ESPERADO */
+			}
+			catch(Exception a) {
+				fail("Lanza la excepción incorrecta");
+			}
+		}
+		catch(Exception e) {
+			fail("Lanza la excepción incorrecta");
+		}
+		
+		Grupo g1 = em.find(Grupo.class, "id1"); // Dos grupos relacionados
+		Grupo g2 = em.find(Grupo.class, "id2");
+		Integer plazas = g1.getPlazas() + g2.getPlazas();
+		
+		Grupo g3 = em.find(Grupo.class, "id3"); // Grupo sin relacionar
+		
+		try {
+			assertEquals("No coincide el numero de plazas totales de dos grupos relacionados", grupoEJB.plazasTotales(g1), grupoEJB.plazasTotales(g2));
+			assertEquals("El numero de plazas totales no es correcto", plazas, grupoEJB.plazasTotales(g1));
+			
+			assertEquals("No coincide el numero de plazas totales de un grupo sin relaciones con su atributo interno", g3.getPlazas(), grupoEJB.plazasTotales(g3));
+		}
+		catch(Exception e) {
+			fail("Lanza una excepcion inesperada");
+		}
 	}
 	
 	@Requisitos({"RF9"})
