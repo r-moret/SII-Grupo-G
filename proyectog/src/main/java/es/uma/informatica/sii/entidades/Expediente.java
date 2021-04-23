@@ -22,6 +22,7 @@ public class Expediente implements Serializable {
 	private Boolean activo;
 	private Float notaMediaProvisional;
 
+
 	@OneToMany(mappedBy="expediente")
 	private List<Encuesta> encuestas;
 	
@@ -48,6 +49,7 @@ public class Expediente implements Serializable {
 	public Expediente() {
 		super();
 		this.matriculas = new ArrayList<>();
+		this.encuestas = new ArrayList<>();
 	}   
 	
 	public Boolean getActivo() {

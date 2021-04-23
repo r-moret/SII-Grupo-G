@@ -18,11 +18,13 @@ public class PreferenciaSelector implements AlgoritmoSelector {
 	@Override
 	public Map<Asignatura, Grupo> asignarGrupo(Matricula matricula) throws SecretariaException {
 		Expediente ex = matricula.getExpediente();
-		String cursoActual = matricula.getCursoAcademico().substring(3,5); 				// 20/21 -> 21
+		String cursoActual = matricula.getCursoAcademico();
 		
 		Encuesta encuestaActual = null;
 		for(Encuesta encuesta : ex.getEncuestas()) {
-			String cursoEncuesta = encuesta.getFechaEnvio().toString().substring(2,4);  // 2021-09-02 -> 21
+			Integer anyo = Integer.parseInt(encuesta.getFechaEnvio().toString().substring(2,4));
+			String cursoEncuesta = anyo + "/" + (anyo + 1);
+			
 			if(cursoEncuesta.equals(cursoActual)) {
 				encuestaActual = encuesta;
 			}

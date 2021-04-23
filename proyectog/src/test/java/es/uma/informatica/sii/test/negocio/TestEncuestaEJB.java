@@ -91,7 +91,6 @@ public class TestEncuestaEJB {
 	}
 	
 	@Test
-	@Ignore
 	public void testObtenerEncuesta() {
 		try {
 			Expediente ex = em.find(Expediente.class, 1);
@@ -132,7 +131,6 @@ public class TestEncuestaEJB {
 	
 	@Requisitos({"RF2"})
 	@Test
-	@Ignore
 	public void testRegistroEncuestaCorrecto() {
 		try {
 			encuestaEJB.registrarEncuesta(null);
@@ -246,7 +244,6 @@ public class TestEncuestaEJB {
 	
 	@Requisitos({"RF6"})
 	@Test
-	@Ignore
 	public void testDetectarIncompatibilidadHoraria() {
 		try {
 			encuestaEJB.incompatibilidadHoraria(null);

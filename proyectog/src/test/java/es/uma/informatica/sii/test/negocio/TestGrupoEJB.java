@@ -18,6 +18,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -144,14 +145,14 @@ public class TestGrupoEJB {
 	}
 	
 	@Test
-	public void testAsignarGrupos() {
-		
+	public void testAsignarGrupos() throws SecretariaException {
 		AlgoritmoSelector algo = new PreferenciaSelector();
 		
 		List<Matricula> matriculas = new ArrayList<>();
 		
 		MatriculaId id1 = new MatriculaId("20/21", 999);
 		Matricula m1 = em.find(Matricula.class, id1);
+		
 		MatriculaId id2 = new MatriculaId("20/21", 1001);
 		Matricula m2 = em.find(Matricula.class, id2);
 		
@@ -187,7 +188,7 @@ public class TestGrupoEJB {
 			fail("No detecta correctamente si todas las asignaturas de un mismo curso tienen el mismo grupo");
 		}
 		catch(Exception e) {
-			fail("Lanza una excepción no esperada");
+			fail("Lanza una excepción no esperada " + e.toString());
 		}
 		
 		Matricula m = new Matricula();

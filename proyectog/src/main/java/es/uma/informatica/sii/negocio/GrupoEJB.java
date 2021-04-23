@@ -17,13 +17,10 @@ import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas.AsignaturasPorMatriculasId;
 import es.uma.informatica.sii.entidades.Matricula.MatriculaId;
-import es.uma.informatica.sii.entidades.SolicitudCambioGrupo.SolicitudCambioGrupoID;
-import es.uma.informatica.sii.exceptions.EncuestaInexistente;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.MatriculaInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
-import es.uma.informatica.sii.exceptions.SolicitudCambioGrupoInexistente;
 import es.uma.informatica.sii.exceptions.SolicitudDuplicada;
 
 @Stateless
@@ -40,15 +37,16 @@ public class GrupoEJB implements GrupoInterface{
 	@Override
 	public void asignarGrupos(AlgoritmoSelector algo, Matricula matricula) throws SecretariaException {
 		if(algo == null || matricula == null) throw new SecretariaException();
-		Matricula mat = em.find(Matricula.class, matricula);
+		MatriculaId matId = new MatriculaId(matricula.getCursoAcademico(), matricula.getExpediente().getNumExpediente());
+		Matricula mat = em.find(Matricula.class, matId);
+		
 		if(mat == null) throw new MatriculaInexistente();
 		
 		Map<Asignatura, Grupo> asignacion = algo.asignarGrupo(mat);
 		
-		MatriculaId matId = new MatriculaId(mat.getCursoAcademico(), mat.getExpediente().getNumExpediente());
 		for(Asignatura asignatura : asignacion.keySet()) {
 			
-			AsignaturasPorMatriculasId asignaturaMatid = new AsignaturasPorMatriculasId(matId, asignatura.getCodigo());
+			AsignaturasPorMatriculasId asignaturaMatid = new AsignaturasPorMatriculasId(matId, asignatura.getReferencia());
 			AsignaturasPorMatriculas asignaturaMat = em.find(AsignaturasPorMatriculas.class, asignaturaMatid);
 			
 			asignaturaMat.setGrupo(asignacion.get(asignatura));
@@ -147,14 +145,11 @@ public class GrupoEJB implements GrupoInterface{
 
 		for(AsignaturasPorMatriculas a : apm){
 	
-			if(a.getGrupo().getCurso().equals(g.getCurso()) && a.getAsignatura().getPlazas() < g.getPlazas()){
-				
-				g.setPlazas(g.getPlazas()-1); 
-				a.getGrupo().setPlazas(a.getGrupo().getPlazas()+1);
+			if(a.getGrupo().getCurso().equals(g.getCurso())){
 				a.setGrupo(g);
+				em.merge(a);
 			}	
 		}
-		em.merge(exp);
 	}
 
 	@Override
