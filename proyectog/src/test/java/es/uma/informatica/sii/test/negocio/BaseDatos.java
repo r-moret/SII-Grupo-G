@@ -62,6 +62,20 @@ public class BaseDatos {
 		
 		em.persist(al2);
 		
+		Alumno al3 = new Alumno();
+		al3.setDni("89LJ");
+		al3.setNombreCompleto("Alfonso Roca");
+		al3.setEmailInstitucional("roca@hotmail.es");
+		
+		em.persist(al3);
+		
+		Alumno al4 = new Alumno();
+		al4.setDni("999T");
+		al4.setNombreCompleto("Diana Perez");
+		al4.setEmailInstitucional("di@gmail.es");
+		
+		em.persist(al4);
+		
 		Expediente ex1 = new Expediente();
 		ex1.setNumExpediente(8);
 		ex1.setAlumno(al1);
@@ -69,7 +83,6 @@ public class BaseDatos {
 		ex1.setActivo(true);
 		
 		em.persist(ex1);
-		
 		
 		Expediente ex2 = new Expediente();
 		ex2.setNumExpediente(1);
@@ -79,6 +92,21 @@ public class BaseDatos {
 		
 		em.persist(ex2);
 		
+		Expediente ex3 = new Expediente();
+		ex3.setNumExpediente(999);
+		ex3.setAlumno(al3);
+		ex3.setTitulacion(tit1);
+		ex3.setActivo(false);
+		
+		em.persist(ex3);
+		
+		Expediente ex4 = new Expediente();
+		ex4.setNumExpediente(1001);
+		ex4.setAlumno(al4);
+		ex4.setTitulacion(tit1);
+		ex4.setActivo(false);
+		
+		em.persist(ex4);
 		
 		Matricula mat1 = new Matricula();
 		mat1.setCursoAcademico("20/21");
@@ -99,6 +127,26 @@ public class BaseDatos {
 		mat2.setFechaMatricula(Timestamp.valueOf("2020-09-11 16:38:01"));
 		
 		em.persist(mat2);
+		
+		Matricula mat3 = new Matricula();
+		mat3.setCursoAcademico("20/21");
+		mat3.setExpediente(ex3);
+		mat3.setEstado(true);
+		mat3.setNumArchivo(22);
+		mat3.setTurnoPreferente("tarde");
+		mat3.setFechaMatricula(Timestamp.valueOf("2020-09-21 11:35:01"));
+		
+		em.persist(mat3);
+		
+		Matricula mat4 = new Matricula();
+		mat4.setCursoAcademico("20/21");
+		mat4.setExpediente(ex4);
+		mat4.setEstado(true);
+		mat4.setNumArchivo(34);
+		mat4.setTurnoPreferente("mañana");
+		mat4.setFechaMatricula(Timestamp.valueOf("2020-09-03 12:38:01"));
+		
+		em.persist(mat4);
 		
 		Asignatura asig1 = new Asignatura();
 		asig1.setReferencia(1);
@@ -222,7 +270,8 @@ public class BaseDatos {
 		
 		em.persist(c4);
 		
-		// Seleccion con conflicto
+		// Seleccion con conflicto horario
+		// 20/21 - Calculo - 1A
 		List<GruposPorAsignatura> gpa1 = new ArrayList<>();
 		GruposPorAsignatura gp1 = new GruposPorAsignatura();
 		gp1.setCursoAcademico("20/21");
@@ -232,6 +281,7 @@ public class BaseDatos {
 		em.persist(gp1);
 		
 		GruposPorAsignatura gp2 = new GruposPorAsignatura();
+		// 20/21 - TDC - 2B
 		gp2.setCursoAcademico("20/21");
 		gp2.setAsignatura(asig3);
 		gp2.setGrupo(grup3);
@@ -241,7 +291,8 @@ public class BaseDatos {
 		
 		em.persist(gp2);
 		
-		// Seleccion sin conflicto
+		// Seleccion sin conflicto horario
+		// 20/21 - TDC - 2A
 		List<GruposPorAsignatura> gpa2 = new ArrayList<>();
 		GruposPorAsignatura gp3 = new GruposPorAsignatura();
 		gp3.setCursoAcademico("20/21");
@@ -254,6 +305,8 @@ public class BaseDatos {
 		em.persist(gp3);
 		
 		Encuesta enc1 = new Encuesta();
+		// Calculo - 1A
+		// TDC     - 2B
 		enc1.setExpediente(ex1);
 		enc1.setFechaEnvio(Timestamp.valueOf("2020-08-21 10:00:00"));
 		enc1.setGruposPorAsignatura(gpa1);
@@ -261,11 +314,31 @@ public class BaseDatos {
 		em.persist(enc1);
 		
 		Encuesta enc2 = new Encuesta();
+		// Calculo - 1A
+		// TDC     - 2A
 		enc2.setExpediente(ex2);
 		enc2.setFechaEnvio(Timestamp.valueOf("2020-09-21 16:00:00"));
 		enc2.setGruposPorAsignatura(gpa2);
 		
 		em.persist(enc2);
+		
+		Encuesta enc3 = new Encuesta();
+		// Calculo - 1A
+		// TDC     - 2A
+		enc3.setExpediente(ex3);
+		enc3.setFechaEnvio(Timestamp.valueOf("2020-09-31 19:00:00"));
+		enc3.setGruposPorAsignatura(gpa2);
+		
+		em.persist(enc3);
+		
+		Encuesta enc4 = new Encuesta();
+		// Calculo - 1A
+		// TDC     - 2B
+		enc4.setExpediente(ex4);
+		enc4.setFechaEnvio(Timestamp.valueOf("2020-09-26 03:00:00"));
+		enc4.setGruposPorAsignatura(gpa1);
+		
+		em.persist(enc4);
 		
 		AsignaturasPorMatriculas am1 = new AsignaturasPorMatriculas();
 		am1.setAsignatura(asig1);
@@ -280,6 +353,32 @@ public class BaseDatos {
 		am2.setMatricula(mat1);
 		
 		em.persist(am2);
+		
+		// Matricula pendiente de asignar grupos
+		AsignaturasPorMatriculas am3 = new AsignaturasPorMatriculas();
+		am3.setAsignatura(asig1);
+		am3.setMatricula(mat3);
+		
+		em.persist(am3);
+		
+		AsignaturasPorMatriculas am4 = new AsignaturasPorMatriculas();
+		am4.setAsignatura(asig3);
+		am4.setMatricula(mat3);
+		
+		em.persist(am4);
+		
+		// Matricula pendiente de asignar grupos
+		AsignaturasPorMatriculas am5 = new AsignaturasPorMatriculas();
+		am5.setAsignatura(asig1);
+		am5.setMatricula(mat4);
+		
+		em.persist(am5);
+		
+		AsignaturasPorMatriculas am6 = new AsignaturasPorMatriculas();
+		am6.setAsignatura(asig3);
+		am6.setMatricula(mat4);
+		
+		em.persist(am6);
 		
 		// FIN DE LA INICIALIZACION DE LA BASE DE DATOS
 		

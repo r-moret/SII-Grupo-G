@@ -5,6 +5,7 @@ import javax.ejb.Local;
 import es.uma.informatica.sii.entidades.Encuesta;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
+import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
@@ -20,7 +21,7 @@ public interface GrupoInterface {
 	 * @param encuesta
 	 * @throws SecretariaException
 	 */
-	public void asignarGrupos(Algoritmo selector, Encuesta encuesta) throws SecretariaException;
+	public void asignarGrupos(AlgoritmoSelector selector, Matricula matricula) throws SecretariaException;
 	
 	/**
 	 * REQUISITO: RF-04

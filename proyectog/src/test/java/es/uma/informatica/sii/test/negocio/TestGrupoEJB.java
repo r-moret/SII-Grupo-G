@@ -18,7 +18,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -26,14 +25,19 @@ import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Matricula;
+import es.uma.informatica.sii.entidades.Matricula.MatriculaId;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo.SolicitudCambioGrupoID;
 import es.uma.informatica.sii.entidades.Titulacion;
+import es.uma.informatica.sii.exceptions.AsignacionIndebida;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
+import es.uma.informatica.sii.exceptions.MatriculaInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.exceptions.SolicitudDuplicada;
 import es.uma.informatica.sii.negocio.GrupoInterface;
+import es.uma.informatica.sii.negocio.PreferenciaSelector;
+import es.uma.informatica.sii.negocio.AlgoritmoSelector;
 
 public class TestGrupoEJB {
 
@@ -140,9 +144,68 @@ public class TestGrupoEJB {
 	}
 	
 	@Test
-	@Ignore
 	public void testAsignarGrupos() {
-		// TODO testAsignarGrupos
+		
+		AlgoritmoSelector algo = new PreferenciaSelector();
+		
+		List<Matricula> matriculas = new ArrayList<>();
+		
+		MatriculaId id1 = new MatriculaId("20/21", 999);
+		Matricula m1 = em.find(Matricula.class, id1);
+		MatriculaId id2 = new MatriculaId("20/21", 1001);
+		Matricula m2 = em.find(Matricula.class, id2);
+		
+		matriculas.add(m1);
+		matriculas.add(m2);
+		
+		try {
+			grupoEJB.asignarGrupos(null, matriculas.get(0));
+			fail("No lanza una excepción cuando el algoritmo de selección es nulo");
+		}
+		catch(SecretariaException e) {
+			try {
+				grupoEJB.asignarGrupos(algo, null);
+				fail("No lanza una excepción cuando la matrícula es nula");
+			}
+			catch(SecretariaException a) {
+				/* COMPORTAMIENTO CORRECTO */
+			}
+			catch(Exception a) {
+				fail("Lanza la excepción incorrecta");
+			}
+		}
+		catch(Exception e) {
+			fail("Lanza la excepción incorrecta");
+		}
+		
+		try {
+			for(Matricula mat : matriculas) {
+				grupoEJB.asignarGrupos(algo, mat);
+			}
+		}
+		catch(AsignacionIndebida e) {
+			fail("No detecta correctamente si todas las asignaturas de un mismo curso tienen el mismo grupo");
+		}
+		catch(Exception e) {
+			fail("Lanza una excepción no esperada");
+		}
+		
+		Matricula m = new Matricula();
+		Expediente ex = new Expediente();
+		m.setCursoAcademico("noExiste");
+		ex.setNumExpediente(-3000);
+		m.setExpediente(ex);
+		
+		try {
+			grupoEJB.asignarGrupos(algo, m);
+			fail("Permite asignar grupo a una asignatura no almacenada en la base de datos");
+		}
+		catch(MatriculaInexistente e) {
+			/* COMPORTAMIENTO CORRECTO */
+		}
+		catch(Exception e) {
+			fail("Lanza la excepción incorrecta");
+		}
 	}
 	
 	private String ultimoCursoMatriculado(Expediente ex) {

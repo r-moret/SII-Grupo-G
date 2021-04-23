@@ -1,6 +1,7 @@
 package es.uma.informatica.sii.negocio;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,15 +9,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
+import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
-import es.uma.informatica.sii.entidades.Encuesta;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
-import es.uma.informatica.sii.exceptions.EncuestaInexistente;
+import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas.AsignaturasPorMatriculasId;
+import es.uma.informatica.sii.entidades.Matricula.MatriculaId;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
+import es.uma.informatica.sii.exceptions.MatriculaInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.exceptions.SolicitudCambioGrupoInexistente;
 import es.uma.informatica.sii.exceptions.SolicitudDuplicada;
@@ -33,20 +36,40 @@ public class GrupoEJB implements GrupoInterface{
 
 
 	@Override
-	public void asignarGrupos(Algoritmo selector, Encuesta encuesta) throws SecretariaException {
-		if(encuesta==null){
-			throw new SecretariaException();
-		}
+	public void asignarGrupos(AlgoritmoSelector algo, Matricula matricula) throws SecretariaException {
+		if(algo == null || matricula == null) throw new SecretariaException();
+		Matricula mat = em.find(Matricula.class, matricula);
+		if(mat == null) throw new MatriculaInexistente();
 		
-		Encuesta e = em.find(Encuesta.class, encuesta.getExpediente());
+		Map<Asignatura, Grupo> asignacion = algo.asignarGrupo(mat);
 		
-		if(e == null) {
-			throw new EncuestaInexistente();
+		MatriculaId matId = new MatriculaId(mat.getCursoAcademico(), mat.getExpediente().getNumExpediente());
+		for(Asignatura asignatura : asignacion.keySet()) {
+			
+			AsignaturasPorMatriculasId asignaturaMatid = new AsignaturasPorMatriculasId(matId, asignatura.getCodigo());
+			AsignaturasPorMatriculas asignaturaMat = em.find(AsignaturasPorMatriculas.class, asignaturaMatid);
+			
+			asignaturaMat.setGrupo(asignacion.get(asignatura));
+			
+			em.merge(asignaturaMat);
 		}
-	
-		selector.aplicarAlgoritmo(0, encuesta);
-		em.merge(encuesta);
 	}
+	
+//	@Override
+//	public void asignarGrupos(Algoritmo selector, Encuesta encuesta) throws SecretariaException {
+//		if(encuesta==null){
+//			throw new SecretariaException();
+//		}
+//		
+//		Encuesta e = em.find(Encuesta.class, encuesta.getExpediente());
+//		
+//		if(e == null) {
+//			throw new EncuestaInexistente();
+//		}
+//	
+//		selector.aplicarAlgoritmo(0, encuesta);
+//		em.merge(encuesta);
+//	}
 	
 	@Override
 	public void registrarSolicitudCambioGrupo(SolicitudCambioGrupo solicitud) throws SecretariaException {
