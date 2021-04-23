@@ -5,6 +5,8 @@ import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import java.util.List;
+import java.util.Set;
+
 import javax.ejb.Local;
 
 @Local
@@ -33,7 +35,7 @@ public interface MatriculaInterface {
 	 *  Lista todo el conjunto de matriculas
 	 *  @throws SecretariaException
 	 */ 
-	public List<Matricula> consultarMatriculas() throws SecretariaException;
+	public Set<Matricula> consultarMatriculas() throws SecretariaException;
 	
 	/** REQUISITO: RF-10 
 	 *  TODO: Actualizar lista de requisitos incluyendo RF-10

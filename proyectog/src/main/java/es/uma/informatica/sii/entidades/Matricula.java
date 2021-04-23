@@ -192,11 +192,9 @@ public class Matricula implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Matricula [cursoAcademico=" + cursoAcademico + ", estado=" + estado + ", numArchivo=" + numArchivo
-				+ ", turnoPreferente=" + turnoPreferente + ", fechaMatricula=" + fechaMatricula + ", nuevoIngreso="
-				+ nuevoIngreso + ", listadoAsignaturas=" + listadoAsignaturas + ", expediente=" + expediente
-				+ ", asignaturasPorMatriculas=" + asignaturasPorMatriculas + "]";
+		return "Matricula [cursoAcademico=" + cursoAcademico + ", expediente=" + expediente + "]";
 	}
+
 	
 	
 }

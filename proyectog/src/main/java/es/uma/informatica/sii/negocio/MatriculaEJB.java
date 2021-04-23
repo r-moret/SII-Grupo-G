@@ -1,7 +1,9 @@
 package es.uma.informatica.sii.negocio;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,6 +17,7 @@ import es.uma.informatica.sii.entidades.Alumno;
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
+import es.uma.informatica.sii.entidades.Matricula.MatriculaId;
 import es.uma.informatica.sii.exceptions.AlumnoInexistente;
 import es.uma.informatica.sii.exceptions.AsignaturaInexistente;
 import es.uma.informatica.sii.exceptions.CursoInexistente;
@@ -43,59 +46,34 @@ public class MatriculaEJB implements MatriculaInterface {
 		Expediente e = em.find(Expediente.class, alumno.getNumExpediente());
 
 		if(e == null) {
-			//Alumno no está en la bbdd
+			//Alumno no est� en la bbdd
 			throw new ExpedienteInexistente();
 		}
 		
-		List<Matricula> lm = new ArrayList<Matricula>();
-
-		if(e.getMatriculas() == null || e.getMatriculas().isEmpty() || alumno.getMatriculas() == null){
-			//throw new MatriculaInexistente();
-			return lm;
-		}else {
+		return e.getMatriculas();
 			
-			/*
-			TypedQuery<Matricula> q = em.createQuery("select m from Matricula m where m.expediente  alumno", Matricula.class);
-			
-			if(q == null) {
-				return lm;
-			}else {
-				q.setParameter("matriculas", alumno);
-				return q.getResultList();
-			}
-			*/
-			
-			for(Matricula ma : e.getMatriculas()) {
-				lm.add(ma);
-			}
-			return lm;
-						
-			//return e.getMatriculas();
-			
-			/*
-	        String jpql = "select m from Matricula m where m.expediente = :alumno";
-	        TypedQuery<Matricula> query = (TypedQuery<Matricula>) em.createQuery(jpql);
-	        //query.setParameter("alumno", alumno.getMatriculas());
-			//lm.add((Matricula) query.getResultList());
-	        lm = query.getResultList();
-	        return lm;
-	        */
-		}
 	}
 
 
 	@Override
 	public Matricula consultarMatricula(Expediente alumno, String cursoAcademico) throws SecretariaException {
 		if (alumno == null) {
-			throw new ExpedienteInexistente();
+			throw new SecretariaException();
 
 		}
 
 		Expediente e = em.find(Expediente.class, alumno.getNumExpediente());
 		if (e == null) {
 			// Alumno no existe
-			throw new AlumnoInexistente();
+			throw new ExpedienteInexistente();
 		}
+		
+		if (cursoAcademico == null) {
+			throw new SecretariaException();
+		}
+		
+		
+		
 		int cont = 0;
 		boolean enc = false;
 		while (cont < e.getMatriculas().size() && !enc) {
@@ -116,34 +94,37 @@ public class MatriculaEJB implements MatriculaInterface {
 	}
 
 	@Override
-	public List<Matricula> consultarMatriculas() throws SecretariaException {
-		/*TypedQuery<Matricula> q = em.createQuery("SELECT * FROM MATRICULA", Matricula.class);
-		return q.getResultList();*/
-		//em.createNamedQuery("Matricula.todos", Matricula.class).getResultList();
-		List<Matricula> lm = em.createQuery("Matricula.todos", Matricula.class).getResultList();
-		if(lm==null){
-			throw new SecretariaException();
-		}
-		return lm;
+	public Set<Matricula> consultarMatriculas() throws SecretariaException {
+
+		List<Matricula> lm = em.createQuery("SELECT m FROM Matricula m", Matricula.class).getResultList();
+		Set<Matricula> sm = new HashSet<Matricula>(lm);
+		
+		return sm;
 	}
 
 	@Override
 	public void desmatricularAsignatura(Matricula matricula, Asignatura asignatura) throws SecretariaException {
-		// Esto debería ser matriculaId (Matricula.MatriculaId.class)
-		Matricula m = em.find(Matricula.class, matricula.getCursoAcademico());
+		
+		if(matricula == null || asignatura == null) {
+			throw new SecretariaException();
+		}
+		
+		MatriculaId mId = new MatriculaId(matricula.getCursoAcademico(), matricula.getExpediente().getNumExpediente());
+		Matricula m = em.find(Matricula.class, mId);
 
 		if (m == null) {
 			throw new MatriculaInexistente();
 		}
 		Asignatura a = em.find(Asignatura.class, asignatura.getReferencia());
 
-
 		if (a == null) {
 			throw new AsignaturaInexistente();
 		}
+		
 		int cont = 0;
 		boolean enc = false;
 		while (cont < m.getAsignaturasPorMatriculas().size() && !enc) {
+			
 			if (m.getAsignaturasPorMatriculas().get(cont).getAsignatura().equals(a)) {
 
 				enc = true;
@@ -152,13 +133,11 @@ public class MatriculaEJB implements MatriculaInterface {
 			}
 		}
 		
-		if(cont == m.getAsignaturasPorMatriculas().size() && !enc) {
+		if(!enc) {
 			throw new SecretariaException();
-		}else if(!enc) {
-			
 		}
 
-		em.remove(m.getAsignaturasPorMatriculas().get(cont).getAsignatura());
-		matricula = em.merge(m);
+		em.remove(em.merge(m.getAsignaturasPorMatriculas().get(cont).getAsignatura()));
+
 	}
 }
