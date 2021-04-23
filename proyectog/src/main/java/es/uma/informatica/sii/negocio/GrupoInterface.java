@@ -2,6 +2,7 @@ package es.uma.informatica.sii.negocio;
 
 import javax.ejb.Local;
 
+import es.uma.informatica.sii.entidades.Encuesta;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
@@ -12,18 +13,19 @@ public interface GrupoInterface {
 
 	/**
 	 * REQUISITO: RF-03
-	 * Aplicar el algoritmo seleccionado a las encuestas realizadas por los alumnos
+	 * Aplicar el algoritmo seleccionado a cada encuesta realizada por los alumnos
 	 * 
 	 * 
 	 * @param selector
+	 * @param encuesta
 	 * @throws SecretariaException
 	 */
-	public void asignarGrupos(Algoritmo selector) throws SecretariaException;
+	public void asignarGrupos(Algoritmo selector, Encuesta encuesta) throws SecretariaException;
 	
 	/**
 	 * REQUISITO: RF-04
 	 * Guarda una solicitud de cambio de grupo en la base de datos para poder ser 
-	 * consultada más tarde por Secretaria
+	 * consultada mï¿½s tarde por Secretaria
 	 * 
 	 * @param solicitud
 	 * @throws SecretariaException
@@ -32,7 +34,7 @@ public interface GrupoInterface {
 	
 	/**
 	 * REQUISITO: RF-04
-	 * Actualización del grupo de alumno correspondiente al mismo curso académico que 
+	 * Actualizaciï¿½n del grupo de alumno correspondiente al mismo curso acadï¿½mico que 
 	 * grupo
 	 * 
 	 * @param alumno
@@ -48,7 +50,7 @@ public interface GrupoInterface {
 	
 	/** 
 	 * REQUISITO: RF-09
-	 * Actualización de los datos de grupo
+	 * Actualizaciï¿½n de los datos de grupo
  
 	 * @param grupo
 	 * @throws SecretariaException

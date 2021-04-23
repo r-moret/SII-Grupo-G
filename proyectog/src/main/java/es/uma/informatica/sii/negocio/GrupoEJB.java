@@ -6,9 +6,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
+import es.uma.informatica.sii.entidades.Encuesta;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
+import es.uma.informatica.sii.exceptions.EncuestaInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
@@ -24,9 +26,19 @@ public class GrupoEJB implements GrupoInterface{
 
 
 	@Override
-	public void asignarGrupos(Algoritmo selector) throws SecretariaException {
-		// TODO Auto-generated method stub
+	public void asignarGrupos(Algoritmo selector, Encuesta encuesta) throws SecretariaException {
+		if(encuesta==null){
+			throw new SecretariaException();
+		}
 		
+		Encuesta e = em.find(Encuesta.class, encuesta.getExpediente());
+		
+		if(e == null) {
+			throw new EncuestaInexistente();
+		}
+	
+		selector.aplicarAlgoritmo(0, encuesta);
+		em.merge(encuesta);
 	}
 	
 	@Override
@@ -63,5 +75,4 @@ public class GrupoEJB implements GrupoInterface{
 
 		em.merge(grupo);	
 	}
-
 }
