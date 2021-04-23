@@ -1,6 +1,7 @@
 package es.uma.informatica.sii.negocio;
 
 import java.io.File;
+import java.util.List;
 
 import es.uma.informatica.sii.entidades.DatosAlumnado;
 
@@ -12,7 +13,7 @@ public interface DatosEJBInterface {
 	 * @param excel
 	 * @return
 	 */
-	public DatosAlumnado importarDatosAlumnado(File excel);
+	public List<DatosAlumnado> importarDatosAlumnado(File excel);
 	
 	/**REQUISITO: RF-08
 	 * Inserta en la base de datos los DatosAlumnado previamente importados

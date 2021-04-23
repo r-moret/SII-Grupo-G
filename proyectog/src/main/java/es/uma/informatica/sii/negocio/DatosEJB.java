@@ -23,8 +23,8 @@ public class DatosEJB implements DatosEJBInterface {
 	
 
 	@Override
-	public DatosAlumnado importarDatosAlumnado(File excel) {
-			
+	public List<DatosAlumnado> importarDatosAlumnado(File excel) {
+		List<DatosAlumnado> listaDatos = new ArrayList<DatosAlumnado>();
         InputStream excelStream = null;
         try {
             excelStream = new FileInputStream(excel);
@@ -50,7 +50,6 @@ public class DatosEJB implements DatosEJBInterface {
                     break;
                 }else{
                     for (int c = 0; c < (cols = hssfRow.getFirstCellNum()); c++) {
-                    	 for (int k = 0; k < 25; k++) {
                          	da.setDni(hssfRow.getCell(c).getStringCellValue());
                         	da.setNombre(hssfRow.getCell(c).getStringCellValue());
                         	da.setApellido1(hssfRow.getCell(c).getStringCellValue());
@@ -73,9 +72,9 @@ public class DatosEJB implements DatosEJBInterface {
                         	da.setCreditosOB((int) hssfRow.getCell(c).getNumericCellValue());
                         	da.setCreditosCF((int) hssfRow.getCell(c).getNumericCellValue());
                         	da.setCreditosPE((int) hssfRow.getCell(c).getNumericCellValue());
-                        	da.setCreditosTF((int) hssfRow.getCell(c).getNumericCellValue());
-                    	 }                
+                        	da.setCreditosTF((int) hssfRow.getCell(c).getNumericCellValue());              
                     }
+                    listaDatos.add(da);
                 }
             }            
         } catch (FileNotFoundException fileNotFoundException) {
@@ -90,7 +89,8 @@ public class DatosEJB implements DatosEJBInterface {
             }
         }
 	
-		return null;
+
+		return listaDatos;
 	}
 
 	@Override
