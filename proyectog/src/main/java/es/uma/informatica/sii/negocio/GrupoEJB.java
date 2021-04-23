@@ -10,9 +10,12 @@ import es.uma.informatica.sii.entidades.Encuesta;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
+import es.uma.informatica.sii.entidades.SolicitudCambioGrupo.SolicitudCambioGrupoID;
 import es.uma.informatica.sii.exceptions.EncuestaInexistente;
+import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
+import es.uma.informatica.sii.exceptions.SolicitudCambioGrupoInexistente;
 
 @Stateless
 public class GrupoEJB implements GrupoInterface{
@@ -43,13 +46,30 @@ public class GrupoEJB implements GrupoInterface{
 	
 	@Override
 	public void registrarSolicitudCambioGrupo(SolicitudCambioGrupo solicitud) throws SecretariaException {
-		// TODO Auto-generated method stub
+		if(solicitud == null) {
+			throw new SecretariaException();
+		}
+		
+		SolicitudCambioGrupo s = em.find(SolicitudCambioGrupo.class, solicitud.getExpediente());
+	
+		if(s == null) {
+			throw new SolicitudCambioGrupoInexistente();
+		}
+		
+		Expediente exp = em.find(Expediente.class, s.getExpediente().getNumExpediente());
+		
+		if(exp==null){
+			throw new ExpedienteInexistente();
+		}
+		
+		em.persist(s);
 		
 	}
 
 	@Override
 	public void reasignarGrupo(Expediente expediente, Grupo grupo) throws SecretariaException {
 		// TODO Auto-generated method stub
+		
 		
 	}
 
