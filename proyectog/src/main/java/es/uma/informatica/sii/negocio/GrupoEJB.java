@@ -1,18 +1,24 @@
 package es.uma.informatica.sii.negocio;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
+import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
 import es.uma.informatica.sii.entidades.Encuesta;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
+import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.exceptions.EncuestaInexistente;
+import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
+import es.uma.informatica.sii.exceptions.SolicitudCambioGrupoInexistente;
 
 @Stateless
 public class GrupoEJB implements GrupoInterface{
@@ -43,14 +49,55 @@ public class GrupoEJB implements GrupoInterface{
 	
 	@Override
 	public void registrarSolicitudCambioGrupo(SolicitudCambioGrupo solicitud) throws SecretariaException {
-		// TODO Auto-generated method stub
+		if(solicitud == null) {
+			throw new SecretariaException();
+		}
+		
+		SolicitudCambioGrupo s = em.find(SolicitudCambioGrupo.class, solicitud.getExpediente());
+	
+		if(s == null) {
+			throw new SolicitudCambioGrupoInexistente();
+		}
+		
+		Expediente exp = em.find(Expediente.class, s.getExpediente().getNumExpediente());
+		
+		if(exp==null){
+			throw new ExpedienteInexistente();
+		}
+		
+		em.persist(s);
 		
 	}
 
 	@Override
 	public void reasignarGrupo(Expediente expediente, Grupo grupo) throws SecretariaException {
-		// TODO Auto-generated method stub
 		
+		if(expediente == null || grupo == null) {
+			throw new SecretariaException();
+		}
+		Expediente exp = em.find(Expediente.class, expediente.getNumExpediente());
+		
+		if(exp == null) {
+			throw new ExpedienteInexistente();
+		}
+		
+		Grupo g = em.find(Grupo.class, grupo.getId());
+		
+		if(g == null) {
+			throw new GrupoInexistente();
+		}
+		
+		int i = exp.getMatriculas().size()-1;
+		Matricula m = exp.getMatriculas().get(i);
+		List<AsignaturasPorMatriculas> apm = m.getAsignaturasPorMatriculas();
+
+		for(AsignaturasPorMatriculas a : apm){
+			if(a.getGrupo().getCurso() == g.getCurso()){
+				a.setGrupo(g);
+			}
+		}
+
+		em.merge(exp);
 	}
 
 	@Override

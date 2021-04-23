@@ -3,6 +3,7 @@ package es.uma.informatica.sii.negocio;
 
 
 import es.uma.informatica.sii.entidades.Encuesta;
+import es.uma.informatica.sii.exceptions.SecretariaException;
 
 
 public interface AlgoritmoInterfaz {
@@ -13,6 +14,6 @@ public interface AlgoritmoInterfaz {
 	 * @param metodo
 	 * @param encuesta
 	 */
-	public void aplicarAlgoritmo(int metodo, Encuesta encuesta);
+	public void aplicarAlgoritmo(int metodo, Encuesta encuesta) throws SecretariaException ;
 	
 }
