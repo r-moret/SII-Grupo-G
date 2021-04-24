@@ -147,7 +147,6 @@ public class TestGrupoEJB {
 	
 	@Requisitos({"RF3"})
 	@Test
-	@Ignore
 	public void testAsignarGrupos() throws SecretariaException {
 		AlgoritmoSelector algo = new PreferenciaSelector();
 		
@@ -228,7 +227,6 @@ public class TestGrupoEJB {
 	
 	@Requisitos({"RF4"})
 	@Test
-	@Ignore
 	public void testReasignarGrupoInvalido() {
 		Grupo gp1 = em.find(Grupo.class, "id1");
 		Expediente ex1 = em.find(Expediente.class, 8);
@@ -286,7 +284,6 @@ public class TestGrupoEJB {
 	
 	@Requisitos({"RF4"})
 	@Test
-	@Ignore
 	public void testReasignarGrupo() {
 		Expediente al1 = em.find(Expediente.class, 8); // 1 B
 		Grupo gp1 = em.find(Grupo.class, "id1"); // 1 A
@@ -312,7 +309,6 @@ public class TestGrupoEJB {
 	
 	@Requisitos({"RF5"})
 	@Test
-	@Ignore
 	public void testPlazasTotales() {
 		try {
 			grupoEJB.plazasTotales(null);
@@ -320,7 +316,7 @@ public class TestGrupoEJB {
 		catch(SecretariaException e) {
 			try {
 				Grupo g = new Grupo();
-				g.setId("id7");
+				g.setId("id13");
 				grupoEJB.plazasTotales(g);
 				fail("No lanza la excepción esperada, permite un grupo no almacenado en la base de datos");
 			}
@@ -354,7 +350,6 @@ public class TestGrupoEJB {
 	
 	@Requisitos({"RF9"})
 	@Test
-	@Ignore
 	public void testActualizarGrupo() {
 		try {
 			grupoEJB.actualizarGrupo(null);
@@ -363,7 +358,7 @@ public class TestGrupoEJB {
 		catch(SecretariaException exc1) {
 			try {
 				Grupo gr = new Grupo();
-				gr.setId("id5");
+				gr.setId("id12");
 				gr.setCurso(3);
 				gr.setLetra("A");
 				gr.setTurno("tarde");

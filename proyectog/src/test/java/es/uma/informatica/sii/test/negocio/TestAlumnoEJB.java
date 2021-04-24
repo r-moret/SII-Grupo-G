@@ -73,7 +73,6 @@ public class TestAlumnoEJB {
 
 	@Requisitos({"RF9"})
 	@Test
-	@Ignore
 	public void testActualizarAlumno() {
 		
 		try {
