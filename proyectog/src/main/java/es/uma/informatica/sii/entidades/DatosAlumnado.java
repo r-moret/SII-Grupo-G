@@ -21,6 +21,7 @@ public class DatosAlumnado implements Serializable {
 	private String apellido1;
 	private String apellido2;
 	private Integer numExpediente;
+	private Integer numArchivo;
 	private String emailInstitucional;
 	private String emailPersonal;
 	private Integer telefono;
@@ -238,6 +239,14 @@ public class DatosAlumnado implements Serializable {
 		this.dni = dni;
 	}
 
+	public Integer getNumArchivo() {
+		return numArchivo;
+	}
+
+	public void setNumArchivo(Integer numArchivo) {
+		this.numArchivo = numArchivo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -262,6 +271,7 @@ public class DatosAlumnado implements Serializable {
 		result = prime * result + ((movil == null) ? 0 : movil.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((notaMedia == null) ? 0 : notaMedia.hashCode());
+		result = prime * result + ((numArchivo == null) ? 0 : numArchivo.hashCode());
 		result = prime * result + ((numExpediente == null) ? 0 : numExpediente.hashCode());
 		result = prime * result + ((provinciaNotificacion == null) ? 0 : provinciaNotificacion.hashCode());
 		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
@@ -273,7 +283,9 @@ public class DatosAlumnado implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof DatosAlumnado))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		DatosAlumnado other = (DatosAlumnado) obj;
 		if (apellido1 == null) {
@@ -376,6 +388,11 @@ public class DatosAlumnado implements Serializable {
 				return false;
 		} else if (!notaMedia.equals(other.notaMedia))
 			return false;
+		if (numArchivo == null) {
+			if (other.numArchivo != null)
+				return false;
+		} else if (!numArchivo.equals(other.numArchivo))
+			return false;
 		if (numExpediente == null) {
 			if (other.numExpediente != null)
 				return false;
@@ -402,16 +419,18 @@ public class DatosAlumnado implements Serializable {
 	@Override
 	public String toString() {
 		return "DatosAlumnado [dni=" + dni + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2="
-				+ apellido2 + ", numExpediente=" + numExpediente + ", emailInstitucional=" + emailInstitucional
-				+ ", emailPersonal=" + emailPersonal + ", telefono=" + telefono + ", movil=" + movil
-				+ ", direccionNotificacion=" + direccionNotificacion + ", localidadNotificacion="
-				+ localidadNotificacion + ", provinciaNotificacion=" + provinciaNotificacion + ", cpNotificacion="
-				+ cpNotificacion + ", fechaMatricula=" + fechaMatricula + ", turnoPreferente=" + turnoPreferente
-				+ ", gruposAsignados=" + gruposAsignados + ", notaMedia=" + notaMedia + ", creditosSuperados="
-				+ creditosSuperados + ", creditosFB=" + creditosFB + ", creditosOB=" + creditosOB + ", creditosOP="
-				+ creditosOP + ", creditosCF=" + creditosCF + ", creditosPE=" + creditosPE + ", creditosTF="
-				+ creditosTF + "]";
-	}   
+				+ apellido2 + ", numExpediente=" + numExpediente + ", numArchivo=" + numArchivo
+				+ ", emailInstitucional=" + emailInstitucional + ", emailPersonal=" + emailPersonal + ", telefono="
+				+ telefono + ", movil=" + movil + ", direccionNotificacion=" + direccionNotificacion
+				+ ", localidadNotificacion=" + localidadNotificacion + ", provinciaNotificacion="
+				+ provinciaNotificacion + ", cpNotificacion=" + cpNotificacion + ", fechaMatricula=" + fechaMatricula
+				+ ", turnoPreferente=" + turnoPreferente + ", gruposAsignados=" + gruposAsignados + ", notaMedia="
+				+ notaMedia + ", creditosSuperados=" + creditosSuperados + ", creditosFB=" + creditosFB
+				+ ", creditosOB=" + creditosOB + ", creditosOP=" + creditosOP + ", creditosCF=" + creditosCF
+				+ ", creditosPE=" + creditosPE + ", creditosTF=" + creditosTF + "]";
+	}
+
+	
 
    
 }

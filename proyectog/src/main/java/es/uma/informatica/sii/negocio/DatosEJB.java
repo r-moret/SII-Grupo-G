@@ -105,7 +105,8 @@ public class DatosEJB implements DatosInterface {
                 	da.setApellido1(hssfRow.getCell(c++).getStringCellValue());
                 	da.setApellido2(hssfRow.getCell(c++).getStringCellValue());
                 	da.setNumExpediente((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setEmailInstitucional(hssfRow.getCell(c+2).getStringCellValue());  // Columna NºARCHIVO saltada
+                	da.setNumArchivo((int) hssfRow.getCell(c++).getNumericCellValue());
+                	da.setEmailInstitucional(hssfRow.getCell(c++).getStringCellValue());
                 	da.setEmailPersonal(hssfRow.getCell(c++).getStringCellValue());
                 	da.setTelefono((int) hssfRow.getCell(c++).getNumericCellValue());
                 	da.setMovil((int) hssfRow.getCell(c++).getNumericCellValue());
@@ -157,7 +158,6 @@ public class DatosEJB implements DatosInterface {
 			em.persist(d);
 		}
 	}
-
 
 	@Override
 	public List<Asignatura> importarDatosAsignaturas(String fichero) throws SecretariaException {
@@ -311,9 +311,9 @@ public class DatosEJB implements DatosInterface {
 	}
 	
 	private String formatearFecha(Date d) {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD HH:mm");
 		String fechaFormateada = formatter.format(d);
-		return fechaFormateada;
+		return fechaFormateada + ":00";
 	}
 	
 	private Integer tratarPlazas(String str) {
