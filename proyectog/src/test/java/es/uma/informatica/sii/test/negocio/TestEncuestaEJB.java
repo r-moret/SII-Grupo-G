@@ -15,7 +15,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -192,5 +191,22 @@ public class TestEncuestaEJB {
 		} catch (Exception e) {
 			fail("Lanza una excepciï¿½n al comprobar una encuesta correcta");
 		}
+	}
+	
+	@Requisitos({"RF7"})
+	@Test
+	public void testNotificarPeriodoEncuesta() {
+		
+		try {
+			encuestaEJB.notificarPeriodoEncuesta(-10);
+			fail("No lanza excepción cuando los dias indicados son incorrectos");
+		} 
+		catch (SecretariaException e) {
+			/* CORRECTO */
+		}
+		catch(Exception e) {
+			fail("Excepción incorrecta");
+		}
+		
 	}
 }

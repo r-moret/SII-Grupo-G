@@ -3,7 +3,9 @@ package es.uma.informatica.sii.negocio;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -24,6 +26,8 @@ import es.uma.informatica.sii.exceptions.SecretariaException;
 @Stateless
 public class EncuestaEJB implements EncuestaInterface {
 
+	private static final Logger LOGGER = Logger.getLogger(EncuestaEJB.class.getCanonicalName());
+	
 	private static final String PERSISTENCE_UNIT = "proyectog-jpa";
 	
 	@PersistenceUnit(unitName = PERSISTENCE_UNIT)
@@ -116,4 +120,19 @@ public class EncuestaEJB implements EncuestaInterface {
 		return res;
 	}
 
+	@Override
+	public void notificarPeriodoEncuesta(int dias) throws SecretariaException {
+		if(dias <= 0) {
+			throw new SecretariaException();
+		}
+		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(fechaActual);
+		cal.add(Calendar.DAY_OF_WEEK, dias);
+		
+		Timestamp fecha = new Timestamp(cal.getTime().getTime());
+		Encuesta.setFechaFinPeriodo(fecha);
+		
+		LOGGER.info("INFO UMA: El periodo de encuesta ha comenzado. Disponeis de " + dias + " para realizar la encuesta de selección de grupo.");
+	}
 }

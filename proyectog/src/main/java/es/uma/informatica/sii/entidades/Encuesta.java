@@ -14,6 +14,8 @@ import javax.persistence.*;
 @IdClass(Encuesta.EncuestaID.class)
 public class Encuesta implements Serializable {
 	
+	private static Timestamp fechaFinPeriodo;
+	
 	public static class EncuestaID implements Serializable{
 		private static final long serialVersionUID = 1L;
 		private Timestamp fechaEnvio;
@@ -109,6 +111,14 @@ public class Encuesta implements Serializable {
 
 	public void setGruposPorAsignatura(List<GruposPorAsignatura> gruposPorAsignatura) {
 		this.gruposPorAsignatura = gruposPorAsignatura;
+	}
+
+	public static Timestamp getFechaFinPeriodo() {
+		return fechaFinPeriodo;
+	}
+
+	public static void setFechaFinPeriodo(Timestamp fechaFinPeriodo) {
+		Encuesta.fechaFinPeriodo = fechaFinPeriodo;
 	}
 
 	@Override

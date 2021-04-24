@@ -10,11 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
@@ -363,9 +360,7 @@ public class DatosEJB implements DatosInterface {
                 if (xssfRow == null){
                     break;
                     
-                }else{    
-                	int c = 0; 
-                   	                	
+                }else{              	                	
 					g.setId(xssfRow.getCell(0).getStringCellValue());
 					g.setCurso((int) xssfRow.getCell(1).getNumericCellValue());
                 	g.setLetra(xssfRow.getCell(2).getStringCellValue());

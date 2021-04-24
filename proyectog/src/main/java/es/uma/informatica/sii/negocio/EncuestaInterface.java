@@ -43,4 +43,12 @@ public interface EncuestaInterface {
 	 */
 	public boolean incompatibilidadHoraria(Encuesta encuesta) throws SecretariaException;
 
+	/**
+	 * REQUISITO: RF-07
+	 * 
+	 * Envia una notificacion indicando que el periodo de encuesta ha comenzado y de cuantos dias
+	 * se dispone para realizar la encuesta de selección de grupo.
+	 * @param dias
+	 */
+	public void notificarPeriodoEncuesta(int dias) throws SecretariaException;
 }
