@@ -20,7 +20,7 @@ public class Expediente implements Serializable {
 	@Id
 	private Integer numExpediente;
 	private Boolean activo;
-	private Float notaMediaProvisional;
+	private Double notaMediaProvisional;
 
 
 	@OneToMany(mappedBy="expediente")
@@ -59,11 +59,11 @@ public class Expediente implements Serializable {
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
 	}   
-	public Float getNotaMediaProvisional() {
+	public Double getNotaMediaProvisional() {
 		return this.notaMediaProvisional;
 	}
 
-	public void setNotaMediaProvisional(Float notaMediaProvisional) {
+	public void setNotaMediaProvisional(Double notaMediaProvisional) {
 		this.notaMediaProvisional = notaMediaProvisional;
 	}
 	public Integer getNumExpediente() {

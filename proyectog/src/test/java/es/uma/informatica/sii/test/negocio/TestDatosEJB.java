@@ -114,6 +114,7 @@ public class TestDatosEJB {
 	
 	@Requisitos({"RF8"})
 	@Test
+	@Ignore
 	public void testGruposLeidos() {
 		String ficheroGrupos = "target/test-classes/files/grupos.xlsx";
 		

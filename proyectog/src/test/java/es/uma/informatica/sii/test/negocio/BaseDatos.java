@@ -48,6 +48,51 @@ public class BaseDatos {
 		
 		em.persist(tit1);
 		
+		Titulacion tit2 = new Titulacion();
+		tit2.setCodigo(1041);
+		tit2.setNombre("Informatica");
+		tit2.setCreditos(6);
+		tit2.setCentros(new ArrayList<>());
+		tit2.getCentros().add(cent1);
+		
+		em.persist(tit2);
+		
+		Titulacion tit3 = new Titulacion();
+		tit3.setCodigo(1042);
+		tit3.setNombre("Software");
+		tit3.setCreditos(6);
+		tit3.setCentros(new ArrayList<>());
+		tit3.getCentros().add(cent1);
+		
+		em.persist(tit3);
+		
+		Titulacion tit4 = new Titulacion();
+		tit4.setCodigo(1043);
+		tit4.setNombre("Computadores");
+		tit4.setCreditos(6);
+		tit4.setCentros(new ArrayList<>());
+		tit4.getCentros().add(cent1);
+		
+		em.persist(tit4);
+		
+		Titulacion tit5 = new Titulacion();
+		tit5.setCodigo(1056);
+		tit5.setNombre("Salud");
+		tit5.setCreditos(6);
+		tit5.setCentros(new ArrayList<>());
+		tit5.getCentros().add(cent1);
+		
+		em.persist(tit5);
+
+		Titulacion tit6 = new Titulacion();
+		tit6.setCodigo(1073);
+		tit6.setNombre("DobleGrado");
+		tit6.setCreditos(6);
+		tit6.setCentros(new ArrayList<>());
+		tit6.getCentros().add(cent1);
+		
+		em.persist(tit6);
+		
 		Alumno al1 = new Alumno();
 		al1.setDni("12W");
 		al1.setNombreCompleto("Antonio Miguel Sánchez");

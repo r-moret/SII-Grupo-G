@@ -18,6 +18,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -146,6 +147,7 @@ public class TestGrupoEJB {
 	
 	@Requisitos({"RF3"})
 	@Test
+	@Ignore
 	public void testAsignarGrupos() throws SecretariaException {
 		AlgoritmoSelector algo = new PreferenciaSelector();
 		
@@ -226,6 +228,7 @@ public class TestGrupoEJB {
 	
 	@Requisitos({"RF4"})
 	@Test
+	@Ignore
 	public void testReasignarGrupoInvalido() {
 		Grupo gp1 = em.find(Grupo.class, "id1");
 		Expediente ex1 = em.find(Expediente.class, 8);
@@ -283,6 +286,7 @@ public class TestGrupoEJB {
 	
 	@Requisitos({"RF4"})
 	@Test
+	@Ignore
 	public void testReasignarGrupo() {
 		Expediente al1 = em.find(Expediente.class, 8); // 1 B
 		Grupo gp1 = em.find(Grupo.class, "id1"); // 1 A
@@ -308,6 +312,7 @@ public class TestGrupoEJB {
 	
 	@Requisitos({"RF5"})
 	@Test
+	@Ignore
 	public void testPlazasTotales() {
 		try {
 			grupoEJB.plazasTotales(null);
@@ -349,6 +354,7 @@ public class TestGrupoEJB {
 	
 	@Requisitos({"RF9"})
 	@Test
+	@Ignore
 	public void testActualizarGrupo() {
 		try {
 			grupoEJB.actualizarGrupo(null);

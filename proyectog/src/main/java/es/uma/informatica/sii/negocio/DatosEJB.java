@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -90,9 +91,9 @@ public class DatosEJB implements DatosInterface {
             //Objeto que nos permite leer un fila de la hoja excel, y de aquí extraer el contenido de las celdas.
             XSSFRow xssfRow;                    
             //Obtengo el número de filas ocupadas en la hoja
-            int filas = xssfSheet.getLastRowNum();        
+            int filas = xssfSheet.getPhysicalNumberOfRows();        
             //En el documento los datos empiezan en fila 5       
-            for (int f = 5; f <= filas; f++) {
+            for (int f = 4; f < filas; f++) {
             	 
             	xssfRow = xssfSheet.getRow(f);
                 DatosAlumnado da = new DatosAlumnado();
@@ -179,7 +180,7 @@ public class DatosEJB implements DatosInterface {
 		return importarDatosAsignaturas(archivo);
 	}
 	
-	private List<Asignatura> importarDatosAsignaturas(File excel) throws TitulacionInexistente {
+	private List<Asignatura> importarDatosAsignaturas(File excel) throws SecretariaException {
 		List<Asignatura> listaAsignaturas = new ArrayList<Asignatura>();
         InputStream excelStream = null;
         try {
@@ -187,16 +188,15 @@ public class DatosEJB implements DatosInterface {
     
             @SuppressWarnings("resource")
 			XSSFWorkbook xssfWorkbook = new XSSFWorkbook(excelStream);
-            
-			for(int i=0;i<xssfWorkbook.getNumberOfSheets();i++){
+           //xssfWorkbook.getNumberOfSheets() 
+			for(int i = 0;i < 1;i++){
 				
             XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(i);
             
             XSSFRow xssfRow;                    
-      
-            int filas = xssfSheet.getLastRowNum();        
+            int filas = xssfSheet.getPhysicalNumberOfRows();
   
-            for (int f = 2; f < filas; f++) {
+            for (int f = 1; f < filas; f++) {
             	 
                 xssfRow = xssfSheet.getRow(f);
                 Asignatura a = new Asignatura();
@@ -204,18 +204,23 @@ public class DatosEJB implements DatosInterface {
                     break;
                     
                 }else{    
-                	int c = 0; 
-                	Titulacion t = em.find(Titulacion.class, (int) xssfRow.getCell(c).getNumericCellValue()); if(t==null){throw new TitulacionInexistente();}
+
+                	int c = 0;
+                	Titulacion t = em.find(Titulacion.class, (int)(xssfRow.getCell(c).getNumericCellValue())); if(t==null){throw new TitulacionInexistente();}
 					a.setTitulacion(t);
-                 	a.setOfertada(tratarBooleanos(xssfRow.getCell(c++).getStringCellValue()));
-                	a.setCodigo((int) xssfRow.getCell(c++).getNumericCellValue());
-                	a.setReferencia((int) xssfRow.getCell(c++).getNumericCellValue());
-                	a.setNombre(xssfRow.getCell(c++).getStringCellValue());
-                	a.setCurso((int) xssfRow.getCell(c++).getNumericCellValue());
-                	a.setCreditos((int) xssfRow.getCell(c++).getNumericCellValue());
-                	a.setDuracion((int) xssfRow.getCell(c+3).getStringCellValue().charAt(0));
-					a.setPlazas(tratarPlazas(xssfRow.getCell(c++).getStringCellValue()));	//Asumimos formato establecido en el archivo (mirar tratarPlazas).
-					if(xssfRow.getCell(c++) != null) {
+                 	a.setOfertada(tratarBooleanos(xssfRow.getCell(++c).getStringCellValue()));
+                	a.setCodigo(((int) (xssfRow.getCell(++c).getNumericCellValue())));
+                	a.setReferencia((int) xssfRow.getCell(++c).getNumericCellValue());
+                	a.setNombre(xssfRow.getCell(++c).getStringCellValue());
+                	a.setCurso((int) xssfRow.getCell(++c).getNumericCellValue());
+                	a.setCreditos((int) xssfRow.getCell(++c).getNumericCellValue());
+                	a.setDuracion((int) xssfRow.getCell(c+=3).getStringCellValue().charAt(0));		                       	
+                	
+                	XSSFCell celda = xssfRow.getCell(++c);
+					celda.setCellType(CellType.STRING);
+                	a.setPlazas(((int) tratarPlazas(celda.getStringCellValue())));	//Asumimos formato establecido en el archivo (mirar tratarPlazas).
+					
+					if(xssfRow.getCell(++c) != null) {
 						a.setIdioma(xssfRow.getCell(c).getStringCellValue());
 					}   
                 	listaAsignaturas.add(a);
@@ -236,6 +241,7 @@ public class DatosEJB implements DatosInterface {
         }
 		return listaAsignaturas;
 	}
+
 
 	@Override
 	public void registrarDatosAsignaturas(List<Asignatura> asignaturas) throws SecretariaException{
@@ -274,9 +280,9 @@ public class DatosEJB implements DatosInterface {
             
             XSSFRow xssfRow; 
             
-            int filas = xssfSheet.getLastRowNum();       
+            int filas = xssfSheet.getPhysicalNumberOfRows();       
             
-            for (int f = 2; f < filas; f++) {
+            for (int f = 1; f < filas; f++) {
             	 
                 xssfRow = xssfSheet.getRow(f);
                 Expediente e = new Expediente();
@@ -286,10 +292,9 @@ public class DatosEJB implements DatosInterface {
                 }else{    
                 	int c = 0; 
                 	
-                 	e.setNumExpediente((int) xssfRow.getCell(c).getNumericCellValue());
-                	e.setActivo(tratarBooleanos(xssfRow.getCell(c++).getStringCellValue()));
-                	e.setNotaMediaProvisional((float) xssfRow.getCell(c++).getNumericCellValue());
-         
+                 	e.setNumExpediente(Integer.valueOf(xssfRow.getCell(c).getStringCellValue()));
+                	e.setActivo(tratarBooleanos(xssfRow.getCell(++c).getStringCellValue()));                	
+					e.setNotaMediaProvisional(xssfRow.getCell(++c).getNumericCellValue());
                 	listaExpedientes.add(e);
                 }
             }            

@@ -14,6 +14,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -72,6 +73,7 @@ public class TestAlumnoEJB {
 
 	@Requisitos({"RF9"})
 	@Test
+	@Ignore
 	public void testActualizarAlumno() {
 		
 		try {
