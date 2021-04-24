@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -17,6 +15,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -93,40 +92,51 @@ public class DatosEJB implements DatosInterface {
             //Obtengo el número de filas ocupadas en la hoja
             int filas = xssfSheet.getLastRowNum();        
             //En el documento los datos empiezan en fila 5       
-            for (int f = 5; f < filas; f++) {
+            for (int f = 5; f <= filas; f++) {
             	 
             	xssfRow = xssfSheet.getRow(f);
                 DatosAlumnado da = new DatosAlumnado();
+                
                 if (xssfRow == null){ //¿Se puede omitir si sabemos que no habrá filas vacias?
                     break;
                     
                 }else{    
-                	int c = 0; 
+                	for(int i = 0; i <= 24; i++) {
+                		xssfRow.getCell(i).setCellType(CellType.STRING);
+                	}
                 	
-                 	da.setDni(xssfRow.getCell(c).getStringCellValue());
-                	da.setNombre(xssfRow.getCell(c++).getStringCellValue());
-                	da.setApellido1(xssfRow.getCell(c++).getStringCellValue());
-                	da.setApellido2(xssfRow.getCell(c++).getStringCellValue());
-                	da.setNumExpediente((int) xssfRow.getCell(c++).getNumericCellValue());
-                	da.setNumArchivo((int) xssfRow.getCell(c++).getNumericCellValue());
-                	da.setEmailInstitucional(xssfRow.getCell(c++).getStringCellValue());
-                	da.setEmailPersonal(xssfRow.getCell(c++).getStringCellValue());
-                	da.setTelefono((int) xssfRow.getCell(c++).getNumericCellValue());
-                	da.setMovil((int) xssfRow.getCell(c++).getNumericCellValue());
-                	da.setDireccionNotificacion(xssfRow.getCell(c++).getStringCellValue());
-                	da.setLocalidadNotificacion(xssfRow.getCell(c++).getStringCellValue());
-                	da.setProvinciaNotificacion(xssfRow.getCell(c++).getStringCellValue());
-                	da.setCpNotificacion((int) xssfRow.getCell(c++).getNumericCellValue());  
-                    da.setFechaMatricula(Timestamp.valueOf(formatearFecha(xssfRow.getCell(c++).getDateCellValue())));
-                	da.setTurnoPreferente(xssfRow.getCell(c++).getStringCellValue());
-                	da.setGruposAsignados(xssfRow.getCell(c++).getStringCellValue());
-                	da.setNotaMedia((int) xssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosSuperados((int) xssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosFB((int) xssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosOB((int) xssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosCF((int) xssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosPE((int) xssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosTF((int) xssfRow.getCell(c++).getNumericCellValue());   
+                 	da.setDni(xssfRow.getCell(0).getStringCellValue());
+                	da.setNombre(xssfRow.getCell(1).getStringCellValue());
+                	da.setApellido1(xssfRow.getCell(2).getStringCellValue());
+                	da.setApellido2(xssfRow.getCell(3).getStringCellValue());
+                	
+                	da.setNumExpediente(Integer.valueOf(xssfRow.getCell(4).getStringCellValue()));
+                	da.setNumArchivo(Integer.valueOf(xssfRow.getCell(5).getStringCellValue()));
+                	
+                	da.setEmailInstitucional(xssfRow.getCell(6).getStringCellValue());
+                	da.setEmailPersonal(xssfRow.getCell(7).getStringCellValue());
+                	da.setTelefono(xssfRow.getCell(8).getStringCellValue());
+                	da.setMovil(xssfRow.getCell(9).getStringCellValue());
+                	da.setDireccionNotificacion(xssfRow.getCell(10).getStringCellValue());
+                	da.setLocalidadNotificacion(xssfRow.getCell(11).getStringCellValue());
+                	da.setProvinciaNotificacion(xssfRow.getCell(12).getStringCellValue());
+          
+                	da.setCpNotificacion(Integer.valueOf(xssfRow.getCell(13).getStringCellValue()));  
+                    
+                	da.setFechaMatricula(Timestamp.valueOf(formatearFecha(xssfRow.getCell(14).getStringCellValue())));
+                	
+                	da.setTurnoPreferente(xssfRow.getCell(15).getStringCellValue());
+                	da.setGruposAsignados(xssfRow.getCell(16).getStringCellValue());
+                	
+                	da.setNotaMedia(Double.valueOf(xssfRow.getCell(17).getStringCellValue()));
+                	
+                	da.setCreditosSuperados(Double.valueOf(xssfRow.getCell(18).getStringCellValue()));
+                	da.setCreditosFB(Double.valueOf(xssfRow.getCell(19).getStringCellValue()));
+                	da.setCreditosOB(Double.valueOf(xssfRow.getCell(20).getStringCellValue()));
+                	da.setCreditosOP(Double.valueOf(xssfRow.getCell(21).getStringCellValue()));
+                	da.setCreditosCF(Double.valueOf(xssfRow.getCell(22).getStringCellValue()));
+                	da.setCreditosPE(Double.valueOf(xssfRow.getCell(23).getStringCellValue()));
+                	da.setCreditosTF(Double.valueOf(xssfRow.getCell(24).getStringCellValue()));   
                 	
                 	listaDatos.add(da);
                 }
@@ -313,10 +323,14 @@ public class DatosEJB implements DatosInterface {
 		}
 	}
 	
-	private String formatearFecha(Date d) {
-		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD HH:mm");
-		String fechaFormateada = formatter.format(d);
-		return fechaFormateada + ":00";
+	private String formatearFecha(String date) {
+		String anyo = date.substring(date.lastIndexOf("/")+1, date.indexOf(" "));
+		String mes = date.substring(date.indexOf("/")+1, date.lastIndexOf("/"));
+		String dia = date.substring(0, date.indexOf("/"));
+		String hora = date.substring(date.lastIndexOf(" ")+1, date.indexOf(":"));
+		String minuto = date.substring(date.lastIndexOf(":")+1, date.length());
+		
+		return anyo + "-" + mes + "-" + dia + " " + hora + ":" + minuto + ":00";
 	}
 	
 	private Integer tratarPlazas(String str) {

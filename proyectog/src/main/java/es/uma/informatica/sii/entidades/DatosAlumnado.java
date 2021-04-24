@@ -24,8 +24,8 @@ public class DatosAlumnado implements Serializable {
 	private Integer numArchivo;
 	private String emailInstitucional;
 	private String emailPersonal;
-	private Integer telefono;
-	private Integer movil;
+	private String telefono;
+	private String movil;
 	private String direccionNotificacion;
 	private String localidadNotificacion;
 	private String provinciaNotificacion;
@@ -33,14 +33,14 @@ public class DatosAlumnado implements Serializable {
 	private Timestamp fechaMatricula;
 	private String turnoPreferente;
 	private String gruposAsignados;
-	private Integer notaMedia;
-	private Integer creditosSuperados;
-	private Integer creditosFB;
-	private Integer creditosOB;
-	private Integer creditosOP;
-	private Integer creditosCF;
-	private Integer creditosPE;
-	private Integer creditosTF;
+	private Double notaMedia;
+	private Double creditosSuperados;
+	private Double creditosFB;
+	private Double creditosOB;
+	private Double creditosOP;
+	private Double creditosCF;
+	private Double creditosPE;
+	private Double creditosTF;
 	private static final long serialVersionUID = 1L;
 
 	public DatosAlumnado() {
@@ -95,19 +95,19 @@ public class DatosAlumnado implements Serializable {
 		this.emailPersonal = emailPersonal;
 	}
 
-	public Integer getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
-	public Integer getMovil() {
+	public String getMovil() {
 		return movil;
 	}
 
-	public void setMovil(Integer movil) {
+	public void setMovil(String movil) {
 		this.movil = movil;
 	}
 
@@ -167,67 +167,67 @@ public class DatosAlumnado implements Serializable {
 		this.gruposAsignados = gruposAsignados;
 	}
 
-	public Integer getNotaMedia() {
+	public Double getNotaMedia() {
 		return notaMedia;
 	}
 
-	public void setNotaMedia(Integer notaMedia) {
+	public void setNotaMedia(Double notaMedia) {
 		this.notaMedia = notaMedia;
 	}
 
-	public Integer getCreditosSuperados() {
+	public Double getCreditosSuperados() {
 		return creditosSuperados;
 	}
 
-	public void setCreditosSuperados(Integer creditosSuperados) {
+	public void setCreditosSuperados(Double creditosSuperados) {
 		this.creditosSuperados = creditosSuperados;
 	}
 
-	public Integer getCreditosFB() {
+	public Double getCreditosFB() {
 		return creditosFB;
 	}
 
-	public void setCreditosFB(Integer creditosFB) {
+	public void setCreditosFB(Double creditosFB) {
 		this.creditosFB = creditosFB;
 	}
 
-	public Integer getCreditosOB() {
+	public Double getCreditosOB() {
 		return creditosOB;
 	}
 
-	public void setCreditosOB(Integer creditosOB) {
+	public void setCreditosOB(Double creditosOB) {
 		this.creditosOB = creditosOB;
 	}
 
-	public Integer getCreditosOP() {
+	public Double getCreditosOP() {
 		return creditosOP;
 	}
 
-	public void setCreditosOP(Integer creditosOP) {
+	public void setCreditosOP(Double creditosOP) {
 		this.creditosOP = creditosOP;
 	}
 
-	public Integer getCreditosCF() {
+	public Double getCreditosCF() {
 		return creditosCF;
 	}
 
-	public void setCreditosCF(Integer creditosCF) {
+	public void setCreditosCF(Double creditosCF) {
 		this.creditosCF = creditosCF;
 	}
 
-	public Integer getCreditosPE() {
+	public Double getCreditosPE() {
 		return creditosPE;
 	}
 
-	public void setCreditosPE(Integer creditosPE) {
+	public void setCreditosPE(Double creditosPE) {
 		this.creditosPE = creditosPE;
 	}
 
-	public Integer getCreditosTF() {
+	public Double getCreditosTF() {
 		return creditosTF;
 	}
 
-	public void setCreditosTF(Integer creditosTF) {
+	public void setCreditosTF(Double creditosTF) {
 		this.creditosTF = creditosTF;
 	}
 
