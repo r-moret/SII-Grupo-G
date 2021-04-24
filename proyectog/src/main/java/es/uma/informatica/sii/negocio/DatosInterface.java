@@ -4,6 +4,7 @@ import java.util.List;
 
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.DatosAlumnado;
+import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
 public interface DatosInterface {
@@ -39,4 +40,21 @@ public interface DatosInterface {
 	 * @throws SecretariaException
 	 */
 	public void registrarDatosAsignaturas(List<Asignatura> asignaturas) throws SecretariaException;
+	
+	/**
+
+	 * Importa los expedientes desde un fichero y los almacena en una lista de Expediente
+	 * @param fichero
+	 * @return
+	 * @throws SecretariaException
+	 */
+	public List<Expediente> importarDatosExpediente(String fichero)  throws SecretariaException;
+	
+	/**
+	 * REQUISITO: RF-08
+	 * Inserta en la base de datos los expedientes previamente importados
+	 * @param expedientes
+	 * @throws SecretariaException
+	 */
+	public void registrarDatosExpediente(List<Expediente> expedientes) throws SecretariaException;
 }
