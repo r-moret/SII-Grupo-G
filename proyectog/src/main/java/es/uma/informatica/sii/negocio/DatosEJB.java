@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
@@ -33,6 +34,7 @@ import es.uma.informatica.sii.exceptions.DatosInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.exceptions.TitulacionInexistente;
 
+@Stateless
 public class DatosEJB implements DatosInterface {
 	
 	private static final String PERSISTENCE_UNIT = "proyectog-jpa";
@@ -59,7 +61,7 @@ public class DatosEJB implements DatosInterface {
 				throw new SecretariaException("Error al convertir el fichero de .CSV a .XLSX");
 			}
 		}
-		else if(formato.equals(".xls") || formato.equals(".xlsx")) {
+		else if(!formato.equals(".xls") && !formato.equals(".xlsx")) {
 			throw new SecretariaException("Formato de fichero no reconocido");
 		}
 		
@@ -77,7 +79,7 @@ public class DatosEJB implements DatosInterface {
 		List<DatosAlumnado> listaDatos = new ArrayList<DatosAlumnado>();
         InputStream excelStream = null;
         try {
-            excelStream = new FileInputStream(excel);
+        	excelStream = new FileInputStream(excel);
             //Lista de hojas excel.
             @SuppressWarnings("resource")
 			HSSFWorkbook hssfWorkbook = new HSSFWorkbook(excelStream);
