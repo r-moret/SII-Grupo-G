@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,9 +20,13 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.DatosAlumnado;
+import es.uma.informatica.sii.entidades.Titulacion;
+import es.uma.informatica.sii.exceptions.AsignaturaInexistente;
 import es.uma.informatica.sii.exceptions.DatosInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
+import es.uma.informatica.sii.exceptions.TitulacionInexistente;
 
 public class DatosEJB implements DatosEJBInterface {
 	
@@ -69,8 +75,8 @@ public class DatosEJB implements DatosEJBInterface {
                 	da.setDireccionNotificacion(hssfRow.getCell(c++).getStringCellValue());
                 	da.setLocalidadNotificacion(hssfRow.getCell(c++).getStringCellValue());
                 	da.setProvinciaNotificacion(hssfRow.getCell(c++).getStringCellValue());
-                	da.setCpNotificacion((int) hssfRow.getCell(c++).getNumericCellValue());         
-                	da.setFechaMatricula(Timestamp.valueOf(hssfRow.getCell(c++).getStringCellValue())); //Formato de fecha y hora cambiada en documento previamente.
+                	da.setCpNotificacion((int) hssfRow.getCell(c++).getNumericCellValue());  
+                    da.setFechaMatricula(Timestamp.valueOf(formatearFecha(hssfRow.getCell(c++).getDateCellValue())));
                 	da.setTurnoPreferente(hssfRow.getCell(c++).getStringCellValue());
                 	da.setGruposAsignados(hssfRow.getCell(c++).getStringCellValue());
                 	da.setNotaMedia((int) hssfRow.getCell(c++).getNumericCellValue());
@@ -99,23 +105,114 @@ public class DatosEJB implements DatosEJBInterface {
 	}
 
 	@Override
-	public void registrarDatos(List<DatosAlumnado> datos) throws SecretariaException{
+	public void registrarDatosAlumnado(List<DatosAlumnado> datos) throws SecretariaException{
 		
 		if(datos == null){
 			throw new SecretariaException();
 		}
 
-		
-
-		
 		for(DatosAlumnado d: datos){
 			DatosAlumnado da = em.find(DatosAlumnado.class, d.getDni());
-			if(da==null){
+			if(da == null){
 				throw new DatosInexistente();
 			}
-			//
+			
+			em.persist(d);
 		}
 	}
 
+private String formatearFecha(Date d) {
+	SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+	String fechaFormateada = formatter.format(d);
+	return fechaFormateada;
+}
 
+@Override
+	public List<Asignatura> importarDatosAsignaturas(File excel) throws TitulacionInexistente {
+		List<Asignatura> listaAsignaturas = new ArrayList<Asignatura>();
+        InputStream excelStream = null;
+        try {
+            excelStream = new FileInputStream(excel);
+    
+            @SuppressWarnings("resource")
+			HSSFWorkbook hssfWorkbook = new HSSFWorkbook(excelStream);
+            
+			for(int i=0;i<hssfWorkbook.getNumberOfSheets();i++){
+				
+            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(i);
+            
+            HSSFRow hssfRow;                    
+      
+            int filas = hssfSheet.getLastRowNum();        
+  
+            for (int f = 2; f < filas; f++) {
+            	 
+                hssfRow = hssfSheet.getRow(f);
+                Asignatura a = new Asignatura();
+                if (hssfRow == null){
+                    break;
+                    
+                }else{    
+                	int c = 0; 
+                	Titulacion t = em.find(Titulacion.class, (int) hssfRow.getCell(c).getNumericCellValue()); if(t==null){throw new TitulacionInexistente();}
+					a.setTitulacion(t);
+                 	a.setOfertada(hssfRow.getCell(c++).getBooleanCellValue());
+                	a.setCodigo((int) hssfRow.getCell(c++).getNumericCellValue());
+                	a.setReferencia((int) hssfRow.getCell(c++).getNumericCellValue());
+                	a.setNombre(hssfRow.getCell(c++).getStringCellValue());
+                	a.setCurso((int) hssfRow.getCell(c++).getNumericCellValue());
+                	a.setCreditos((int) hssfRow.getCell(c++).getNumericCellValue());
+                	a.setDuracion((int) hssfRow.getCell(c+3).getStringCellValue().charAt(0));
+					a.setPlazas(tratarPlazas(hssfRow.getCell(c++).getStringCellValue()));	//Asumimos formato establecido en el archivo (mirar tratarPlazas).
+					if(hssfRow.getCell(c++) != null) {
+						a.setIdioma(hssfRow.getCell(c).getStringCellValue());
+					}   
+                	listaAsignaturas.add(a);
+                }
+            } 
+			}
+                       
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("No se encontró el fichero: " + fileNotFoundException);
+        } catch (IOException ex) {
+            System.out.println("Error al procesar el fichero: " + ex);
+        } finally {
+            try {
+                excelStream.close();
+            } catch (IOException ex) {
+                System.out.println("Error al procesar el fichero después de cerrarlo: " + ex);
+            }
+        }
+		return listaAsignaturas;
+	}
+
+private Integer tratarPlazas(String str) {
+	Integer res;
+	if(str.equals("-")) {
+		res = 200;			
+	}else if(str.equals("Sin lím.")){
+		res=200;
+	}else{
+		res = Integer.valueOf(str);
+	}
+
+	return res;
+}
+
+@Override
+	public void registrarDatosAsignaturas(List<Asignatura> asignaturas) throws SecretariaException{
+		
+		if(asignaturas == null){
+			throw new SecretariaException();
+		}
+
+		for(Asignatura a: asignaturas){
+			Asignatura asig = em.find(Asignatura.class, a.getReferencia());
+			if(asig == null){
+				throw new AsignaturaInexistente();
+			}
+			
+			em.persist(a);
+		}
+	}
 }

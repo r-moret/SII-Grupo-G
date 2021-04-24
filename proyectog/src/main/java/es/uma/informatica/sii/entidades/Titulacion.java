@@ -37,6 +37,7 @@ public class Titulacion implements Serializable {
 	public Titulacion() {
 		super();
 	}
+
 	
 	public Integer getCodigo() {
 		return this.codigo;
