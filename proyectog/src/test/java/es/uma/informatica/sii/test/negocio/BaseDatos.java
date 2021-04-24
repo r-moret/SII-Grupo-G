@@ -269,6 +269,37 @@ public class BaseDatos {
 		grup4.setPlazas(20);
 		List<Grupo> rel4 = new ArrayList<Grupo>();
 		
+		Grupo grup5 = new Grupo();
+		grup5.setId("id5");
+		grup5.setCurso(3);
+		grup5.setLetra("A");
+		grup5.setTurno("mañana");
+		grup5.setIngles(false);
+		grup5.setVisible(true);
+		grup5.setTitulacion(tit1);
+		grup5.setPlazas(30);
+		
+		Grupo grup6 = new Grupo();
+		grup6.setId("id6");
+		grup6.setCurso(2);
+		grup6.setLetra("D");
+		grup6.setTurno("mañana");
+		grup6.setIngles(false);
+		grup5.setVisible(true);
+		grup6.setTitulacion(tit1);
+		grup6.setPlazas(50);
+	
+		
+		Grupo grup7 = new Grupo();
+		grup7.setId("id7");
+		grup7.setCurso(1);
+		grup7.setLetra("C");
+		grup7.setTurno("tarde");
+		grup7.setIngles(false);
+		grup7.setTitulacion(tit1);
+		grup7.setPlazas(60);
+		
+		
 		rel1.add(grup2);
 		rel2.add(grup1);
 		
@@ -282,6 +313,9 @@ public class BaseDatos {
 		em.persist(grup2);
 		em.persist(grup3);
 		em.persist(grup4);
+		em.persist(grup5);
+		em.persist(grup6);
+		em.persist(grup7);
 		
 		Clase c1 = new Clase();
 		c1.setDia("Lunes");

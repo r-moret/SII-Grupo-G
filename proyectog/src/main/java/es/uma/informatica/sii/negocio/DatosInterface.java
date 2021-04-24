@@ -5,6 +5,7 @@ import java.util.List;
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.DatosAlumnado;
 import es.uma.informatica.sii.entidades.Expediente;
+import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
 public interface DatosInterface {
@@ -42,7 +43,7 @@ public interface DatosInterface {
 	public void registrarDatosAsignaturas(List<Asignatura> asignaturas) throws SecretariaException;
 	
 	/**
-
+	 * REQUISITO: RF-08
 	 * Importa los expedientes desde un fichero y los almacena en una lista de Expediente
 	 * @param fichero
 	 * @return
@@ -57,4 +58,20 @@ public interface DatosInterface {
 	 * @throws SecretariaException
 	 */
 	public void registrarDatosExpediente(List<Expediente> expedientes) throws SecretariaException;
+
+	/**
+	 * REQUISITO: RF-08
+	 * Importa los grupos desde un fichero y los almacena en una lista de Grupo
+	 * @param ficheroGrupos
+	 * @return
+	 */
+	public List<Grupo> importarDatosGrupos(String ficheroGrupos) throws SecretariaException;
+	
+	/**
+	 * REQUISITO: RF-08
+	 * @param grupos
+	 * @throws SecretariaException
+	 */
+	public void registrarDatosGrupos(List<Grupo> grupos) throws SecretariaException;
+	
 }

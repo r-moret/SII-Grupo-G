@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
@@ -29,10 +32,12 @@ import com.aspose.cells.Workbook;
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.DatosAlumnado;
 import es.uma.informatica.sii.entidades.Expediente;
+import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Titulacion;
 import es.uma.informatica.sii.exceptions.AsignaturaInexistente;
 import es.uma.informatica.sii.exceptions.DatosInexistente;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
+import es.uma.informatica.sii.exceptions.GrupoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.exceptions.TitulacionInexistente;
 
@@ -320,13 +325,89 @@ public class DatosEJB implements DatosInterface {
 		}
 
 		for(Expediente e: listaExpedientes){
-			Expediente de = em.find(Expediente.class, e.getNumExpediente());
-			if(de == null){
+			Expediente dEnt = em.find(Expediente.class, e.getNumExpediente());
+			if(dEnt == null){
 				throw new ExpedienteInexistente();
 			}
 			
 			em.persist(e);
 		}
+	}
+	
+	@Override
+	public List<Grupo> importarDatosGrupos(String fichero) throws SecretariaException{
+		File archivo = cargarArchivo(fichero);
+		
+		return importarDatosGrupos(archivo);
+	}
+	
+	private List<Grupo> importarDatosGrupos(File excel) throws SecretariaException {
+		List<Grupo> listaGrupos = new ArrayList<Grupo>();
+        InputStream excelStream = null;
+        try {
+            excelStream = new FileInputStream(excel);
+            
+            @SuppressWarnings("resource")
+			XSSFWorkbook xssfWorkbook = new XSSFWorkbook(excelStream);
+            
+            XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
+            
+            XSSFRow xssfRow; 
+            
+            int filas = xssfSheet.getPhysicalNumberOfRows();       
+            
+            for (int f = 1; f < filas; f++) {
+            	 
+                xssfRow = xssfSheet.getRow(f);
+                Grupo g = new Grupo();
+                if (xssfRow == null){
+                    break;
+                    
+                }else{    
+                	int c = 0; 
+                   	                	
+					g.setId(xssfRow.getCell(0).getStringCellValue());
+					g.setCurso((int) xssfRow.getCell(1).getNumericCellValue());
+                	g.setLetra(xssfRow.getCell(2).getStringCellValue());
+					g.setTurno(xssfRow.getCell(3).getStringCellValue());
+					g.setIngles(tratarBooleanos(xssfRow.getCell(4).getStringCellValue()));
+                	g.setVisible(tratarBooleanos(xssfRow.getCell(5).getStringCellValue()));
+                	g.setAsignar(tratarBooleanos(xssfRow.getCell(6).getStringCellValue()));
+					g.setPlazas((int) xssfRow.getCell(7).getNumericCellValue());
+					
+					listaGrupos.add(g);
+                }
+            }            
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("No se encontró el fichero: " + fileNotFoundException);
+        } catch (IOException ex) {
+            System.out.println("Error al procesar el fichero: " + ex);
+        } finally {
+            try {
+                excelStream.close();
+            } catch (IOException ex) {
+                System.out.println("Error al procesar el fichero después de cerrarlo: " + ex);
+            }
+        }
+		return listaGrupos;
+		
+	}
+
+	@Override
+	public void registrarDatosGrupos(List<Grupo> listaGrupos) throws SecretariaException {
+		if(listaGrupos == null) {
+			throw new SecretariaException();
+		}
+		
+		for(Grupo g: listaGrupos){
+			Grupo gEnt = em.find(Grupo.class, g.getId());
+			if(gEnt == null){
+				throw new GrupoInexistente();
+			}
+			
+			em.persist(g);
+		}
+		
 	}
 	
 	private String formatearFecha(String date) {
