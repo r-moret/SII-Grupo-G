@@ -17,9 +17,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.aspose.cells.FileFormatType;
 import com.aspose.cells.LoadOptions;
@@ -74,6 +74,7 @@ public class DatosEJB implements DatosInterface {
 	public List<DatosAlumnado> importarDatosAlumnado(String fichero) throws SecretariaException {
 		File archivo = cargarArchivo(fichero);
 		
+		
 		return importarDatosAlumnado(archivo);
 	}
 	
@@ -84,48 +85,48 @@ public class DatosEJB implements DatosInterface {
         	excelStream = new FileInputStream(excel);
             //Lista de hojas excel.
             @SuppressWarnings("resource")
-			HSSFWorkbook hssfWorkbook = new HSSFWorkbook(excelStream);
+			XSSFWorkbook xssfWorkbook = new XSSFWorkbook(excelStream);
             //Primera hoja
-            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
+            XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
             //Objeto que nos permite leer un fila de la hoja excel, y de aquí extraer el contenido de las celdas.
-            HSSFRow hssfRow;                    
+            XSSFRow xssfRow;                    
             //Obtengo el número de filas ocupadas en la hoja
-            int filas = hssfSheet.getLastRowNum();        
+            int filas = xssfSheet.getLastRowNum();        
             //En el documento los datos empiezan en fila 5       
             for (int f = 5; f < filas; f++) {
             	 
-                hssfRow = hssfSheet.getRow(f);
+            	xssfRow = xssfSheet.getRow(f);
                 DatosAlumnado da = new DatosAlumnado();
-                if (hssfRow == null){ //¿Se puede omitir si sabemos que no habrá filas vacias?
+                if (xssfRow == null){ //¿Se puede omitir si sabemos que no habrá filas vacias?
                     break;
                     
                 }else{    
                 	int c = 0; 
                 	
-                 	da.setDni(hssfRow.getCell(c).getStringCellValue());
-                	da.setNombre(hssfRow.getCell(c++).getStringCellValue());
-                	da.setApellido1(hssfRow.getCell(c++).getStringCellValue());
-                	da.setApellido2(hssfRow.getCell(c++).getStringCellValue());
-                	da.setNumExpediente((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setNumArchivo((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setEmailInstitucional(hssfRow.getCell(c++).getStringCellValue());
-                	da.setEmailPersonal(hssfRow.getCell(c++).getStringCellValue());
-                	da.setTelefono((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setMovil((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setDireccionNotificacion(hssfRow.getCell(c++).getStringCellValue());
-                	da.setLocalidadNotificacion(hssfRow.getCell(c++).getStringCellValue());
-                	da.setProvinciaNotificacion(hssfRow.getCell(c++).getStringCellValue());
-                	da.setCpNotificacion((int) hssfRow.getCell(c++).getNumericCellValue());  
-                    da.setFechaMatricula(Timestamp.valueOf(formatearFecha(hssfRow.getCell(c++).getDateCellValue())));
-                	da.setTurnoPreferente(hssfRow.getCell(c++).getStringCellValue());
-                	da.setGruposAsignados(hssfRow.getCell(c++).getStringCellValue());
-                	da.setNotaMedia((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosSuperados((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosFB((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosOB((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosCF((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosPE((int) hssfRow.getCell(c++).getNumericCellValue());
-                	da.setCreditosTF((int) hssfRow.getCell(c++).getNumericCellValue());   
+                 	da.setDni(xssfRow.getCell(c).getStringCellValue());
+                	da.setNombre(xssfRow.getCell(c++).getStringCellValue());
+                	da.setApellido1(xssfRow.getCell(c++).getStringCellValue());
+                	da.setApellido2(xssfRow.getCell(c++).getStringCellValue());
+                	da.setNumExpediente((int) xssfRow.getCell(c++).getNumericCellValue());
+                	da.setNumArchivo((int) xssfRow.getCell(c++).getNumericCellValue());
+                	da.setEmailInstitucional(xssfRow.getCell(c++).getStringCellValue());
+                	da.setEmailPersonal(xssfRow.getCell(c++).getStringCellValue());
+                	da.setTelefono((int) xssfRow.getCell(c++).getNumericCellValue());
+                	da.setMovil((int) xssfRow.getCell(c++).getNumericCellValue());
+                	da.setDireccionNotificacion(xssfRow.getCell(c++).getStringCellValue());
+                	da.setLocalidadNotificacion(xssfRow.getCell(c++).getStringCellValue());
+                	da.setProvinciaNotificacion(xssfRow.getCell(c++).getStringCellValue());
+                	da.setCpNotificacion((int) xssfRow.getCell(c++).getNumericCellValue());  
+                    da.setFechaMatricula(Timestamp.valueOf(formatearFecha(xssfRow.getCell(c++).getDateCellValue())));
+                	da.setTurnoPreferente(xssfRow.getCell(c++).getStringCellValue());
+                	da.setGruposAsignados(xssfRow.getCell(c++).getStringCellValue());
+                	da.setNotaMedia((int) xssfRow.getCell(c++).getNumericCellValue());
+                	da.setCreditosSuperados((int) xssfRow.getCell(c++).getNumericCellValue());
+                	da.setCreditosFB((int) xssfRow.getCell(c++).getNumericCellValue());
+                	da.setCreditosOB((int) xssfRow.getCell(c++).getNumericCellValue());
+                	da.setCreditosCF((int) xssfRow.getCell(c++).getNumericCellValue());
+                	da.setCreditosPE((int) xssfRow.getCell(c++).getNumericCellValue());
+                	da.setCreditosTF((int) xssfRow.getCell(c++).getNumericCellValue());   
                 	
                 	listaDatos.add(da);
                 }
@@ -175,37 +176,37 @@ public class DatosEJB implements DatosInterface {
             excelStream = new FileInputStream(excel);
     
             @SuppressWarnings("resource")
-			HSSFWorkbook hssfWorkbook = new HSSFWorkbook(excelStream);
+			XSSFWorkbook xssfWorkbook = new XSSFWorkbook(excelStream);
             
-			for(int i=0;i<hssfWorkbook.getNumberOfSheets();i++){
+			for(int i=0;i<xssfWorkbook.getNumberOfSheets();i++){
 				
-            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(i);
+            XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(i);
             
-            HSSFRow hssfRow;                    
+            XSSFRow xssfRow;                    
       
-            int filas = hssfSheet.getLastRowNum();        
+            int filas = xssfSheet.getLastRowNum();        
   
             for (int f = 2; f < filas; f++) {
             	 
-                hssfRow = hssfSheet.getRow(f);
+                xssfRow = xssfSheet.getRow(f);
                 Asignatura a = new Asignatura();
-                if (hssfRow == null){
+                if (xssfRow == null){
                     break;
                     
                 }else{    
                 	int c = 0; 
-                	Titulacion t = em.find(Titulacion.class, (int) hssfRow.getCell(c).getNumericCellValue()); if(t==null){throw new TitulacionInexistente();}
+                	Titulacion t = em.find(Titulacion.class, (int) xssfRow.getCell(c).getNumericCellValue()); if(t==null){throw new TitulacionInexistente();}
 					a.setTitulacion(t);
-                 	a.setOfertada(tratarBooleanos(hssfRow.getCell(c++).getStringCellValue()));
-                	a.setCodigo((int) hssfRow.getCell(c++).getNumericCellValue());
-                	a.setReferencia((int) hssfRow.getCell(c++).getNumericCellValue());
-                	a.setNombre(hssfRow.getCell(c++).getStringCellValue());
-                	a.setCurso((int) hssfRow.getCell(c++).getNumericCellValue());
-                	a.setCreditos((int) hssfRow.getCell(c++).getNumericCellValue());
-                	a.setDuracion((int) hssfRow.getCell(c+3).getStringCellValue().charAt(0));
-					a.setPlazas(tratarPlazas(hssfRow.getCell(c++).getStringCellValue()));	//Asumimos formato establecido en el archivo (mirar tratarPlazas).
-					if(hssfRow.getCell(c++) != null) {
-						a.setIdioma(hssfRow.getCell(c).getStringCellValue());
+                 	a.setOfertada(tratarBooleanos(xssfRow.getCell(c++).getStringCellValue()));
+                	a.setCodigo((int) xssfRow.getCell(c++).getNumericCellValue());
+                	a.setReferencia((int) xssfRow.getCell(c++).getNumericCellValue());
+                	a.setNombre(xssfRow.getCell(c++).getStringCellValue());
+                	a.setCurso((int) xssfRow.getCell(c++).getNumericCellValue());
+                	a.setCreditos((int) xssfRow.getCell(c++).getNumericCellValue());
+                	a.setDuracion((int) xssfRow.getCell(c+3).getStringCellValue().charAt(0));
+					a.setPlazas(tratarPlazas(xssfRow.getCell(c++).getStringCellValue()));	//Asumimos formato establecido en el archivo (mirar tratarPlazas).
+					if(xssfRow.getCell(c++) != null) {
+						a.setIdioma(xssfRow.getCell(c).getStringCellValue());
 					}   
                 	listaAsignaturas.add(a);
                 }
@@ -256,27 +257,27 @@ public class DatosEJB implements DatosInterface {
             excelStream = new FileInputStream(excel);
             
             @SuppressWarnings("resource")
-			HSSFWorkbook hssfWorkbook = new HSSFWorkbook(excelStream);
+			XSSFWorkbook xssfWorkbook = new XSSFWorkbook(excelStream);
             
-            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
+            XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
             
-            HSSFRow hssfRow; 
+            XSSFRow xssfRow; 
             
-            int filas = hssfSheet.getLastRowNum();       
+            int filas = xssfSheet.getLastRowNum();       
             
             for (int f = 2; f < filas; f++) {
             	 
-                hssfRow = hssfSheet.getRow(f);
+                xssfRow = xssfSheet.getRow(f);
                 Expediente e = new Expediente();
-                if (hssfRow == null){
+                if (xssfRow == null){
                     break;
                     
                 }else{    
                 	int c = 0; 
                 	
-                 	e.setNumExpediente((int) hssfRow.getCell(c).getNumericCellValue());
-                	e.setActivo(tratarBooleanos(hssfRow.getCell(c++).getStringCellValue()));
-                	e.setNotaMediaProvisional((float) hssfRow.getCell(c++).getNumericCellValue());
+                 	e.setNumExpediente((int) xssfRow.getCell(c).getNumericCellValue());
+                	e.setActivo(tratarBooleanos(xssfRow.getCell(c++).getStringCellValue()));
+                	e.setNotaMediaProvisional((float) xssfRow.getCell(c++).getNumericCellValue());
          
                 	listaExpedientes.add(e);
                 }

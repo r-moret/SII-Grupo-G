@@ -3,6 +3,7 @@ package es.uma.informatica.sii.test.negocio;
 import static org.junit.Assert.*;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
@@ -25,8 +26,8 @@ import es.uma.informatica.sii.entidades.DatosAlumnado;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.negocio.DatosInterface;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class TestDatosEJB {
 
@@ -83,23 +84,28 @@ public class TestDatosEJB {
 		String ficheroAlumnos = "target/test-classes/files/alumnos.xlsx";
 		
 		FileInputStream inputStream;
-		HSSFWorkbook workbook;
-		HSSFSheet sheet;
+		XSSFWorkbook workbook;
+		XSSFSheet sheet;
 		
 		int numFilasAlumnos;
 		try {
 			inputStream = new FileInputStream(ficheroAlumnos);
-			workbook = new HSSFWorkbook(inputStream);
+			workbook = new XSSFWorkbook(inputStream);
 			sheet = workbook.getSheetAt(0);
 			numFilasAlumnos = sheet.getPhysicalNumberOfRows();
 		
 			List<DatosAlumnado> listaAlumnos = datosEJB.importarDatosAlumnado(ficheroAlumnos);
 			
 			assertEquals(listaAlumnos.size(), numFilasAlumnos - 4);
-		} catch (IOException e) {
-			fail("Da error");
-		} catch (SecretariaException e) {
-			fail("Da otro error");
+		} 
+		catch(FileNotFoundException e) {
+			fail("Lanza una excepción abriendo el fichero");
+		}
+		catch (IOException e) {
+			fail("Lanza una excepción a la hora de trabajar con el fichero (Workbook)");
+		} 
+		catch (SecretariaException e) {
+			fail("Lanza una excepción importando los datos del alumnado");
 		}
 	}
 	
@@ -109,23 +115,28 @@ public class TestDatosEJB {
 		String ficheroAsignaturas = "target/test-classes/files/asignaturas.xlsx";
 		
 		FileInputStream inputStream;
-		HSSFWorkbook workbook;
-		HSSFSheet sheet;
+		XSSFWorkbook workbook;
+		XSSFSheet sheet;
 		
 		int numFilasAsignaturas;
 		try {
 			inputStream = new FileInputStream(ficheroAsignaturas);
-			workbook = new HSSFWorkbook(inputStream);
+			workbook = new XSSFWorkbook(inputStream);
 			sheet = workbook.getSheetAt(0);
 			numFilasAsignaturas = sheet.getPhysicalNumberOfRows();
 		
 			List<Asignatura> listaAsignaturas = datosEJB.importarDatosAsignaturas(ficheroAsignaturas);
 			
 			assertEquals(listaAsignaturas.size(), numFilasAsignaturas - 1);
-		} catch (IOException e) {
-			fail("Da error");
-		} catch (SecretariaException e) {
-			fail("Da otro error");
+		}
+		catch(FileNotFoundException e) {
+			fail("Lanza una excepción abriendo el fichero");
+		}
+		catch (IOException e) {
+			fail("Lanza una excepción a la hora de trabajar con el fichero (Workbook)");
+		} 
+		catch (SecretariaException e) {
+			fail("Lanza una excepción importando las asignaturas");
 		}
 	}
 
