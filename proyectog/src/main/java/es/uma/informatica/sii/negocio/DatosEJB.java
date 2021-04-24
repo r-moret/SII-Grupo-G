@@ -20,6 +20,11 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import com.aspose.cells.FileFormatType;
+import com.aspose.cells.LoadOptions;
+import com.aspose.cells.SaveFormat;
+import com.aspose.cells.Workbook;
+
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.DatosAlumnado;
 import es.uma.informatica.sii.entidades.Titulacion;
@@ -28,7 +33,7 @@ import es.uma.informatica.sii.exceptions.DatosInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.exceptions.TitulacionInexistente;
 
-public class DatosEJB implements DatosEJBInterface {
+public class DatosEJB implements DatosInterface {
 	
 	private static final String PERSISTENCE_UNIT = "proyectog-jpa";
 	
@@ -37,8 +42,38 @@ public class DatosEJB implements DatosEJBInterface {
 	@PersistenceContext(name = PERSISTENCE_UNIT)
 	private EntityManager em;
 
+	private File cargarArchivo(String fichero) throws SecretariaException {
+		int idxExtension = fichero.lastIndexOf('.');
+		String formato = fichero.substring(idxExtension, fichero.length());
+		
+		String nuevoFichero = fichero;
+		if(formato.equals(".csv")) {
+			nuevoFichero = fichero.substring(0, idxExtension) + ".xlsx";
+			
+			LoadOptions opciones = new LoadOptions(FileFormatType.CSV);
+			Workbook workbook;
+			try {
+				workbook = new Workbook(fichero, opciones);
+				workbook.save(nuevoFichero, SaveFormat.XLSX);
+			} catch (Exception e) {
+				throw new SecretariaException("Error al convertir el fichero de .CSV a .XLSX");
+			}
+		}
+		else if(formato.equals(".xls") || formato.equals(".xlsx")) {
+			throw new SecretariaException("Formato de fichero no reconocido");
+		}
+		
+		return new File(nuevoFichero);
+	}
+	
 	@Override
-	public List<DatosAlumnado> importarDatosAlumnado(File excel) {
+	public List<DatosAlumnado> importarDatosAlumnado(String fichero) throws SecretariaException {
+		File archivo = cargarArchivo(fichero);
+		
+		return importarDatosAlumnado(archivo);
+	}
+	
+	private List<DatosAlumnado> importarDatosAlumnado(File excel) {
 		List<DatosAlumnado> listaDatos = new ArrayList<DatosAlumnado>();
         InputStream excelStream = null;
         try {
@@ -121,14 +156,15 @@ public class DatosEJB implements DatosEJBInterface {
 		}
 	}
 
-private String formatearFecha(Date d) {
-	SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy hh:mm");
-	String fechaFormateada = formatter.format(d);
-	return fechaFormateada;
-}
 
-@Override
-	public List<Asignatura> importarDatosAsignaturas(File excel) throws TitulacionInexistente {
+	@Override
+	public List<Asignatura> importarDatosAsignaturas(String fichero) throws SecretariaException {
+		File archivo = cargarArchivo(fichero);
+		
+		return importarDatosAsignaturas(archivo);
+	}
+	
+	private List<Asignatura> importarDatosAsignaturas(File excel) throws TitulacionInexistente {
 		List<Asignatura> listaAsignaturas = new ArrayList<Asignatura>();
         InputStream excelStream = null;
         try {
@@ -186,20 +222,7 @@ private String formatearFecha(Date d) {
 		return listaAsignaturas;
 	}
 
-private Integer tratarPlazas(String str) {
-	Integer res;
-	if(str.equals("-")) {
-		res = 200;			
-	}else if(str.equals("Sin lím.")){
-		res=200;
-	}else{
-		res = Integer.valueOf(str);
-	}
-
-	return res;
-}
-
-@Override
+	@Override
 	public void registrarDatosAsignaturas(List<Asignatura> asignaturas) throws SecretariaException{
 		
 		if(asignaturas == null){
@@ -215,4 +238,24 @@ private Integer tratarPlazas(String str) {
 			em.persist(a);
 		}
 	}
+	
+	private String formatearFecha(Date d) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+		String fechaFormateada = formatter.format(d);
+		return fechaFormateada;
+	}
+	
+	private Integer tratarPlazas(String str) {
+		Integer res;
+		if(str.equals("-")) {
+			res = 200;			
+		}else if(str.equals("Sin lím.")){
+			res=200;
+		}else{
+			res = Integer.valueOf(str);
+		}
+	
+		return res;
+	}
+
 }
