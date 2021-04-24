@@ -28,9 +28,11 @@ import com.aspose.cells.Workbook;
 
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.DatosAlumnado;
+import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Titulacion;
 import es.uma.informatica.sii.exceptions.AsignaturaInexistente;
 import es.uma.informatica.sii.exceptions.DatosInexistente;
+import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.exceptions.TitulacionInexistente;
 
@@ -194,7 +196,7 @@ public class DatosEJB implements DatosInterface {
                 	int c = 0; 
                 	Titulacion t = em.find(Titulacion.class, (int) hssfRow.getCell(c).getNumericCellValue()); if(t==null){throw new TitulacionInexistente();}
 					a.setTitulacion(t);
-                 	a.setOfertada(hssfRow.getCell(c++).getBooleanCellValue());
+                 	a.setOfertada(tratarBooleanos(hssfRow.getCell(c++).getStringCellValue()));
                 	a.setCodigo((int) hssfRow.getCell(c++).getNumericCellValue());
                 	a.setReferencia((int) hssfRow.getCell(c++).getNumericCellValue());
                 	a.setNombre(hssfRow.getCell(c++).getStringCellValue());
@@ -241,6 +243,75 @@ public class DatosEJB implements DatosInterface {
 		}
 	}
 	
+	public List<Expediente> importarDatosExpediente(String fichero) throws SecretariaException{
+		File archivo = cargarArchivo(fichero);
+		
+		return importarDatosExpediente(archivo);
+	}
+	
+	private List<Expediente> importarDatosExpediente(File excel)  throws SecretariaException{
+		List<Expediente> listaExpedientes = new ArrayList<Expediente>();
+        InputStream excelStream = null;
+        try {
+            excelStream = new FileInputStream(excel);
+            
+            @SuppressWarnings("resource")
+			HSSFWorkbook hssfWorkbook = new HSSFWorkbook(excelStream);
+            
+            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
+            
+            HSSFRow hssfRow; 
+            
+            int filas = hssfSheet.getLastRowNum();       
+            
+            for (int f = 2; f < filas; f++) {
+            	 
+                hssfRow = hssfSheet.getRow(f);
+                Expediente e = new Expediente();
+                if (hssfRow == null){
+                    break;
+                    
+                }else{    
+                	int c = 0; 
+                	
+                 	e.setNumExpediente((int) hssfRow.getCell(c).getNumericCellValue());
+                	e.setActivo(tratarBooleanos(hssfRow.getCell(c++).getStringCellValue()));
+                	e.setNotaMediaProvisional((float) hssfRow.getCell(c++).getNumericCellValue());
+         
+                	listaExpedientes.add(e);
+                }
+            }            
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("No se encontró el fichero: " + fileNotFoundException);
+        } catch (IOException ex) {
+            System.out.println("Error al procesar el fichero: " + ex);
+        } finally {
+            try {
+                excelStream.close();
+            } catch (IOException ex) {
+                System.out.println("Error al procesar el fichero después de cerrarlo: " + ex);
+            }
+        }
+		return listaExpedientes;
+	}
+	
+	@Override
+	public void registrarDatosExpediente(List<Expediente> listaExpedientes) throws SecretariaException{
+		
+		if(listaExpedientes == null){
+			throw new SecretariaException();
+		}
+
+		for(Expediente e: listaExpedientes){
+			Expediente de = em.find(Expediente.class, e.getNumExpediente());
+			if(de == null){
+				throw new ExpedienteInexistente();
+			}
+			
+			em.persist(e);
+		}
+	}
+	
 	private String formatearFecha(Date d) {
 		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD HH:mm");
 		String fechaFormateada = formatter.format(d);
@@ -260,4 +331,7 @@ public class DatosEJB implements DatosInterface {
 		return res;
 	}
 
+	private boolean tratarBooleanos(String str){
+		return str.equals("Sí");
+	}
 }
