@@ -24,6 +24,8 @@ import org.junit.Test;
 import es.uma.informatica.sii.anotaciones.Requisitos;
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.DatosAlumnado;
+import es.uma.informatica.sii.entidades.Expediente;
+import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.negocio.DatosInterface;
 
@@ -112,7 +114,68 @@ public class TestDatosEJB {
 	
 	@Requisitos({"RF8"})
 	@Test
-	@Ignore
+	public void testGruposLeidos() {
+		String ficheroGrupos = "target/test-classes/files/grupos.xlsx";
+		
+		FileInputStream inputStream;
+		XSSFWorkbook workbook;
+		XSSFSheet sheet;
+		
+		int numFilasGrupos;
+		try {
+			inputStream = new FileInputStream(ficheroGrupos);
+			workbook = new XSSFWorkbook(inputStream);
+			sheet = workbook.getSheetAt(0);
+			numFilasGrupos = sheet.getPhysicalNumberOfRows() - 1;
+		
+			List<Grupo> listaGrupos = datosEJB.importarDatosGrupos(ficheroGrupos);
+			
+			assertEquals("El numero de alumnos leidos es incorrecto", listaGrupos.size(), numFilasGrupos);
+		} 
+		catch(FileNotFoundException e) {
+			fail("Lanza una excepción abriendo el fichero");
+		}
+		catch (IOException e) {
+			fail("Lanza una excepción a la hora de trabajar con el fichero (Workbook)");
+		} 
+		catch (SecretariaException e) {
+			fail("Lanza una excepción importando los datos de los grupos");
+		}
+	}
+	
+	@Requisitos({"RF8"})
+	@Test
+	public void testExpedientesLeidos() {
+		String ficheroExpedientes = "target/test-classes/files/expedientes.xlsx";
+		
+		FileInputStream inputStream;
+		XSSFWorkbook workbook;
+		XSSFSheet sheet;
+		
+		int numFilasExpedientes;
+		try {
+			inputStream = new FileInputStream(ficheroExpedientes);
+			workbook = new XSSFWorkbook(inputStream);
+			sheet = workbook.getSheetAt(0);
+			numFilasExpedientes = sheet.getPhysicalNumberOfRows() - 1;
+		
+			List<Expediente> listaExpedientes = datosEJB.importarDatosExpediente(ficheroExpedientes);
+			
+			assertEquals("El numero de alumnos leidos es incorrecto", listaExpedientes.size(), numFilasExpedientes);
+		} 
+		catch(FileNotFoundException e) {
+			fail("Lanza una excepción abriendo el fichero");
+		}
+		catch (IOException e) {
+			fail("Lanza una excepción a la hora de trabajar con el fichero (Workbook)");
+		} 
+		catch (SecretariaException e) {
+			fail("Lanza una excepción importando los datos de los expedientes");
+		}
+	}
+	
+	@Requisitos({"RF8"})
+	@Test
 	public void testAsignaturasLeidas() {
 		String ficheroAsignaturas = "target/test-classes/files/asignaturas.xlsx";
 		
@@ -125,11 +188,11 @@ public class TestDatosEJB {
 			inputStream = new FileInputStream(ficheroAsignaturas);
 			workbook = new XSSFWorkbook(inputStream);
 			sheet = workbook.getSheetAt(0);
-			numFilasAsignaturas = sheet.getPhysicalNumberOfRows();
+			numFilasAsignaturas = sheet.getPhysicalNumberOfRows() - 1;
 		
 			List<Asignatura> listaAsignaturas = datosEJB.importarDatosAsignaturas(ficheroAsignaturas);
 			
-			assertEquals(listaAsignaturas.size(), numFilasAsignaturas - 1);
+			assertEquals(listaAsignaturas.size(), numFilasAsignaturas);
 		}
 		catch(FileNotFoundException e) {
 			fail("Lanza una excepción abriendo el fichero");

@@ -37,8 +37,8 @@ public interface MatriculaInterface {
 	 */ 
 	public Set<Matricula> consultarMatriculas() throws SecretariaException;
 	
-	/** REQUISITO: RF-10 
-	 *  TODO: Actualizar lista de requisitos incluyendo RF-10
+	/** 
+	 *  REQUISITO: RF-10 
 	 *  @throws SecretariaException
 	 */ 
 	//Añadir este requisito

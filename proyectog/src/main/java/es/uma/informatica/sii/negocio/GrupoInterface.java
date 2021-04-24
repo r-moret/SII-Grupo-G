@@ -2,7 +2,6 @@ package es.uma.informatica.sii.negocio;
 
 import javax.ejb.Local;
 
-import es.uma.informatica.sii.entidades.Encuesta;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Matricula;

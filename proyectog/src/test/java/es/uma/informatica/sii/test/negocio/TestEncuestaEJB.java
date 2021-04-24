@@ -15,7 +15,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -91,7 +90,6 @@ public class TestEncuestaEJB {
 	}
 	
 	@Test
-	@Ignore
 	public void testObtenerEncuesta() {
 		try {
 			Expediente ex = em.find(Expediente.class, 1);
@@ -132,7 +130,6 @@ public class TestEncuestaEJB {
 	
 	@Requisitos({"RF2"})
 	@Test
-	@Ignore
 	public void testRegistroEncuestaCorrecto() {
 		try {
 			encuestaEJB.registrarEncuesta(null);
@@ -172,81 +169,8 @@ public class TestEncuestaEJB {
 		}	
 	}
 	
-	//  TODO: Determinar si es necesario comprobar si los grupos de dos asignaturas del mismo curso 
-	//  deben ser iguales, o no
-	//
-	//	@Requisitos({"RF2"})
-	//	@Test
-	//	@Ignore
-	//	public void testDistintoGrupoMismoCurso() {
-	//		/*  Simulamos una encuesta con un conflicto en el cual dos asignaturas del mismo a�o
-	//		 *  tienen grupos distintos asignados
-	//		 */ 
-	//		Encuesta enc = new Encuesta();
-	//		enc.setFechaEnvio(Timestamp.valueOf("2020-09-03 10:00:00"));
-	//		enc.setExpediente(em.find(Expediente.class, 8));
-	//		
-	//		List<GruposPorAsignatura> gruposAsignatura = new ArrayList<>();
-	//		GruposPorAsignatura gpa1 =  new GruposPorAsignatura();
-	//		gpa1.setAsignatura(em.find(Asignatura.class, 1)); // Asignatura de primero
-	//		gpa1.setCursoAcademico("20/21");
-	//		gpa1.setGrupo(em.find(Grupo.class, "id1")); // Grupo A de primero
-	//		
-	//		GruposPorAsignatura gpa2 =  new GruposPorAsignatura();
-	//		gpa2.setAsignatura(em.find(Asignatura.class, 2)); // Asignatura de primero
-	//		gpa2.setCursoAcademico("20/21");
-	//		gpa2.setGrupo(em.find(Grupo.class, "id2")); // Grupo B de primero
-	//		
-	//		gruposAsignatura.add(gpa1);
-	//		gruposAsignatura.add(gpa2);
-	//		
-	//		enc.setGruposPorAsignatura(gruposAsignatura);
-	//		
-	//		try {
-	//			encuestaEJB.registrarEncuesta(enc);
-	//			fail("No lanza una excepci�n (MalAsignacionEncuesta) avisando de que la encuesta tiene una seleccion incorrecta de grupos");
-	//		} 
-	//		catch(MalAsignacionEncuesta e) {
-	//			/* COMPORTAMIENTO CORRECTO */
-	//		}
-	//		catch(Exception e) {
-	//			fail("Lanza una excepci�n distinta a MalAsignacionEncuesta");
-	//		}
-	//		
-	//		/*  Simulamos una encuesta sin conflicto donde tienen distintos grupos asignados pero
-	//		 *  para distintos a�os
-	//		 */ 
-	//		Encuesta enc2 = new Encuesta();
-	//		enc2.setFechaEnvio(Timestamp.valueOf("2020-09-03 11:00:00"));
-	//		enc2.setExpediente(em.find(Expediente.class, 1));
-	//		
-	//		List<GruposPorAsignatura> gruposAsignatura2 = new ArrayList<>();
-	//		GruposPorAsignatura gpa3 =  new GruposPorAsignatura();
-	//		gpa3.setAsignatura(em.find(Asignatura.class, 1)); // Asignatura de primero
-	//		gpa3.setCursoAcademico("20/21");
-	//		gpa3.setGrupo(em.find(Grupo.class, "id1")); // Grupo A de primero
-	//		
-	//		GruposPorAsignatura gpa4 =  new GruposPorAsignatura();
-	//		gpa4.setAsignatura(em.find(Asignatura.class, 3)); // Asignatura de segundo
-	//		gpa4.setCursoAcademico("20/21");
-	//		gpa4.setGrupo(em.find(Grupo.class, "id3")); // Grupo B de segundo
-	//		
-	//		gruposAsignatura2.add(gpa3);
-	//		gruposAsignatura2.add(gpa4);
-	//		
-	//		enc2.setGruposPorAsignatura(gruposAsignatura2);
-	//		
-	//		try {
-	//			encuestaEJB.registrarEncuesta(enc2);
-	//		} 
-	//		catch(Exception e) {
-	//			fail("Lanza una excepci�n cuando la asignaci�n de grupo de la encuesta es correcta");
-	//		}
-	//	}
-	
 	@Requisitos({"RF6"})
 	@Test
-	@Ignore
 	public void testDetectarIncompatibilidadHoraria() {
 		try {
 			encuestaEJB.incompatibilidadHoraria(null);

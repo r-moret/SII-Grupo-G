@@ -16,7 +16,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.entidades.Titulacion;
@@ -76,9 +75,8 @@ public class TestExpediente {
 		emf.close();
 	}
 
-	@Requisitos({ "RF9" })
+	@Requisitos({"RF9"})
 	@Test
-	@Ignore
 	public void testActualizarExpediente() {
 		
 		// Caso 1 - paso un expediente nulo
