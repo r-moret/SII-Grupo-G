@@ -9,14 +9,27 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
+
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import es.uma.informatica.sii.entidades.DatosAlumnado;
+import es.uma.informatica.sii.exceptions.DatosInexistente;
+import es.uma.informatica.sii.exceptions.SecretariaException;
 
 public class DatosEJB implements DatosEJBInterface {
 	
+	private static final String PERSISTENCE_UNIT = "proyectog-jpa";
+	
+	@PersistenceUnit(unitName = PERSISTENCE_UNIT)
+	private EntityManagerFactory emf;
+	@PersistenceContext(name = PERSISTENCE_UNIT)
+	private EntityManager em;
 
 	@Override
 	public List<DatosAlumnado> importarDatosAlumnado(File excel) {
@@ -86,9 +99,22 @@ public class DatosEJB implements DatosEJBInterface {
 	}
 
 	@Override
-	public void registrarDatos(DatosAlumnado datos) {
-		// TODO Auto-generated method stub
+	public void registrarDatos(List<DatosAlumnado> datos) throws SecretariaException{
 		
+		if(datos == null){
+			throw new SecretariaException();
+		}
+
+		
+
+		
+		for(DatosAlumnado d: datos){
+			DatosAlumnado da = em.find(DatosAlumnado.class, d.getDni());
+			if(da==null){
+				throw new DatosInexistente();
+			}
+			//
+		}
 	}
 
 

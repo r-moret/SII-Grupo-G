@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import es.uma.informatica.sii.entidades.DatosAlumnado;
+import es.uma.informatica.sii.exceptions.SecretariaException;
 
 public interface DatosEJBInterface {
 	
@@ -13,12 +14,12 @@ public interface DatosEJBInterface {
 	 * @param excel
 	 * @return
 	 */
-	public List<DatosAlumnado> importarDatosAlumnado(File excel);
+	public List<DatosAlumnado> importarDatosAlumnado(File excel) throws SecretariaException;
 	
 	/**REQUISITO: RF-08
 	 * Inserta en la base de datos los DatosAlumnado previamente importados
 	 * @param datos
 	 */
-	public void registrarDatos(DatosAlumnado datos);
+	public void registrarDatos(List<DatosAlumnado> datos) throws SecretariaException; 
 
 }
