@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="proyectog-ear-0.0.1-SNAPSHOT">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
+        <dependent-module archiveName="proyectog-ejb-0.0.1-SNAPSHOT.jar" deploy-path="/" handle="module:/resource/proyectog-ejb/proyectog-ejb">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="proyectog-war-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/proyectog-war/proyectog-war">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-csv-1.6.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-csv/1.6/commons-csv-1.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="poi-5.0.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/poi/poi/5.0.0/poi-5.0.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="slf4j-api-1.7.30.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jcl-over-slf4j-1.7.30.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/slf4j/jcl-over-slf4j/1.7.30/jcl-over-slf4j-1.7.30.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-codec-1.15.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/commons-codec/commons-codec/1.15/commons-codec-1.15.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-collections4-4.4.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-math3-3.6.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SparseBitSet-1.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/zaxxer/SparseBitSet/1.2/SparseBitSet-1.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="poi-ooxml-5.0.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/poi/poi-ooxml/5.0.0/poi-ooxml-5.0.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="poi-ooxml-lite-5.0.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/poi/poi-ooxml-lite/5.0.0/poi-ooxml-lite-5.0.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xmlbeans-4.0.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlbeans/xmlbeans/4.0.0/xmlbeans-4.0.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-compress-1.20.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-compress/1.20/commons-compress-1.20.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="curvesapi-1.06.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/github/virtuald/curvesapi/1.06/curvesapi-1.06.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bcpkix-jdk15on-1.68.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/bouncycastle/bcpkix-jdk15on/1.68/bcpkix-jdk15on-1.68.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bcprov-jdk15on-1.68.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/bouncycastle/bcprov-jdk15on/1.68/bcprov-jdk15on-1.68.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xmlsec-2.2.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/santuario/xmlsec/2.2.1/xmlsec-2.2.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="woodstox-core-5.2.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/fasterxml/woodstox/woodstox-core/5.2.1/woodstox-core-5.2.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="stax2-api-4.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/codehaus/woodstox/stax2-api/4.2/stax2-api-4.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jakarta.xml.bind-api-2.3.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jakarta.activation-api-1.2.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-all-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-all/1.13/batik-all-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-anim-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-anim/1.13/batik-anim-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-shared-resources-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-shared-resources/1.13/batik-shared-resources-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xml-apis-ext-1.3.04.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/xml-apis/xml-apis-ext/1.3.04/xml-apis-ext-1.3.04.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-awt-util-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-awt-util/1.13/batik-awt-util-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xmlgraphics-commons-2.4.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/xmlgraphics-commons/2.4/xmlgraphics-commons-2.4.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-io-1.3.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/commons-io/commons-io/1.3.1/commons-io-1.3.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-bridge-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-bridge/1.13/batik-bridge-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-codec-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-codec/1.13/batik-codec-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-constants-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-constants/1.13/batik-constants-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-css-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-css/1.13/batik-css-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-dom-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-dom/1.13/batik-dom-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xalan-2.7.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/xalan/xalan/2.7.2/xalan-2.7.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="serializer-2.7.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/xalan/serializer/2.7.2/serializer-2.7.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xml-apis-1.4.01.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-ext-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-ext/1.13/batik-ext-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-extension-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-extension/1.13/batik-extension-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-gui-util-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-gui-util/1.13/batik-gui-util-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-gvt-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-gvt/1.13/batik-gvt-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-i18n-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-i18n/1.13/batik-i18n-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-parser-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-parser/1.13/batik-parser-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-rasterizer-ext-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-rasterizer-ext/1.13/batik-rasterizer-ext-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-rasterizer-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-rasterizer/1.13/batik-rasterizer-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-script-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-script/1.13/batik-script-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-slideshow-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-slideshow/1.13/batik-slideshow-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-squiggle-ext-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-squiggle-ext/1.13/batik-squiggle-ext-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-squiggle-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-squiggle/1.13/batik-squiggle-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-svg-dom-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-svg-dom/1.13/batik-svg-dom-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-svgbrowser-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-svgbrowser/1.13/batik-svgbrowser-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-svggen-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-svggen/1.13/batik-svggen-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-svgpp-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-svgpp/1.13/batik-svgpp-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-svgrasterizer-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-svgrasterizer/1.13/batik-svgrasterizer-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-swing-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-swing/1.13/batik-swing-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-transcoder-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-transcoder/1.13/batik-transcoder-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-util-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-util/1.13/batik-util-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-ttf2svg-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-ttf2svg/1.13/batik-ttf2svg-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="batik-xml-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-xml/1.13/batik-xml-1.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="graphics2d-0.30.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/de/rototor/pdfbox/graphics2d/0.30/graphics2d-0.30.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pdfbox-2.0.22.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/pdfbox/pdfbox/2.0.22/pdfbox-2.0.22.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="fontbox-2.0.22.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/pdfbox/fontbox/2.0.22/fontbox-2.0.22.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="anotaciones-0.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/es/uma/informatica/sii/anotaciones/0.0.1/anotaciones-0.0.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="aspose-cells-20.8.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/aspose/aspose-cells/20.8/aspose-cells-20.8.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
