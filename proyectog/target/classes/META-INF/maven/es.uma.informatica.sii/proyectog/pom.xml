@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>es.uma.informatica.sii</groupId>
+	<artifactId>proyectog</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	
+	<packaging>ejb</packaging>
+	
+	<name>Secretaria</name>
+	
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	  	<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	
+  	<dependencies>
+  		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.6</version>
+		</dependency>
+  	
+  		<dependency>
+			<groupId>org.glassfish.main.extras</groupId>
+			<artifactId>glassfish-embedded-all</artifactId>
+			<version>5.1.0</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>5.0.0</version>
+		</dependency>
+		
+  		<dependency>
+  			<groupId>javax</groupId>
+  			<artifactId>javaee-api</artifactId>
+  			<version>8.0</version>
+  			<scope>provided</scope>
+  		</dependency>
+  		
+  		<dependency>
+	    	<groupId>junit</groupId>
+	    	<artifactId>junit</artifactId>
+	    	<version>4.13</version>
+	    	<scope>test</scope>
+		</dependency>
+	
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>es.uma.informatica.sii</groupId>
+		    <artifactId>anotaciones</artifactId>
+		    <version>0.0.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.aspose</groupId>
+		    <artifactId>aspose-cells</artifactId>
+		    <version>20.8</version>
+		</dependency>
+  	</dependencies>
+  	
+  	<repositories>
+  		<repository>
+		    <id>AsposeJavaAPI</id>
+		    <name>Aspose Java API</name>
+		    <url>https://repository.aspose.com/repo/</url>
+		</repository>
+  	</repositories>
+  	
+  	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<configuration>
+					<ejbVersion>3.2</ejbVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
