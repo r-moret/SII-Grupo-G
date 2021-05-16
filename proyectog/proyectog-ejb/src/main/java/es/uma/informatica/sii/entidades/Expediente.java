@@ -35,7 +35,6 @@ public class Expediente implements Serializable {
 	private Alumno alumno;
 	
 	@OneToMany(mappedBy="expediente")
-	@JoinColumn(nullable=false)
 	private List<Matricula> matriculas;
 	
 	@OneToMany(mappedBy="expediente")

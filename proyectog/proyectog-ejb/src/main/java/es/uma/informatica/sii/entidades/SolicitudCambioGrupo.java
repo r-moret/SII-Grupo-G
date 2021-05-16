@@ -3,6 +3,7 @@ package es.uma.informatica.sii.entidades;
 import java.io.File;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -61,9 +62,11 @@ public class SolicitudCambioGrupo implements Serializable {
 
 	public SolicitudCambioGrupo() {
 		super();
+		documentacionAportada = new ArrayList<>();
 	}
 	
 	private Timestamp fechaRealizada;
+	@ElementCollection(targetClass=File.class)
 	private List<File> documentacionAportada;
 	
 	@Id
