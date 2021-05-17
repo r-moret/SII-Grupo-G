@@ -28,7 +28,6 @@
 		<scope>provided</scope>
 	</dependency>
 	
-
 	<dependency>
 		<groupId>es.uma.informatica.sii</groupId>
 		<artifactId>proyectog-ejb</artifactId>

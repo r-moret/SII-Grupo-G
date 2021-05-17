@@ -16,9 +16,10 @@
 		<class>es.uma.informatica.sii.entidades.DatosAlumnado</class>
 		<class>es.uma.informatica.sii.entidades.AsignaturasPorMatriculas</class>
 		<class>es.uma.informatica.sii.entidades.SolicitudCambioGrupo</class>
+		<class>es.uma.informatica.sii.entidades.Usuario</class>
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
-			<property name="javax.persistence.schema-generation.database.action" value="none"/>
+			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 		</properties>
 	</persistence-unit>
 </persistence>
