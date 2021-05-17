@@ -25,7 +25,7 @@ public class UsuarioEJB implements UsuarioInterface {
 	
 	@Override
 	public Usuario obtenerUsuarioByName(String userName) throws SecretariaException {
-		TypedQuery<Usuario> query = em.createQuery("SELECT * FROM Usuario u WHERE u.name = :pname", Usuario.class);
+		TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.name = :pname", Usuario.class);
 		query.setParameter("pname", userName);
 		
 		Usuario queryUser;
