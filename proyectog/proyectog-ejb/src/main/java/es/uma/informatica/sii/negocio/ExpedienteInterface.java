@@ -15,6 +15,8 @@ public interface ExpedienteInterface {
 	 * @param expediente
 	 * @throws SecretariaException
 	 */
-	public void actualizarExpediente(Expediente expediente) throws SecretariaException; 
+	public void actualizarExpediente(Expediente expediente) throws SecretariaException;
+
+	public void comprobarExpediente(Expediente expediente) throws SecretariaException;
 	
 }

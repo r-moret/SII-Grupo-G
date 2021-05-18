@@ -38,5 +38,19 @@ public class ExpedienteEJB implements ExpedienteInterface{
 		em.merge(expediente);	
 		
 	}
+	
+	public void comprobarExpediente(Expediente expediente) throws SecretariaException{
+		if(expediente == null) {
+			//Expediente no existe
+			throw new SecretariaException();
+		}
+		Expediente e = em.find(Expediente.class, expediente.getNumExpediente());
+		
+		if(e == null) {
+			//Epediente no existe en la BBDD
+			throw new ExpedienteInexistente();
+		}
+		
+	}
 
 }
