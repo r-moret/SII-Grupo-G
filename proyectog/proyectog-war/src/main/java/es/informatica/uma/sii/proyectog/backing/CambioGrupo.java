@@ -42,7 +42,7 @@ public class CambioGrupo {
 		listaGruposCurso.add(new SelectItem(1, "1A"));
 		listaGruposCurso.add(new SelectItem(2, "3B"));
 		
-		
+		expediente = new Expediente();
 	}
 
 	public File getUploadedFile() {
@@ -90,24 +90,25 @@ public class CambioGrupo {
 	
 	public String enviar() {
 		// Faltaria hacer comprobaciones etc
-		return "faces/welcome.xhtml";
+		return "welcome.xhtml";
 	}
 	
 	public String entrar() {
 		
 		try {
-			ExpedienteEJB.comprobarExpediente(expediente);
-			return "faces/changeRequest.xhtml";
+			//ExpedienteEJB.comprobarExpediente(expediente);
+			return "changeRequest.xhtml";
 		}
-		catch(ExpedienteInexistente e) {
-			FacesMessage fm = new FacesMessage("El expediente no existe");
-            FacesContext.getCurrentInstance().addMessage("login:expediente", fm);
-		}
-
-		catch(SecretariaException e) {
-			FacesMessage fm = new FacesMessage("Error: " + e);
-			FacesContext.getCurrentInstance().addMessage(null, fm);
-		}
+//		catch(ExpedienteInexistente e) {
+//			FacesMessage fm = new FacesMessage("El expediente no existe");
+//            FacesContext.getCurrentInstance().addMessage("login:expediente", fm);
+//		}
+//
+//		catch(SecretariaException e) {
+//			FacesMessage fm = new FacesMessage("Error: " + e);
+//			FacesContext.getCurrentInstance().addMessage(null, fm);
+//		}
+		catch(Exception e) {}
 		
 		return null;
 		

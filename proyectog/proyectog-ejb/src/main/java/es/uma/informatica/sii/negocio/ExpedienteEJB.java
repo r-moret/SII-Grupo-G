@@ -39,6 +39,7 @@ public class ExpedienteEJB implements ExpedienteInterface{
 		
 	}
 	
+	@Override
 	public void comprobarExpediente(Expediente expediente) throws SecretariaException{
 		if(expediente == null) {
 			//Expediente no existe
