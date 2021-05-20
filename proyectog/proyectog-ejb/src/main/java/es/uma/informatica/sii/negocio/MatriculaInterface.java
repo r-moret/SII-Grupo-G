@@ -35,7 +35,7 @@ public interface MatriculaInterface {
 	 *  Lista todo el conjunto de matriculas
 	 *  @throws SecretariaException
 	 */ 
-	public Set<Matricula> consultarMatriculas() throws SecretariaException;
+	public List<Matricula> consultarMatriculas() throws SecretariaException;
 	
 	/** 
 	 *  REQUISITO: RF-10 

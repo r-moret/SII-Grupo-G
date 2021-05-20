@@ -89,12 +89,11 @@ public class MatriculaEJB implements MatriculaInterface {
 	}
 
 	@Override
-	public Set<Matricula> consultarMatriculas() throws SecretariaException {
+	public List<Matricula> consultarMatriculas() throws SecretariaException {
 
 		List<Matricula> lm = em.createQuery("SELECT m FROM Matricula m", Matricula.class).getResultList();
-		Set<Matricula> sm = new HashSet<Matricula>(lm);
 		
-		return sm;
+		return lm;
 	}
 
 	@Override

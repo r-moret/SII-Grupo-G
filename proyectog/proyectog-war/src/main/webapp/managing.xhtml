@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"/>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"/>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"/>
+		<script type="text/javascript" src="./scripts/pagination.js"/>
+		
+		<title>Secretaría</title>
+	</h:head>
+	
+	<h:body class="bg-image vh-100 d-flex flex-column" style="background-image: url('./images/background-etsii.png')">
+		
+		<header> 
+			<nav class="navbar navbar-expand-lg transparent">
+				<div class="container-fluid">
+	    			<a class="nav-link" style="color: white; font-weight: bold;" href="welcome.xhtml">Inicio</a>
+	  			</div>
+			</nav>
+			
+			<div class="row m-0">
+				<div class="col"></div>
+				<div class="col-8">
+					<div class="row m-0">
+						<div class="d-flex mb-3 justify-content-center">
+							<h1 class="text-light">Universidad de Málaga</h1>
+						</div>
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		</header>
+		
+		<div class="container">
+			<div class="row m-0">
+				<div class="col p-0"></div>
+				<div class="col-12 py-3 rounded bg-light">
+					<div class="row m-0">
+						<div class="d-flex mb-3 justify-content-center">
+							<h3>Portal Secretaría</h3>
+						</div>
+					</div>
+					
+					<div class="row m-3">
+						<ul class="nav nav-tabs" id="myTab" role="tablist">
+						  	<li class="nav-item" role="presentation">
+						    	<button class="nav-link active" id="matriculas-tab" data-bs-toggle="tab" data-bs-target="#matriculas" type="button" role="tab" aria-controls="matriculas" aria-selected="true">Matrículas</button>
+						  	</li>
+						  	<li class="nav-item" role="presentation">
+						    	<button class="nav-link" id="grupos-tab" data-bs-toggle="tab" data-bs-target="#grupos" type="button" role="tab" aria-controls="grupos" aria-selected="false">Grupos</button>
+						  	</li>
+						  	<li class="nav-item" role="presentation">
+						    	<button class="nav-link" id="expedientes-tab" data-bs-toggle="tab" data-bs-target="#expedientes" type="button" role="tab" aria-controls="expedientes" aria-selected="false">Expedientes</button>
+						  	</li>
+						  	<li class="nav-item" role="presentation">
+						    	<button class="nav-link" id="alumnos-tab" data-bs-toggle="tab" data-bs-target="#alumnos" type="button" role="tab" aria-controls="alumnos" aria-selected="false">Alumnos</button>
+						  	</li>
+						  	<li class="nav-item" role="presentation">
+						    	<button class="nav-link" id="asignaturas-tab" data-bs-toggle="tab" data-bs-target="#asignaturas" type="button" role="tab" aria-controls="asignaturas" aria-selected="false">Asignaturas</button>
+						  	</li>
+						</ul>
+						<div class="tab-content px-0" id="myTabContent">
+						  	<div class="tab-pane fade show mt-3 active" id="matriculas" role="tabpanel" aria-labelledby="matriculas-tab">
+						  		<h:dataTable id="matriculas-table" class="table table-striped" value="#{managing.matriculas}" var="matricula">				   
+								   	<h:column>
+								      	<f:facet name = "header">Expediente</f:facet>
+								      	<h:outputText value="#{matricula.expediente.numExpediente}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Núm. archivo</f:facet>
+								      	<h:outputText value="#{matricula.numArchivo}"/>
+								   	</h:column>
+								   	
+								   	<h:column>    				
+								    	<f:facet name = "header">Curso</f:facet>    				
+								      	<h:outputText value="#{matricula.cursoAcademico}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Fecha matriculación</f:facet>
+								      	<h:outputText value="#{matricula.fechaMatricula}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Estado</f:facet>
+								      	<h:outputText value="#{matricula.estado}"/>
+								   	</h:column>								   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Nuevo ingreso</f:facet>
+								      	<h:outputText value="#{matricula.nuevoIngreso}"/>
+								   	</h:column>								   									   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Turno</f:facet>
+								      	<h:outputText value="#{matricula.turnoPreferente}"/>
+								   	</h:column>
+								</h:dataTable>
+						  	</div>
+						  	<div class="tab-pane fade" id="grupos" role="tabpanel" aria-labelledby="grupos-tab">
+						  		GRUPOS
+						  	</div>
+						  	<div class="tab-pane fade" id="expedientes" role="tabpanel" aria-labelledby="expedientes-tab">
+						  		EXPEDIENTES
+						  	</div>
+						  	<div class="tab-pane fade" id="alumnos" role="tabpanel" aria-labelledby="alumnos-tab">
+						  		ALUMNOS
+						  	</div>
+						  	<div class="tab-pane fade" id="asignaturas" role="tabpanel" aria-labelledby="asignaturas-tab">
+						  		ASIGNATURAS
+						  	</div>
+						</div>
+					</div>
+				</div>
+				<div class="col p-0"></div>
+			</div>
+		</div>
+		
+		<footer class="row m-0 mt-auto">
+			<div class="col">
+				<p class="text-light m-0 py-2 text-center">2021 &copy; proyectog. Sistemas de la Información para Internet</p>
+			</div>
+		</footer>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"/>
+	</h:body>
+
+</html>

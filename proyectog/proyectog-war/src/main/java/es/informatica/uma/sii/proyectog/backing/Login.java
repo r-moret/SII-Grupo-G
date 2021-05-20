@@ -33,7 +33,7 @@ public class Login {
 		
 		try {
 			usuarioEJB.comprobarLogin(user);
-			return "faces/welcome.xhtml";
+			return "managing.xhtml";
 		}
 		catch(UsuarioInexistente e) {
 			FacesMessage fm = new FacesMessage("El usuario no existe");
