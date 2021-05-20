@@ -1,6 +1,9 @@
 package es.informatica.uma.sii.proyectog.backing;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 
 @Named(value="cambioGrupo")
 @RequestScoped
@@ -31,7 +35,8 @@ public class CambioGrupo {
 	
 	private String grupoActual;
 	private String grupoElegido;
-	private File uploadedFile;
+	private Part uploadedFile;
+	private String folder = "/home/alumno/Documentos";
 	
 	public CambioGrupo() {
 		listaGrupoUsuario = new ArrayList<SelectItem>();
@@ -46,11 +51,11 @@ public class CambioGrupo {
 
 	}
 
-	public File getUploadedFile() {
+	public Part getUploadedFile() {
 		return uploadedFile;
 	}
 
-	public void setUploadedFile(File uploadedFile) {
+	public void setUploadedFile(Part uploadedFile) {
 		this.uploadedFile = uploadedFile;
 	}
 	public List<SelectItem> getListaGrupoUsuario() {
@@ -85,7 +90,14 @@ public class CambioGrupo {
 	}
 	
 	public String enviar() {
-		// Faltaria hacer comprobaciones etc
+
+		try (InputStream input = uploadedFile.getInputStream()) {
+			String fileName = uploadedFile.getSubmittedFileName();
+	        Files.copy(input, new File(folder, fileName).toPath());
+	    }
+	    catch (IOException e) {
+	        
+	    }
 		return "welcome.xhtml";
 	}
 	

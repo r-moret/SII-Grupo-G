@@ -53,11 +53,23 @@
 					</div>
 					
 					<div class="row m-3">
-						<h:form>
-							<:dataTable values="#{encuesta.lista}" var="datos" >
-								
-							</:dataTable>
-						</h:form>
+						<div class="tab-content px-0" id="myTabContentSurvey">
+						  	<div class="tab-pane fade show mt-3 active" id="Survey" role="tabpanel" aria-labelledby="survey-tab">
+						  		<h:dataTable id="survey-table" class="table table-striped" value="#{survey.listaAsignaturas}" var="asignaturas">				   
+								   	<h:column>
+								      	<f:facet name = "header">Curso</f:facet>
+								      	<h:outputText value="#{}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Grupo</f:facet>
+								      	<h:outputText value="#{matricula.numArchivo}"/> 
+								   	</h:column>
+								   
+								</h:dataTable>
+						  	</div>
+						  
+						</div>
 					</div>
 				</div>
 				<div class="col p-0"></div>

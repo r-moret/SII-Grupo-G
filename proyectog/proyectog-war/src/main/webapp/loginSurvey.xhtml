@@ -13,7 +13,7 @@
 		
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
 		
-		<title>LoginCambioGrupo</title>
+		<title>LoginEncuesta</title>
 	</h:head>
 	
 	<h:body class="bg-image vh-100 d-flex flex-column" style="background-image: url('./images/background-etsii.png')">
@@ -48,14 +48,14 @@
 						</div>
 					</div>
 					
-					<h:form id="login" class="mx-4">
+					<h:form id="loginSurvey" class="mx-4">
 						<div class="form-group">
-						  	<label for="expediente">Número de expediente</label>
-						  	<h:inputText class="form-control" id="expediente" aria-describedby="userDescription" value="#{encuesta.expediente.numExpediente}" p:placeholder="Expediente"/>
-						  	<h:message class="ms-1 text-danger" for="expediente"/>
+						  	<label for="expedienteSurvey">Número de expediente</label>
+						  	<h:inputText class="form-control" id="expedienteSurvey" aria-describedby="userDescription" value="#{encuestaAlum.expediente.numExpediente}" p:placeholder="Expediente"/>
+						  	<h:message class="ms-1 text-danger" for="expedienteSurvey"/>
 						</div>
 						<div class="d-flex justify-content-center mt-3">
-							<h:commandButton value="Entrar" action="#{encuesta.entrar}" class="col-5 btn btn-outline-dark"/>
+							<h:commandButton value="Entrar" action="#{encuestaAlum.entrar}" class="col-5 btn btn-outline-dark"/>
 						</div>
 					</h:form>
 					
