@@ -10,7 +10,6 @@ import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.negocio.ExpedienteInterface;
 
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -31,9 +30,10 @@ public class CambioGrupo {
 	private Expediente expediente;
 	
 	private String grupoActual;
+	private String grupoElegido;
+	private File uploadedFile;
 	
-	@PostConstruct
-	public void init() {
+	public CambioGrupo() {
 		listaGrupoUsuario = new ArrayList<SelectItem>();
 		listaGrupoUsuario.add(new SelectItem(1, "3C"));
 		listaGrupoUsuario.add(new SelectItem(2, "2B"));
@@ -43,6 +43,7 @@ public class CambioGrupo {
 		listaGruposCurso.add(new SelectItem(2, "3B"));
 		
 		expediente = new Expediente();
+
 	}
 
 	public File getUploadedFile() {
@@ -52,11 +53,6 @@ public class CambioGrupo {
 	public void setUploadedFile(File uploadedFile) {
 		this.uploadedFile = uploadedFile;
 	}
-
-	private String grupoElegido;
-	private File uploadedFile;
-	
-
 	public List<SelectItem> getListaGrupoUsuario() {
 		return listaGrupoUsuario;
 	}
@@ -96,18 +92,18 @@ public class CambioGrupo {
 	public String entrar() {
 		
 		try {
-			//ExpedienteEJB.comprobarExpediente(expediente);
+			ExpedienteEJB.comprobarExpediente(expediente);
 			return "changeRequest.xhtml";
 		}
-//		catch(ExpedienteInexistente e) {
-//			FacesMessage fm = new FacesMessage("El expediente no existe");
-//            FacesContext.getCurrentInstance().addMessage("login:expediente", fm);
-//		}
-//
-//		catch(SecretariaException e) {
-//			FacesMessage fm = new FacesMessage("Error: " + e);
-//			FacesContext.getCurrentInstance().addMessage(null, fm);
-//		}
+		catch(ExpedienteInexistente e) {
+			FacesMessage fm = new FacesMessage("El expediente no existe");
+            FacesContext.getCurrentInstance().addMessage("login:expediente", fm);
+		}
+
+		catch(SecretariaException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
 		catch(Exception e) {}
 		
 		return null;

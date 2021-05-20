@@ -50,9 +50,12 @@
 					</div>
 		
 				</div>
-				
+			
 				<h:form class="mx-4">
-					<div class="form-group">
+					<div class="d-flex form-group justify-content-center">
+						<h:outputText value="Número de expediente: #{cambioGrupo.expediente.numExpediente}"></h:outputText>
+  					</div>
+ 					<div class="form-group mt-3">
 						<label for="grupoActual">Grupo actual</label>
 						<h:selectOneMenu class="form-select" value="#{cambioGrupo.grupoActual}">
 	    					<f:selectItems value="#{cambioGrupo.listaGrupoUsuario}" />
@@ -68,10 +71,9 @@
   					
   					<div class="form-group mt-3">
 						<label for="addFile">Adjuntar archivo justificante</label>
-						<h:inputFile class="form-control" value="#{bean.uploadedFile}">
-        					<f:ajax listener="#{bean.upload}" />
-   					 	</h:inputFile>
-  					</div>
+							<h:inputFile id="file" class="form-control" value="#{cambioGrupo.uploadedFile}">
+   					 		</h:inputFile>
+  					</div> 
   					
   					<div class="mt-3 d-flex justify-content-center">
 						<h:commandButton value="Enviar" action="#{cambioGrupo.enviar}" class="col-5 btn btn-outline-dark"/>
