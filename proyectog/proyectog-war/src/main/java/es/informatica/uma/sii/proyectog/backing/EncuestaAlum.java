@@ -17,7 +17,7 @@ import es.uma.informatica.sii.entidades.Titulacion;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.negocio.ExpedienteInterface;
-import es.uma.informatica.sii.negocio.MatriculaInterface;
+
 
 @Named(value="encuestaAlum")
 @RequestScoped
@@ -28,11 +28,57 @@ public class EncuestaAlum {
 	
 	private Expediente expediente;
 	
+	// Lista grande donde cada fila es un curso donde dentro contiene las asignaturas de ese curso
 	private List<List<Asignatura>> listaAsignaturas;
 	
+	private List<String> cursos;
+	private int indexCurso;
+	
+	private String grupoElegido;
+	private List<String> gruposElegidos;
+	
+	private List<List<String>> grupos;
+	private int indexGrupos;
+	
+	private String grupoElegidoIngles;
+	
+	private List<String> gruposIngles;
+
+	private boolean tardeElegida;
+	private boolean idiomaElegido;
+	
 	public EncuestaAlum() {
+	
+		gruposIngles = new ArrayList<String>();
+		gruposIngles.add("Grupo A");
+		gruposIngles.add("Grupo B");
+		
+		cursos = new ArrayList<String>();
+		cursos.add("1");
+		cursos.add("2");
+		indexCurso = 0;
+		
+		gruposElegidos = new ArrayList<String>();
+		
+		grupos = new ArrayList<List<String>>();
+		indexGrupos = 0;
+		List<String> grupo1 = new ArrayList<String>();
+		grupo1.add("1A");
+		grupo1.add("1B");
+		
+		List<String> grupo2 = new ArrayList<String>();
+		grupo2.add("2A");
+		grupo2.add("2B");
+		
+		grupos.add(grupo1);
+		grupos.add(grupo2);
+		
+		
+		
+		
 		expediente = new Expediente();
 		listaAsignaturas = new ArrayList<List<Asignatura>>();
+		
 		
 		
 		Titulacion tit = new Titulacion();
@@ -59,12 +105,131 @@ public class EncuestaAlum {
 		asig1.setNombre("Cálculo");
 		asig1.setPlazas(1);
 		asig1.setTitulacion(tit);
+		asig1.setIdioma("ingles");
 		
 		lista1.add(asig1);
+		
+		
+		Asignatura asig3 = new Asignatura();
+		asig3.setReferencia(3);
+		asig3.setCodigo(3);
+		asig3.setCreditos(3);
+		asig3.setOfertada(true);
+		asig3.setNombre("Estadística");
+		asig3.setPlazas(3);
+		asig3.setTitulacion(tit);
+		
+		lista1.add(asig3);
+		
+		Asignatura asig4 = new Asignatura();
+		asig4.setReferencia(4);
+		asig4.setCodigo(4);
+		asig4.setCreditos(4);
+		asig4.setOfertada(true);
+		asig4.setNombre("Discreta");
+		asig4.setPlazas(4);
+		asig4.setTitulacion(tit);
+		asig4.setIdioma("ingles");
+		
+		lista1.add(asig4);
+		
 		listaAsignaturas.add(lista1);
+		
+		List<Asignatura> lista2 = new ArrayList<Asignatura>();
+		Asignatura asig2 = new Asignatura();
+		asig2.setReferencia(2);
+		asig2.setCodigo(2);
+		asig2.setCreditos(2);
+		asig2.setOfertada(true);
+		asig2.setNombre("Java");
+		asig2.setPlazas(2);
+		asig2.setTitulacion(tit);
+		asig2.setIdioma("ingles");
+		
+		lista2.add(asig2);
+		listaAsignaturas.add(lista2);
 		
 	}
 	
+	
+
+	public boolean isTardeElegida() {
+		return tardeElegida;
+	}
+
+
+
+	public void setTardeElegida(boolean tardeElegida) {
+		this.tardeElegida = tardeElegida;
+	}
+
+
+
+	public List<String> getGruposIngles() {
+		return gruposIngles;
+	}
+
+
+
+	public void setGruposIngles(List<String> gruposIngles) {
+		this.gruposIngles = gruposIngles;
+	}
+
+
+
+	public String getGrupoElegidoIngles() {
+		return grupoElegidoIngles;
+	}
+
+
+
+	public void setGrupoElegidoIngles(String grupoElegidoIngles) {
+		this.grupoElegidoIngles = grupoElegidoIngles;
+	}
+
+	public boolean isIdiomaElegido() {
+		return idiomaElegido;
+	}
+
+
+
+	public void setIdiomaElegido(boolean idiomaElegido) {
+		this.idiomaElegido = idiomaElegido;
+	}
+
+
+
+	public List<String> getGrupos() {
+		List<String> res =  new ArrayList<String>();
+		res = grupos.get(indexGrupos);
+		indexGrupos++;
+		return res;
+	}
+
+	public void setGrupos(List<List<String>> grupos) {
+		this.grupos = grupos;
+	}
+
+	public String getGrupoElegido() {
+		return grupoElegido;
+	}
+
+	public void setGrupoElegido(String grupoElegido) {
+		
+		this.grupoElegido = grupoElegido;
+		gruposElegidos.add(grupoElegido);
+	}
+
+	public String getCursos() {
+		String res = cursos.get(indexCurso);
+		indexCurso++;
+		return res;
+	}
+
+	public void setCursos(List<String> cursos) {
+		this.cursos = cursos;
+	}
+
 	public List<List<Asignatura>> getListaAsignaturas() {
 		return listaAsignaturas;
 	}
