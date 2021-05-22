@@ -18,6 +18,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -82,6 +83,7 @@ public class TestDatosEJB {
 
 	@Requisitos({"RF8"})
 	@Test
+	@Ignore
 	public void testAlumnosLeidos() {
 		String ficheroAlumnos = "target/test-classes/files/alumnos.xlsx";
 		
@@ -113,6 +115,7 @@ public class TestDatosEJB {
 	
 	@Requisitos({"RF8"})
 	@Test
+	@Ignore
 	public void testGruposLeidos() {
 		String ficheroGrupos = "target/test-classes/files/grupos.xlsx";
 		
@@ -144,6 +147,7 @@ public class TestDatosEJB {
 	
 	@Requisitos({"RF8"})
 	@Test
+	@Ignore
 	public void testExpedientesLeidos() {
 		String ficheroExpedientes = "target/test-classes/files/expedientes.xlsx";
 		
@@ -175,6 +179,7 @@ public class TestDatosEJB {
 	
 	@Requisitos({"RF8"})
 	@Test
+	@Ignore
 	public void testAsignaturasLeidas() {
 		String ficheroAsignaturas = "target/test-classes/files/asignaturas.xlsx";
 		

@@ -194,4 +194,10 @@ public class GrupoEJB implements GrupoInterface{
 
 		em.merge(grupo);	
 	}
+	
+	@Override
+	public List<Grupo> consultarGrupos() throws SecretariaException {
+		List<Grupo> lg = em.createQuery("SELECT g FROM Grupo g", Grupo.class).getResultList();
+		return lg;
+	}
 }

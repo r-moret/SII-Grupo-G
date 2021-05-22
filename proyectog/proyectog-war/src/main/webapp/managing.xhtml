@@ -110,16 +110,170 @@
 								</h:dataTable>
 						  	</div>
 						  	<div class="tab-pane fade" id="grupos" role="tabpanel" aria-labelledby="grupos-tab">
-						  		GRUPOS
+						 	<h:dataTable id="grupos-table" class="table table-striped" value="#{managing.grupos}" var="grupo">				   
+									<h:column>
+								      	<f:facet name = "header">ID</f:facet>
+								      	<h:outputText value="#{grupo.id}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Curso</f:facet>
+								      	<h:outputText value="#{grupo.curso}"/>
+								   	</h:column>
+								   	
+								   	<h:column>    				
+								    	<f:facet name = "header">Letra</f:facet>    				
+								      	<h:outputText value="#{grupo.letra}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Turno</f:facet>
+								      	<h:outputText value="#{grupo.turno}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Ingles</f:facet>
+								      	<h:outputText value="#{grupo.ingles}"/>
+								   	</h:column>								   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Visible</f:facet>
+								      	<h:outputText value="#{grupo.visible}"/>
+								   	</h:column>								   									   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Asignar</f:facet>
+								      	<h:outputText value="#{grupo.asignar}"/>
+								   	</h:column>
+								   	<h:column>
+								      	<f:facet name = "header">Plazas</f:facet>
+								      	<h:outputText value="#{grupo.plazas}"/>
+								   	</h:column>
+								</h:dataTable>
 						  	</div>
 						  	<div class="tab-pane fade" id="expedientes" role="tabpanel" aria-labelledby="expedientes-tab">
-						  		EXPEDIENTES
+							<h:dataTable id="expedientes-table" class="table table-striped" value="#{managing.expedientes}" var="expediente">				   
+									<h:column>
+								      	<f:facet name = "header">Expediente</f:facet>
+								      	<h:outputText value="#{expediente.numExpediente}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Activo</f:facet>
+								      	<h:outputText value="#{expediente.activo}"/>
+								   	</h:column>
+								   									   	
+								   	<h:column>
+								      	<f:facet name = "header">Nota media</f:facet>
+								      	<h:outputText value="#{expediente.notaMediaProvisional}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Alumno</f:facet>
+								      	<h:outputText value="#{expediente.alumno.id}"/>
+								   	</h:column>								   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Titulación</f:facet>
+								      	<h:outputText value="#{expediente.titulacion.codigo}"/>
+								   	</h:column>								   									   
+								</h:dataTable>
 						  	</div>
 						  	<div class="tab-pane fade" id="alumnos" role="tabpanel" aria-labelledby="alumnos-tab">
-						  		ALUMNOS
+							<h:dataTable id="alumnos-table" class="table table-striped" value="#{managing.alumnos}" var="alumno">				   
+									<h:column>
+								      	<f:facet name = "header">ID</f:facet>
+								      	<h:outputText value="#{alumno.id}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">DNI</f:facet>
+								      	<h:outputText value="#{alumno.dni}"/>
+								   	</h:column>
+								   	
+								   	<h:column>    				
+								    	<f:facet name = "header">Nombre</f:facet>    				
+								      	<h:outputText value="#{alumno.nombreCompleto}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Email institucional</f:facet>
+								      	<h:outputText value="#{alumno.emailInstitucional}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Email personal</f:facet>
+								      	<h:outputText value="#{alumno.emailPersonal}"/>
+								   	</h:column>								   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Móvil</f:facet>
+								      	<h:outputText value="#{alumno.movil}"/>
+								   	</h:column>								   									   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Teléfono</f:facet>
+								      	<h:outputText value="#{alumno.telefono}"/>
+								   	</h:column>
+								</h:dataTable>
 						  	</div>
 						  	<div class="tab-pane fade" id="asignaturas" role="tabpanel" aria-labelledby="asignaturas-tab">
-						  		ASIGNATURAS
+						  		<h:dataTable id="asignaturas-table" class="table table-striped" value="#{managing.asignaturas}" var="asignatura">				   
+									<h:column>
+								      	<f:facet name = "header">Referencia</f:facet>
+								      	<h:outputText value="#{asignatura.referencia}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Nombre</f:facet>
+								      	<h:outputText value="#{asignatura.nombre}"/>
+								   	</h:column>
+								   	
+								   	<h:column>    				
+								    	<f:facet name = "header">Código</f:facet>    				
+								      	<h:outputText value="#{asignatura.codigo}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Curso</f:facet>
+								      	<h:outputText value="#{asignatura.curso}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Créditos</f:facet>
+								      	<h:outputText value="#{asignatura.creditos}"/>
+								   	</h:column>								   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Ofertada</f:facet>
+								      	<h:outputText value="#{asignatura.ofertada}"/>
+								   	</h:column>								   									   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Carácter</f:facet>
+								      	<h:outputText value="#{asignatura.caracter}"/>
+								   	</h:column>
+								   
+								  	<h:column>
+								      	<f:facet name = "header">Plazas</f:facet>
+								      	<h:outputText value="#{asignatura.plazas}"/>
+								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Cuatrimestre</f:facet>
+								      	<h:outputText value="#{asignatura.cuatrimestre}"/>
+								   	</h:column>								   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Idioma</f:facet>
+								      	<h:outputText value="#{asignatura.idioma}"/>
+								   	</h:column>								   									   
+								   	
+								   	<h:column>
+								      	<f:facet name = "header">Duración</f:facet>
+								      	<h:outputText value="#{asignatura.duracion}"/>
+								   	</h:column>
+								</h:dataTable>
 						  	</div>
 						</div>
 					</div>
