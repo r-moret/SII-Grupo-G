@@ -97,14 +97,12 @@
 								   	
 								   	<h:column>
 								      	<f:facet name = "header">Estado</f:facet>
-<!-- 								      	<h:outputText value="#{matricula.estado}"/> -->
 								      	<h:outputText class="fa fa-check fa-lg" rendered="#{matricula.estado}"/>
 								      	<h:outputText class="fa fa-times fa-lg" rendered="#{not matricula.estado}"/>
 								   	</h:column>								   
 								   	
 								   	<h:column>
 								      	<f:facet name = "header">Nuevo ingreso</f:facet>
-<!-- 								      	<h:outputText value="#{matricula.nuevoIngreso}"/> -->
 								      	<h:outputText class="fa fa-check fa-lg" rendered="#{matricula.nuevoIngreso}"/>
 								      	<h:outputText class="fa fa-times fa-lg" rendered="#{not matricula.nuevoIngreso}"/>
 								   	</h:column>								   									   
@@ -115,12 +113,12 @@
 								   	</h:column>
 								   	
 								   	<h:column>
-								      	<f:facet name = "header"></f:facet>
-								      	<a class="me-1" href="welcome.xhtml"><span class="fa fa-search fa-lg" aria-hidden="true"></span></a>
-<!-- 								      	<a class="text-danger" href="welcome.xhtml"><span class="fa fa-trash-o fa-lg" aria-hidden="true"></span></a> -->
-										<h:commandButton class="text-danger" action="#{managing.deleteMatricula}">
-											<span class="fa fa-trash-o fa-lg" aria-hidden="true"/>
-										</h:commandButton>
+								      	<f:facet name = "header">Ver matrícula</f:facet>
+								      	<h:form>
+								      		<h:commandLink class="me-1" id="inspect-button" action="#{inspectMatricula.inspect(matricula)}">
+									      		<span class="fa fa-search fa-lg" aria-hidden="true"/>
+								      		</h:commandLink>
+								      	</h:form>
 								   	</h:column>
 								</h:dataTable>
 						  	</div>
