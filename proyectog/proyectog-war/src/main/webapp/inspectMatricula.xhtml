@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<h:head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	
+		<title>Matrícula</title>
+	</h:head>
+	
+	<h:body class="bg-image vh-100 d-flex flex-column" style="background-image: url('./images/background-etsii.png')">
+	
+		<header> 
+			<nav class="navbar navbar-expand-lg transparent">
+				<div class="container-fluid">
+	    			<a class="nav-link" style="color: white; font-weight: bold;" href="welcome.xhtml">Inicio</a>
+	  			</div>
+			</nav>
+			
+			<div class="row m-0">
+				<div class="col"></div>
+				<div class="col-8">
+					<div class="row m-0">
+						<div class="d-flex mb-3 justify-content-center">
+							<h1 class="text-light">Universidad de Málaga</h1>
+						</div>
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		</header>
+	
+		<div class="container">
+			<div class="row m-0">
+				<div class="col p-0"></div>
+				<div class="col-12 py-3 rounded bg-light">
+					<div class="row m-0">
+						<div class="d-flex mb-3 justify-content-center">
+							<h3>Matrícula</h3>
+						</div>
+					</div>
+					
+					<div class="row">
+						<h:outputText value="#{inspectMatricula.matricula.cursoAcademico}"></h:outputText>
+					</div>
+				</div>
+				<div class="col p-0"></div>
+			</div>
+		</div>
+		
+		<footer class="row m-0 mt-auto">
+			<div class="col">
+				<p class="text-light m-0 py-2 text-center">2021 &copy; proyectog. Sistemas de la Información para Internet</p>
+			</div>
+		</footer>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"/>
+	</h:body>
+				
+
+</html>

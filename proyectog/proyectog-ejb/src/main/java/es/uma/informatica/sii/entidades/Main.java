@@ -10,6 +10,8 @@ public class Main {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("proyectog-jpa");
 		EntityManager em = emf.createEntityManager();
 		
+		String query = "DELETE * FROM DatosAlumnado;";
+		
 		em.close();
 		emf.close();
 	}
