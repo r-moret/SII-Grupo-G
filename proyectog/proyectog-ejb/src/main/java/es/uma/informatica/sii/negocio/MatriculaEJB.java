@@ -1,8 +1,6 @@
 package es.uma.informatica.sii.negocio;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -132,7 +130,9 @@ public class MatriculaEJB implements MatriculaInterface {
 		} else {
 			em.remove(em.merge(m.getAsignaturasPorMatriculas().get(cont)));
 		}
-
-
+	}
+	
+	public void eliminarMatricula(Matricula matricula) {
+		em.remove(em.merge(matricula));
 	}
 }

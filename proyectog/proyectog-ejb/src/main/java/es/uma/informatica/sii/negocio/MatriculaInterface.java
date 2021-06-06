@@ -5,7 +5,6 @@ import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Local;
 
@@ -43,4 +42,6 @@ public interface MatriculaInterface {
 	 */ 
 	//Añadir este requisito
 	public void desmatricularAsignatura(Matricula matricula, Asignatura asignatura) throws SecretariaException;
+	
+	public void eliminarMatricula(Matricula matricula);
 }

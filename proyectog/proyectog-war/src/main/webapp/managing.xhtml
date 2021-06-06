@@ -12,6 +12,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+		
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"/>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"/>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"/>
@@ -72,7 +74,7 @@
 						</ul>
 						<div class="tab-content px-0" id="myTabContent">
 						  	<div class="tab-pane fade show mt-3 active" id="matriculas" role="tabpanel" aria-labelledby="matriculas-tab">
-						  		<h:dataTable id="matriculas-table" class="table table-striped" value="#{managing.matriculas}" var="matricula">				   
+						  		<h:dataTable id="matriculas-table" class="table table-striped" headerClass="text-center" columnClasses="text-center,text-center,text-center,text-center,text-center,text-center,text-center,text-center" value="#{managing.matriculas}" var="matricula">				   
 								   	<h:column>
 								      	<f:facet name = "header">Expediente</f:facet>
 								      	<h:outputText value="#{matricula.expediente.numExpediente}"/>
@@ -95,19 +97,34 @@
 								   	
 								   	<h:column>
 								      	<f:facet name = "header">Estado</f:facet>
-								      	<h:outputText value="#{matricula.estado}"/>
+<!-- 								      	<h:outputText value="#{matricula.estado}"/> -->
+								      	<h:outputText class="fa fa-check fa-lg" rendered="#{matricula.estado}"/>
+								      	<h:outputText class="fa fa-times fa-lg" rendered="#{not matricula.estado}"/>
 								   	</h:column>								   
 								   	
 								   	<h:column>
 								      	<f:facet name = "header">Nuevo ingreso</f:facet>
-								      	<h:outputText value="#{matricula.nuevoIngreso}"/>
+<!-- 								      	<h:outputText value="#{matricula.nuevoIngreso}"/> -->
+								      	<h:outputText class="fa fa-check fa-lg" rendered="#{matricula.nuevoIngreso}"/>
+								      	<h:outputText class="fa fa-times fa-lg" rendered="#{not matricula.nuevoIngreso}"/>
 								   	</h:column>								   									   
 								   	
 								   	<h:column>
 								      	<f:facet name = "header">Turno</f:facet>
 								      	<h:outputText value="#{matricula.turnoPreferente}"/>
 								   	</h:column>
+								   	
+								   	<h:column>
+								      	<f:facet name = "header"></f:facet>
+								      	<a class="me-1" href="welcome.xhtml"><span class="fa fa-search fa-lg" aria-hidden="true"></span></a>
+<!-- 								      	<a class="text-danger" href="welcome.xhtml"><span class="fa fa-trash-o fa-lg" aria-hidden="true"></span></a> -->
+										<h:commandButton class="text-danger" action="#{managing.deleteMatricula}">
+											<span class="fa fa-trash-o fa-lg" aria-hidden="true"/>
+										</h:commandButton>
+								   	</h:column>
 								</h:dataTable>
+								<p>#{managing.deleteMatricula}</p>
+								<p>HOLAAA</p>
 						  	</div>
 						  	<div class="tab-pane fade" id="grupos" role="tabpanel" aria-labelledby="grupos-tab">
 						  		GRUPOS

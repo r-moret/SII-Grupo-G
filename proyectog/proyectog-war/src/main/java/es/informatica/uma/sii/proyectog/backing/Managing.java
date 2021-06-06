@@ -9,7 +9,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.negocio.MatriculaInterface;
@@ -22,9 +21,11 @@ public class Managing {
 	private MatriculaInterface matriculaEJB;
 	
 	private List<Matricula> matriculas;
+	private Matricula selected;
 	
 	public Managing() {
 		matriculas = new ArrayList<>();
+		selected = null;
 	}
 	
 	public List<Matricula> getMatriculas(){
@@ -37,6 +38,24 @@ public class Managing {
 		}
 		
 		return null;
+	}
+	
+	public Matricula getSelected() {
+		return selected;
+	}
+	
+	public void setSelected(Matricula mat) {
+		selected = mat;
+	}
+	
+	public String deleteMatricula() {
+//		FacesMessage fm = new FacesMessage("selected: " + selected.getCursoAcademico());
+//		FacesContext.getCurrentInstance().addMessage("container", fm);
+		
+		
+		
+		matriculaEJB.eliminarMatricula(selected);
+		return "welcome.xhtml";
 	}
 	
 }
