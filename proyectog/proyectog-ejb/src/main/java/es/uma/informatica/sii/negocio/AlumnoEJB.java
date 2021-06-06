@@ -1,5 +1,7 @@
 package es.uma.informatica.sii.negocio;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -7,7 +9,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
 import es.uma.informatica.sii.entidades.Alumno;
+import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.exceptions.AlumnoInexistente;
+import es.uma.informatica.sii.exceptions.SecretariaException;
 
 @Stateless
 public class AlumnoEJB implements AlumnoInterface{
@@ -34,5 +38,11 @@ public class AlumnoEJB implements AlumnoInterface{
 		}
 
 		em.merge(alumno);
+	}
+	
+	@Override
+	public List<Alumno> consultarAlumnos() throws SecretariaException {
+		List<Alumno> la = em.createQuery("SELECT a FROM Alumno a", Alumno.class).getResultList();
+		return la;	
 	}
 }

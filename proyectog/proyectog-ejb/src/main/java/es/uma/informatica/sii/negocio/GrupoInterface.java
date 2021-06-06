@@ -1,5 +1,7 @@
 package es.uma.informatica.sii.negocio;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import es.uma.informatica.sii.entidades.Expediente;
@@ -61,5 +63,8 @@ public interface GrupoInterface {
 	 * @throws SecretariaException
 	 */
 	public void actualizarGrupo(Grupo grupo) throws SecretariaException;
+	
+	
+	public List<Grupo> consultarGrupos() throws SecretariaException;
 	
 }

@@ -1,5 +1,7 @@
 package es.uma.informatica.sii.negocio;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import es.uma.informatica.sii.entidades.Expediente;
@@ -19,4 +21,5 @@ public interface ExpedienteInterface {
 
 	public void comprobarExpediente(Expediente expediente) throws SecretariaException;
 	
+	public List<Expediente> consultarExpedientes() throws SecretariaException;
 }

@@ -1,5 +1,7 @@
 package es.uma.informatica.sii.negocio;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -52,6 +54,12 @@ public class ExpedienteEJB implements ExpedienteInterface{
 			throw new ExpedienteInexistente();
 		}
 		
+	}
+
+	@Override
+	public List<Expediente> consultarExpedientes() throws SecretariaException {
+		List<Expediente> le = em.createQuery("SELECT e FROM Expediente e", Expediente.class).getResultList();
+		return le;	
 	}
 
 }
