@@ -48,8 +48,64 @@
 						</div>
 					</div>
 					
-					<div class="row">
-						<h:outputText value="#{inspectMatricula.matricula.cursoAcademico}"></h:outputText>
+					<div class="row mx-3">
+						<div class="col"></div>
+						<div class="col-auto mb-3">
+							<h:form>
+								<div class="row align-items-center mb-4">
+									<div class="form-group col-6">
+										<label>Nombre del alumno</label>
+										<h:inputText class="form-control" value="#{inspectMatricula.nombre}" disabled="true"></h:inputText>
+									</div>
+									<div class="col"></div>
+									<div class="col-auto">
+										<h:commandLink class="btn btn-primary btn-block" action="#{inspectMatricula.edit(inspectMatricula.matricula)}">Editar</h:commandLink>
+									</div>
+									<div class="col-auto">
+										<h:commandLink class="btn btn-danger btn-block" action="#{inspectMatricula.delete}">Eliminar</h:commandLink >
+									</div>
+								</div>
+								<div class="row align-items-center mb-4">
+									<div class="form-group col-auto">
+										<label>Número expediente</label>
+										<h:inputText class="form-control" value="#{inspectMatricula.matricula.expediente.numExpediente}" disabled="true"></h:inputText>
+									</div>
+									<div class="form-group col-auto">
+										<label>Curso académico</label>
+										<h:inputText class="form-control" value="#{inspectMatricula.matricula.cursoAcademico}" disabled="true"></h:inputText>
+									</div>
+									<div class="form-group col-auto">
+										<label>Número archivo</label>
+										<h:inputText class="form-control" value="#{inspectMatricula.matricula.numArchivo}" disabled="#{!inspectMatricula.editable}"></h:inputText>
+									</div>
+								</div>
+								<div class="row align-items-center mb-4">
+									<div class="form-group col-auto">
+										<label>Fecha matriculación</label>
+										<h:inputText class="form-control" value="#{inspectMatricula.matricula.fechaMatricula}" disabled="true"></h:inputText>
+									</div>
+								</div>
+								<div class="row align-items-start">
+									<div class="form-group col-auto">
+										<label>Turno preferente</label>
+										<h:inputText class="form-control" value="#{inspectMatricula.matricula.turnoPreferente}" disabled="#{!inspectMatricula.editable}"></h:inputText>
+									</div>
+									<div class="form-group col-auto">
+										<label class="form-check-label">Estado</label>
+										<div class="mt-1 d-flex justify-content-center">
+											<h:selectBooleanCheckbox class="form-check-input" value="#{inspectMatricula.matricula.estado}" disabled="#{!inspectMatricula.editable}"></h:selectBooleanCheckbox>
+										</div>							
+									</div>
+									<div class="form-group col-auto">
+										<label class="form-check-label">Nuevo ingreso</label>
+										<div class="mt-1 d-flex justify-content-center">
+											<h:selectBooleanCheckbox class="form-check-input" value="#{inspectMatricula.matricula.nuevoIngreso}" disabled="#{!inspectMatricula.editable}"></h:selectBooleanCheckbox>
+										</div>										
+									</div>
+								</div>
+							</h:form>
+						</div>
+						<div class="col"></div>
 					</div>
 				</div>
 				<div class="col p-0"></div>

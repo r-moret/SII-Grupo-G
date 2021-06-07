@@ -75,14 +75,6 @@ public class Managing {
 	public void setSelected(Matricula mat) {
 		selected = mat;
 	}
-	
-	public String deleteMatricula() {
-//		FacesMessage fm = new FacesMessage("selected: " + selected.getCursoAcademico());
-//		FacesContext.getCurrentInstance().addMessage("container", fm);
-		
-		matriculaEJB.eliminarMatricula(selected);
-		return "welcome.xhtml";
-	}
 
 	public List<Grupo> getGrupos(){
 		
