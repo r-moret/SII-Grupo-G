@@ -1,5 +1,6 @@
 package es.uma.informatica.sii.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -199,5 +200,71 @@ public class GrupoEJB implements GrupoInterface{
 	public List<Grupo> consultarGrupos() throws SecretariaException {
 		List<Grupo> lg = em.createQuery("SELECT g FROM Grupo g", Grupo.class).getResultList();
 		return lg;
+	}
+	
+	@Override
+	public List<List<String>> consultarGrupos(Integer expediente, List<Integer> curso) throws SecretariaException {
+		/*
+		if(expediente == null) {
+			//Expediente no existe
+			throw new ExpedienteInexistente();
+		}
+		
+		Expediente e = em.find(Expediente.class, expediente.getNumExpediente());
+		*/
+		List<List<String>> res = new ArrayList<>();
+		List<String> aux= new ArrayList<>();
+		List<Grupo> lg = em.createQuery("SELECT g FROM Grupo g", Grupo.class).getResultList();
+
+		for(int i=0;i<curso.size();i++){
+			for(int j=0;j<lg.size();j++){
+				if(lg.get(j).getTitulacion().equals(Integer.parseInt(expediente.toString().substring(0,4))) && curso.get(i).equals(lg.get(j).getCurso())){
+					aux.add(lg.get(j).getLetra());
+				}	
+			}
+			res.add(aux);
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public List<Grupo> consultarGrupos(Expediente expediente, int curso, boolean ingles) throws SecretariaException {
+	if(expediente == null) {
+				//Expediente no existe
+				throw new ExpedienteInexistente();
+	}
+
+	Expediente e = em.find(Expediente.class, expediente.getNumExpediente());
+		
+	List<Grupo> res = new ArrayList<>();
+	List<Grupo> lg = em.createQuery("SELECT g FROM Grupo g", Grupo.class).getResultList();
+	for(int i = 0; i < lg.size(); i++) {
+		if(lg.get(i).getTitulacion().toString() ==  e.getNumExpediente().toString().substring(0,4) && curso == lg.get(i).getCurso() && ingles){
+			res.add(lg.get(i));
+		}
+	}
+		
+	return res;	
+	}
+
+	@Override
+	public List<Grupo> consultarGrupos(Expediente expediente, int curso, boolean ingles, String tarde) throws SecretariaException {
+	
+		if(expediente == null) {
+				//Expediente no existe
+				throw new ExpedienteInexistente();
+		}
+
+		Expediente e = em.find(Expediente.class, expediente.getNumExpediente());
+			
+		List<Grupo> res = new ArrayList<>();
+		List<Grupo> lg = em.createQuery("SELECT g FROM Grupo g", Grupo.class).getResultList();
+		for(int i = 0; i < lg.size(); i++) {
+			if(lg.get(i).getTitulacion().toString() ==  e.getNumExpediente().toString().substring(0,4) && curso == lg.get(i).getCurso() && tarde == "Tarde"){
+				res.add(lg.get(i));
+			}
+		}
+		return res;
 	}
 }

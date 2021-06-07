@@ -1,5 +1,8 @@
 package es.uma.informatica.sii.negocio;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -135,4 +138,58 @@ public class MatriculaEJB implements MatriculaInterface {
 	public void eliminarMatricula(Matricula matricula) {
 		em.remove(em.merge(matricula));
 	}
+	
+	@Override
+	public String consultarTurnoMatricula(Expediente alumno) throws SecretariaException {
+
+		if(alumno == null) {
+			throw new SecretariaException();
+		}
+				
+		Expediente e = em.find(Expediente.class, alumno.getNumExpediente());
+
+		if(e == null) {
+			//Alumno no está en la bbdd
+			throw new ExpedienteInexistente();
+		}
+				
+		return consultarMatricula(e, obtenerCursoActual()).getTurnoPreferente();		
+	}
+	
+	@Override
+	public List<Integer> obtenerCodigosAsignaturasMatricula(Expediente alumno) throws SecretariaException {
+		String listadoAsignaturas;
+		List<Integer> res = new ArrayList<>();
+		if(alumno == null) {
+			throw new SecretariaException();
+		}
+				
+		Expediente e = em.find(Expediente.class, alumno.getNumExpediente());
+
+		if(e == null) {
+			//Alumno no está en la bbdd
+			throw new ExpedienteInexistente();
+		}
+		
+		listadoAsignaturas = consultarMatricula(e, obtenerCursoActual()).getListadoAsignaturas();
+		
+		String[] asignaturas = listadoAsignaturas.split(",");
+		for(int i = 0; i < asignaturas.length; i++) {
+			if(!res.contains(Integer.parseInt(asignaturas[i].substring(0,3)))){
+				res.add(Integer.parseInt(asignaturas[i].substring(0,3)));
+			}
+		}
+		return res;
+	}
+
+	private String obtenerCursoActual() {
+		Date fecha = new Date();
+		Integer anio1;
+        SimpleDateFormat getAnio = new SimpleDateFormat("yy");
+        String anio = getAnio.format(fecha);
+		anio1 = Integer.parseInt(anio) - 1;
+        return anio = anio1.toString() + "/" + anio;
+	}
+		
+	
 }

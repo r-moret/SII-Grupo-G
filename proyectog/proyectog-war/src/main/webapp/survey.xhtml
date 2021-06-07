@@ -62,7 +62,7 @@
 								      	<h:outputText class="nombreCursos" value="#{encuestaAlum.cursos}"/>
 								   	</h:column>
 								   	
-								   	<h:column>
+								   	<h:column> 
 								   		<f:facet name = "header">Grupo</f:facet>
 								      		<h:selectOneMenu class="form-select" value="#{encuestaAlum.grupoElegido}">
 	    										<f:selectItems value="#{encuestaAlum.grupos}"/>
@@ -78,7 +78,7 @@
 								   			</h:column>
 								   		</h:dataTable>
 								   	</h:column>
-								   	
+								   <!--	
 								   	<h:column>
 								      	<f:facet name = "header">Ingles</f:facet>
 								      	<h:dataTable id="survey-tableIngles" class="table table-striped" value="#{asignaturas}" var="asignatura">				   
@@ -87,19 +87,24 @@
 								   			</h:column>
 								   		</h:dataTable>
 								   	</h:column>
-								   	
+								   	-->
 								   	<h:column>
 								      	<f:facet name = "header">Grupo de Ingles</f:facet>
-								      	<h:dataTable id="survey-tableGrupoIngles" class="table table-striped" value="#{asignaturas}" var="asignatura">				   
+								      <!--  <h:dataTable id="survey-tableGrupoIngles" class="table table-striped" value="#{asignaturas}" var="asignatura">	-->			   
 								   			<h:column>
-									      		<h:selectOneMenu rendered="#{asignatura.idioma != null}" class="form-select" value="#{encuestaAlum.grupoElegidoIngles}">
+									      		<h:selectOneMenu  class="form-select" value="#{encuestaAlum.grupoElegidoIngles}">
 	    										<f:selectItems value="#{encuestaAlum.gruposIngles}"/>
 	  										</h:selectOneMenu>	
 								   			</h:column>
-								   		</h:dataTable>
+								   		<!--</h:dataTable> -->
 								   	</h:column>
-								   	
 								   	<h:column>
+								   		<f:facet name = "header">Grupo de Tarde</f:facet>
+								      		<h:selectOneMenu class="form-select" value="#{encuestaAlum.grupoElegidoTarde}">
+	    										<f:selectItems value="#{encuestaAlum.gruposTardes}"/>
+	  										</h:selectOneMenu>	
+								   	</h:column>
+								<!--<h:column>
 								      	<f:facet name = "header">Tarde</f:facet>
 								      	<h:dataTable id="survey-tableTarde" class="table table-striped" value="#{asignaturas}" var="asignatura">				   
 								   			<h:column>
@@ -107,9 +112,10 @@
 								   			</h:column>
 								   		</h:dataTable>
 								   	</h:column>
-								   	
+								   	-->
 						
 								</h:dataTable>
+								
 						  	</div>
 						  
 						</div>

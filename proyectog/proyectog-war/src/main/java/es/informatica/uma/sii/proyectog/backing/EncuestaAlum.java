@@ -13,10 +13,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import es.uma.informatica.sii.entidades.Expediente;
+import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Titulacion;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 import es.uma.informatica.sii.negocio.ExpedienteInterface;
+import es.uma.informatica.sii.negocio.GrupoInterface;
+import es.uma.informatica.sii.negocio.MatriculaInterface;
+import es.uma.informatica.sii.negocio.AsignaturaInterface;
 
 
 @Named(value="encuestaAlum")
@@ -26,13 +30,23 @@ public class EncuestaAlum {
 	@Inject
 	private ExpedienteInterface ExpedienteEJB;
 	
+	@Inject 
+	private GrupoInterface GrupoEJB;
+	
+	@Inject 
+	private MatriculaInterface MatriculaEJB;
+	
+	@Inject 
+	private AsignaturaInterface AsignaturaEJB;
+	
+	//private List<List<String>> grupos;
 	private Expediente expediente;
 	
 	// Lista grande donde cada fila es un curso donde dentro contiene las asignaturas de ese curso
 	private List<List<Asignatura>> listaAsignaturas;
 	
-	private List<String> cursos;
-	private int indexCurso;
+	//private List<String> cursos;
+	//private int indexCurso;
 	
 	private String grupoElegido;
 	private List<String> gruposElegidos;
@@ -41,27 +55,32 @@ public class EncuestaAlum {
 	private int indexGrupos;
 	
 	private String grupoElegidoIngles;
+	private String grupoElegidoTarde;
 	
 	private List<String> gruposIngles;
+	
+	private List<String> gruposTardes;
 
 	private boolean tardeElegida;
 	private boolean idiomaElegido;
 	
 	public EncuestaAlum() {
-	
+		
+		//grupos = new ArrayList<>();
+		
 		gruposIngles = new ArrayList<String>();
 		gruposIngles.add("Grupo A");
 		gruposIngles.add("Grupo B");
 		
-		cursos = new ArrayList<String>();
-		cursos.add("1");
-		cursos.add("2");
-		indexCurso = 0;
+		//cursos = new ArrayList<String>();
+		//cursos.add("1");
+		//cursos.add("2");
+		//indexCurso = 0;
 		
 		gruposElegidos = new ArrayList<String>();
 		
 		grupos = new ArrayList<List<String>>();
-		indexGrupos = 0;
+		/*indexGrupos = 0;
 		List<String> grupo1 = new ArrayList<String>();
 		grupo1.add("1A");
 		grupo1.add("1B");
@@ -71,7 +90,7 @@ public class EncuestaAlum {
 		grupo2.add("2B");
 		
 		grupos.add(grupo1);
-		grupos.add(grupo2);
+		grupos.add(grupo2);*/
 		
 		
 		
@@ -198,6 +217,34 @@ public class EncuestaAlum {
 	}
 
 
+	public List<String> getGruposTardes(){
+		return gruposTardes;		
+	}
+
+	public List<List<String>> getGrupos(){
+		
+		
+		//List<String> res= new ArrayList<>();
+		List<Integer> cursos = getCursos();
+		Integer numE = expediente.getNumExpediente();
+		try {
+			grupos = GrupoEJB.consultarGrupos(numE, cursos);
+			
+		
+		//	for(int i=0; i<grupos.size();i++){
+		//		res.add(grupos.get(i).getLetra());
+		//	}
+			
+			return grupos;
+		} catch (SecretariaException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
+		
+		return null;
+
+	}
+	/*
 
 	public List<String> getGrupos() {
 		List<String> res =  new ArrayList<String>();
@@ -205,13 +252,18 @@ public class EncuestaAlum {
 		indexGrupos++;
 		return res;
 	}
-
-	public void setGrupos(List<List<String>> grupos) {
+*/
+	/* 
+	public void setGrupos(List<List<Grupo>> grupos) {
 		this.grupos = grupos;
 	}
-
+*/
 	public String getGrupoElegido() {
 		return grupoElegido;
+	}
+	
+	public void setGruposTardes(List<String> grupos) {
+		this.gruposTardes = grupos;
 	}
 
 	public void setGrupoElegido(String grupoElegido) {
@@ -220,16 +272,24 @@ public class EncuestaAlum {
 		gruposElegidos.add(grupoElegido);
 	}
 
-	public String getCursos() {
-		String res = cursos.get(indexCurso);
-		indexCurso++;
-		return res;
+	public List<Integer> getCursos() {
+		List<Integer> codigos = new ArrayList<>();
+		List<Integer> cursos = new ArrayList<>();
+		try {
+			codigos = MatriculaEJB.obtenerCodigosAsignaturasMatricula(expediente);
+			cursos = AsignaturaEJB.obtenerCursos(codigos);
+			return cursos;
+		} catch (SecretariaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
-
+/*
 	public void setCursos(List<String> cursos) {
 		this.cursos = cursos;
 	}
-
+	*/
 	public List<List<Asignatura>> getListaAsignaturas() {
 		return listaAsignaturas;
 	}
@@ -246,6 +306,7 @@ public class EncuestaAlum {
 	public void setExpediente(Expediente expediente) {
 		this.expediente = expediente;
 	}
+	
 	
 	
 	public String entrar() {
@@ -266,6 +327,18 @@ public class EncuestaAlum {
 		catch(Exception e) {}
 		return null;
 		
+	}
+
+
+
+	public String getGrupoElegidoTarde() {
+		return grupoElegidoTarde;
+	}
+
+
+
+	public void setGrupoElegidoTarde(String grupoElegidoTarde) {
+		this.grupoElegidoTarde = grupoElegidoTarde;
 	}
 
 }

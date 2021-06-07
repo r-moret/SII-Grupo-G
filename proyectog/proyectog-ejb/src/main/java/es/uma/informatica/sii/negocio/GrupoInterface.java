@@ -64,7 +64,16 @@ public interface GrupoInterface {
 	 */
 	public void actualizarGrupo(Grupo grupo) throws SecretariaException;
 	
-	
+	//documentar
 	public List<Grupo> consultarGrupos() throws SecretariaException;
+
+	//documentar
+	public List<List<String>> consultarGrupos(Integer expediente, List<Integer> curso) throws SecretariaException;
+
+	//documentar
+	public List<Grupo> consultarGrupos(Expediente expediente, int curso, boolean ingles) throws SecretariaException;
+
+	//documentar
+	public List<Grupo> consultarGrupos(Expediente expediente, int curso, boolean ingles, String tarde) throws SecretariaException;
 	
 }
