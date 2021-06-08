@@ -12,6 +12,7 @@
 		<module>proyectog-ejb</module>
 		<module>proyectog-war</module>
 		<module>proyectog-ear</module>
+		<module>proyectog-tests</module>
 	</modules>
 	
 	<properties>

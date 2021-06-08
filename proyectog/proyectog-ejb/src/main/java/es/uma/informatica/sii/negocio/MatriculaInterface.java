@@ -43,7 +43,14 @@ public interface MatriculaInterface {
 	//Añadir este requisito
 	public void desmatricularAsignatura(Matricula matricula, Asignatura asignatura) throws SecretariaException;
 	
+	//documentar
 	public void eliminarMatricula(Matricula matricula);
 	
 	public List<Asignatura> asignaturasDeMatricula(Matricula mat);
+
+	//documentar
+	public String consultarTurnoMatricula(Expediente alumno) throws SecretariaException;
+
+	public List<Integer> obtenerCodigosAsignaturasMatricula(Expediente alumno) throws SecretariaException;
+
 }
