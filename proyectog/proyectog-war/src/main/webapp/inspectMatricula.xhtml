@@ -13,6 +13,11 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 	
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"/>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"/>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"/>
+		<script type="text/javascript" src="./scripts/pagination.js"/>
+		
 		<title>Matrícula</title>
 	</h:head>
 	
@@ -59,7 +64,12 @@
 									</div>
 									<div class="col"></div>
 									<div class="col-auto">
-										<h:commandLink class="btn btn-primary btn-block" action="#{inspectMatricula.edit(inspectMatricula.matricula)}">Editar</h:commandLink>
+										<h:commandLink class="btn btn-primary btn-block" 
+											action="#{inspectMatricula.edit(inspectMatricula.matricula)}" 
+											rendered="#{!inspectMatricula.editable}">Editar</h:commandLink>
+										<h:commandLink class="btn btn-success btn-block" 
+											action="#{inspectMatricula.save(inspectMatricula.matricula)}" 
+											rendered="#{inspectMatricula.editable}">Guardar</h:commandLink>
 									</div>
 									<div class="col-auto">
 										<h:commandLink class="btn btn-danger btn-block" action="#{inspectMatricula.delete}">Eliminar</h:commandLink >
@@ -85,7 +95,7 @@
 										<h:inputText class="form-control" value="#{inspectMatricula.matricula.fechaMatricula}" disabled="true"></h:inputText>
 									</div>
 								</div>
-								<div class="row align-items-start">
+								<div class="row align-items-start mb-4">
 									<div class="form-group col-auto">
 										<label>Turno preferente</label>
 										<h:inputText class="form-control" value="#{inspectMatricula.matricula.turnoPreferente}" disabled="#{!inspectMatricula.editable}"></h:inputText>
@@ -102,6 +112,28 @@
 											<h:selectBooleanCheckbox class="form-check-input" value="#{inspectMatricula.matricula.nuevoIngreso}" disabled="#{!inspectMatricula.editable}"></h:selectBooleanCheckbox>
 										</div>										
 									</div>
+								</div>
+								<div class="row align-items-center mb-4">
+									<h:dataTable id="asignaturasPorMatriculas-table" 
+										class="table table-striped"
+										headerClass="text-center" 
+										columnClasses="text-center,text-center,text-center" 
+										value="#{inspectMatricula.asignaturas}" 
+										var="asignatura">
+										
+										<h:column>
+									      	<f:facet name = "header">Curso</f:facet>
+									      	<h:outputText value="#{asignatura.curso}"/>
+								   		</h:column>
+								   		<h:column>
+									      	<f:facet name = "header">Código</f:facet>
+									      	<h:outputText value="#{asignatura.codigo}"/>
+								   		</h:column>
+										<h:column>
+									      	<f:facet name = "header">Asignatura</f:facet>
+									      	<h:outputText value="#{asignatura.nombre}"/>
+								   		</h:column>
+									</h:dataTable>
 								</div>
 							</h:form>
 						</div>

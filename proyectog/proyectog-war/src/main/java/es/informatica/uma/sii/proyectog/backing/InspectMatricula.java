@@ -1,20 +1,30 @@
 package es.informatica.uma.sii.proyectog.backing;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import es.uma.informatica.sii.entidades.Asignatura;
+import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
+import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.negocio.MatriculaInterface;
 
 @Named(value="inspectMatricula")
 @RequestScoped
-public class InspectMatricula {
+public class InspectMatricula implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private MatriculaInterface matriculaEJB;
 	
 	private Matricula matricula;
+	private List<Asignatura> asignaturas;
 	private String nombre;
 	private Boolean editable = false;
 	
@@ -31,9 +41,14 @@ public class InspectMatricula {
 	}
 	
 	public String edit(Matricula mat) {
-		// Se borran los datos al recargar la página con los campos editables
+		// Internal Server Error al ejecutarlo
 		setEditable(true);
-		matricula = mat;
+		return "inspectMatricula.xhtml";
+	}
+	
+	public String save(Matricula mat) {
+		// Llamada al EJB para guardar los datos del formulario
+		setEditable(false);
 		return "inspectMatricula.xhtml";
 	}
 
@@ -60,5 +75,13 @@ public class InspectMatricula {
 	public void setEditable(Boolean editable) {
 		this.editable = editable;
 	}
-	
+
+	public List<Asignatura> getAsignaturas() {
+		asignaturas = matriculaEJB.asignaturasDeMatricula(matricula);
+		return asignaturas;
+	}
+
+	public void setAsignaturas(List<Asignatura> asignaturas) {
+		this.asignaturas = asignaturas;
+	}
 }

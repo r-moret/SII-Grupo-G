@@ -1,5 +1,6 @@
 package es.uma.informatica.sii.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -7,9 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
-
+import javax.persistence.TypedQuery;
 
 import es.uma.informatica.sii.entidades.Asignatura;
+import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.Matricula.MatriculaId;
@@ -92,6 +94,25 @@ public class MatriculaEJB implements MatriculaInterface {
 		List<Matricula> lm = em.createQuery("SELECT m FROM Matricula m", Matricula.class).getResultList();
 		
 		return lm;
+	}
+	
+	@Override
+	public List<Asignatura> asignaturasDeMatricula(Matricula mat){
+		
+		TypedQuery<AsignaturasPorMatriculas> query = em.createQuery("SELECT a FROM AsignaturasPorMatriculas a", AsignaturasPorMatriculas.class);
+		
+		List<AsignaturasPorMatriculas> lm = query.getResultList();
+		List<Asignatura> asignaturas = new ArrayList<>();
+		
+		for(AsignaturasPorMatriculas asig : lm) {
+			if(asig.getMatricula().getCursoAcademico().equals(mat.getCursoAcademico()) &&
+			   asig.getMatricula().getExpediente().getNumExpediente().equals(mat.getExpediente().getNumExpediente())) {
+				
+				asignaturas.add(asig.getAsignatura());
+			}
+		}
+		
+		return asignaturas;
 	}
 
 	@Override

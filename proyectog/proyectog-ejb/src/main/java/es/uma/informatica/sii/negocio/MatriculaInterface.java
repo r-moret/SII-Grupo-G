@@ -44,4 +44,6 @@ public interface MatriculaInterface {
 	public void desmatricularAsignatura(Matricula matricula, Asignatura asignatura) throws SecretariaException;
 	
 	public void eliminarMatricula(Matricula matricula);
+	
+	public List<Asignatura> asignaturasDeMatricula(Matricula mat);
 }
