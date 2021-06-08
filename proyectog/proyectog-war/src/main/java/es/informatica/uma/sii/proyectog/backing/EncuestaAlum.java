@@ -48,6 +48,8 @@ public class EncuestaAlum {
 	//private List<String> cursos;
 	//private int indexCurso;
 	
+	private ContenidoEncuesta tabla;
+	
 	private String grupoElegido;
 	private List<String> gruposElegidos;
 	
@@ -168,6 +170,7 @@ public class EncuestaAlum {
 		lista2.add(asig2);
 		listaAsignaturas.add(lista2);
 		
+		
 	}
 	
 	
@@ -278,6 +281,7 @@ public class EncuestaAlum {
 		try {
 			codigos = MatriculaEJB.obtenerCodigosAsignaturasMatricula(expediente);
 			cursos = AsignaturaEJB.obtenerCursos(codigos);
+		
 			return cursos;
 		} catch (SecretariaException e) {
 			// TODO Auto-generated catch block
@@ -291,7 +295,16 @@ public class EncuestaAlum {
 	}
 	*/
 	public List<List<Asignatura>> getListaAsignaturas() {
-		return listaAsignaturas;
+		try {
+			List<Integer> codigos = MatriculaEJB.obtenerCodigosAsignaturasMatricula(expediente);
+			List<List<Asignatura>> res = AsignaturaEJB.obtenerListaAsignaturas(codigos);
+			return res;
+		} catch (SecretariaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//return listaAsignaturas;
+		return null;
 	}
 
 	public void setListaAsignaturas(List<List<Asignatura>> listaAsignaturas) {

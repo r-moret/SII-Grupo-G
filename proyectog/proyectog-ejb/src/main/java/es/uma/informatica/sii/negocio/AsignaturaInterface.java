@@ -15,4 +15,7 @@ public interface AsignaturaInterface {
 	//documentar
 	public List<Integer> obtenerCursos(List<Integer> codigo) throws SecretariaException;
 
+	//documentar
+	public List<List<Asignatura>> obtenerListaAsignaturas(List<Integer> codigos) throws SecretariaException;
+
 }
