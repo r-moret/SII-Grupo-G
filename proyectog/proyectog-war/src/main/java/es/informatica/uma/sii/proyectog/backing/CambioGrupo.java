@@ -5,13 +5,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import es.uma.informatica.sii.entidades.Expediente;
+import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
+import es.uma.informatica.sii.negocio.AsignaturasPorMatriculasInterface;
 import es.uma.informatica.sii.negocio.ExpedienteInterface;
-
+import es.uma.informatica.sii.negocio.GrupoInterface;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -28,10 +32,20 @@ public class CambioGrupo {
 	@Inject
 	private ExpedienteInterface ExpedienteEJB;
 	
+	@Inject 
+	private GrupoInterface GrupoEJB;
+	
+	@Inject
+	private AsignaturasPorMatriculasInterface ApmEJB;
+	
+	private List<String> grupos;
+	
 	private List<SelectItem> listaGrupoUsuario;
 	private List<SelectItem> listaGruposCurso;
 	
 	private Expediente expediente;
+	
+	List<Grupo> gps;
 	
 	private String grupoActual;
 	private String grupoElegido;
@@ -47,10 +61,47 @@ public class CambioGrupo {
 		listaGruposCurso.add(new SelectItem(1, "1A"));
 		listaGruposCurso.add(new SelectItem(2, "3B"));
 		
+		gps = new ArrayList<>();
+		grupos = new ArrayList<>();
+		
 		expediente = new Expediente();
 
 	}
+	
+	public List<String> getGruposActual(){
+		try {
+			grupos = ApmEJB.obtenerGruposMatriculados(expediente);
+			
+			return grupos;
+		} catch (SecretariaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<String> getGruposACambiar(){
+		List<String> res = new ArrayList<>();
 
+		try {
+			String grupo="1C";
+		
+			gps = GrupoEJB.consultarGrupos();
+			for(int i = 0; i < grupos.size(); i++) {
+				if(Integer.parseInt(grupo.substring(0,1)) == (gps.get(i).getCurso())){
+					res.add(gps.get(i).getCurso() + gps.get(i).getLetra());
+				}
+				
+			}
+			
+			return res;
+		} catch (SecretariaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public Part getUploadedFile() {
 		return uploadedFile;
 	}
