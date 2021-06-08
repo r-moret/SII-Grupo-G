@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-            
+                
+    
     
     <wb-module deploy-name="proyectog-ear-0.0.1-SNAPSHOT">
-                        
+                                
+        
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
-                        
+                                
+        
         
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
         <dependent-module archiveName="proyectog-ejb-0.0.1-SNAPSHOT.jar" deploy-path="/" handle="module:/resource/proyectog-ejb/proyectog-ejb">
@@ -47,9 +50,6 @@
         <dependent-module archiveName="xmlbeans-4.0.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlbeans/xmlbeans/4.0.0/xmlbeans-4.0.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="xml-apis-1.4.01.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="commons-compress-1.20.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-compress/1.20/commons-compress-1.20.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -69,6 +69,12 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="stax2-api-4.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/codehaus/woodstox/stax2-api/4.2/stax2-api-4.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jakarta.xml.bind-api-2.3.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jakarta.activation-api-1.2.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="batik-all-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-all/1.13/batik-all-1.13.jar">
@@ -111,6 +117,9 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="serializer-2.7.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/xalan/serializer/2.7.2/serializer-2.7.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xml-apis-1.4.01.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="batik-ext-1.13.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/xmlgraphics/batik-ext/1.13/batik-ext-1.13.jar">
@@ -194,9 +203,11 @@
         <dependent-module archiveName="aspose-cells-20.8.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/aspose/aspose-cells/20.8/aspose-cells-20.8.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                    
+                            
+    
     
     </wb-module>
-        
+            
+
 
 </project-modules>
