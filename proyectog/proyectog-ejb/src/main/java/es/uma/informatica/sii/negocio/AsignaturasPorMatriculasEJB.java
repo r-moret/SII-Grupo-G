@@ -47,4 +47,29 @@ public class AsignaturasPorMatriculasEJB implements AsignaturasPorMatriculasInte
 		
 		return res;
     }
+
+	   @Override
+    	public List<Integer> obtenerReferenciaMatriculados(Expediente expediente) throws SecretariaException{
+        
+		if(expediente == null) {
+			//Expediente no existe
+			throw new ExpedienteInexistente();
+		}
+		
+		Expediente e = em.find(Expediente.class, expediente.getNumExpediente());
+		
+        
+		List<Integer> res = new ArrayList<>();
+		List<AsignaturasPorMatriculas> lapm = em.createQuery("SELECT apm FROM AsignaturasPorMatriculas apm", AsignaturasPorMatriculas.class).getResultList();
+
+		for(int i = 0;i < lapm.size();i++){
+			if(lapm.get(i).getMatricula().getExpediente().equals(e)){
+                res.add(lapm.get(i).getAsignatura().getReferencia());
+            }
+		}
+		
+		return res;
+    }
+
+
 }

@@ -13,4 +13,7 @@ public interface AsignaturasPorMatriculasInterface {
 	//Documentar
 	List<String> obtenerGruposMatriculados(Expediente expediente) throws SecretariaException;
 
+	//Documentar
+	public List<Integer> obtenerReferenciaMatriculados(Expediente expediente) throws SecretariaException;
+
 }

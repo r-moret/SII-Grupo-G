@@ -12,6 +12,10 @@ import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
+import es.uma.informatica.sii.exceptions.SecretariaException;
+import es.uma.informatica.sii.negocio.AsignaturaInterface;
+import es.uma.informatica.sii.negocio.AsignaturasPorMatriculasInterface;
+import es.uma.informatica.sii.negocio.MatriculaEJB;
 import es.uma.informatica.sii.negocio.MatriculaInterface;
 
 @Named(value="inspectMatricula")
@@ -21,7 +25,15 @@ public class InspectMatricula implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private MatriculaInterface matriculaEJB;
+	private MatriculaInterface MatriculaEJB;
+	
+	@Inject
+	private AsignaturaInterface AsignaturaEJB;
+	
+	@Inject
+	private AsignaturasPorMatriculasInterface ApmEJB;
+
+
 	
 	private Matricula matricula;
 	private List<Asignatura> asignaturas;
@@ -36,7 +48,7 @@ public class InspectMatricula implements Serializable {
 	
 	public String delete() {
 		// Internal Server Error al ejecutarlo
-		matriculaEJB.eliminarMatricula(matricula);
+		MatriculaEJB.eliminarMatricula(matricula);
 		return "managing.xhtml";
 	}
 	
@@ -77,8 +89,17 @@ public class InspectMatricula implements Serializable {
 	}
 
 	public List<Asignatura> getAsignaturas() {
-		asignaturas = matriculaEJB.asignaturasDeMatricula(matricula);
-		return asignaturas;
+		List<Asignatura> listaAsignaturas;
+		List<Integer> listaReferencias;
+		try {
+			listaReferencias = ApmEJB.obtenerReferenciaMatriculados(getMatricula().getExpediente());
+			listaAsignaturas = AsignaturaEJB.obtenerAsignaturasPorReferencia(listaReferencias);
+			return listaAsignaturas;
+		} catch (SecretariaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void setAsignaturas(List<Asignatura> asignaturas) {

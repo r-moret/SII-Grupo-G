@@ -18,4 +18,8 @@ public interface AsignaturaInterface {
 	//documentar
 	public List<List<Asignatura>> obtenerListaAsignaturas(List<Integer> codigos) throws SecretariaException;
 
+	//documentar
+	List<Asignatura> obtenerAsignaturasPorReferencia(List<Integer> referencias) throws SecretariaException;
+
 }
+

@@ -38,14 +38,14 @@ public class CambioGrupo {
 	@Inject
 	private AsignaturasPorMatriculasInterface ApmEJB;
 	
-	private List<String> grupos;
+	private List<String> listaGruposActual;
 	
 	private List<SelectItem> listaGrupoUsuario;
 	private List<SelectItem> listaGruposCurso;
 	
 	private Expediente expediente;
 	
-	List<Grupo> gps;
+	List<Grupo> listaGruposACambiar;
 	
 	private String grupoActual;
 	private String grupoElegido;
@@ -61,8 +61,8 @@ public class CambioGrupo {
 		listaGruposCurso.add(new SelectItem(1, "1A"));
 		listaGruposCurso.add(new SelectItem(2, "3B"));
 		
-		gps = new ArrayList<>();
-		grupos = new ArrayList<>();
+		listaGruposACambiar = new ArrayList<>();
+		listaGruposActual = new ArrayList<>();
 		
 		expediente = new Expediente();
 
@@ -70,9 +70,9 @@ public class CambioGrupo {
 	
 	public List<String> getGruposActual(){
 		try {
-			grupos = ApmEJB.obtenerGruposMatriculados(expediente);
+			listaGruposActual = ApmEJB.obtenerGruposMatriculados(expediente);
 			
-			return grupos;
+			return listaGruposActual;
 		} catch (SecretariaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,11 +85,10 @@ public class CambioGrupo {
 
 		try {
 			String grupo="1C";
-		
-			gps = GrupoEJB.consultarGrupos();
-			for(int i = 0; i < grupos.size(); i++) {
-				if(Integer.parseInt(grupo.substring(0,1)) == (gps.get(i).getCurso())){
-					res.add(gps.get(i).getCurso() + gps.get(i).getLetra());
+			listaGruposACambiar = GrupoEJB.consultarGrupos();
+			for(int i = 0; i < listaGruposACambiar.size(); i++) {
+				if(Integer.parseInt(grupo.substring(0,1)) == (listaGruposACambiar.get(i).getCurso())){
+					res.add(listaGruposACambiar.get(i).getCurso() + listaGruposACambiar.get(i).getLetra());
 				}
 				
 			}
