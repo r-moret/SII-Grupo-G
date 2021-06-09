@@ -56,22 +56,6 @@ public class GrupoEJB implements GrupoInterface{
 		}
 	}
 	
-//	@Override
-//	public void asignarGrupos(Algoritmo selector, Encuesta encuesta) throws SecretariaException {
-//		if(encuesta==null){
-//			throw new SecretariaException();
-//		}
-//		
-//		Encuesta e = em.find(Encuesta.class, encuesta.getExpediente());
-//		
-//		if(e == null) {
-//			throw new EncuestaInexistente();
-//		}
-//	
-//		selector.aplicarAlgoritmo(0, encuesta);
-//		em.merge(encuesta);
-//	}
-	
 	@Override
 	public void registrarSolicitudCambioGrupo(SolicitudCambioGrupo solicitud) throws SecretariaException {
 		if(solicitud == null) {
@@ -140,8 +124,6 @@ public class GrupoEJB implements GrupoInterface{
 				mat = m;
 			}
 		}
-		//int i = exp.getMatriculas().size()-1;
-		//Matricula m = exp.getMatriculas().get(i);
 		List<AsignaturasPorMatriculas> apm = mat.getAsignaturasPorMatriculas();
 
 		for(AsignaturasPorMatriculas a : apm){
@@ -204,14 +186,6 @@ public class GrupoEJB implements GrupoInterface{
 	
 	@Override
 	public List<List<String>> consultarGrupos(Integer expediente, List<Integer> curso) throws SecretariaException {
-		/*
-		if(expediente == null) {
-			//Expediente no existe
-			throw new ExpedienteInexistente();
-		}
-		
-		Expediente e = em.find(Expediente.class, expediente.getNumExpediente());
-		*/
 		List<List<String>> res = new ArrayList<>();
 		List<String> aux= new ArrayList<>();
 		List<Grupo> lg = em.createQuery("SELECT g FROM Grupo g", Grupo.class).getResultList();
@@ -223,8 +197,7 @@ public class GrupoEJB implements GrupoInterface{
 				}	
 			}
 			res.add(aux);
-		}
-		
+		}	
 		return res;
 	}
 	

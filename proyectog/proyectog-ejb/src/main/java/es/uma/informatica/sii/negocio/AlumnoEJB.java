@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
 import es.uma.informatica.sii.entidades.Alumno;
-import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.exceptions.AlumnoInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 

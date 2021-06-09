@@ -43,8 +43,7 @@ public class AsignaturasPorMatriculasEJB implements AsignaturasPorMatriculasInte
 			if(lapm.get(i).getMatricula().getExpediente().equals(e) && !res.contains(lapm.get(i).getGrupo().getId().substring(2,4))){
                 res.add(lapm.get(i).getGrupo().getId().substring(2,4));
             }
-		}
-		
+		}	
 		return res;
     }
 
@@ -66,10 +65,7 @@ public class AsignaturasPorMatriculasEJB implements AsignaturasPorMatriculasInte
 			if(lapm.get(i).getMatricula().getExpediente().equals(e)){
                 res.add(lapm.get(i).getAsignatura().getReferencia());
             }
-		}
-		
+		}		
 		return res;
     }
-
-
 }

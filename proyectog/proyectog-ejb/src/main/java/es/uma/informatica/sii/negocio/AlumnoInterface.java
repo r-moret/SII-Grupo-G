@@ -20,6 +20,10 @@ public interface AlumnoInterface {
 	 */
 	public void actualizarAlumno(Alumno alumno) throws SecretariaException;
 	
-	
+	/**
+	 * Devuelve una lista de alumnos de la tabla Alumno
+	 * @return List<Alumno>
+	 * @throws SecretariaException
+	 */
 	public List<Alumno> consultarAlumnos() throws SecretariaException;
 }

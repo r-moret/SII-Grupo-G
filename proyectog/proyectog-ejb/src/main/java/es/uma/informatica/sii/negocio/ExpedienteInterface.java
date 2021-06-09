@@ -19,7 +19,17 @@ public interface ExpedienteInterface {
 	 */
 	public void actualizarExpediente(Expediente expediente) throws SecretariaException;
 
+	/**
+	 * Comprueba la existencia de un expediente en la base de datos.
+	 * @param expediente
+	 * @throws SecretariaException
+	 */
 	public void comprobarExpediente(Expediente expediente) throws SecretariaException;
 	
+	/**
+	 * Devuelve una lista de expedientes de la tabla Expediente
+	 * @return List<Expediente>
+	 * @throws SecretariaException
+	 */
 	public List<Expediente> consultarExpedientes() throws SecretariaException;
 }
