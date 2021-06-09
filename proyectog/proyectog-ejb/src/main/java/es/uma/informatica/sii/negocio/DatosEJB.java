@@ -169,8 +169,7 @@ public class DatosEJB implements DatosInterface {
 			DatosAlumnado da = em.find(DatosAlumnado.class, d.getDni());
 			if(da == null){
 				throw new DatosInexistente();
-			}
-			
+			}		
 			em.persist(d);
 		}
 	}
@@ -256,8 +255,7 @@ public class DatosEJB implements DatosInterface {
 			Asignatura asig = em.find(Asignatura.class, a.getReferencia());
 			if(asig == null){
 				throw new AsignaturaInexistente();
-			}
-			
+			}			
 			em.persist(a);
 		}
 	}
@@ -325,8 +323,7 @@ public class DatosEJB implements DatosInterface {
 			Expediente dEnt = em.find(Expediente.class, e.getNumExpediente());
 			if(dEnt == null){
 				throw new ExpedienteInexistente();
-			}
-			
+			}	
 			em.persist(e);
 		}
 	}
@@ -358,8 +355,7 @@ public class DatosEJB implements DatosInterface {
                 xssfRow = xssfSheet.getRow(f);
                 Grupo g = new Grupo();
                 if (xssfRow == null){
-                    break;
-                    
+                    break;            
                 }else{              	                	
 					g.setId(xssfRow.getCell(0).getStringCellValue());
 					g.setCurso((int) xssfRow.getCell(1).getNumericCellValue());
@@ -384,8 +380,7 @@ public class DatosEJB implements DatosInterface {
                 System.out.println("Error al procesar el fichero después de cerrarlo: " + ex);
             }
         }
-		return listaGrupos;
-		
+		return listaGrupos;	
 	}
 
 	@Override
@@ -398,11 +393,9 @@ public class DatosEJB implements DatosInterface {
 			Grupo gEnt = em.find(Grupo.class, g.getId());
 			if(gEnt == null){
 				throw new GrupoInexistente();
-			}
-			
+			}			
 			em.persist(g);
-		}
-		
+		}		
 	}
 	
 	private String formatearFecha(String date) {
@@ -424,7 +417,6 @@ public class DatosEJB implements DatosInterface {
 		}else{
 			res = Integer.valueOf(str);
 		}
-	
 		return res;
 	}
 

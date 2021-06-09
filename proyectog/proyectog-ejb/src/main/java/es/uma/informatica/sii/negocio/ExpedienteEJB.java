@@ -36,7 +36,6 @@ public class ExpedienteEJB implements ExpedienteInterface{
 			//Epediente no existe en la BBDD
 			throw new ExpedienteInexistente();
 		}
-
 		em.merge(expediente);	
 		
 	}
@@ -52,8 +51,7 @@ public class ExpedienteEJB implements ExpedienteInterface{
 		if(e == null) {
 			//Epediente no existe en la BBDD
 			throw new ExpedienteInexistente();
-		}
-		
+		}	
 	}
 
 	@Override
