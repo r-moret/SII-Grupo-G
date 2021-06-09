@@ -55,16 +55,14 @@ public class Managing {
 		selected = null;
 	}
 	
-	public List<Matricula> getMatriculas(){
-				
+	public List<Matricula> getMatriculas(){			
 		try {
 			matriculas = matriculaEJB.consultarMatriculas();
 			return matriculas;
 		} catch (SecretariaException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			FacesContext.getCurrentInstance().addMessage(null, fm);
-		}
-		
+		}	
 		return null;
 	}
 	
@@ -76,55 +74,47 @@ public class Managing {
 		selected = mat;
 	}
 
-	public List<Grupo> getGrupos(){
-		
+	public List<Grupo> getGrupos(){		
 		try {
 			grupos = grupoEJB.consultarGrupos();
 			return grupos;
 		} catch (SecretariaException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			FacesContext.getCurrentInstance().addMessage(null, fm);
-		}
-		
+		}		
 		return null;
 	}	
 
-	public List<Expediente> getExpedientes(){
-		
+	public List<Expediente> getExpedientes(){		
 		try {
 			expedientes = expedienteEJB.consultarExpedientes();
 			return expedientes;
 		} catch (SecretariaException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			FacesContext.getCurrentInstance().addMessage(null, fm);
-		}
-		
+		}		
 		return null;
 	}	
 
-	public List<Alumno> getAlumnos(){
-		
+	public List<Alumno> getAlumnos(){		
 		try {
 			alumnos = alumnoEJB.consultarAlumnos();
 			return alumnos;
 		} catch (SecretariaException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			FacesContext.getCurrentInstance().addMessage(null, fm);
-		}
-		
+		}		
 		return null;
 	}	
 
-	public List<Asignatura> getAsignaturas(){
-		
+	public List<Asignatura> getAsignaturas(){	
 		try {
 			asignaturas = asignaturaEJB.consultarAsignaturas();
 			return asignaturas;
 		} catch (SecretariaException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			FacesContext.getCurrentInstance().addMessage(null, fm);
-		}
-		
+		}		
 		return null;
 	}	
 }

@@ -1,12 +1,11 @@
 package es.uma.informatica.sii.negocio;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+
 import java.util.List;
 
-import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,8 +13,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
 import es.uma.informatica.sii.entidades.Asignatura;
-import es.uma.informatica.sii.entidades.Expediente;
-import es.uma.informatica.sii.exceptions.AsignaturaInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
 
 @Stateless
@@ -38,14 +35,17 @@ public class AsignaturaEJB implements AsignaturaInterface {
 	public List<Integer> obtenerCursos(List<Asignatura> asignaturas)throws SecretariaException {
 		List<Integer> res = new ArrayList<Integer>();
 		
+
 		for (Asignatura asig : asignaturas) {
 			if(!res.contains(asig.getCurso())) {
 				res.add(asig.getCurso());
+
 			}
 				
 	
 		}
 	
+
 		Collections.sort(res);
 		return res;
 	}
@@ -75,4 +75,29 @@ public class AsignaturaEJB implements AsignaturaInterface {
 	 */
 	
 	
+	@Override
+	public List<Asignatura> obtenerAsignaturasPorReferencia(List<Integer> referencias) throws SecretariaException{
+		List<Asignatura> la = em.createQuery("SELECT a FROM Asignatura a", Asignatura.class).getResultList();
+		List<Asignatura> res = new ArrayList<>();
+		for(int i = 0; i < referencias.size(); i++) {
+			int j = 0;
+			boolean enc = false;
+			while(j < la.size() && !enc) {
+				if(referencias.get(i).equals(la.get(j).getReferencia())) {
+					res.add(la.get(j));
+					enc = true;
+				}
+				j++;
+			}
+		}
+		return res;
+	}
+
+
+	@Override
+	public List<List<Asignatura>> obtenerListaAsignaturas(List<Integer> codigos) throws SecretariaException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

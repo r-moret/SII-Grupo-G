@@ -1,7 +1,6 @@
 package es.informatica.uma.sii.proyectog.backing;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -9,9 +8,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import es.uma.informatica.sii.entidades.Asignatura;
-import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
-import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Matricula;
+import es.uma.informatica.sii.exceptions.SecretariaException;
+import es.uma.informatica.sii.negocio.AsignaturaInterface;
+import es.uma.informatica.sii.negocio.AsignaturasPorMatriculasInterface;
 import es.uma.informatica.sii.negocio.MatriculaInterface;
 
 @Named(value="inspectMatricula")
@@ -21,10 +21,17 @@ public class InspectMatricula implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private MatriculaInterface matriculaEJB;
+	private MatriculaInterface MatriculaEJB;
+	
+	@Inject
+	private AsignaturaInterface AsignaturaEJB;
+	
+	@Inject
+	private AsignaturasPorMatriculasInterface ApmEJB;
+
+
 	
 	private Matricula matricula;
-	private List<Asignatura> asignaturas;
 	private String nombre;
 	private Boolean editable = false;
 	
@@ -36,7 +43,7 @@ public class InspectMatricula implements Serializable {
 	
 	public String delete() {
 		// Internal Server Error al ejecutarlo
-		matriculaEJB.eliminarMatricula(matricula);
+		MatriculaEJB.eliminarMatricula(matricula);
 		return "managing.xhtml";
 	}
 	
@@ -50,6 +57,20 @@ public class InspectMatricula implements Serializable {
 		// Llamada al EJB para guardar los datos del formulario
 		setEditable(false);
 		return "inspectMatricula.xhtml";
+	}
+	
+	public List<Asignatura> getAsignaturas() {
+		List<Asignatura> listaAsignaturas;
+		List<Integer> listaReferencias;
+		try {
+			listaReferencias = ApmEJB.obtenerReferenciaMatriculados(getMatricula().getExpediente());
+			listaAsignaturas = AsignaturaEJB.obtenerAsignaturasPorReferencia(listaReferencias);
+			return listaAsignaturas;
+		} catch (SecretariaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public Matricula getMatricula() {
@@ -74,14 +95,5 @@ public class InspectMatricula implements Serializable {
 
 	public void setEditable(Boolean editable) {
 		this.editable = editable;
-	}
-
-	public List<Asignatura> getAsignaturas() {
-		asignaturas = matriculaEJB.asignaturasDeMatricula(matricula);
-		return asignaturas;
-	}
-
-	public void setAsignaturas(List<Asignatura> asignaturas) {
-		this.asignaturas = asignaturas;
 	}
 }

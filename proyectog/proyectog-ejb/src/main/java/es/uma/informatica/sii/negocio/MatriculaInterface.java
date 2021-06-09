@@ -14,7 +14,7 @@ public interface MatriculaInterface {
 	/**  
 	 *  REQUISITO: RF-01
 	 *  Lista el conjunto de matriculas de alumno. Si el alumno no tiene matriculas, devuelve una
-	 *  lista vacÃ­a
+	 *  lista vací­a
 	 *  @param alumno 
 	 *  @throws SecretariaException
 	 */ 
@@ -40,17 +40,35 @@ public interface MatriculaInterface {
 	 *  REQUISITO: RF-10 
 	 *  @throws SecretariaException
 	 */ 
-	//AÃ±adir este requisito
 	public void desmatricularAsignatura(Matricula matricula, Asignatura asignatura) throws SecretariaException;
 	
-	//documentar
+	/**
+	 * Elimina de la base de datos la matricula.
+	 * @param matricula
+	 */
 	public void eliminarMatricula(Matricula matricula);
 	
+	/**
+	 * Devuelve la lista de asignaturas de una matricula.
+	 * @param mat
+	 * @return List<Asignatura>
+	 */
 	public List<Asignatura> asignaturasDeMatricula(Matricula mat);
 
-	//documentar
+	/**
+	 * Devuelve el turnoPreferente especificado en Matricula perteneciente a un alumno
+	 * @param alumno
+	 * @return String
+	 * @throws SecretariaException
+	 */
 	public String consultarTurnoMatricula(Expediente alumno) throws SecretariaException;
 
+	/**
+	 * Devuelve la lista de codigos de asignaturas pertenecientes a la matricula del curso actual de un alumno.
+	 * @param alumno
+	 * @return List<Integer>
+	 * @throws SecretariaException
+	 */
 	public List<Integer> obtenerCodigosAsignaturasMatricula(Expediente alumno) throws SecretariaException;
 	
 	public String obtenerCursoActual();

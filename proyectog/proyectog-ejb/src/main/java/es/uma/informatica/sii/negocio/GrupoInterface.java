@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Matricula;
@@ -57,23 +58,49 @@ public interface GrupoInterface {
 	
 	/** 
 	 * REQUISITO: RF-09
-	 * Actualizaciï¿½n de los datos de grupo
+	 * Actualización de los datos de grupo
  
 	 * @param grupo
 	 * @throws SecretariaException
 	 */
 	public void actualizarGrupo(Grupo grupo) throws SecretariaException;
 	
-	//documentar
+	/**
+	 * Devuelve la lista de grupos pertenecientes a la tabla Grupo
+	 * @return List<Grupo>
+	 * @throws SecretariaException
+	 */
 	public List<Grupo> consultarGrupos() throws SecretariaException;
 
-	//documentar
+	/**
+	 * Devuelve la lista de listas de grupos (letra) dados un alumno identificado por su nº de expediente y una lista de cursos de asignaturas.
+	 * @param expediente
+	 * @param curso
+	 * @return List<List<String>>
+	 * @throws SecretariaException
+	 */
 	public List<List<String>> consultarGrupos(Integer expediente, List<Integer> curso) throws SecretariaException;
 
-	//documentar
+	/**
+	 * Devuelve la lista de grupos en inglés pertenecientes a un expediente y un curso.
+	 * @param expediente
+	 * @param curso
+	 * @param ingles
+	 * @return List<Grupo>
+	 * @throws SecretariaException
+	 */
 	public List<Grupo> consultarGrupos(Expediente expediente, int curso, boolean ingles) throws SecretariaException;
 
-	//documentar
+	/**
+	 * Devuelve la lista de grupos de tarde pertenecientes a un expediente y un curso.
+	 * @param expediente
+	 * @param curso
+	 * @param ingles
+	 * @param tarde
+	 * @return List<Grupo>
+	 * @throws SecretariaException
+	 */
 	public List<Grupo> consultarGrupos(Expediente expediente, int curso, boolean ingles, String tarde) throws SecretariaException;
 	
+	public List<Asignatura> asignaturasDeGrupo(Grupo grupo);
 }

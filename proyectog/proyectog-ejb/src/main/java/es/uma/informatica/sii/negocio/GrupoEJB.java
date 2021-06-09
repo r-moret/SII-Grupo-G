@@ -9,11 +9,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.TypedQuery;
 
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
+import es.uma.informatica.sii.entidades.GruposPorAsignatura;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas.AsignaturasPorMatriculasId;
@@ -34,6 +36,24 @@ public class GrupoEJB implements GrupoInterface{
 	@PersistenceContext(name = PERSISTENCE_UNIT)
 	private EntityManager em;
 
+	
+	@Override
+	public List<Asignatura> asignaturasDeGrupo(Grupo grupo){
+		
+		TypedQuery<GruposPorAsignatura> query = em.createQuery("SELECT g FROM GruposPorAsignatura g", GruposPorAsignatura.class);
+		
+		List<GruposPorAsignatura> lm = query.getResultList();
+		List<Asignatura> asignaturas = new ArrayList<>();
+		
+		for(GruposPorAsignatura asig : lm) {
+			if(asig.getGrupo().equals(grupo)) {
+				
+				asignaturas.add(asig.getAsignatura());
+			}
+		}
+		
+		return asignaturas;
+	}
 
 	@Override
 	public void asignarGrupos(AlgoritmoSelector algo, Matricula matricula) throws SecretariaException {
@@ -55,22 +75,6 @@ public class GrupoEJB implements GrupoInterface{
 			em.merge(asignaturaMat);
 		}
 	}
-	
-//	@Override
-//	public void asignarGrupos(Algoritmo selector, Encuesta encuesta) throws SecretariaException {
-//		if(encuesta==null){
-//			throw new SecretariaException();
-//		}
-//		
-//		Encuesta e = em.find(Encuesta.class, encuesta.getExpediente());
-//		
-//		if(e == null) {
-//			throw new EncuestaInexistente();
-//		}
-//	
-//		selector.aplicarAlgoritmo(0, encuesta);
-//		em.merge(encuesta);
-//	}
 	
 	@Override
 	public void registrarSolicitudCambioGrupo(SolicitudCambioGrupo solicitud) throws SecretariaException {
@@ -140,8 +144,6 @@ public class GrupoEJB implements GrupoInterface{
 				mat = m;
 			}
 		}
-		//int i = exp.getMatriculas().size()-1;
-		//Matricula m = exp.getMatriculas().get(i);
 		List<AsignaturasPorMatriculas> apm = mat.getAsignaturasPorMatriculas();
 
 		for(AsignaturasPorMatriculas a : apm){
@@ -204,14 +206,6 @@ public class GrupoEJB implements GrupoInterface{
 	
 	@Override
 	public List<List<String>> consultarGrupos(Integer expediente, List<Integer> curso) throws SecretariaException {
-		/*
-		if(expediente == null) {
-			//Expediente no existe
-			throw new ExpedienteInexistente();
-		}
-		
-		Expediente e = em.find(Expediente.class, expediente.getNumExpediente());
-		*/
 		List<List<String>> res = new ArrayList<>();
 		List<String> aux= new ArrayList<>();
 		List<Grupo> lg = em.createQuery("SELECT g FROM Grupo g", Grupo.class).getResultList();
@@ -223,8 +217,7 @@ public class GrupoEJB implements GrupoInterface{
 				}	
 			}
 			res.add(aux);
-		}
-		
+		}	
 		return res;
 	}
 	
