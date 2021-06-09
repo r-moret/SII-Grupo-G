@@ -9,11 +9,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.TypedQuery;
 
 import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
+import es.uma.informatica.sii.entidades.GruposPorAsignatura;
 import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.SolicitudCambioGrupo;
 import es.uma.informatica.sii.entidades.AsignaturasPorMatriculas.AsignaturasPorMatriculasId;
@@ -34,6 +36,24 @@ public class GrupoEJB implements GrupoInterface{
 	@PersistenceContext(name = PERSISTENCE_UNIT)
 	private EntityManager em;
 
+	
+	@Override
+	public List<Asignatura> asignaturasDeGrupo(Grupo grupo){
+		
+		TypedQuery<GruposPorAsignatura> query = em.createQuery("SELECT g FROM GruposPorAsignatura g", GruposPorAsignatura.class);
+		
+		List<GruposPorAsignatura> lm = query.getResultList();
+		List<Asignatura> asignaturas = new ArrayList<>();
+		
+		for(GruposPorAsignatura asig : lm) {
+			if(asig.getGrupo().equals(grupo)) {
+				
+				asignaturas.add(asig.getAsignatura());
+			}
+		}
+		
+		return asignaturas;
+	}
 
 	@Override
 	public void asignarGrupos(AlgoritmoSelector algo, Matricula matricula) throws SecretariaException {

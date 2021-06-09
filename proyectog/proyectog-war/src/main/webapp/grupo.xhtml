@@ -18,11 +18,10 @@
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"/>
 		<script type="text/javascript" src="./scripts/pagination.js"/>
 		
-		<title>Matrícula</title>
+		<title>Grupo</title>
 	</h:head>
 	
 	<h:body class="bg-image vh-100 d-flex flex-column" style="background-image: url('./images/background-etsii.png')">
-	
 		<header> 
 			<nav class="navbar navbar-expand-lg transparent">
 				<div class="container-fluid">
@@ -42,14 +41,14 @@
 				<div class="col"></div>
 			</div>
 		</header>
-	
+		
 		<div class="container">
 			<div class="row m-0">
 				<div class="col p-0"></div>
 				<div class="col-12 py-3 rounded bg-light">
 					<div class="row m-0">
 						<div class="d-flex mb-3 justify-content-center">
-							<h3>Matrícula</h3>
+							<h3>Grupo</h3>
 						</div>
 					</div>
 					
@@ -57,84 +56,88 @@
 						<div class="col"></div>
 						<div class="col-auto mb-3">
 							<h:form>
+								
 								<div class="row align-items-center mb-4">
 									<div class="form-group col-6">
-										<label>Nombre del alumno</label>
-										<h:inputText class="form-control" value="#{inspectMatricula.nombre}" disabled="true"></h:inputText>
+										<label>ID</label>
+										<h:inputText class="form-control" value="#{inspectGrupo.grupo.id}" disabled="true"></h:inputText>
 									</div>
 									<div class="col"></div>
 									<div class="col-auto">
 										<h:commandLink class="btn btn-primary btn-block" 
-											action="#{inspectMatricula.edit(inspectMatricula.matricula)}" 
-											rendered="#{!inspectMatricula.editable}">Editar</h:commandLink>
+											action="#{inspectGrupo.edit(inspectGrupo.grupo)}" 
+											rendered="#{!inspectGrupo.editable}">Editar</h:commandLink>
 										<h:commandLink class="btn btn-success btn-block" 
-											action="#{inspectMatricula.save(inspectMatricula.matricula)}" 
-											rendered="#{inspectMatricula.editable}">Guardar</h:commandLink>
+											action="#{inspectGrupo.save(inspectGrupo.grupo)}" 
+											rendered="#{inspectGrupo.editable}">Guardar</h:commandLink>
 									</div>
 									<div class="col-auto">
-										<h:commandLink class="btn btn-danger btn-block" action="#{inspectMatricula.delete}">Eliminar</h:commandLink >
+										<h:commandLink class="btn btn-danger btn-block" action="#{inspectGrupo.delete}">Eliminar</h:commandLink>
 									</div>
 								</div>
+								
 								<div class="row align-items-center mb-4">
 									<div class="form-group col-auto">
-										<label>Número expediente</label>
-										<h:inputText class="form-control" value="#{inspectMatricula.matricula.expediente.numExpediente}" disabled="true"></h:inputText>
+										<label>Curso</label>
+										<h:inputText class="form-control" value="#{inspectGrupo.grupo.curso}" disabled="true"></h:inputText>
 									</div>
 									<div class="form-group col-auto">
-										<label>Curso académico</label>
-										<h:inputText class="form-control" value="#{inspectMatricula.matricula.cursoAcademico}" disabled="true"></h:inputText>
+										<label>Letra</label>
+										<h:inputText class="form-control" value="#{inspectGrupo.grupo.letra}" disabled="true"></h:inputText>
 									</div>
 									<div class="form-group col-auto">
-										<label>Número archivo</label>
-										<h:inputText class="form-control" value="#{inspectMatricula.matricula.numArchivo}" disabled="#{!inspectMatricula.editable}"></h:inputText>
+										<label>Titulación</label>
+										<h:inputText class="form-control" value="#{inspectGrupo.grupo.titulacion.nombre}" disabled="true"></h:inputText>
 									</div>
-								</div>
+								</div>		
+								
 								<div class="row align-items-center mb-4">
 									<div class="form-group col-auto">
-										<label>Fecha matriculación</label>
-										<h:inputText class="form-control" value="#{inspectMatricula.matricula.fechaMatricula}" disabled="true"></h:inputText>
+										<label>Turno</label>
+										<h:inputText class="form-control" value="#{inspectGrupo.grupo.turno}" disabled="true"></h:inputText>
+									</div>
+									<div class="form-group col-auto">
+										<label class="form-check-label">Inglés</label>
+										<div class="mt-1 d-flex justify-content-center">
+											<h:selectBooleanCheckbox class="form-check-input" value="#{inspectGrupo.grupo.ingles}" disabled="#{!inspectGrupo.editable}"></h:selectBooleanCheckbox>
+										</div>
 									</div>
 								</div>
+								
 								<div class="row align-items-start mb-4">
 									<div class="form-group col-auto">
-										<label>Turno preferente</label>
-										<h:inputText class="form-control" value="#{inspectMatricula.matricula.turnoPreferente}" disabled="#{!inspectMatricula.editable}"></h:inputText>
+										<label class="form-check-label">Visible</label>
+										<div class="mt-1 d-flex justify-content-center">
+											<h:selectBooleanCheckbox class="form-check-input" value="#{inspectGrupo.grupo.visible}" disabled="#{!inspectGrupo.editable}"></h:selectBooleanCheckbox>
+										</div>
 									</div>
 									<div class="form-group col-auto">
-										<label class="form-check-label">Estado</label>
+										<label class="form-check-label">Asignar</label>
 										<div class="mt-1 d-flex justify-content-center">
-											<h:selectBooleanCheckbox class="form-check-input" value="#{inspectMatricula.matricula.estado}" disabled="#{!inspectMatricula.editable}"></h:selectBooleanCheckbox>
+											<h:selectBooleanCheckbox class="form-check-input" value="#{inspectGrupo.grupo.asignar}" disabled="#{!inspectGrupo.editable}"></h:selectBooleanCheckbox>
 										</div>							
 									</div>
 									<div class="form-group col-auto">
-										<label class="form-check-label">Nuevo ingreso</label>
-										<div class="mt-1 d-flex justify-content-center">
-											<h:selectBooleanCheckbox class="form-check-input" value="#{inspectMatricula.matricula.nuevoIngreso}" disabled="#{!inspectMatricula.editable}"></h:selectBooleanCheckbox>
-										</div>										
+										<label>Plazas</label>
+										<h:inputText class="form-control" value="#{inspectGrupo.grupo.plazas}" disabled="true"></h:inputText>
 									</div>
 								</div>
+								
+								
 								<div class="row align-items-center mb-4">
-									<h:dataTable id="asignaturasPorMatriculas-table" 
+									<h:dataTable id="asignaturas-grupo-table" 
 										class="table table-striped"
 										headerClass="text-center" 
-										columnClasses="text-center,text-center,text-center" 
-										value="#{inspectMatricula.asignaturas}" 
+										columnClasses="text-center"
+										value="#{inspectGrupo.asignaturas}"
 										var="asignatura">
 										
 										<h:column>
-									      	<f:facet name = "header">Curso</f:facet>
-									      	<h:outputText value="#{asignatura.curso}"/>
-								   		</h:column>
-								   		<h:column>
-									      	<f:facet name = "header">Código</f:facet>
-									      	<h:outputText value="#{asignatura.codigo}"/>
-								   		</h:column>
-										<h:column>
-									      	<f:facet name = "header">Asignatura</f:facet>
+									      	<f:facet name = "header">Asignaturas</f:facet>
 									      	<h:outputText value="#{asignatura.nombre}"/>
 								   		</h:column>
 									</h:dataTable>
-								</div>
+								</div>						
 							</h:form>
 						</div>
 						<div class="col"></div>
@@ -143,7 +146,7 @@
 				<div class="col p-0"></div>
 			</div>
 		</div>
-		
+	
 		<footer class="row m-0 mt-auto">
 			<div class="col">
 				<p class="text-light m-0 py-2 text-center">2021 &copy; proyectog. Sistemas de la Información para Internet</p>
@@ -152,4 +155,5 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"/>
 	</h:body>
+
 </html>

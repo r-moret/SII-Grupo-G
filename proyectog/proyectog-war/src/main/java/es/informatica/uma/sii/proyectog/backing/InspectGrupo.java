@@ -8,61 +8,53 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import es.uma.informatica.sii.entidades.Asignatura;
+import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Matricula;
+import es.uma.informatica.sii.negocio.GrupoInterface;
 import es.uma.informatica.sii.negocio.MatriculaInterface;
 
-@Named(value="inspectMatricula")
+@Named(value="inspectGrupo")
 @RequestScoped
-public class InspectMatricula implements Serializable {
+public class InspectGrupo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private MatriculaInterface matriculaEJB;
+	private GrupoInterface grupoEJB;
 	
-	private Matricula matricula;
+	private Grupo grupo;
 	private List<Asignatura> asignaturas;
-	private String nombre;
 	private Boolean editable = false;
 	
-	public String inspect(Matricula mat) {
-		matricula = mat;
-		setNombre(mat.getExpediente().getAlumno().getNombreCompleto());
-		return "inspectMatricula.xhtml";
+	public String inspect(Grupo grup) {
+		setGrupo(grup);
+		return "grupo.xhtml";
 	}
 	
 	public String delete() {
-		// Internal Server Error al ejecutarlo
-		matriculaEJB.eliminarMatricula(matricula);
+		// TODO: Falta implementar el método en EJB
+		// grupoEJB.eliminarGrupo(grupo);
 		return "managing.xhtml";
 	}
 	
-	public String edit(Matricula mat) {
+	public String edit(Grupo grup) {
 		// Internal Server Error al ejecutarlo
 		setEditable(true);
-		return "inspectMatricula.xhtml";
+		return "inspectGrupo.xhtml";
 	}
 	
-	public String save(Matricula mat) {
+	public String save(Grupo grup) {
 		// Llamada al EJB para guardar los datos del formulario
 		setEditable(false);
-		return "inspectMatricula.xhtml";
+		return "inspectGrupo.xhtml";
 	}
 
-	public Matricula getMatricula() {
-		return matricula;
+	public Grupo getGrupo() {
+		return grupo;
 	}
 
-	public void setMatricula(Matricula matricula) {
-		this.matricula = matricula;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 
 	public Boolean getEditable() {
@@ -74,7 +66,7 @@ public class InspectMatricula implements Serializable {
 	}
 
 	public List<Asignatura> getAsignaturas() {
-		asignaturas = matriculaEJB.asignaturasDeMatricula(matricula);
+		asignaturas = grupoEJB.asignaturasDeGrupo(grupo);
 		return asignaturas;
 	}
 

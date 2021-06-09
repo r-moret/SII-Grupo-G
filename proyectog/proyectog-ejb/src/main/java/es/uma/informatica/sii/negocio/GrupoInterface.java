@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import es.uma.informatica.sii.entidades.Asignatura;
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
 import es.uma.informatica.sii.entidades.Matricula;
@@ -76,4 +77,5 @@ public interface GrupoInterface {
 	//documentar
 	public List<Grupo> consultarGrupos(Expediente expediente, int curso, boolean ingles, String tarde) throws SecretariaException;
 	
+	public List<Asignatura> asignaturasDeGrupo(Grupo grupo);
 }

@@ -1,0 +1,265 @@
+referencia,carácter,codigo,creditos,cuatrimestre,curso,duracion,idioma,nombre,ofertada,plazas,titulacion_codigo
+51198,,450,12,2,4,2,,Trabajo Fin de Grado,true,90,1042
+51673,,101,6,1,1,1,,Cálculo para la Computación,true,90,1043
+51674,,102,6,1,1,1,,Fundamentos Físicos de la Informática,true,90,1043
+51675,,103,6,1,1,1,,Fundamentos de Electrónica,true,90,1043
+51676,,104,6,1,1,1,Solo un grupo,Fundamentos de la Programación,true,90,1043
+51677,,105,6,1,1,1,,Matemática Discreta,true,90,1043
+51678,,106,6,2,1,2,,Estructuras Algebraicas para la Computación,true,90,1043
+51679,,107,6,2,1,2,,Métodos Estadísticos para la Computación,true,90,1043
+51680,,108,6,2,1,2,,Organización Empresarial,true,90,1043
+51681,,109,6,2,1,2,Solo un grupo,Programación Orientada a Objetos,true,90,1043
+51682,,110,6,2,1,2,Solo un grupo,Tecnología de Computadores,true,90,1043
+51683,,201,6,1,2,1,Solo un grupo,Análisis y Diseño de Algoritmos,true,90,1043
+51684,,202,6,1,2,1,Solo un grupo,Bases de Datos,true,90,1043
+51685,,203,6,1,2,1,Solo un grupo,Estructura de Computadores,true,90,1043
+51686,,204,6,1,2,1,Solo un grupo,Estructura de Datos,true,90,1043
+51687,,205,6,1,2,1,Solo un grupo,Teoría de Autómatas y Lenguajes Formales,true,90,1043
+51688,,206,6,2,2,2,Solo un grupo,Introducción a la Ingeniería del Software,true,90,1043
+51689,,207,6,2,2,2,Solo un grupo,Programación de Sistemas y Concurrencia,true,90,1043
+51690,,208,6,2,2,2,Solo un grupo,Redes y Sistemas Distribuidos,true,90,1043
+51691,,209,6,2,2,2,Solo un grupo,Sistemas Inteligentes,true,90,1043
+51692,,210,6,2,2,2,Solo un grupo,Sistemas Operativos,true,90,1043
+51701,,301,6,1,3,1,,Arquitecturas de Almacenamiento,true,90,1043
+51700,,302,6,1,3,1,,Arquitectura de Computadores,true,90,1043
+51702,,303,6,1,3,1,,Circuitos Electrónicos y Señales,true,90,1043
+51703,,304,6,1,3,1,,Diseño de Sistemas Empotrados,true,90,1043
+51708,,305,6,2,3,2,,Diseño con Microcontroladores,true,90,1043
+51709,,306,6,2,3,2,,Diseño de Infraestructuras de Red,true,90,1043
+51710,,307,6,2,3,2,,Diseño de Sistemas Operativos,true,90,1043
+51716,,308,6,2,3,2,,Sistemas de Tiempo Real,true,90,1043
+51735,,401,6,2,4,2,,Proyectos y Legislación,true,90,1043
+51718,,402,6,1,4,1,,Arquitecturas Paralelas,true,90,1043
+51720,,403,6,1,4,1,,Control por Computador,true,90,1043
+51722,,404,6,1,4,1,,Diseño de Infraestructuras Informáticas,true,90,1043
+51725,,405,6,1,4,1,,Programación Distribuida,true,90,1043
+51739,,450,12,2,4,2,,Trabajo Fin de Grado,true,90,1043
+53417,,830,"4,5",1,4,1,,Biofísica Celular y Tisular,true,90,1056
+53418,,831,"4,5",1,4,1,,Ingeniería de Tejidos,true,90,1056
+53419,,832,"4,5",1,4,1,,Prostética,true,90,1056
+53420,,833,"4,5",1,4,1,,Robótica Médica,true,90,1056
+53422,,835,"4,5",2,4,2,,Sistemas de Rehabilitación y Ayuda a la Discapacidad,true,90,1056
+53413,,920,"4,5",1,4,1,,Aprendizaje Computacional,true,90,1056
+53412,,921,"4,5",1,4,1,,Almacenes de Datos,true,90,1056
+53414,,922,"4,5",1,4,1,,Estándares de Datos Abiertos e Integración de Datos,true,90,1056
+53415,,923,"4,5",1,4,1,,Ingeniería Web,true,90,1056
+53424,,930,"4,5",2,4,2,,Bioseñales Médicas,true,90,1056
+53425,,931,"4,5",2,4,2,,Microtecnología y Nanotecnología en Biomedicina,true,90,1056
+53423,,932,"4,5",1,4,1,,Modelado de Sistemas Biomédicos,true,90,1056
+53426,,933,"4,5",2,4,2,,"Seguridad, Ética y Regulación en Ingeniería Biomédica",true,90,1056
+51487,,101,12,2,1,2,,Álgebra Lineal y Geometría,true,90,1073
+51478,,102,6,1,1,1,,Análisis Matemático I,true,90,1073
+51479,,103,6,1,1,1,,Estructuras Básicas del Álgebra,true,90,1073
+51483,,107,6,2,1,2,,Análisis Matemático II,true,90,1073
+51484,,108,6,2,1,2,,Estructuras Algebraicas,true,90,1073
+51481,,201,6,1,2,1,Ningún grupo,Matemática Discreta,true,90,1073
+51488,,202,6,1,2,1,,Análisis Matemático III,true,90,1073
+51489,,203,6,1,2,1,,Ecuaciones Diferenciales I,true,90,1073
+51486,,207,6,2,2,2,,Introducción a la Probabilidad y a la Estadística,true,90,1073
+51493,,208,6,2,2,2,,Ampliación de Álgebra Lineal y Geometría,true,90,1073
+51494,,209,6,2,2,2,,Análisis Matemático IV,true,90,1073
+53303,,504,"13,5",2,4,2,,Práctias Externas,true,90,1056
+50658,,101,6,1,1,1,,Cálculo para la Computación,true,90,1041
+50659,,102,6,1,1,1,,Fundamentos Físicos de la Informática,true,90,1041
+50660,,103,6,1,1,1,,Fundamentos de Electrónica,true,90,1041
+50661,,104,6,1,1,1,Solo un grupo,Fundamentos de la Programación,true,90,1041
+50662,,105,6,1,1,1,,Matemática Discreta,true,90,1041
+50663,,106,6,2,1,2,,Estructuras Algebraicas para la Computación,true,90,1041
+50664,,107,6,2,1,2,,Métodos Estadísticos para la Computación,true,90,1041
+50665,,108,6,2,1,2,,Organización Empresarial,true,90,1041
+50666,,109,6,2,1,2,Solo un grupo,Programación Orientada a Objetos,true,90,1041
+50667,,110,6,2,1,2,Solo un grupo,Tecnología de Computadores,true,90,1041
+50994,,201,6,1,2,1,Solo un grupo,Análisis y Diseño de Algoritmos,true,90,1041
+50995,,202,6,1,2,1,Solo un grupo,Bases de Datos,true,90,1041
+50996,,203,6,1,2,1,Solo un grupo,Estructura de Computadores,true,90,1041
+50997,,204,6,1,2,1,Solo un grupo,Estructura de Datos,true,90,1041
+50998,,205,6,1,2,1,Solo un grupo,Teoría de Autómatas y Lenguajes Formales,true,90,1041
+50999,,206,6,2,2,2,Solo un grupo,Introducción a la Ingeniería del Software,true,90,1041
+51000,,207,6,2,2,2,Solo un grupo,Programación de Sistemas y Concurrencia,true,90,1041
+51001,,208,6,2,2,2,Solo un grupo,Redes y Sistemas Distribuidos,true,90,1041
+51002,,209,6,2,2,2,Solo un grupo,Sistemas Inteligentes,true,90,1041
+51003,,210,6,2,2,2,Solo un grupo,Sistemas Operativos,true,90,1041
+51007,,301,6,1,3,1,,Introducción a los Sistemas de Información,true,90,1041
+51009,,302,6,1,3,1,,Procesadores de Lenguajes,true,90,1041
+51011,,303,6,1,3,1,,Seguridad de la Información,true,90,1041
+51015,,305,6,2,3,2,,Administración de Bases de Datos,true,90,1041
+51025,,306,6,2,3,2,,Sistemas de Información para Internet,true,90,1041
+51024,,307,6,2,3,2,,Sistemas Inteligentes II,true,90,1041
+51008,,310,6,1,3,1,,Lógica Computacional,true,90,1041
+51016,,311,6,2,3,2,,Algoritmia y Complejidad,true,90,1041
+51017,,320,6,1,3,1,,Análisis y Diseño de los Sistemas de Información,true,90,1041
+51013,,321,6,2,3,2,,Sistemas de Información Empresarial,true,90,1041
+51005,,330,6,1,3,1,,Desarrollo de Servicios Telemáticos,true,90,1041
+51022,,331,6,2,3,2,,Modelos Estadísticos y Simulación,true,90,1041
+51055,,401,6,2,4,2,,Proyectos y Legislación,true,90,1041
+51029,,410,6,1,4,1,,Aprendizaje Computacional,true,90,1041
+51036,,411,6,1,4,1,,Modelos de la Computación,true,90,1041
+51041,,412,6,1,4,1,,Robótica,true,90,1041
+51046,,413,6,1,4,1,,Teoría de los Lenguajes de Programación,true,90,1041
+51027,,420,6,1,4,1,,Administración de Redes y Sistemas,true,90,1041
+51032,,421,6,1,4,1,,Dirección de Proyectos de Sistemas de Información,true,90,1041
+51034,,422,6,1,4,1,,Diseño y Explotación de Almacenes de Datos,true,90,1041
+51037,,423,6,1,4,1,,Negocio Electrónico,true,90,1041
+51028,,430,6,1,4,1,,Administración de Sistemas Operativos,true,90,1041
+51033,,431,6,1,4,1,,Diseño y Evaluación de Infraestructuras Informáticas,true,90,1041
+51038,,432,6,1,4,1,,Planificación de Proyectos y Análisis de Riesgos,true,90,1041
+51043,,433,6,1,4,1,,Tecnología de los Sistemas de Producción,true,90,1041
+51059,,450,12,2,4,2,,Trabajo Fin de Grado (Informática),true,90,1041
+51047,,802,6,1,4,1,,Arquitecturas Virtuales,true,90,1041
+51031,,803,6,1,4,1,,Desarrollo de Software Crítico,true,90,1041
+51006,,804,6,1,3,1,,Electrónica Digital,true,90,1041
+51051,,806,6,1,4,1,,Herramientas de Diseño Electrónico,true,90,1041
+51018,,807,6,1,3,1,,Ingeniería de Protocolos,true,90,1041
+51019,,808,6,1,3,1,,Inteligencia Artificial para Juegos,true,90,1041
+51057,,810,6,1,3,1,,Redes Inalámbricas,true,90,1041
+51014,,813,6,1,3,1,,Teoría de Dominios y Modelos Denotacionales,true,90,1041
+51044,,814,6,1,3,1,,Teoría de la Información y la Codificación,true,90,1041
+51026,,815,6,1,3,1,,Visión por Computador,true,90,1041
+51030,,850,6,2,3,2,,Arquitecturas Cluster,true,90,1041
+51730,,851,6,2,4,2,,Arquitecturas Especializadas,true,90,1041
+51190,,852,6,2,4,2,,Calidad de Software,true,90,1041
+51191,,853,6,2,4,2,,Cognición y Comunicación en Ingeniería del Software,true,90,1041
+51049,,856,6,2,3,2,,Electrónica para Domótica,true,90,1041
+51050,,857,6,2,4,2,,Gestión Inteligente de la Información,true,90,1041
+51020,,860,6,2,3,2,,Laboratorio de Computación Científica,true,90,1041
+51021,,862,6,2,3,2,,Modelado y Simulación de Sistemas,true,90,1041
+51056,,863,12,2,4,2,,Prácticas Externas,true,90,1041
+51039,,864,6,2,3,2,,Procesamiento de Imágenes y Video,true,90,1041
+51040,,865,6,2,3,2,,Programación de Robots,true,90,1041
+51023,,866,6,2,3,2,,Programación de Videojuegos,true,90,1041
+51058,,869,6,2,4,2,,Sistemas de Información para la Industria,true,90,1041
+51138,,101,6,1,1,1,,Cálculo para la Computación,true,90,1042
+51139,,102,6,1,1,1,,Fundamentos Físicos de la Informática,true,90,1042
+51140,,103,6,1,1,1,,Fundamentos de Electrónica,true,90,1042
+51141,,104,6,1,1,1,Solo un grupo,Fundamentos de la Programación,true,90,1042
+51142,,105,6,1,1,1,,Matemática Discreta,true,90,1042
+51143,,106,6,2,1,2,,Estructuras Algebraicas para la Computación,true,90,1042
+51144,,107,6,2,1,2,,Métodos Estadísticos para la Computación,true,90,1042
+51145,,108,6,2,1,2,,Organización Empresarial,true,90,1042
+51146,,109,6,2,1,2,Solo un grupo,Programación Orientada a Objetos,true,90,1042
+53008,,101,6,1,1,1,,Bioquímica Estructural,true,90,1056
+53009,,102,6,1,1,1,,Cálculo,true,90,1056
+53010,,103,6,1,1,1,,Fundamentos de la Programación,true,90,1056
+53011,,104,6,1,1,1,,Física I,true,90,1056
+53012,,105,6,1,1,1,,Álgebra Lineal,true,90,1056
+53013,,106,6,2,1,2,,Ampliación de Cálculo,true,90,1056
+53014,,107,6,2,1,2,,Estadística,true,90,1056
+53015,,108,6,2,1,2,,Física II,true,90,1056
+53016,,109,6,2,1,2,,Gestión de Empresas,true,90,1056
+53017,,110,6,2,1,2,,Programación Orientada a Objetos,true,90,1056
+53109,,201,6,1,2,1,,Ampliación de Matemáticas,true,90,1056
+53110,,202,6,1,2,1,,Biología Molecular y Bioquímica,true,90,1056
+53111,,203,6,1,2,1,,Circuitos y Máquinas Eléctricas,true,90,1056
+53112,,204,6,1,2,1,,Electrónica,true,90,1056
+53113,,205,6,1,2,1,,Estructuras de Datos y Algoritmos,true,90,1056
+53114,,206,6,2,2,2,,Anatomía y Fisiología,true,90,1056
+53115,,207,6,2,2,2,,Arquitectura de Computadores y Sistemas Operativos,true,90,1056
+53116,,208,6,2,2,2,,Bases de Datos,true,90,1056
+53117,,209,6,2,2,2,,Biología Celular y Genética,true,90,1056
+53118,,210,6,2,2,2,,Control Automático,true,90,1056
+53161,,301,6,1,3,1,,Fundamentos de Informática Clínica,true,90,1056
+53162,,302,6,1,3,1,,Imágenes Biomédicas,true,90,1056
+53163,,303,6,1,3,1,,Ingeniería del Software,true,90,1056
+53164,,304,6,1,3,1,,Redes y Sistemas Distribuidos,true,90,1056
+53165,,305,6,1,3,1,,Sistemas Inteligentes,true,90,1056
+53210,,320,"4,5",2,3,2,,Bases de Datos Biológicas,true,90,1056
+53211,,330,"4,5",2,3,2,,Biomateriales,true,90,1056
+53212,,331,"4,5",2,3,2,,Biomecánica I: Sólidos,true,90,1056
+53213,,332,"4,5",2,3,2,,Biomecánica II: Fluidos,true,90,1056
+53214,,333,"4,5",2,3,2,,Biotecnología,true,90,1056
+53215,,334,6,2,3,2,,Ciencia y Resistencia de Materiales,true,90,1056
+53218,,321,"4,5",2,3,2,,"Genómica, Proteómica y Metabolómica",true,90,1056
+53220,,322,6,2,3,2,,Ingeniería del Software Avanzada,true,90,1056
+53221,,335,6,2,3,2,,Instrumentación Biomédica,true,90,1056
+53222,,323,"4,5",2,3,2,,Minería de Datos,true,90,1056
+53223,,324,"4,5",2,3,2,,Programación Avanzada en Bioinformática,true,90,1056
+53226,,325,6,2,3,2,,Técnicas y Modelos Algorítmicos,true,90,1056
+53283,,415,6,1,4,1,,Electromedicina,true,90,1056
+53286,,416,6,1,4,1,,Instalaciones Hospitalarias,true,90,1056
+53296,,414,"4,5",2,4,2,,Proyectos de Ingeniería Biomédica,true,90,1056
+53304,,423,12,2,4,2,,Trabajo Fin de Grado,true,90,1056
+53308,,425,6,1,4,1,,Biología de Sistemas,true,90,1056
+53309,,424,6,1,4,1,,Herramientas y Algoritmos en Bioinformática,true,90,1056
+53310,,426,"4,5",2,4,2,,Proyectos de Bioinformática,true,90,1056
+53824,,336,"4,5",2,3,2,,Análisis Avanzado de Datos Clínicos (SE),false,90,1056
+53825,,337,"4,5",2,3,2,,Codificación y Gestión de la Información Sanitaria (SE),false,90,1056
+53826,,338,"4,5",2,3,2,,Diseño e Implementación de Sistemas de Información Clínica (SE),false,90,1056
+53827,,339,6,2,3,2,,Infraestructuras de Sistemas de Información (SE),false,90,1056
+53828,,340,6,2,3,2,,Salud Pública y Organización Sanitaria (SE),false,90,1056
+53829,,341,"4,5",2,3,2,,"Seguridad, Confidencialidad y Gestión de la Identidad (SE)",false,90,1056
+53407,,820,"4,5",1,4,1,,Análisis de Datos de Expresión Génica,false,90,1056
+53408,,821,"4,5",1,4,1,,Biofísica,false,90,1056
+53409,,822,"4,5",1,4,1,,Biología Sintética,false,90,1056
+53410,,823,"4,5",1,4,1,,Computación en Biotecnología,false,90,1056
+53411,,824,"4,5",1,4,1,,Sistemas Biológicos Complejos,false,90,1056
+53421,,834,"4,5",1,4,1,,Sistemas de Control y Biomecatrónica,false,90,1056
+53416,,924,"4,5",2,4,2,,Minería de Textos,false,90,1056
+53427,,934,"4,5",2,4,2,,Telemedicina,false,90,1056
+53830,,935,6,1,4,1,,Arquitectura de Sistemas y Software de Base (SE),false,90,1056
+53831,,936,"4,5",1,4,1,,Computación Orientada a Servicios (SE),false,90,1056
+53832,,937,"4,5",1,4,1,,Gestión de Proyectos Informáticos (SE),false,90,1056
+53833,,938,6,1,4,1,,Gestión de Servicios y Tecnologías de la Información (SE),false,90,1056
+53834,,939,"4,5",1,4,1,,"Gestión del Cambio, Comunicación y Liderazgo (SE)",false,90,1056
+53835,,940,"4,5",1,4,1,,Minería de Datos Clínicos (SE),false,90,1056
+53836,,941,"4,5",2,4,2,,Proyectos de Informática Clínica (SE),false,90,1056
+53837,,942,"4,5",2,4,2,,Sistemas de Información para Teleasistencia y Atención Remota (SE),false,90,1056
+53838,,943,"4,5",2,4,2,,Tecnología de las Comunicaciones (SE),false,90,1056
+53839,,944,"4,5",2,4,2,,Tecnologías para la Administración Electrónica (SE),false,90,1056
+53840,,945,"4,5",2,4,2,,Ética y Legislación en Salud (SE),false,90,1056
+51492,,301,6,1,3,1,,Topología General,false,90,1073
+51491,,302,6,1,3,1,,Métodos Numéricos I,false,90,1073
+51498,,303,6,1,3,1,,Ecuaciones Diferenciales II,false,90,1073
+51496,,307,6,2,3,2,,Geometría Diferencial de Curvas y Superficies,false,90,1073
+51497,,308,6,2,3,2,,Métodos Numéricos II,false,90,1073
+51507,,309,6,2,3,2,,Variable Compleja,false,90,1073
+51500,,401,6,1,4,1,,Probabilidad,false,90,1073
+51501,,402,6,1,4,1,,Teoría de la Medida e Integración,false,90,1073
+51502,,403,6,1,4,1,,Topología Algebraica Básica,false,90,1073
+51503,,406,6,2,4,2,,Análisis Numérico,false,90,1073
+51504,,407,6,2,4,2,,Geometría Diferencial Global de Superficies,false,90,1073
+51505,,408,6,2,4,2,,Inferencia Estadística,false,90,1073
+51499,,501,6,1,5,1,,Optimización,false,90,1073
+51521,,502,6,1,5,1,,Ampliación de Teoría de la Probabilidad,false,90,1073
+51526,,503,6,1,5,1,,Ecuaciones en Derivadas Parciales y Análisis de Fourier,false,90,1073
+51506,,504,6,2,5,2,,Teoría de Cuerpos,false,90,1073
+51536,,505,6,2,5,2,,Modelización,false,90,1073
+51539,,511,12,2,5,2,,Trabajo Fin de Grado (Matemáticas),false,90,1073
+53158,,801,6,1,3,1,,Ampliación de Física,false,90,1041
+51035,,805,6,1,4,1,,Fundamentos de Economía y Política Económica,false,90,1041
+51010,,809,6,1,3,1,,Programación Gráfica 3D,false,90,1041
+51012,,811,6,1,3,1,,Servicios Multimedia,false,90,1041
+51042,,812,6,1,4,1,,Sistemas de Automatización,false,90,1041
+51192,,854,6,2,4,2,,Desarrollo del Software Dirigido por Modelos,false,90,1041
+51048,,855,6,2,4,2,,Diseño de Equipos y Sistemas Electrónicos,false,90,1041
+51734,,858,6,2,4,2,,Implementación Electrónica de Procesadores,false,90,1041
+51052,,859,6,2,4,2,,Inteligencia Computacional,false,90,1041
+51053,,861,6,2,4,2,,Lógica e Informática,false,90,1041
+51054,,867,6,2,4,2,,Programación Declarativa,false,90,1041
+51738,,868,6,2,4,2,,Sensores y Actuadores,false,90,1041
+51045,,870,6,2,4,2,,Teoría de la Señal,false,90,1041
+51196,,863,12,2,4,2,,Prácticas Externas,true,90,1042
+51736,,863,12,2,4,2,,Prácticas Externas,true,90,1043
+51147,,110,6,2,1,2,Solo un grupo,Tecnología de Computadores,true,90,1042
+51148,,201,6,1,2,1,Solo un grupo,Análisis y Diseño de Algoritmos,true,90,1042
+51149,,202,6,1,2,1,Solo un grupo,Bases de Datos,true,90,1042
+51150,,203,6,1,2,1,Solo un grupo,Estructura de Computadores,true,90,1042
+51151,,204,6,1,2,1,Solo un grupo,Estructura de Datos,true,90,1042
+51152,,205,6,1,2,1,Solo un grupo,Teoría de Autómatas y Lenguajes Formales,true,90,1042
+51153,,206,6,2,2,2,Solo un grupo,Introducción a la Ingeniería del Software,true,90,1042
+51154,,207,6,2,2,2,Solo un grupo,Programación de Sistemas y Concurrencia,true,90,1042
+51155,,208,6,2,2,2,Solo un grupo,Redes y Sistemas Distribuidos,true,90,1042
+51156,,209,6,2,2,2,Solo un grupo,Sistemas Inteligentes,true,90,1042
+51157,,210,6,2,2,2,Solo un grupo,Sistemas Operativos,true,90,1042
+51160,,301,6,1,3,1,,Gestión de la Información,true,90,1042
+51161,,302,6,1,3,1,,Ingeniería de Requisitos,true,90,1042
+51162,,303,6,1,3,1,,Modelado y Diseño del Software,true,90,1042
+51166,,304,6,1,3,1,,Técnicas Computacionales para la Ingeniería del Software,true,90,1042
+51169,,305,6,2,3,2,,Interfaces de Usuario,true,90,1042
+51171,,306,6,2,3,2,,Mantenimiento y Pruebas del Software,true,90,1042
+51174,,307,6,2,3,2,,Seguridad en Servicios y Aplicaciones,true,90,1042
+51175,,308,6,2,3,2,,Tecnologías de Aplicaciones Web,true,90,1042
+51195,,401,6,2,4,2,,Proyectos y Legislación,true,90,1042
+51180,,402,6,1,4,1,,Gestión de Proyectos Software,true,90,1042
+51181,,403,6,1,4,1,,Ingeniería Web,true,90,1042
+51182,,404,6,1,4,1,,Métodos formales para la Ingeniería del Software,true,90,1042
+51186,,405,6,1,4,1,,Software para sistemas empotrados y dispositivos móviles,true,90,1042
