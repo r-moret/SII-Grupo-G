@@ -52,5 +52,7 @@ public interface MatriculaInterface {
 	public String consultarTurnoMatricula(Expediente alumno) throws SecretariaException;
 
 	public List<Integer> obtenerCodigosAsignaturasMatricula(Expediente alumno) throws SecretariaException;
+	
+	public String obtenerCursoActual();
 
 }

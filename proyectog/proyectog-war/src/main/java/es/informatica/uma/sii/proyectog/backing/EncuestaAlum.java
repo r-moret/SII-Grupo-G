@@ -1,6 +1,7 @@
 package es.informatica.uma.sii.proyectog.backing;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import es.uma.informatica.sii.entidades.Asignatura;
@@ -14,6 +15,7 @@ import javax.inject.Named;
 
 import es.uma.informatica.sii.entidades.Expediente;
 import es.uma.informatica.sii.entidades.Grupo;
+import es.uma.informatica.sii.entidades.Matricula;
 import es.uma.informatica.sii.entidades.Titulacion;
 import es.uma.informatica.sii.exceptions.ExpedienteInexistente;
 import es.uma.informatica.sii.exceptions.SecretariaException;
@@ -29,148 +31,98 @@ public class EncuestaAlum {
 	
 	@Inject
 	private ExpedienteInterface ExpedienteEJB;
-	
 	@Inject 
 	private GrupoInterface GrupoEJB;
-	
 	@Inject 
 	private MatriculaInterface MatriculaEJB;
-	
 	@Inject 
 	private AsignaturaInterface AsignaturaEJB;
-	
-	//private List<List<String>> grupos;
+
 	private Expediente expediente;
 	
-	// Lista grande donde cada fila es un curso donde dentro contiene las asignaturas de ese curso
-	private List<List<Asignatura>> listaAsignaturas;
-	
-	//private List<String> cursos;
-	//private int indexCurso;
-	
-	private ContenidoEncuesta tabla;
-	
+	private List<ContenidoEncuesta> contenidos;
+
 	private String grupoElegido;
 	private List<String> gruposElegidos;
-	
-	private List<List<String>> grupos;
-	private int indexGrupos;
 	
 	private String grupoElegidoIngles;
 	private String grupoElegidoTarde;
 	
-	private List<String> gruposIngles;
-	
-	private List<String> gruposTardes;
 
 	private boolean tardeElegida;
 	private boolean idiomaElegido;
 	
 	public EncuestaAlum() {
 		
-		//grupos = new ArrayList<>();
-		
-		gruposIngles = new ArrayList<String>();
-		gruposIngles.add("Grupo A");
-		gruposIngles.add("Grupo B");
-		
-		//cursos = new ArrayList<String>();
-		//cursos.add("1");
-		//cursos.add("2");
-		//indexCurso = 0;
-		
-		gruposElegidos = new ArrayList<String>();
-		
-		grupos = new ArrayList<List<String>>();
-		/*indexGrupos = 0;
-		List<String> grupo1 = new ArrayList<String>();
-		grupo1.add("1A");
-		grupo1.add("1B");
-		
-		List<String> grupo2 = new ArrayList<String>();
-		grupo2.add("2A");
-		grupo2.add("2B");
-		
-		grupos.add(grupo1);
-		grupos.add(grupo2);*/
-		
-		
-		
-		
 		expediente = new Expediente();
-		listaAsignaturas = new ArrayList<List<Asignatura>>();
 		
+		/*
+		 * // Grupos
+		 * 
+		 * List<String> grupo1 = new ArrayList<String>(); grupo1.add("1A");
+		 * grupo1.add("1B");
+		 * 
+		 * List<String> grupo2 = new ArrayList<String>(); grupo2.add("2A");
+		 * grupo2.add("2B");
+		 * 
+		 * // Asignaturas
+		 * 
+		 * Titulacion tit = new Titulacion(); tit.setCodigo(1);
+		 * tit.setNombre("informatica"); tit.setCreditos(1);
+		 * 
+		 * Centro cent1 = new Centro(); cent1.setId(1); cent1.setNombre("inf");
+		 * cent1.setDireccion("dir");
+		 * 
+		 * List<Centro> listacentro = new ArrayList<Centro>(); listacentro.add(cent1);
+		 * tit.setCentros(listacentro);
+		 * 
+		 * 
+		 * List<Asignatura> lista1 = new ArrayList<Asignatura>(); Asignatura asig1 = new
+		 * Asignatura(); asig1.setReferencia(1); asig1.setCodigo(1);
+		 * asig1.setCreditos(1); asig1.setOfertada(true); asig1.setNombre("Cálculo");
+		 * asig1.setPlazas(1); asig1.setTitulacion(tit); asig1.setIdioma("ingles");
+		 * 
+		 * lista1.add(asig1);
+		 * 
+		 * 
+		 * Asignatura asig3 = new Asignatura(); asig3.setReferencia(3);
+		 * asig3.setCodigo(3); asig3.setCreditos(3); asig3.setOfertada(true);
+		 * asig3.setNombre("Estadística"); asig3.setPlazas(3); asig3.setTitulacion(tit);
+		 * 
+		 * lista1.add(asig3);
+		 * 
+		 * Asignatura asig4 = new Asignatura(); asig4.setReferencia(4);
+		 * asig4.setCodigo(4); asig4.setCreditos(4); asig4.setOfertada(true);
+		 * asig4.setNombre("Discreta"); asig4.setPlazas(4); asig4.setTitulacion(tit);
+		 * asig4.setIdioma("ingles");
+		 * 
+		 * lista1.add(asig4);
+		 * 
+		 * 
+		 * List<Asignatura> lista2 = new ArrayList<Asignatura>(); Asignatura asig2 = new
+		 * Asignatura(); asig2.setReferencia(2); asig2.setCodigo(2);
+		 * asig2.setCreditos(2); asig2.setOfertada(true); asig2.setNombre("Java");
+		 * asig2.setPlazas(2); asig2.setTitulacion(tit); asig2.setIdioma("ingles");
+		 * 
+		 * lista2.add(asig2);
+		 * 
+		 * // GruposIngles
+		 * 
+		 * List<String> gruposIngles = new ArrayList<String>();
+		 * gruposIngles.add("Grupo A"); gruposIngles.add("Grupo B");
+		 * 
+		 * List<String> gruposTarde = new ArrayList<String>();
+		 * gruposTarde.add("Grupo A"); gruposTarde.add("Grupo B");
+		 * 
+		 * contenidos = new ArrayList<ContenidoEncuesta>(); contenidos.add(new
+		 * ContenidoEncuesta(1, grupo1, lista1, gruposIngles, gruposTarde));
+		 * contenidos.add(new ContenidoEncuesta(2, grupo2, lista2, gruposIngles,
+		 * gruposTarde));
+		 */
 		
-		
-		Titulacion tit = new Titulacion();
-		tit.setCodigo(1);
-		tit.setNombre("informatica");
-		tit.setCreditos(1);
-		
-		Centro cent1 = new Centro();
-		cent1.setId(1);
-		cent1.setNombre("inf");
-		cent1.setDireccion("dir");
-		
-		List<Centro> listacentro = new ArrayList<Centro>();
-		listacentro.add(cent1);
-		tit.setCentros(listacentro);
-		
-		
-		List<Asignatura> lista1 = new ArrayList<Asignatura>();
-		Asignatura asig1 = new Asignatura();
-		asig1.setReferencia(1);
-		asig1.setCodigo(1);
-		asig1.setCreditos(1);
-		asig1.setOfertada(true);
-		asig1.setNombre("Cálculo");
-		asig1.setPlazas(1);
-		asig1.setTitulacion(tit);
-		asig1.setIdioma("ingles");
-		
-		lista1.add(asig1);
-		
-		
-		Asignatura asig3 = new Asignatura();
-		asig3.setReferencia(3);
-		asig3.setCodigo(3);
-		asig3.setCreditos(3);
-		asig3.setOfertada(true);
-		asig3.setNombre("Estadística");
-		asig3.setPlazas(3);
-		asig3.setTitulacion(tit);
-		
-		lista1.add(asig3);
-		
-		Asignatura asig4 = new Asignatura();
-		asig4.setReferencia(4);
-		asig4.setCodigo(4);
-		asig4.setCreditos(4);
-		asig4.setOfertada(true);
-		asig4.setNombre("Discreta");
-		asig4.setPlazas(4);
-		asig4.setTitulacion(tit);
-		asig4.setIdioma("ingles");
-		
-		lista1.add(asig4);
-		
-		listaAsignaturas.add(lista1);
-		
-		List<Asignatura> lista2 = new ArrayList<Asignatura>();
-		Asignatura asig2 = new Asignatura();
-		asig2.setReferencia(2);
-		asig2.setCodigo(2);
-		asig2.setCreditos(2);
-		asig2.setOfertada(true);
-		asig2.setNombre("Java");
-		asig2.setPlazas(2);
-		asig2.setTitulacion(tit);
-		asig2.setIdioma("ingles");
-		
-		lista2.add(asig2);
-		listaAsignaturas.add(lista2);
-		
-		
+		contenidos = new ArrayList<ContenidoEncuesta>();
+		gruposElegidos = new ArrayList<String>();
+	
 	}
 	
 	
@@ -187,27 +139,54 @@ public class EncuestaAlum {
 
 
 
-	public List<String> getGruposIngles() {
-		return gruposIngles;
-	}
-
-
-
-	public void setGruposIngles(List<String> gruposIngles) {
-		this.gruposIngles = gruposIngles;
-	}
-
-
-
 	public String getGrupoElegidoIngles() {
 		return grupoElegidoIngles;
 	}
-
-
-
+	
 	public void setGrupoElegidoIngles(String grupoElegidoIngles) {
 		this.grupoElegidoIngles = grupoElegidoIngles;
 	}
+
+	
+	public List<ContenidoEncuesta> getContenidos() {
+		
+		try {
+			Matricula m = MatriculaEJB.consultarMatricula(expediente, MatriculaEJB.obtenerCursoActual());
+			List<Asignatura> todasAsignaturas = MatriculaEJB.asignaturasDeMatricula(m);
+			List<Integer> cursos = AsignaturaEJB.obtenerCursos(todasAsignaturas);
+			
+			List<Asignatura> asigPorCurso = new ArrayList<Asignatura>();
+			List<String> grupPorCurso = new ArrayList<String>();
+			List<String> grupoIngles = new ArrayList<String>();
+			List<String> grupoTarde = new ArrayList<String>();
+			
+			for (Integer curso : cursos) {
+				
+				for(Asignatura asig : todasAsignaturas){
+					if(asig.getCurso().equals(curso)) asigPorCurso.add(asig);
+				}
+				
+				contenidos.add(new ContenidoEncuesta(curso, grupPorCurso, asigPorCurso, grupoIngles, grupoTarde));
+				asigPorCurso.removeAll(asigPorCurso);
+			}
+			
+		} catch (SecretariaException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return contenidos;
+	}
+
+
+
+	public void setContenidos(List<ContenidoEncuesta> contenidos) {
+		this.contenidos = contenidos;
+	}
+
+
+
+
 
 	public boolean isIdiomaElegido() {
 		return idiomaElegido;
@@ -220,96 +199,17 @@ public class EncuestaAlum {
 	}
 
 
-	public List<String> getGruposTardes(){
-		return gruposTardes;		
-	}
-
-	public List<List<String>> getGrupos(){
-		
-		
-		//List<String> res= new ArrayList<>();
-		List<Integer> cursos = getCursos();
-		Integer numE = expediente.getNumExpediente();
-		try {
-			grupos = GrupoEJB.consultarGrupos(numE, cursos);
-			
-		
-		//	for(int i=0; i<grupos.size();i++){
-		//		res.add(grupos.get(i).getLetra());
-		//	}
-			
-			return grupos;
-		} catch (SecretariaException e) {
-			FacesMessage fm = new FacesMessage("Error: " + e);
-			FacesContext.getCurrentInstance().addMessage(null, fm);
-		}
-		
-		return null;
-
-	}
-	/*
-
-	public List<String> getGrupos() {
-		List<String> res =  new ArrayList<String>();
-		res = grupos.get(indexGrupos);
-		indexGrupos++;
-		return res;
-	}
-*/
-	/* 
-	public void setGrupos(List<List<Grupo>> grupos) {
-		this.grupos = grupos;
-	}
-*/
 	public String getGrupoElegido() {
 		return grupoElegido;
 	}
 	
-	public void setGruposTardes(List<String> grupos) {
-		this.gruposTardes = grupos;
-	}
 
 	public void setGrupoElegido(String grupoElegido) {
 		
 		this.grupoElegido = grupoElegido;
-		gruposElegidos.add(grupoElegido);
-	}
-
-	public List<Integer> getCursos() {
-		List<Integer> codigos = new ArrayList<>();
-		List<Integer> cursos = new ArrayList<>();
-		try {
-			codigos = MatriculaEJB.obtenerCodigosAsignaturasMatricula(expediente);
-			cursos = AsignaturaEJB.obtenerCursos(codigos);
 		
-			return cursos;
-		} catch (SecretariaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-/*
-	public void setCursos(List<String> cursos) {
-		this.cursos = cursos;
-	}
-	*/
-	public List<List<Asignatura>> getListaAsignaturas() {
-		try {
-			List<Integer> codigos = MatriculaEJB.obtenerCodigosAsignaturasMatricula(expediente);
-			List<List<Asignatura>> res = AsignaturaEJB.obtenerListaAsignaturas(codigos);
-			return res;
-		} catch (SecretariaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//return listaAsignaturas;
-		return null;
 	}
 
-	public void setListaAsignaturas(List<List<Asignatura>> listaAsignaturas) {
-		this.listaAsignaturas = listaAsignaturas;
-	}
 
 	public Expediente getExpediente() {
 		return expediente;

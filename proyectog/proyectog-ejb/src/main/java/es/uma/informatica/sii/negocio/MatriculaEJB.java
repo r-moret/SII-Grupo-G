@@ -203,7 +203,8 @@ public class MatriculaEJB implements MatriculaInterface {
 		return res;
 	}
 
-	private String obtenerCursoActual() {
+	@Override
+	public String obtenerCursoActual() {
 		Date fecha = new Date();
 		Integer anio1;
         SimpleDateFormat getAnio = new SimpleDateFormat("yy");

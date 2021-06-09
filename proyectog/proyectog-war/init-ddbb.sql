@@ -1,4 +1,5 @@
 INSERT INTO Usuario VALUES (1, "admin", "jajaja");
+INSERT INTO Usuario VALUES (2, "admin2", "jajaja");
 
 INSERT INTO Titulacion VALUES (1, 6, "Informatica");
 INSERT INTO Alumno VALUES (1, "77777777W", "email@1", "email@2", 22222222, "Alumno Nombre Completo", 33333333);

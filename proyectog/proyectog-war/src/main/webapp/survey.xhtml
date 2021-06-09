@@ -55,24 +55,24 @@
 					<div class="row m-3">
 						<div class="tab-content px-0" id="myTabContentSurvey">
 						  	<div class="tab-pane fade show mt-3 active" id="Survey" role="tabpanel" aria-labelledby="survey-tab">
-						  		<h:dataTable id="survey-table" class="table table-striped" value="#{encuestaAlum.listaAsignaturas}" var="asignaturas">				   
+						  		<h:dataTable id="survey-table" class="table table-striped" value="#{encuestaAlum.contenidos}" var="contenido">				   
 								   	<h:column>
 								      	<f:facet name = "header">Curso</f:facet>
 								      	<style type="text/css"> table tr td{height: 55px;text-align:center; vertical-align:middle } th { text-align: center} .nombreCursos {font-size: 25px} </style>	
-								      	<h:outputText class="nombreCursos" value="#{encuestaAlum.cursos}"/>
+								      	<h:outputText class="nombreCursos" value="#{contenido.curso}"/>
 								   	</h:column>
 								   
 								   	<h:column> 
 								   		<f:facet name = "header">Grupo</f:facet>
 								      		<h:selectOneMenu class="form-select" value="#{encuestaAlum.grupoElegido}">
-	    										<f:selectItems value="#{encuestaAlum.grupos}"/>
+	    										<f:selectItems value="#{contenido.listaGrupos}"/>
 	  										</h:selectOneMenu>	
 								   	</h:column>
 								   	
 								   	<h:column>
 								      	<f:facet name = "header">Asignatura</f:facet>
 								      		
-								      	<h:dataTable id="survey-tableAsig" class="table table-striped" value="#{asignaturas}" var="asignatura">	   
+								      	<h:dataTable id="survey-tableAsig" class="table table-striped" value="#{contenido.listaAsignaturas}" var="asignatura">	   
 								   			<h:column>
 								      		<h:outputText value="#{asignatura.nombre}"/>
 								   			</h:column>
@@ -90,19 +90,26 @@
 								   	-->
 								   	<h:column>
 								      	<f:facet name = "header">Grupo de Ingles</f:facet>
-								      <!--  <h:dataTable id="survey-tableGrupoIngles" class="table table-striped" value="#{asignaturas}" var="asignatura">	-->			   
+								      	  <h:dataTable id="survey-tableGrupoIngles" class="table table-striped" value="#{contenido.listaAsignaturas}" var="asignatura">	   
 								   			<h:column>
-									      		<h:selectOneMenu  class="form-select" value="#{encuestaAlum.grupoElegidoIngles}">
-	    										<f:selectItems value="#{encuestaAlum.gruposIngles}"/>
-	  										</h:selectOneMenu>	
+									      		<h:selectOneMenu  rendered="#{asignatura.idioma != null}" class="form-select" value="#{encuestaAlum.grupoElegidoIngles}">
+										      		<f:selectItem itemValue="#{null}" itemLabel="" noSelectionOption="true" />
+		    										<f:selectItems value="#{contenido.listaGruposIngles}"/>
+	  											</h:selectOneMenu>	
 								   			</h:column>
-								   		<!--</h:dataTable> -->
+								   		  </h:dataTable> 
 								   	</h:column>
 								   	<h:column>
 								   		<f:facet name = "header">Grupo de Tarde</f:facet>
-								      		<h:selectOneMenu class="form-select" value="#{encuestaAlum.grupoElegidoTarde}">
-	    										<f:selectItems value="#{encuestaAlum.gruposTardes}"/>
-	  										</h:selectOneMenu>	
+								   		<h:dataTable id="survey-tableGrupoTardes" class="table table-striped" value="#{contenido.listaAsignaturas}" var="asignatura">
+								   			<h:column>
+									      		<h:selectOneMenu class="form-select" value="#{encuestaAlum.grupoElegidoTarde}" var= "gruposTarde">
+									      			<f:selectItem itemValue="#{null}" itemLabel="" noSelectionOption="true"/>
+		    										<f:selectItems value="#{contenido.listaGruposTarde}"/>
+		  										</h:selectOneMenu>	
+		  									</h:column>
+		  								</h:dataTable>
+		  										
 								   	</h:column>
 								<!--<h:column>
 								      	<f:facet name = "header">Tarde</f:facet>
